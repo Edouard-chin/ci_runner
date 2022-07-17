@@ -1,0 +1,561 @@
+2022-06-09T14:22:49.2197607Z Requested labels: ubuntu-latest
+2022-06-09T14:22:49.2197654Z Job defined at: ruby-i18n/i18n/.github/workflows/ruby.yml@refs/pull/630/merge
+2022-06-09T14:22:49.2197678Z Waiting for a runner to pick up this job...
+2022-06-09T14:22:51.5077624Z Job is waiting for a hosted runner to come online.
+2022-06-09T14:22:56.1686877Z Job is about to start running on the hosted runner: GitHub Actions 11 (hosted)
+2022-06-09T14:23:01.2875041Z Current runner version: '2.292.0'
+2022-06-09T14:23:01.2906234Z ##[group]Operating System
+2022-06-09T14:23:01.2906926Z Ubuntu
+2022-06-09T14:23:01.2907260Z 20.04.4
+2022-06-09T14:23:01.2907710Z LTS
+2022-06-09T14:23:01.2908023Z ##[endgroup]
+2022-06-09T14:23:01.2908430Z ##[group]Virtual Environment
+2022-06-09T14:23:01.2908902Z Environment: ubuntu-20.04
+2022-06-09T14:23:01.2909366Z Version: 20220605.1
+2022-06-09T14:23:01.2909955Z Included Software: https://github.com/actions/virtual-environments/blob/ubuntu20/20220605.1/images/linux/Ubuntu2004-Readme.md
+2022-06-09T14:23:01.2910781Z Image Release: https://github.com/actions/virtual-environments/releases/tag/ubuntu20%2F20220605.1
+2022-06-09T14:23:01.2911335Z ##[endgroup]
+2022-06-09T14:23:01.2911730Z ##[group]Virtual Environment Provisioner
+2022-06-09T14:23:01.2912235Z 1.0.0.0-main-20220531-1
+2022-06-09T14:23:01.2912635Z ##[endgroup]
+2022-06-09T14:23:01.2913754Z ##[group]GITHUB_TOKEN Permissions
+2022-06-09T14:23:01.2914581Z Actions: read
+2022-06-09T14:23:01.2915178Z Checks: read
+2022-06-09T14:23:01.2915595Z Contents: read
+2022-06-09T14:23:01.2915997Z Deployments: read
+2022-06-09T14:23:01.2916379Z Discussions: read
+2022-06-09T14:23:01.2916817Z Issues: read
+2022-06-09T14:23:01.2917128Z Metadata: read
+2022-06-09T14:23:01.2917514Z Packages: read
+2022-06-09T14:23:01.3080405Z Pages: read
+2022-06-09T14:23:01.3080735Z PullRequests: read
+2022-06-09T14:23:01.3081059Z RepositoryProjects: read
+2022-06-09T14:23:01.3081399Z SecurityEvents: read
+2022-06-09T14:23:01.3081690Z Statuses: read
+2022-06-09T14:23:01.3081981Z ##[endgroup]
+2022-06-09T14:23:01.3087303Z Secret source: None
+2022-06-09T14:23:01.3087845Z Prepare workflow directory
+2022-06-09T14:23:01.4493062Z Prepare all required actions
+2022-06-09T14:23:01.4724157Z Getting action download info
+2022-06-09T14:23:01.7761575Z Download action repository 'actions/checkout@v2' (SHA:7884fcad6b5d53d10323aee724dc68d8b9096a2e)
+2022-06-09T14:23:02.2002716Z Download action repository 'ruby/setup-ruby@v1' (SHA:8029ebd6e5bd8f4e0d6f7623ea76a01ec5b1010d)
+2022-06-09T14:23:02.6408670Z ##[group]Run actions/checkout@v2
+2022-06-09T14:23:02.6409038Z with:
+2022-06-09T14:23:02.6409286Z   repository: ruby-i18n/i18n
+2022-06-09T14:23:02.6409746Z   token: ***
+2022-06-09T14:23:02.6409967Z   ssh-strict: true
+2022-06-09T14:23:02.6410222Z   persist-credentials: true
+2022-06-09T14:23:02.6410472Z   clean: true
+2022-06-09T14:23:02.6410677Z   fetch-depth: 1
+2022-06-09T14:23:02.6410896Z   lfs: false
+2022-06-09T14:23:02.6411130Z   submodules: false
+2022-06-09T14:23:02.6411364Z   set-safe-directory: true
+2022-06-09T14:23:02.6411604Z env:
+2022-06-09T14:23:02.6411823Z   BUNDLE_GEMFILE: Gemfile
+2022-06-09T14:23:02.6412045Z ##[endgroup]
+2022-06-09T14:23:02.9176148Z Syncing repository: ruby-i18n/i18n
+2022-06-09T14:23:02.9178526Z ##[group]Getting Git version info
+2022-06-09T14:23:02.9179872Z Working directory is '/home/runner/work/i18n/i18n'
+2022-06-09T14:23:02.9180436Z [command]/usr/bin/git version
+2022-06-09T14:23:02.9320952Z git version 2.36.1
+2022-06-09T14:23:02.9322631Z ##[endgroup]
+2022-06-09T14:23:02.9346096Z Temporarily overriding HOME='/home/runner/work/_temp/204697db-4eee-4a1d-9dc8-eca6c5d94fd9' before making global git config changes
+2022-06-09T14:23:02.9346647Z Adding repository directory to the temporary git global config as a safe directory
+2022-06-09T14:23:02.9347220Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/i18n/i18n
+2022-06-09T14:23:02.9388229Z Deleting the contents of '/home/runner/work/i18n/i18n'
+2022-06-09T14:23:02.9393480Z ##[group]Initializing the repository
+2022-06-09T14:23:02.9397897Z [command]/usr/bin/git init /home/runner/work/i18n/i18n
+2022-06-09T14:23:02.9486847Z hint: Using 'master' as the name for the initial branch. This default branch name
+2022-06-09T14:23:02.9488875Z hint: is subject to change. To configure the initial branch name to use in all
+2022-06-09T14:23:02.9489844Z hint: of your new repositories, which will suppress this warning, call:
+2022-06-09T14:23:02.9490797Z hint:
+2022-06-09T14:23:02.9491617Z hint: 	git config --global init.defaultBranch <name>
+2022-06-09T14:23:02.9493170Z hint:
+2022-06-09T14:23:02.9494365Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2022-06-09T14:23:02.9495121Z hint: 'development'. The just-created branch can be renamed via this command:
+2022-06-09T14:23:02.9495583Z hint:
+2022-06-09T14:23:02.9496598Z hint: 	git branch -m <name>
+2022-06-09T14:23:02.9501455Z Initialized empty Git repository in /home/runner/work/i18n/i18n/.git/
+2022-06-09T14:23:02.9512710Z [command]/usr/bin/git remote add origin https://github.com/ruby-i18n/i18n
+2022-06-09T14:23:02.9562151Z ##[endgroup]
+2022-06-09T14:23:02.9563182Z ##[group]Disabling automatic garbage collection
+2022-06-09T14:23:02.9567215Z [command]/usr/bin/git config --local gc.auto 0
+2022-06-09T14:23:02.9599430Z ##[endgroup]
+2022-06-09T14:23:02.9600481Z ##[group]Setting up auth
+2022-06-09T14:23:02.9609175Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2022-06-09T14:23:02.9645819Z [command]/usr/bin/git submodule foreach --recursive git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :
+2022-06-09T14:23:03.0041448Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2022-06-09T14:23:03.0064630Z [command]/usr/bin/git submodule foreach --recursive git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :
+2022-06-09T14:23:03.0321488Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2022-06-09T14:23:03.0367624Z ##[endgroup]
+2022-06-09T14:23:03.0368363Z ##[group]Fetching the repository
+2022-06-09T14:23:03.0379052Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 origin +cb0c718b22148ab24928c19b68162ae50a51f14d:refs/remotes/pull/630/merge
+2022-06-09T14:23:03.3616346Z remote: Enumerating objects: 140, done.
+2022-06-09T14:23:03.3681141Z remote: Counting objects:   0% (1/140)
+2022-06-09T14:23:03.3681484Z remote: Counting objects:   1% (2/140)
+2022-06-09T14:23:03.3682382Z remote: Counting objects:   2% (3/140)
+2022-06-09T14:23:03.3682690Z remote: Counting objects:   3% (5/140)
+2022-06-09T14:23:03.3682976Z remote: Counting objects:   4% (6/140)
+2022-06-09T14:23:03.3683247Z remote: Counting objects:   5% (7/140)
+2022-06-09T14:23:03.3683608Z remote: Counting objects:   6% (9/140)
+2022-06-09T14:23:03.3683898Z remote: Counting objects:   7% (10/140)
+2022-06-09T14:23:03.3684177Z remote: Counting objects:   8% (12/140)
+2022-06-09T14:23:03.3684465Z remote: Counting objects:   9% (13/140)
+2022-06-09T14:23:03.3684754Z remote: Counting objects:  10% (14/140)
+2022-06-09T14:23:03.3685026Z remote: Counting objects:  11% (16/140)
+2022-06-09T14:23:03.3685330Z remote: Counting objects:  12% (17/140)
+2022-06-09T14:23:03.3685625Z remote: Counting objects:  13% (19/140)
+2022-06-09T14:23:03.3685908Z remote: Counting objects:  14% (20/140)
+2022-06-09T14:23:03.3686176Z remote: Counting objects:  15% (21/140)
+2022-06-09T14:23:03.3686456Z remote: Counting objects:  16% (23/140)
+2022-06-09T14:23:03.3686738Z remote: Counting objects:  17% (24/140)
+2022-06-09T14:23:03.3687003Z remote: Counting objects:  18% (26/140)
+2022-06-09T14:23:03.3687281Z remote: Counting objects:  19% (27/140)
+2022-06-09T14:23:03.3687564Z remote: Counting objects:  20% (28/140)
+2022-06-09T14:23:03.3687891Z remote: Counting objects:  21% (30/140)
+2022-06-09T14:23:03.3688171Z remote: Counting objects:  22% (31/140)
+2022-06-09T14:23:03.3688491Z remote: Counting objects:  23% (33/140)
+2022-06-09T14:23:03.3688764Z remote: Counting objects:  24% (34/140)
+2022-06-09T14:23:03.3689044Z remote: Counting objects:  25% (35/140)
+2022-06-09T14:23:03.3689578Z remote: Counting objects:  26% (37/140)
+2022-06-09T14:23:03.3689856Z remote: Counting objects:  27% (38/140)
+2022-06-09T14:23:03.3690136Z remote: Counting objects:  28% (40/140)
+2022-06-09T14:23:03.3690414Z remote: Counting objects:  29% (41/140)
+2022-06-09T14:23:03.3690694Z remote: Counting objects:  30% (42/140)
+2022-06-09T14:23:03.3690960Z remote: Counting objects:  31% (44/140)
+2022-06-09T14:23:03.3691237Z remote: Counting objects:  32% (45/140)
+2022-06-09T14:23:03.3691517Z remote: Counting objects:  33% (47/140)
+2022-06-09T14:23:03.3691781Z remote: Counting objects:  34% (48/140)
+2022-06-09T14:23:03.3692056Z remote: Counting objects:  35% (49/140)
+2022-06-09T14:23:03.3692335Z remote: Counting objects:  36% (51/140)
+2022-06-09T14:23:03.3692614Z remote: Counting objects:  37% (52/140)
+2022-06-09T14:23:03.3692879Z remote: Counting objects:  38% (54/140)
+2022-06-09T14:23:03.3693160Z remote: Counting objects:  39% (55/140)
+2022-06-09T14:23:03.3693441Z remote: Counting objects:  40% (56/140)
+2022-06-09T14:23:03.3693710Z remote: Counting objects:  41% (58/140)
+2022-06-09T14:23:03.3693991Z remote: Counting objects:  42% (59/140)
+2022-06-09T14:23:03.3694272Z remote: Counting objects:  43% (61/140)
+2022-06-09T14:23:03.3694538Z remote: Counting objects:  44% (62/140)
+2022-06-09T14:23:03.3694892Z remote: Counting objects:  45% (63/140)
+2022-06-09T14:23:03.3695175Z remote: Counting objects:  46% (65/140)
+2022-06-09T14:23:03.3695439Z remote: Counting objects:  47% (66/140)
+2022-06-09T14:23:03.3695713Z remote: Counting objects:  48% (68/140)
+2022-06-09T14:23:03.3695994Z remote: Counting objects:  49% (69/140)
+2022-06-09T14:23:03.3696270Z remote: Counting objects:  50% (70/140)
+2022-06-09T14:23:03.3696535Z remote: Counting objects:  51% (72/140)
+2022-06-09T14:23:03.3696918Z remote: Counting objects:  52% (73/140)
+2022-06-09T14:23:03.3697217Z remote: Counting objects:  53% (75/140)
+2022-06-09T14:23:03.3697484Z remote: Counting objects:  54% (76/140)
+2022-06-09T14:23:03.3697762Z remote: Counting objects:  55% (77/140)
+2022-06-09T14:23:03.3698040Z remote: Counting objects:  56% (79/140)
+2022-06-09T14:23:03.3698304Z remote: Counting objects:  57% (80/140)
+2022-06-09T14:23:03.3698593Z remote: Counting objects:  58% (82/140)
+2022-06-09T14:23:03.3698872Z remote: Counting objects:  59% (83/140)
+2022-06-09T14:23:03.3699153Z remote: Counting objects:  60% (84/140)
+2022-06-09T14:23:03.3699415Z remote: Counting objects:  61% (86/140)
+2022-06-09T14:23:03.3699691Z remote: Counting objects:  62% (87/140)
+2022-06-09T14:23:03.3699968Z remote: Counting objects:  63% (89/140)
+2022-06-09T14:23:03.3700244Z remote: Counting objects:  64% (90/140)
+2022-06-09T14:23:03.3700509Z remote: Counting objects:  65% (91/140)
+2022-06-09T14:23:03.3700795Z remote: Counting objects:  66% (93/140)
+2022-06-09T14:23:03.3701136Z remote: Counting objects:  67% (94/140)
+2022-06-09T14:23:03.3701411Z remote: Counting objects:  68% (96/140)
+2022-06-09T14:23:03.3701688Z remote: Counting objects:  69% (97/140)
+2022-06-09T14:23:03.3701967Z remote: Counting objects:  70% (98/140)
+2022-06-09T14:23:03.3702238Z remote: Counting objects:  71% (100/140)
+2022-06-09T14:23:03.3702528Z remote: Counting objects:  72% (101/140)
+2022-06-09T14:23:03.3702816Z remote: Counting objects:  73% (103/140)
+2022-06-09T14:23:03.3703092Z remote: Counting objects:  74% (104/140)
+2022-06-09T14:23:03.3703373Z remote: Counting objects:  75% (105/140)
+2022-06-09T14:23:03.3703659Z remote: Counting objects:  76% (107/140)
+2022-06-09T14:23:03.3703941Z remote: Counting objects:  77% (108/140)
+2022-06-09T14:23:03.3704209Z remote: Counting objects:  78% (110/140)
+2022-06-09T14:23:03.3704605Z remote: Counting objects:  79% (111/140)
+2022-06-09T14:23:03.3704889Z remote: Counting objects:  80% (112/140)
+2022-06-09T14:23:03.3705159Z remote: Counting objects:  81% (114/140)
+2022-06-09T14:23:03.3705441Z remote: Counting objects:  82% (115/140)
+2022-06-09T14:23:03.3705793Z remote: Counting objects:  83% (117/140)
+2022-06-09T14:23:03.3706068Z remote: Counting objects:  84% (118/140)
+2022-06-09T14:23:03.3706349Z remote: Counting objects:  85% (119/140)
+2022-06-09T14:23:03.3706675Z remote: Counting objects:  86% (121/140)
+2022-06-09T14:23:03.3707024Z remote: Counting objects:  87% (122/140)
+2022-06-09T14:23:03.3707395Z remote: Counting objects:  88% (124/140)
+2022-06-09T14:23:03.3707833Z remote: Counting objects:  89% (125/140)
+2022-06-09T14:23:03.3708200Z remote: Counting objects:  90% (126/140)
+2022-06-09T14:23:03.3708586Z remote: Counting objects:  91% (128/140)
+2022-06-09T14:23:03.3708908Z remote: Counting objects:  92% (129/140)
+2022-06-09T14:23:03.3709269Z remote: Counting objects:  93% (131/140)
+2022-06-09T14:23:03.3709680Z remote: Counting objects:  94% (132/140)
+2022-06-09T14:23:03.3709990Z remote: Counting objects:  95% (133/140)
+2022-06-09T14:23:03.3710364Z remote: Counting objects:  96% (135/140)
+2022-06-09T14:23:03.3710726Z remote: Counting objects:  97% (136/140)
+2022-06-09T14:23:03.3711038Z remote: Counting objects:  98% (138/140)
+2022-06-09T14:23:03.3711433Z remote: Counting objects:  99% (139/140)
+2022-06-09T14:23:03.3711883Z remote: Counting objects: 100% (140/140)
+2022-06-09T14:23:03.3712256Z remote: Counting objects: 100% (140/140), done.
+2022-06-09T14:23:03.3712656Z remote: Compressing objects:   0% (1/123)
+2022-06-09T14:23:03.3713086Z remote: Compressing objects:   1% (2/123)
+2022-06-09T14:23:03.3713492Z remote: Compressing objects:   2% (3/123)
+2022-06-09T14:23:03.3713947Z remote: Compressing objects:   3% (4/123)
+2022-06-09T14:23:03.3714353Z remote: Compressing objects:   4% (5/123)
+2022-06-09T14:23:03.3714730Z remote: Compressing objects:   5% (7/123)
+2022-06-09T14:23:03.3715098Z remote: Compressing objects:   6% (8/123)
+2022-06-09T14:23:03.3716281Z remote: Compressing objects:   7% (9/123)
+2022-06-09T14:23:03.3717123Z remote: Compressing objects:   8% (10/123)
+2022-06-09T14:23:03.3717900Z remote: Compressing objects:   9% (12/123)
+2022-06-09T14:23:03.3718605Z remote: Compressing objects:  10% (13/123)
+2022-06-09T14:23:03.3719704Z remote: Compressing objects:  11% (14/123)
+2022-06-09T14:23:03.3720273Z remote: Compressing objects:  12% (15/123)
+2022-06-09T14:23:03.3727613Z remote: Compressing objects:  13% (16/123)
+2022-06-09T14:23:03.3728193Z remote: Compressing objects:  14% (18/123)
+2022-06-09T14:23:03.3728815Z remote: Compressing objects:  15% (19/123)
+2022-06-09T14:23:03.3729809Z remote: Compressing objects:  16% (20/123)
+2022-06-09T14:23:03.3730348Z remote: Compressing objects:  17% (21/123)
+2022-06-09T14:23:03.3732454Z remote: Compressing objects:  18% (23/123)
+2022-06-09T14:23:03.3732897Z remote: Compressing objects:  19% (24/123)
+2022-06-09T14:23:03.3733284Z remote: Compressing objects:  20% (25/123)
+2022-06-09T14:23:03.3733667Z remote: Compressing objects:  21% (26/123)
+2022-06-09T14:23:03.3734070Z remote: Compressing objects:  22% (28/123)
+2022-06-09T14:23:03.3734397Z remote: Compressing objects:  23% (29/123)
+2022-06-09T14:23:03.3734822Z remote: Compressing objects:  24% (30/123)
+2022-06-09T14:23:03.3735202Z remote: Compressing objects:  25% (31/123)
+2022-06-09T14:23:03.3735529Z remote: Compressing objects:  26% (32/123)
+2022-06-09T14:23:03.3735933Z remote: Compressing objects:  27% (34/123)
+2022-06-09T14:23:03.3736361Z remote: Compressing objects:  28% (35/123)
+2022-06-09T14:23:03.3736890Z remote: Compressing objects:  29% (36/123)
+2022-06-09T14:23:03.3737269Z remote: Compressing objects:  30% (37/123)
+2022-06-09T14:23:03.3737660Z remote: Compressing objects:  31% (39/123)
+2022-06-09T14:23:03.3738034Z remote: Compressing objects:  32% (40/123)
+2022-06-09T14:23:03.3738402Z remote: Compressing objects:  33% (41/123)
+2022-06-09T14:23:03.3738783Z remote: Compressing objects:  34% (42/123)
+2022-06-09T14:23:03.3739167Z remote: Compressing objects:  35% (44/123)
+2022-06-09T14:23:03.3739493Z remote: Compressing objects:  36% (45/123)
+2022-06-09T14:23:03.3739871Z remote: Compressing objects:  37% (46/123)
+2022-06-09T14:23:03.3740280Z remote: Compressing objects:  38% (47/123)
+2022-06-09T14:23:03.3740603Z remote: Compressing objects:  39% (48/123)
+2022-06-09T14:23:03.3740992Z remote: Compressing objects:  40% (50/123)
+2022-06-09T14:23:03.3741374Z remote: Compressing objects:  41% (51/123)
+2022-06-09T14:23:03.3741706Z remote: Compressing objects:  42% (52/123)
+2022-06-09T14:23:03.3742120Z remote: Compressing objects:  43% (53/123)
+2022-06-09T14:23:03.3742506Z remote: Compressing objects:  44% (55/123)
+2022-06-09T14:23:03.3743054Z remote: Compressing objects:  45% (56/123)
+2022-06-09T14:23:03.3743402Z remote: Compressing objects:  46% (57/123)
+2022-06-09T14:23:03.3743827Z remote: Compressing objects:  47% (58/123)
+2022-06-09T14:23:03.3744218Z remote: Compressing objects:  48% (60/123)
+2022-06-09T14:23:03.3744540Z remote: Compressing objects:  49% (61/123)
+2022-06-09T14:23:03.3744912Z remote: Compressing objects:  50% (62/123)
+2022-06-09T14:23:03.3745281Z remote: Compressing objects:  51% (63/123)
+2022-06-09T14:23:03.3745642Z remote: Compressing objects:  52% (64/123)
+2022-06-09T14:23:03.3746027Z remote: Compressing objects:  53% (66/123)
+2022-06-09T14:23:03.3746525Z remote: Compressing objects:  54% (67/123)
+2022-06-09T14:23:03.3746946Z remote: Compressing objects:  55% (68/123)
+2022-06-09T14:23:03.3747268Z remote: Compressing objects:  56% (69/123)
+2022-06-09T14:23:03.3747703Z remote: Compressing objects:  57% (71/123)
+2022-06-09T14:23:03.3748077Z remote: Compressing objects:  58% (72/123)
+2022-06-09T14:23:03.3748401Z remote: Compressing objects:  59% (73/123)
+2022-06-09T14:23:03.3748776Z remote: Compressing objects:  60% (74/123)
+2022-06-09T14:23:03.3749203Z remote: Compressing objects:  61% (76/123)
+2022-06-09T14:23:03.3749531Z remote: Compressing objects:  62% (77/123)
+2022-06-09T14:23:03.3749908Z remote: Compressing objects:  63% (78/123)
+2022-06-09T14:23:03.3771361Z remote: Compressing objects:  64% (79/123)
+2022-06-09T14:23:03.3771875Z remote: Compressing objects:  65% (80/123)
+2022-06-09T14:23:03.3772216Z remote: Compressing objects:  66% (82/123)
+2022-06-09T14:23:03.3772605Z remote: Compressing objects:  67% (83/123)
+2022-06-09T14:23:03.3772990Z remote: Compressing objects:  68% (84/123)
+2022-06-09T14:23:03.3773334Z remote: Compressing objects:  69% (85/123)
+2022-06-09T14:23:03.3773752Z remote: Compressing objects:  70% (87/123)
+2022-06-09T14:23:03.3774138Z remote: Compressing objects:  71% (88/123)
+2022-06-09T14:23:03.3774516Z remote: Compressing objects:  72% (89/123)
+2022-06-09T14:23:03.3774840Z remote: Compressing objects:  73% (90/123)
+2022-06-09T14:23:03.3775230Z remote: Compressing objects:  74% (92/123)
+2022-06-09T14:23:03.3775645Z remote: Compressing objects:  75% (93/123)
+2022-06-09T14:23:03.3775969Z remote: Compressing objects:  76% (94/123)
+2022-06-09T14:23:03.3776344Z remote: Compressing objects:  77% (95/123)
+2022-06-09T14:23:03.3776731Z remote: Compressing objects:  78% (96/123)
+2022-06-09T14:23:03.3777363Z remote: Compressing objects:  79% (98/123)
+2022-06-09T14:23:03.3778007Z remote: Compressing objects:  80% (99/123)
+2022-06-09T14:23:03.3778395Z remote: Compressing objects:  81% (100/123)
+2022-06-09T14:23:03.3778813Z remote: Compressing objects:  82% (101/123)
+2022-06-09T14:23:03.3779145Z remote: Compressing objects:  83% (103/123)
+2022-06-09T14:23:03.3779564Z remote: Compressing objects:  84% (104/123)
+2022-06-09T14:23:03.3779949Z remote: Compressing objects:  85% (105/123)
+2022-06-09T14:23:03.3780279Z remote: Compressing objects:  86% (106/123)
+2022-06-09T14:23:03.3781207Z remote: Compressing objects:  87% (108/123)
+2022-06-09T14:23:03.3781623Z remote: Compressing objects:  88% (109/123)
+2022-06-09T14:23:03.3782012Z remote: Compressing objects:  89% (110/123)
+2022-06-09T14:23:03.3782398Z remote: Compressing objects:  90% (111/123)
+2022-06-09T14:23:03.3782789Z remote: Compressing objects:  91% (112/123)
+2022-06-09T14:23:03.3783122Z remote: Compressing objects:  92% (114/123)
+2022-06-09T14:23:03.3783507Z remote: Compressing objects:  93% (115/123)
+2022-06-09T14:23:03.3783926Z remote: Compressing objects:  94% (116/123)
+2022-06-09T14:23:03.3784324Z remote: Compressing objects:  95% (117/123)
+2022-06-09T14:23:03.3784647Z remote: Compressing objects:  96% (119/123)
+2022-06-09T14:23:03.3785391Z remote: Compressing objects:  97% (120/123)
+2022-06-09T14:23:03.3786161Z remote: Compressing objects:  98% (121/123)
+2022-06-09T14:23:03.3786542Z remote: Compressing objects:  99% (122/123)
+2022-06-09T14:23:03.3786962Z remote: Compressing objects: 100% (123/123)
+2022-06-09T14:23:03.3787359Z remote: Compressing objects: 100% (123/123), done.
+2022-06-09T14:23:03.3952493Z Receiving objects:   0% (1/140)
+2022-06-09T14:23:03.3953112Z Receiving objects:   1% (2/140)
+2022-06-09T14:23:03.3953608Z Receiving objects:   2% (3/140)
+2022-06-09T14:23:03.3954936Z Receiving objects:   3% (5/140)
+2022-06-09T14:23:03.3970440Z Receiving objects:   4% (6/140)
+2022-06-09T14:23:03.3970973Z Receiving objects:   5% (7/140)
+2022-06-09T14:23:03.3971269Z Receiving objects:   6% (9/140)
+2022-06-09T14:23:03.3971626Z Receiving objects:   7% (10/140)
+2022-06-09T14:23:03.3972349Z Receiving objects:   8% (12/140)
+2022-06-09T14:23:03.3973502Z Receiving objects:   9% (13/140)
+2022-06-09T14:23:03.3975705Z Receiving objects:  10% (14/140)
+2022-06-09T14:23:03.3976078Z Receiving objects:  11% (16/140)
+2022-06-09T14:23:03.3976682Z Receiving objects:  12% (17/140)
+2022-06-09T14:23:03.3977385Z Receiving objects:  13% (19/140)
+2022-06-09T14:23:03.3978883Z Receiving objects:  14% (20/140)
+2022-06-09T14:23:03.3979395Z Receiving objects:  15% (21/140)
+2022-06-09T14:23:03.3980010Z Receiving objects:  16% (23/140)
+2022-06-09T14:23:03.3980449Z Receiving objects:  17% (24/140)
+2022-06-09T14:23:03.3980952Z Receiving objects:  18% (26/140)
+2022-06-09T14:23:03.3981434Z Receiving objects:  19% (27/140)
+2022-06-09T14:23:03.3981965Z Receiving objects:  20% (28/140)
+2022-06-09T14:23:03.3982742Z Receiving objects:  21% (30/140)
+2022-06-09T14:23:03.3983254Z Receiving objects:  22% (31/140)
+2022-06-09T14:23:03.3983713Z Receiving objects:  23% (33/140)
+2022-06-09T14:23:03.3984457Z Receiving objects:  24% (34/140)
+2022-06-09T14:23:03.3985019Z Receiving objects:  25% (35/140)
+2022-06-09T14:23:03.3985427Z Receiving objects:  26% (37/140)
+2022-06-09T14:23:03.3985754Z Receiving objects:  27% (38/140)
+2022-06-09T14:23:03.3986032Z Receiving objects:  28% (40/140)
+2022-06-09T14:23:03.3986376Z Receiving objects:  29% (41/140)
+2022-06-09T14:23:03.3986741Z Receiving objects:  30% (42/140)
+2022-06-09T14:23:03.3987026Z Receiving objects:  31% (44/140)
+2022-06-09T14:23:03.3987351Z Receiving objects:  32% (45/140)
+2022-06-09T14:23:03.3987698Z Receiving objects:  33% (47/140)
+2022-06-09T14:23:03.3987978Z Receiving objects:  34% (48/140)
+2022-06-09T14:23:03.3988340Z Receiving objects:  35% (49/140)
+2022-06-09T14:23:03.3988674Z Receiving objects:  36% (51/140)
+2022-06-09T14:23:03.3988961Z Receiving objects:  37% (52/140)
+2022-06-09T14:23:03.3989898Z Receiving objects:  38% (54/140)
+2022-06-09T14:23:03.3990283Z Receiving objects:  39% (55/140)
+2022-06-09T14:23:03.3990853Z Receiving objects:  40% (56/140)
+2022-06-09T14:23:03.3991416Z Receiving objects:  41% (58/140)
+2022-06-09T14:23:03.3992012Z Receiving objects:  42% (59/140)
+2022-06-09T14:23:03.3995874Z Receiving objects:  43% (61/140)
+2022-06-09T14:23:03.3999895Z Receiving objects:  44% (62/140)
+2022-06-09T14:23:03.4000297Z Receiving objects:  45% (63/140)
+2022-06-09T14:23:03.4000642Z Receiving objects:  46% (65/140)
+2022-06-09T14:23:03.4000928Z Receiving objects:  47% (66/140)
+2022-06-09T14:23:03.4001327Z Receiving objects:  48% (68/140)
+2022-06-09T14:23:03.4001672Z Receiving objects:  49% (69/140)
+2022-06-09T14:23:03.4001952Z Receiving objects:  50% (70/140)
+2022-06-09T14:23:03.4002297Z Receiving objects:  51% (72/140)
+2022-06-09T14:23:03.4002656Z Receiving objects:  52% (73/140)
+2022-06-09T14:23:03.4002940Z Receiving objects:  53% (75/140)
+2022-06-09T14:23:03.4003303Z Receiving objects:  54% (76/140)
+2022-06-09T14:23:03.4003632Z Receiving objects:  55% (77/140)
+2022-06-09T14:23:03.4003910Z Receiving objects:  56% (79/140)
+2022-06-09T14:23:03.4004274Z Receiving objects:  57% (80/140)
+2022-06-09T14:23:03.4004617Z Receiving objects:  58% (82/140)
+2022-06-09T14:23:03.4004889Z Receiving objects:  59% (83/140)
+2022-06-09T14:23:03.4005203Z Receiving objects:  60% (84/140)
+2022-06-09T14:23:03.4005522Z Receiving objects:  61% (86/140)
+2022-06-09T14:23:03.4005885Z Receiving objects:  62% (87/140)
+2022-06-09T14:23:03.4006163Z Receiving objects:  63% (89/140)
+2022-06-09T14:23:03.4006488Z Receiving objects:  64% (90/140)
+2022-06-09T14:23:03.4006806Z Receiving objects:  65% (91/140)
+2022-06-09T14:23:03.4007080Z Receiving objects:  66% (93/140)
+2022-06-09T14:23:03.4007447Z Receiving objects:  67% (94/140)
+2022-06-09T14:23:03.4007768Z Receiving objects:  68% (96/140)
+2022-06-09T14:23:03.4008043Z Receiving objects:  69% (97/140)
+2022-06-09T14:23:03.4008552Z Receiving objects:  70% (98/140)
+2022-06-09T14:23:03.4008985Z Receiving objects:  71% (100/140)
+2022-06-09T14:23:03.4009272Z Receiving objects:  72% (101/140)
+2022-06-09T14:23:03.4009600Z Receiving objects:  73% (103/140)
+2022-06-09T14:23:03.4009930Z Receiving objects:  74% (104/140)
+2022-06-09T14:23:03.4010212Z Receiving objects:  75% (105/140)
+2022-06-09T14:23:03.4010593Z Receiving objects:  76% (107/140)
+2022-06-09T14:23:03.4010920Z Receiving objects:  77% (108/140)
+2022-06-09T14:23:03.4011197Z Receiving objects:  78% (110/140)
+2022-06-09T14:23:03.4011513Z Receiving objects:  79% (111/140)
+2022-06-09T14:23:03.4011847Z Receiving objects:  80% (112/140)
+2022-06-09T14:23:03.4012156Z Receiving objects:  81% (114/140)
+2022-06-09T14:23:03.4012895Z remote: Total 140 (delta 16), reused 69 (delta 8), pack-reused 0
+2022-06-09T14:23:03.4013289Z Receiving objects:  82% (115/140)
+2022-06-09T14:23:03.4013623Z Receiving objects:  83% (117/140)
+2022-06-09T14:23:03.4013900Z Receiving objects:  84% (118/140)
+2022-06-09T14:23:03.4014275Z Receiving objects:  85% (119/140)
+2022-06-09T14:23:03.4014592Z Receiving objects:  86% (121/140)
+2022-06-09T14:23:03.4014872Z Receiving objects:  87% (122/140)
+2022-06-09T14:23:03.4015228Z Receiving objects:  88% (124/140)
+2022-06-09T14:23:03.4015600Z Receiving objects:  89% (125/140)
+2022-06-09T14:23:03.4015889Z Receiving objects:  90% (126/140)
+2022-06-09T14:23:03.4016222Z Receiving objects:  91% (128/140)
+2022-06-09T14:23:03.4016578Z Receiving objects:  92% (129/140)
+2022-06-09T14:23:03.4016855Z Receiving objects:  93% (131/140)
+2022-06-09T14:23:03.4017207Z Receiving objects:  94% (132/140)
+2022-06-09T14:23:03.4017529Z Receiving objects:  95% (133/140)
+2022-06-09T14:23:03.4017807Z Receiving objects:  96% (135/140)
+2022-06-09T14:23:03.4018148Z Receiving objects:  97% (136/140)
+2022-06-09T14:23:03.4018479Z Receiving objects:  98% (138/140)
+2022-06-09T14:23:03.4018842Z Receiving objects:  99% (139/140)
+2022-06-09T14:23:03.4143456Z Receiving objects: 100% (140/140)
+2022-06-09T14:23:03.4143930Z Receiving objects: 100% (140/140), 91.75 KiB | 8.34 MiB/s, done.
+2022-06-09T14:23:03.4144434Z Resolving deltas:   0% (0/16)
+2022-06-09T14:23:03.4144683Z Resolving deltas:   6% (1/16)
+2022-06-09T14:23:03.4144938Z Resolving deltas:  12% (2/16)
+2022-06-09T14:23:03.4145171Z Resolving deltas:  18% (3/16)
+2022-06-09T14:23:03.4145410Z Resolving deltas:  25% (4/16)
+2022-06-09T14:23:03.4145654Z Resolving deltas:  31% (5/16)
+2022-06-09T14:23:03.4145881Z Resolving deltas:  37% (6/16)
+2022-06-09T14:23:03.4146118Z Resolving deltas:  43% (7/16)
+2022-06-09T14:23:03.4146361Z Resolving deltas:  50% (8/16)
+2022-06-09T14:23:03.4146594Z Resolving deltas:  56% (9/16)
+2022-06-09T14:23:03.4146836Z Resolving deltas:  62% (10/16)
+2022-06-09T14:23:03.4147076Z Resolving deltas:  68% (11/16)
+2022-06-09T14:23:03.4147320Z Resolving deltas:  75% (12/16)
+2022-06-09T14:23:03.4147552Z Resolving deltas:  81% (13/16)
+2022-06-09T14:23:03.4147787Z Resolving deltas:  87% (14/16)
+2022-06-09T14:23:03.4148020Z Resolving deltas:  93% (15/16)
+2022-06-09T14:23:03.4148256Z Resolving deltas: 100% (16/16)
+2022-06-09T14:23:03.4148499Z Resolving deltas: 100% (16/16), done.
+2022-06-09T14:23:03.4195616Z From https://github.com/ruby-i18n/i18n
+2022-06-09T14:23:03.4196140Z  * [new ref]         cb0c718b22148ab24928c19b68162ae50a51f14d -> pull/630/merge
+2022-06-09T14:23:03.4196795Z ##[endgroup]
+2022-06-09T14:23:03.4197228Z ##[group]Determining the checkout info
+2022-06-09T14:23:03.4197634Z ##[endgroup]
+2022-06-09T14:23:03.4198023Z ##[group]Checking out the ref
+2022-06-09T14:23:03.4198488Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/630/merge
+2022-06-09T14:23:03.4198936Z Note: switching to 'refs/remotes/pull/630/merge'.
+2022-06-09T14:23:03.4199302Z
+2022-06-09T14:23:03.4199620Z You are in 'detached HEAD' state. You can look around, make experimental
+2022-06-09T14:23:03.4200014Z changes and commit them, and you can discard any commits you make in this
+2022-06-09T14:23:03.4200395Z state without impacting any branches by switching back to a branch.
+2022-06-09T14:23:03.4200826Z
+2022-06-09T14:23:03.4201035Z If you want to create a new branch to retain commits you create, you may
+2022-06-09T14:23:03.4201521Z do so (now or later) by using -c with the switch command. Example:
+2022-06-09T14:23:03.4201713Z
+2022-06-09T14:23:03.4201892Z   git switch -c <new-branch-name>
+2022-06-09T14:23:03.4202055Z
+2022-06-09T14:23:03.4202163Z Or undo this operation with:
+2022-06-09T14:23:03.4202319Z
+2022-06-09T14:23:03.4202409Z   git switch -
+2022-06-09T14:23:03.4202544Z
+2022-06-09T14:23:03.4202728Z Turn off this advice by setting config variable advice.detachedHead to false
+2022-06-09T14:23:03.4202958Z
+2022-06-09T14:23:03.4203208Z HEAD is now at cb0c718 Merge ed22cbd3b3c0e6ce13dcdbf47dfbfbd1fca598f1 into b805537905522beb95ee7fc772fc8b6e150e1dbe
+2022-06-09T14:23:03.4203838Z ##[endgroup]
+2022-06-09T14:23:03.4238534Z [command]/usr/bin/git log -1 --format='%H'
+2022-06-09T14:23:03.4292627Z 'cb0c718b22148ab24928c19b68162ae50a51f14d'
+2022-06-09T14:23:03.4608890Z ##[group]Run ruby/setup-ruby@v1
+2022-06-09T14:23:03.4609201Z with:
+2022-06-09T14:23:03.4609416Z   ruby-version: 3.0
+2022-06-09T14:23:03.4609639Z   bundler-cache: true
+2022-06-09T14:23:03.4609857Z env:
+2022-06-09T14:23:03.4610069Z   BUNDLE_GEMFILE: Gemfile
+2022-06-09T14:23:03.4610290Z ##[endgroup]
+2022-06-09T14:23:03.7766689Z ##[group]Modifying PATH
+2022-06-09T14:23:03.7768020Z Entries added to PATH to use selected Ruby:
+2022-06-09T14:23:03.7769382Z   /opt/hostedtoolcache/Ruby/3.0.4/x64/bin
+2022-06-09T14:23:03.7770824Z ##[endgroup]
+2022-06-09T14:23:03.7772345Z ##[group]Print Ruby version
+2022-06-09T14:23:03.7797138Z [command]/opt/hostedtoolcache/Ruby/3.0.4/x64/bin/ruby --version
+2022-06-09T14:23:04.0547285Z ruby 3.0.4p208 (2022-04-12 revision 3fa771dded) [x86_64-linux]
+2022-06-09T14:23:04.0580473Z Took   0.29 seconds
+2022-06-09T14:23:04.0583509Z ##[endgroup]
+2022-06-09T14:23:04.0589187Z ##[group]Installing Bundler
+2022-06-09T14:23:04.0608667Z [command]/opt/hostedtoolcache/Ruby/3.0.4/x64/bin/gem install bundler -v ~> 2.0
+2022-06-09T14:23:05.9263873Z Successfully installed bundler-2.3.15
+2022-06-09T14:23:05.9265544Z 1 gem installed
+2022-06-09T14:23:05.9296248Z Took   1.87 seconds
+2022-06-09T14:23:05.9297799Z ##[endgroup]
+2022-06-09T14:23:05.9298663Z ##[group]bundle install
+2022-06-09T14:23:05.9322444Z [command]/opt/hostedtoolcache/Ruby/3.0.4/x64/bin/bundle config --local path /home/runner/work/i18n/i18n/vendor/bundle
+2022-06-09T14:23:06.1529228Z [command]/opt/hostedtoolcache/Ruby/3.0.4/x64/bin/bundle lock
+2022-06-09T14:23:07.3857539Z Fetching gem metadata from https://rubygems.org/..
+2022-06-09T14:23:07.4141044Z Resolving dependencies...
+2022-06-09T14:23:07.4253548Z Writing lockfile to /home/runner/work/i18n/i18n/Gemfile.lock
+2022-06-09T14:23:07.4408438Z Cache key: setup-ruby-bundler-cache-v3-ubuntu-20.04-ruby-3.0.4-Gemfile.lock-1bf1196cad8a992f4b365c28a97d61c86180765c1972bea2782209f41a526dc8
+2022-06-09T14:23:07.5173916Z [command]/opt/hostedtoolcache/Ruby/3.0.4/x64/bin/bundle install --jobs 4
+2022-06-09T14:23:08.4259663Z Fetching gem metadata from https://rubygems.org/..
+2022-06-09T14:23:08.4304050Z Fetching rake 13.0.6
+2022-06-09T14:23:08.4714829Z Installing rake 13.0.6
+2022-06-09T14:23:08.5196325Z Using bundler 2.3.15
+2022-06-09T14:23:08.5228013Z Fetching concurrent-ruby 1.1.10
+2022-06-09T14:23:08.5240091Z Fetching metaclass 0.0.4
+2022-06-09T14:23:08.5240359Z Fetching json 2.6.2
+2022-06-09T14:23:08.5240586Z Fetching minitest 5.15.0
+2022-06-09T14:23:08.5904974Z Installing minitest 5.15.0
+2022-06-09T14:23:08.6048990Z Installing metaclass 0.0.4
+2022-06-09T14:23:08.6126373Z Installing json 2.6.2 with native extensions
+2022-06-09T14:23:08.6169159Z Fetching test_declarative 0.0.6
+2022-06-09T14:23:08.6242849Z Installing concurrent-ruby 1.1.10
+2022-06-09T14:23:08.6564544Z Fetching mocha 1.7.0
+2022-06-09T14:23:08.6817216Z Installing test_declarative 0.0.6
+2022-06-09T14:23:08.7206159Z Installing mocha 1.7.0
+2022-06-09T14:23:08.7527900Z Using i18n 1.10.0 from source at `.`
+2022-06-09T14:23:15.0737128Z Bundle complete! 6 Gemfile dependencies, 9 gems now installed.
+2022-06-09T14:23:15.0737795Z Bundled gems are installed into `./vendor/bundle`
+2022-06-09T14:23:15.0948726Z Saving cache
+2022-06-09T14:23:15.1124398Z [command]/usr/bin/tar --posix --use-compress-program zstd -T0 -cf cache.tzst -P -C /home/runner/work/i18n/i18n --files-from manifest.txt
+2022-06-09T14:23:15.5275164Z Cache Size: ~2 MB (2192490 B)
+2022-06-09T14:23:15.6187335Z Cache saved successfully
+2022-06-09T14:23:15.6197736Z Took   9.69 seconds
+2022-06-09T14:23:15.6198954Z ##[endgroup]
+2022-06-09T14:23:15.6199673Z
+2022-06-09T14:23:15.6343669Z ##[group]Run bundle exec rake
+2022-06-09T14:23:15.6343998Z [36;1mbundle exec rake[0m
+2022-06-09T14:23:15.6408428Z shell: /usr/bin/bash -e {0}
+2022-06-09T14:23:15.6408683Z env:
+2022-06-09T14:23:15.6408890Z   BUNDLE_GEMFILE: Gemfile
+2022-06-09T14:23:15.6409132Z ##[endgroup]
+2022-06-09T14:23:16.0013608Z /opt/hostedtoolcache/Ruby/3.0.4/x64/bin/ruby -w -I"lib:lib:test" /home/runner/work/i18n/i18n/vendor/bundle/ruby/3.0.0/gems/rake-13.0.6/lib/rake/rake_test_loader.rb "test/api/all_features_test.rb" "test/api/cascade_test.rb" "test/api/chain_test.rb" "test/api/fallbacks_test.rb" "test/api/key_value_test.rb" "test/api/lazy_loadable_test.rb" "test/api/memoize_test.rb" "test/api/override_test.rb" "test/api/pluralization_test.rb" "test/api/simple_test.rb" "test/backend/cache_file_test.rb" "test/backend/cache_test.rb" "test/backend/cascade_test.rb" "test/backend/chain_test.rb" "test/backend/exceptions_test.rb" "test/backend/fallbacks_test.rb" "test/backend/interpolation_compiler_test.rb" "test/backend/key_value_test.rb" "test/backend/lazy_loadable_test.rb" "test/backend/memoize_test.rb" "test/backend/metadata_test.rb" "test/backend/pluralization_fallback_test.rb" "test/backend/pluralization_scope_test.rb" "test/backend/pluralization_test.rb" "test/backend/simple_test.rb" "test/backend/transliterator_test.rb" "test/gettext/api_test.rb" "test/gettext/backend_test.rb" "test/i18n/exceptions_test.rb" "test/i18n/gettext_plural_keys_test.rb" "test/i18n/interpolate_test.rb" "test/i18n/load_path_test.rb" "test/i18n/middleware_test.rb" "test/i18n_test.rb" "test/locale/fallbacks_test.rb" "test/locale/tag/rfc4646_test.rb" "test/locale/tag/simple_test.rb" "test/utils_test.rb"
+2022-06-09T14:23:16.3829739Z test_declarative is deprecated for Minitest::Unit::TestCase
+2022-06-09T14:23:16.3830181Z test_declarative is deprecated for Minitest::Test
+2022-06-09T14:23:16.4258740Z Skipping cache tests using ActiveSupport
+2022-06-09T14:23:16.5248406Z not testing with Cache enabled because active_support can not be found
+2022-06-09T14:23:16.5249081Z Run options: --seed 54606
+2022-06-09T14:23:16.5249244Z
+2022-06-09T14:23:16.5249334Z # Running:
+2022-06-09T14:23:16.5249467Z
+2022-06-09T14:23:16.6685889Z /home/runner/work/i18n/i18n/test/i18n_test.rb:504: warning: already initialized constant I18n::RESERVED_KEYS
+2022-06-09T14:23:16.6686420Z /home/runner/work/i18n/i18n/lib/i18n.rb:19: warning: previous definition of RESERVED_KEYS was here
+2022-06-09T14:23:16.9715835Z ................................................................................................................................................................E..................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................#<Concurrent::Map:0x000055ea075a2688 entries=3 default_proc=#<Proc:0x000055ea075a2570 /home/runner/work/i18n/i18n/lib/i18n.rb:38>>
+2022-06-09T14:23:17.0684569Z ......................................................................................................................................................................................................................................................................................................................................................................................................................
+2022-06-09T14:23:17.0687171Z
+2022-06-09T14:23:17.0720146Z Finished in 0.552764s, 2795.0459 runs/s, 4584.2372 assertions/s.
+2022-06-09T14:23:17.0721711Z
+2022-06-09T14:23:17.0723953Z   1) Error:
+2022-06-09T14:23:17.0726467Z I18nBackendPluralizationFallbackTest#test_fallbacks:_nils_are_ignored_and_fallback_is_applied,_with_custom_rule:
+2022-06-09T14:23:17.0731121Z I18n::InvalidPluralizationData: translation data {:one=>nil, :few=>nil, :many=>nil, :other=>nil} can not be used with :count => 0. key 'many' is missing.
+2022-06-09T14:23:17.0731961Z rake aborted!
+2022-06-09T14:23:17.0735419Z Command failed with status (1): [ruby -w -I"lib:lib:test" /home/runner/work/i18n/i18n/vendor/bundle/ruby/3.0.0/gems/rake-13.0.6/lib/rake/rake_test_loader.rb "test/api/all_features_test.rb" "test/api/cascade_test.rb" "test/api/chain_test.rb" "test/api/fallbacks_test.rb" "test/api/key_value_test.rb" "test/api/lazy_loadable_test.rb" "test/api/memoize_test.rb" "test/api/override_test.rb" "test/api/pluralization_test.rb" "test/api/simple_test.rb" "test/backend/cache_file_test.rb" "test/backend/cache_test.rb" "test/backend/cascade_test.rb" "test/backend/chain_test.rb" "test/backend/exceptions_test.rb" "test/backend/fallbacks_test.rb" "test/backend/interpolation_compiler_test.rb" "test/backend/key_value_test.rb" "test/backend/lazy_loadable_test.rb" "test/backend/memoize_test.rb" "test/backend/metadata_test.rb" "test/backend/pluralization_fallback_test.rb" "test/backend/pluralization_scope_test.rb" "test/backend/pluralization_test.rb" "test/backend/simple_test.rb" "test/backend/transliterator_test.rb" "test/gettext/api_test.rb" "test/gettext/backend_test.rb" "test/i18n/exceptions_test.rb" "test/i18n/gettext_plural_keys_test.rb" "test/i18n/interpolate_test.rb" "test/i18n/load_path_test.rb" "test/i18n/middleware_test.rb" "test/i18n_test.rb" "test/locale/fallbacks_test.rb" "test/locale/tag/rfc4646_test.rb" "test/locale/tag/simple_test.rb" "test/utils_test.rb" ]
+2022-06-09T14:23:17.0738168Z /home/runner/work/i18n/i18n/vendor/bundle/ruby/3.0.0/gems/rake-13.0.6/exe/rake:27:in `<top (required)>'
+2022-06-09T14:23:17.0738750Z /opt/hostedtoolcache/Ruby/3.0.4/x64/bin/bundle:23:in `load'
+2022-06-09T14:23:17.0766079Z /opt/hostedtoolcache/Ruby/3.0.4/x64/bin/bundle:23:in `<main>'
+2022-06-09T14:23:17.0766495Z     /home/runner/work/i18n/i18n/lib/i18n/backend/pluralization.rb:61:in `pluralize'
+2022-06-09T14:23:17.0786148Z     /home/runner/work/i18n/i18n/lib/i18n/backend/base.rb:50:in `translate'
+2022-06-09T14:23:17.0786592Z     /home/runner/work/i18n/i18n/lib/i18n/backend/fallbacks.rb:50:in `block (2 levels) in translate'
+2022-06-09T14:23:17.0786979Z     /home/runner/work/i18n/i18n/lib/i18n/backend/fallbacks.rb:49:in `catch'
+2022-06-09T14:23:17.0787372Z     /home/runner/work/i18n/i18n/lib/i18n/backend/fallbacks.rb:49:in `block in translate'
+2022-06-09T14:23:17.0787876Z     /home/runner/work/i18n/i18n/lib/i18n/backend/fallbacks.rb:47:in `each'
+2022-06-09T14:23:17.0788317Z     /home/runner/work/i18n/i18n/lib/i18n/backend/fallbacks.rb:47:in `translate'
+2022-06-09T14:23:17.0788771Z     /home/runner/work/i18n/i18n/lib/i18n.rb:221:in `block in translate'
+2022-06-09T14:23:17.0789141Z     /home/runner/work/i18n/i18n/lib/i18n.rb:217:in `catch'
+2022-06-09T14:23:17.0789479Z     /home/runner/work/i18n/i18n/lib/i18n.rb:217:in `translate'
+2022-06-09T14:23:17.0789942Z     /home/runner/work/i18n/i18n/test/backend/pluralization_fallback_test.rb:37:in `block in <class:I18nBackendPluralizationFallbackTest>'
+2022-06-09T14:23:17.0790272Z
+2022-06-09T14:23:17.0790419Z 1545 runs, 2534 assertions, 0 failures, 1 errors, 0 skips
+2022-06-09T14:23:17.0800198Z Tasks: TOP => default => test
+2022-06-09T14:23:17.0800685Z (See full trace by running task with --trace)
+2022-06-09T14:23:17.0816009Z ##[error]Process completed with exit code 1.
+2022-06-09T14:23:17.0878930Z Post job cleanup.
+2022-06-09T14:23:17.2319550Z [command]/usr/bin/git version
+2022-06-09T14:23:17.2374550Z git version 2.36.1
+2022-06-09T14:23:17.2435322Z Temporarily overriding HOME='/home/runner/work/_temp/5e5ca659-ebdc-4740-8a0d-c996c672958b' before making global git config changes
+2022-06-09T14:23:17.2437748Z Adding repository directory to the temporary git global config as a safe directory
+2022-06-09T14:23:17.2445204Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/i18n/i18n
+2022-06-09T14:23:17.2493082Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2022-06-09T14:23:17.2534977Z [command]/usr/bin/git submodule foreach --recursive git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :
+2022-06-09T14:23:17.2835530Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2022-06-09T14:23:17.2866307Z http.https://github.com/.extraheader
+2022-06-09T14:23:17.2880837Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2022-06-09T14:23:17.2929252Z [command]/usr/bin/git submodule foreach --recursive git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :
+2022-06-09T14:23:17.3593154Z Cleaning up orphan processes

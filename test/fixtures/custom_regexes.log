@@ -1,0 +1,21 @@
+2022-07-17T23:24:55.0416579Z # Blabla
+2022-07-17T23:24:55.0416579Z Gemfile used: Gemfile_AR_5_1
+2022-07-17T23:24:55.0416579Z # dsadadasd
+2022-07-17T23:24:55.0416579Z # dsada
+2022-07-17T23:24:55.0416579Z My Ruby version: 3.2.0
+2022-07-17T23:24:55.0416913Z
+2022-07-17T23:24:55.0416913Z
+2022-07-17T23:24:55.0416913Z
+2022-07-17T23:24:55.0416579Z # Running with the seed value 65123
+2022-07-17T23:24:55.0416913Z
+2022-07-17T23:24:55.0514228Z ..............F...F.F..........
+2022-07-17T23:24:55.0516423Z
+2022-07-17T23:24:55.0518438Z Finished in 0.015397s, 2013.4301 runs/s, 58649.2703 assertions/s.
+2022-07-17T23:24:55.0519643Z
+2022-07-17T23:24:55.0519858Z   1) Failure:
+2022-07-17T23:24:55.0520404Z GithubDiffParserTest#test_boom1 [/home/runner/work/github_diff_parser/github_diff_parser/test/github_diff_parser_test.rb:7]:
+2022-07-17T23:24:55.0520910Z Expected true to not be truthy.
+2022-07-17T23:24:55.0521187Z
+2022-07-17T23:24:55.0521393Z   2) Failure:
+2022-07-17T23:24:55.0521977Z GithubDiffParserTest#test_boom3 [/home/runner/work/github_diff_parser/github_diff_parser/test/github_diff_parser_test.rb:15]:
+2022-07-17T23:24:55.0522799Z Epic Fail!

@@ -1,0 +1,957 @@
+2022-07-15T12:32:07.3795611Z Requested labels: ubuntu-latest
+2022-07-15T12:32:07.3795666Z Job defined at: Shopify/maintenance_tasks/.github/workflows/ci.yml@refs/heads/paulo/multiple-active-runs-per-task
+2022-07-15T12:32:07.3795686Z Waiting for a runner to pick up this job...
+2022-07-15T12:32:10.0057078Z Job is waiting for a hosted runner to come online.
+2022-07-15T12:32:12.1169315Z Job is about to start running on the hosted runner: GitHub Actions 10 (hosted)
+2022-07-15T12:32:15.9127347Z Current runner version: '2.294.0'
+2022-07-15T12:32:15.9155356Z ##[group]Operating System
+2022-07-15T12:32:15.9155840Z Ubuntu
+2022-07-15T12:32:15.9156123Z 20.04.4
+2022-07-15T12:32:15.9156422Z LTS
+2022-07-15T12:32:15.9156663Z ##[endgroup]
+2022-07-15T12:32:15.9157097Z ##[group]Virtual Environment
+2022-07-15T12:32:15.9157635Z Environment: ubuntu-20.04
+2022-07-15T12:32:15.9157966Z Version: 20220710.1
+2022-07-15T12:32:15.9158558Z Included Software: https://github.com/actions/virtual-environments/blob/ubuntu20/20220710.1/images/linux/Ubuntu2004-Readme.md
+2022-07-15T12:32:15.9159342Z Image Release: https://github.com/actions/virtual-environments/releases/tag/ubuntu20%2F20220710.1
+2022-07-15T12:32:15.9159855Z ##[endgroup]
+2022-07-15T12:32:15.9160201Z ##[group]Virtual Environment Provisioner
+2022-07-15T12:32:15.9160921Z 1.0.0.0-main-20220701-2
+2022-07-15T12:32:15.9161280Z ##[endgroup]
+2022-07-15T12:32:15.9162009Z ##[group]GITHUB_TOKEN Permissions
+2022-07-15T12:32:15.9162592Z Contents: read
+2022-07-15T12:32:15.9163135Z Metadata: read
+2022-07-15T12:32:15.9163541Z ##[endgroup]
+2022-07-15T12:32:15.9167631Z Secret source: Actions
+2022-07-15T12:32:15.9168190Z Prepare workflow directory
+2022-07-15T12:32:16.0380921Z Prepare all required actions
+2022-07-15T12:32:16.0565190Z Getting action download info
+2022-07-15T12:32:16.2738036Z Download action repository 'actions/checkout@v3' (SHA:2541b1294d2704b0964813337f33b291d3f8596b)
+2022-07-15T12:32:16.6194801Z Download action repository 'ruby/setup-ruby@v1' (SHA:08245253a76fa4d1e459b7809579c62bd9eb718a)
+2022-07-15T12:32:16.8724234Z Download action repository 'actions/upload-artifact@v3' (SHA:3cea5372237819ed00197afe530f5a7ea3e805c8)
+2022-07-15T12:32:17.3309118Z ##[group]Run actions/checkout@v3
+2022-07-15T12:32:17.3309529Z with:
+2022-07-15T12:32:17.3309839Z   repository: Shopify/maintenance_tasks
+2022-07-15T12:32:17.3310494Z   token: ***
+2022-07-15T12:32:17.3310770Z   ssh-strict: true
+2022-07-15T12:32:17.3311071Z   persist-credentials: true
+2022-07-15T12:32:17.3311376Z   clean: true
+2022-07-15T12:32:17.3311665Z   fetch-depth: 1
+2022-07-15T12:32:17.3311919Z   lfs: false
+2022-07-15T12:32:17.3312180Z   submodules: false
+2022-07-15T12:32:17.3312484Z   set-safe-directory: true
+2022-07-15T12:32:17.3312757Z env:
+2022-07-15T12:32:17.3313066Z   BUNDLE_GEMFILE: gemfiles/rails_6_0.gemfile
+2022-07-15T12:32:17.3313385Z   DB: sqlite
+2022-07-15T12:32:17.3313631Z ##[endgroup]
+2022-07-15T12:32:17.6333585Z Syncing repository: Shopify/maintenance_tasks
+2022-07-15T12:32:17.6335882Z ##[group]Getting Git version info
+2022-07-15T12:32:17.6336691Z Working directory is '/home/runner/work/maintenance_tasks/maintenance_tasks'
+2022-07-15T12:32:17.6337399Z [command]/usr/bin/git version
+2022-07-15T12:32:17.6473961Z git version 2.37.0
+2022-07-15T12:32:17.6493779Z ##[endgroup]
+2022-07-15T12:32:17.6515627Z Temporarily overriding HOME='/home/runner/work/_temp/197b2072-f829-4d8c-baa6-fb9923b3a1e1' before making global git config changes
+2022-07-15T12:32:17.6517301Z Adding repository directory to the temporary git global config as a safe directory
+2022-07-15T12:32:17.6523210Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/maintenance_tasks/maintenance_tasks
+2022-07-15T12:32:17.6580338Z Deleting the contents of '/home/runner/work/maintenance_tasks/maintenance_tasks'
+2022-07-15T12:32:17.6584952Z ##[group]Initializing the repository
+2022-07-15T12:32:17.6589634Z [command]/usr/bin/git init /home/runner/work/maintenance_tasks/maintenance_tasks
+2022-07-15T12:32:17.6681701Z hint: Using 'master' as the name for the initial branch. This default branch name
+2022-07-15T12:32:17.6682409Z hint: is subject to change. To configure the initial branch name to use in all
+2022-07-15T12:32:17.6683837Z hint: of your new repositories, which will suppress this warning, call:
+2022-07-15T12:32:17.6684477Z hint:
+2022-07-15T12:32:17.6685938Z hint: 	git config --global init.defaultBranch <name>
+2022-07-15T12:32:17.6686463Z hint:
+2022-07-15T12:32:17.6686958Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2022-07-15T12:32:17.6687757Z hint: 'development'. The just-created branch can be renamed via this command:
+2022-07-15T12:32:17.6688093Z hint:
+2022-07-15T12:32:17.6688384Z hint: 	git branch -m <name>
+2022-07-15T12:32:17.6695989Z Initialized empty Git repository in /home/runner/work/maintenance_tasks/maintenance_tasks/.git/
+2022-07-15T12:32:17.6705069Z [command]/usr/bin/git remote add origin https://github.com/Shopify/maintenance_tasks
+2022-07-15T12:32:17.6755478Z ##[endgroup]
+2022-07-15T12:32:17.6757654Z ##[group]Disabling automatic garbage collection
+2022-07-15T12:32:17.6760300Z [command]/usr/bin/git config --local gc.auto 0
+2022-07-15T12:32:17.6798524Z ##[endgroup]
+2022-07-15T12:32:17.6799475Z ##[group]Setting up auth
+2022-07-15T12:32:17.6807626Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2022-07-15T12:32:17.6849702Z [command]/usr/bin/git submodule foreach --recursive git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :
+2022-07-15T12:32:17.7257593Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2022-07-15T12:32:17.7287006Z [command]/usr/bin/git submodule foreach --recursive git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :
+2022-07-15T12:32:17.7539979Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2022-07-15T12:32:17.7574972Z ##[endgroup]
+2022-07-15T12:32:17.7575846Z ##[group]Fetching the repository
+2022-07-15T12:32:17.7586097Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 origin +52cb0490bcc2fa6f1f0e31b064e7d86e291ae6b4:refs/remotes/origin/paulo/multiple-active-runs-per-task
+2022-07-15T12:32:17.9718489Z remote: Enumerating objects: 262, done.
+2022-07-15T12:32:17.9841101Z remote: Counting objects:   0% (1/262)
+2022-07-15T12:32:17.9841488Z remote: Counting objects:   1% (3/262)
+2022-07-15T12:32:17.9841813Z remote: Counting objects:   2% (6/262)
+2022-07-15T12:32:17.9842127Z remote: Counting objects:   3% (8/262)
+2022-07-15T12:32:17.9842451Z remote: Counting objects:   4% (11/262)
+2022-07-15T12:32:17.9842759Z remote: Counting objects:   5% (14/262)
+2022-07-15T12:32:17.9843070Z remote: Counting objects:   6% (16/262)
+2022-07-15T12:32:17.9843383Z remote: Counting objects:   7% (19/262)
+2022-07-15T12:32:17.9843680Z remote: Counting objects:   8% (21/262)
+2022-07-15T12:32:17.9843999Z remote: Counting objects:   9% (24/262)
+2022-07-15T12:32:17.9848333Z remote: Counting objects:  10% (27/262)
+2022-07-15T12:32:17.9848647Z remote: Counting objects:  11% (29/262)
+2022-07-15T12:32:17.9848961Z remote: Counting objects:  12% (32/262)
+2022-07-15T12:32:17.9849274Z remote: Counting objects:  13% (35/262)
+2022-07-15T12:32:17.9849601Z remote: Counting objects:  14% (37/262)
+2022-07-15T12:32:17.9849895Z remote: Counting objects:  15% (40/262)
+2022-07-15T12:32:17.9850203Z remote: Counting objects:  16% (42/262)
+2022-07-15T12:32:17.9850514Z remote: Counting objects:  17% (45/262)
+2022-07-15T12:32:17.9850806Z remote: Counting objects:  18% (48/262)
+2022-07-15T12:32:17.9851208Z remote: Counting objects:  19% (50/262)
+2022-07-15T12:32:17.9851494Z remote: Counting objects:  20% (53/262)
+2022-07-15T12:32:17.9851769Z remote: Counting objects:  21% (56/262)
+2022-07-15T12:32:17.9852640Z remote: Counting objects:  22% (58/262)
+2022-07-15T12:32:17.9853756Z remote: Counting objects:  23% (61/262)
+2022-07-15T12:32:17.9854052Z remote: Counting objects:  24% (63/262)
+2022-07-15T12:32:17.9854338Z remote: Counting objects:  25% (66/262)
+2022-07-15T12:32:17.9854624Z remote: Counting objects:  26% (69/262)
+2022-07-15T12:32:17.9854908Z remote: Counting objects:  27% (71/262)
+2022-07-15T12:32:17.9855550Z remote: Counting objects:  28% (74/262)
+2022-07-15T12:32:17.9855838Z remote: Counting objects:  29% (76/262)
+2022-07-15T12:32:17.9856121Z remote: Counting objects:  30% (79/262)
+2022-07-15T12:32:17.9856394Z remote: Counting objects:  31% (82/262)
+2022-07-15T12:32:17.9856678Z remote: Counting objects:  32% (84/262)
+2022-07-15T12:32:17.9856966Z remote: Counting objects:  33% (87/262)
+2022-07-15T12:32:17.9857237Z remote: Counting objects:  34% (90/262)
+2022-07-15T12:32:17.9857518Z remote: Counting objects:  35% (92/262)
+2022-07-15T12:32:17.9857807Z remote: Counting objects:  36% (95/262)
+2022-07-15T12:32:17.9858078Z remote: Counting objects:  37% (97/262)
+2022-07-15T12:32:17.9858373Z remote: Counting objects:  38% (100/262)
+2022-07-15T12:32:17.9858672Z remote: Counting objects:  39% (103/262)
+2022-07-15T12:32:17.9858966Z remote: Counting objects:  40% (105/262)
+2022-07-15T12:32:17.9859250Z remote: Counting objects:  41% (108/262)
+2022-07-15T12:32:17.9859543Z remote: Counting objects:  42% (111/262)
+2022-07-15T12:32:17.9859834Z remote: Counting objects:  43% (113/262)
+2022-07-15T12:32:17.9860108Z remote: Counting objects:  44% (116/262)
+2022-07-15T12:32:17.9860393Z remote: Counting objects:  45% (118/262)
+2022-07-15T12:32:17.9860682Z remote: Counting objects:  46% (121/262)
+2022-07-15T12:32:17.9860961Z remote: Counting objects:  47% (124/262)
+2022-07-15T12:32:17.9861246Z remote: Counting objects:  48% (126/262)
+2022-07-15T12:32:17.9861626Z remote: Counting objects:  49% (129/262)
+2022-07-15T12:32:17.9861907Z remote: Counting objects:  50% (131/262)
+2022-07-15T12:32:17.9862196Z remote: Counting objects:  51% (134/262)
+2022-07-15T12:32:17.9862486Z remote: Counting objects:  52% (137/262)
+2022-07-15T12:32:17.9862771Z remote: Counting objects:  53% (139/262)
+2022-07-15T12:32:17.9863047Z remote: Counting objects:  54% (142/262)
+2022-07-15T12:32:17.9863335Z remote: Counting objects:  55% (145/262)
+2022-07-15T12:32:17.9863622Z remote: Counting objects:  56% (147/262)
+2022-07-15T12:32:17.9865022Z remote: Counting objects:  57% (150/262)
+2022-07-15T12:32:17.9865347Z remote: Counting objects:  58% (152/262)
+2022-07-15T12:32:17.9865943Z remote: Counting objects:  59% (155/262)
+2022-07-15T12:32:17.9866368Z remote: Counting objects:  60% (158/262)
+2022-07-15T12:32:17.9866668Z remote: Counting objects:  61% (160/262)
+2022-07-15T12:32:17.9866989Z remote: Counting objects:  62% (163/262)
+2022-07-15T12:32:17.9867301Z remote: Counting objects:  63% (166/262)
+2022-07-15T12:32:17.9867597Z remote: Counting objects:  64% (168/262)
+2022-07-15T12:32:17.9867908Z remote: Counting objects:  65% (171/262)
+2022-07-15T12:32:17.9868222Z remote: Counting objects:  66% (173/262)
+2022-07-15T12:32:17.9868533Z remote: Counting objects:  67% (176/262)
+2022-07-15T12:32:17.9868829Z remote: Counting objects:  68% (179/262)
+2022-07-15T12:32:17.9869136Z remote: Counting objects:  69% (181/262)
+2022-07-15T12:32:17.9869448Z remote: Counting objects:  70% (184/262)
+2022-07-15T12:32:17.9869746Z remote: Counting objects:  71% (187/262)
+2022-07-15T12:32:17.9870056Z remote: Counting objects:  72% (189/262)
+2022-07-15T12:32:17.9870364Z remote: Counting objects:  73% (192/262)
+2022-07-15T12:32:17.9870657Z remote: Counting objects:  74% (194/262)
+2022-07-15T12:32:17.9870975Z remote: Counting objects:  75% (197/262)
+2022-07-15T12:32:17.9871281Z remote: Counting objects:  76% (200/262)
+2022-07-15T12:32:17.9871573Z remote: Counting objects:  77% (202/262)
+2022-07-15T12:32:17.9871880Z remote: Counting objects:  78% (205/262)
+2022-07-15T12:32:17.9872183Z remote: Counting objects:  79% (207/262)
+2022-07-15T12:32:17.9872650Z remote: Counting objects:  80% (210/262)
+2022-07-15T12:32:17.9872942Z remote: Counting objects:  81% (213/262)
+2022-07-15T12:32:17.9873246Z remote: Counting objects:  82% (215/262)
+2022-07-15T12:32:17.9873554Z remote: Counting objects:  83% (218/262)
+2022-07-15T12:32:17.9873846Z remote: Counting objects:  84% (221/262)
+2022-07-15T12:32:17.9874153Z remote: Counting objects:  85% (223/262)
+2022-07-15T12:32:17.9874463Z remote: Counting objects:  86% (226/262)
+2022-07-15T12:32:17.9874756Z remote: Counting objects:  87% (228/262)
+2022-07-15T12:32:17.9875062Z remote: Counting objects:  88% (231/262)
+2022-07-15T12:32:17.9875374Z remote: Counting objects:  89% (234/262)
+2022-07-15T12:32:17.9875664Z remote: Counting objects:  90% (236/262)
+2022-07-15T12:32:17.9875972Z remote: Counting objects:  91% (239/262)
+2022-07-15T12:32:17.9876285Z remote: Counting objects:  92% (242/262)
+2022-07-15T12:32:17.9876593Z remote: Counting objects:  93% (244/262)
+2022-07-15T12:32:17.9876890Z remote: Counting objects:  94% (247/262)
+2022-07-15T12:32:17.9877194Z remote: Counting objects:  95% (249/262)
+2022-07-15T12:32:17.9877499Z remote: Counting objects:  96% (252/262)
+2022-07-15T12:32:17.9877798Z remote: Counting objects:  97% (255/262)
+2022-07-15T12:32:17.9878107Z remote: Counting objects:  98% (257/262)
+2022-07-15T12:32:17.9878418Z remote: Counting objects:  99% (260/262)
+2022-07-15T12:32:17.9878711Z remote: Counting objects: 100% (262/262)
+2022-07-15T12:32:17.9879111Z remote: Counting objects: 100% (262/262), done.
+2022-07-15T12:32:17.9879469Z remote: Compressing objects:   0% (1/219)
+2022-07-15T12:32:17.9879806Z remote: Compressing objects:   1% (3/219)
+2022-07-15T12:32:17.9880239Z remote: Compressing objects:   2% (5/219)
+2022-07-15T12:32:17.9880680Z remote: Compressing objects:   3% (7/219)
+2022-07-15T12:32:17.9880989Z remote: Compressing objects:   4% (9/219)
+2022-07-15T12:32:17.9881281Z remote: Compressing objects:   5% (11/219)
+2022-07-15T12:32:17.9881599Z remote: Compressing objects:   6% (14/219)
+2022-07-15T12:32:17.9881909Z remote: Compressing objects:   7% (16/219)
+2022-07-15T12:32:17.9882202Z remote: Compressing objects:   8% (18/219)
+2022-07-15T12:32:17.9882513Z remote: Compressing objects:   9% (20/219)
+2022-07-15T12:32:17.9882821Z remote: Compressing objects:  10% (22/219)
+2022-07-15T12:32:17.9883119Z remote: Compressing objects:  11% (25/219)
+2022-07-15T12:32:17.9883427Z remote: Compressing objects:  12% (27/219)
+2022-07-15T12:32:17.9883731Z remote: Compressing objects:  13% (29/219)
+2022-07-15T12:32:17.9884036Z remote: Compressing objects:  14% (31/219)
+2022-07-15T12:32:17.9884325Z remote: Compressing objects:  15% (33/219)
+2022-07-15T12:32:17.9884631Z remote: Compressing objects:  16% (36/219)
+2022-07-15T12:32:17.9884938Z remote: Compressing objects:  17% (38/219)
+2022-07-15T12:32:17.9885225Z remote: Compressing objects:  18% (40/219)
+2022-07-15T12:32:17.9885526Z remote: Compressing objects:  19% (42/219)
+2022-07-15T12:32:17.9885829Z remote: Compressing objects:  20% (44/219)
+2022-07-15T12:32:17.9886263Z remote: Compressing objects:  21% (46/219)
+2022-07-15T12:32:17.9886834Z remote: Compressing objects:  22% (49/219)
+2022-07-15T12:32:17.9887206Z remote: Compressing objects:  23% (51/219)
+2022-07-15T12:32:17.9887509Z remote: Compressing objects:  24% (53/219)
+2022-07-15T12:32:17.9887804Z remote: Compressing objects:  25% (55/219)
+2022-07-15T12:32:17.9888108Z remote: Compressing objects:  26% (57/219)
+2022-07-15T12:32:17.9888410Z remote: Compressing objects:  27% (60/219)
+2022-07-15T12:32:17.9888697Z remote: Compressing objects:  28% (62/219)
+2022-07-15T12:32:17.9889005Z remote: Compressing objects:  29% (64/219)
+2022-07-15T12:32:17.9889440Z remote: Compressing objects:  30% (66/219)
+2022-07-15T12:32:17.9889724Z remote: Compressing objects:  31% (68/219)
+2022-07-15T12:32:17.9890030Z remote: Compressing objects:  32% (71/219)
+2022-07-15T12:32:17.9890334Z remote: Compressing objects:  33% (73/219)
+2022-07-15T12:32:17.9890734Z remote: Compressing objects:  34% (75/219)
+2022-07-15T12:32:17.9891028Z remote: Compressing objects:  35% (77/219)
+2022-07-15T12:32:17.9892193Z remote: Compressing objects:  36% (79/219)
+2022-07-15T12:32:17.9892525Z remote: Compressing objects:  37% (82/219)
+2022-07-15T12:32:17.9892828Z remote: Compressing objects:  38% (84/219)
+2022-07-15T12:32:17.9893132Z remote: Compressing objects:  39% (86/219)
+2022-07-15T12:32:17.9893442Z remote: Compressing objects:  40% (88/219)
+2022-07-15T12:32:17.9893730Z remote: Compressing objects:  41% (90/219)
+2022-07-15T12:32:17.9894035Z remote: Compressing objects:  42% (92/219)
+2022-07-15T12:32:17.9894513Z remote: Compressing objects:  43% (95/219)
+2022-07-15T12:32:17.9894981Z remote: Compressing objects:  44% (97/219)
+2022-07-15T12:32:17.9895303Z remote: Compressing objects:  45% (99/219)
+2022-07-15T12:32:17.9895633Z remote: Compressing objects:  46% (101/219)
+2022-07-15T12:32:17.9895973Z remote: Compressing objects:  47% (103/219)
+2022-07-15T12:32:17.9897632Z remote: Compressing objects:  48% (106/219)
+2022-07-15T12:32:17.9897977Z remote: Compressing objects:  49% (108/219)
+2022-07-15T12:32:17.9898477Z remote: Compressing objects:  50% (110/219)
+2022-07-15T12:32:17.9898824Z remote: Compressing objects:  51% (112/219)
+2022-07-15T12:32:17.9899141Z remote: Compressing objects:  52% (114/219)
+2022-07-15T12:32:17.9899476Z remote: Compressing objects:  53% (117/219)
+2022-07-15T12:32:17.9899813Z remote: Compressing objects:  54% (119/219)
+2022-07-15T12:32:17.9900130Z remote: Compressing objects:  55% (121/219)
+2022-07-15T12:32:17.9900468Z remote: Compressing objects:  56% (123/219)
+2022-07-15T12:32:17.9900798Z remote: Compressing objects:  57% (125/219)
+2022-07-15T12:32:17.9901109Z remote: Compressing objects:  58% (128/219)
+2022-07-15T12:32:17.9901445Z remote: Compressing objects:  59% (130/219)
+2022-07-15T12:32:17.9901823Z remote: Compressing objects:  60% (132/219)
+2022-07-15T12:32:17.9902133Z remote: Compressing objects:  61% (134/219)
+2022-07-15T12:32:17.9902460Z remote: Compressing objects:  62% (136/219)
+2022-07-15T12:32:17.9902787Z remote: Compressing objects:  63% (138/219)
+2022-07-15T12:32:17.9903115Z remote: Compressing objects:  64% (141/219)
+2022-07-15T12:32:17.9903425Z remote: Compressing objects:  65% (143/219)
+2022-07-15T12:32:17.9903747Z remote: Compressing objects:  66% (145/219)
+2022-07-15T12:32:17.9904071Z remote: Compressing objects:  67% (147/219)
+2022-07-15T12:32:17.9916750Z remote: Compressing objects:  68% (149/219)
+2022-07-15T12:32:17.9917230Z remote: Compressing objects:  69% (152/219)
+2022-07-15T12:32:17.9917579Z remote: Compressing objects:  70% (154/219)
+2022-07-15T12:32:17.9917897Z remote: Compressing objects:  71% (156/219)
+2022-07-15T12:32:17.9918238Z remote: Compressing objects:  72% (158/219)
+2022-07-15T12:32:17.9918570Z remote: Compressing objects:  73% (160/219)
+2022-07-15T12:32:17.9918904Z remote: Compressing objects:  74% (163/219)
+2022-07-15T12:32:17.9919210Z remote: Compressing objects:  75% (165/219)
+2022-07-15T12:32:17.9919552Z remote: Compressing objects:  76% (167/219)
+2022-07-15T12:32:17.9919888Z remote: Compressing objects:  77% (169/219)
+2022-07-15T12:32:17.9920202Z remote: Compressing objects:  78% (171/219)
+2022-07-15T12:32:17.9920660Z remote: Compressing objects:  79% (174/219)
+2022-07-15T12:32:17.9927787Z remote: Compressing objects:  80% (176/219)
+2022-07-15T12:32:17.9928303Z remote: Compressing objects:  81% (178/219)
+2022-07-15T12:32:17.9928619Z remote: Compressing objects:  82% (180/219)
+2022-07-15T12:32:17.9928934Z remote: Compressing objects:  83% (182/219)
+2022-07-15T12:32:17.9929243Z remote: Compressing objects:  84% (184/219)
+2022-07-15T12:32:17.9929706Z remote: Compressing objects:  85% (187/219)
+2022-07-15T12:32:17.9930088Z remote: Compressing objects:  86% (189/219)
+2022-07-15T12:32:17.9930417Z remote: Compressing objects:  87% (191/219)
+2022-07-15T12:32:17.9930731Z remote: Compressing objects:  88% (193/219)
+2022-07-15T12:32:17.9931068Z remote: Compressing objects:  89% (195/219)
+2022-07-15T12:32:17.9931389Z remote: Compressing objects:  90% (198/219)
+2022-07-15T12:32:17.9931703Z remote: Compressing objects:  91% (200/219)
+2022-07-15T12:32:17.9932034Z remote: Compressing objects:  92% (202/219)
+2022-07-15T12:32:17.9932368Z remote: Compressing objects:  93% (204/219)
+2022-07-15T12:32:17.9932739Z remote: Compressing objects:  94% (206/219)
+2022-07-15T12:32:17.9933068Z remote: Compressing objects:  95% (209/219)
+2022-07-15T12:32:17.9933627Z remote: Compressing objects:  96% (211/219)
+2022-07-15T12:32:17.9934014Z remote: Compressing objects:  97% (213/219)
+2022-07-15T12:32:17.9934323Z remote: Compressing objects:  98% (215/219)
+2022-07-15T12:32:17.9934654Z remote: Compressing objects:  99% (217/219)
+2022-07-15T12:32:17.9934989Z remote: Compressing objects: 100% (219/219)
+2022-07-15T12:32:17.9935413Z remote: Compressing objects: 100% (219/219), done.
+2022-07-15T12:32:17.9957321Z Receiving objects:   0% (1/262)
+2022-07-15T12:32:17.9965385Z Receiving objects:   1% (3/262)
+2022-07-15T12:32:17.9965704Z Receiving objects:   2% (6/262)
+2022-07-15T12:32:17.9965987Z Receiving objects:   3% (8/262)
+2022-07-15T12:32:17.9970473Z Receiving objects:   4% (11/262)
+2022-07-15T12:32:17.9974841Z Receiving objects:   5% (14/262)
+2022-07-15T12:32:17.9984169Z Receiving objects:   6% (16/262)
+2022-07-15T12:32:17.9988773Z Receiving objects:   7% (19/262)
+2022-07-15T12:32:17.9993696Z Receiving objects:   8% (21/262)
+2022-07-15T12:32:17.9998432Z Receiving objects:   9% (24/262)
+2022-07-15T12:32:18.0005429Z Receiving objects:  10% (27/262)
+2022-07-15T12:32:18.0015868Z Receiving objects:  11% (29/262)
+2022-07-15T12:32:18.0016352Z Receiving objects:  12% (32/262)
+2022-07-15T12:32:18.0016744Z Receiving objects:  13% (35/262)
+2022-07-15T12:32:18.0017029Z Receiving objects:  14% (37/262)
+2022-07-15T12:32:18.0020542Z Receiving objects:  15% (40/262)
+2022-07-15T12:32:18.0020875Z Receiving objects:  16% (42/262)
+2022-07-15T12:32:18.0021473Z Receiving objects:  17% (45/262)
+2022-07-15T12:32:18.0022419Z Receiving objects:  18% (48/262)
+2022-07-15T12:32:18.0023933Z Receiving objects:  19% (50/262)
+2022-07-15T12:32:18.0025394Z Receiving objects:  20% (53/262)
+2022-07-15T12:32:18.0026386Z Receiving objects:  21% (56/262)
+2022-07-15T12:32:18.0028140Z Receiving objects:  22% (58/262)
+2022-07-15T12:32:18.0029280Z Receiving objects:  23% (61/262)
+2022-07-15T12:32:18.0030183Z Receiving objects:  24% (63/262)
+2022-07-15T12:32:18.0031275Z Receiving objects:  25% (66/262)
+2022-07-15T12:32:18.0032203Z Receiving objects:  26% (69/262)
+2022-07-15T12:32:18.0033119Z Receiving objects:  27% (71/262)
+2022-07-15T12:32:18.0034329Z Receiving objects:  28% (74/262)
+2022-07-15T12:32:18.0035408Z Receiving objects:  29% (76/262)
+2022-07-15T12:32:18.0036872Z Receiving objects:  30% (79/262)
+2022-07-15T12:32:18.0037928Z Receiving objects:  31% (82/262)
+2022-07-15T12:32:18.0038931Z Receiving objects:  32% (84/262)
+2022-07-15T12:32:18.0040017Z Receiving objects:  33% (87/262)
+2022-07-15T12:32:18.0041286Z Receiving objects:  34% (90/262)
+2022-07-15T12:32:18.0042146Z Receiving objects:  35% (92/262)
+2022-07-15T12:32:18.0043035Z Receiving objects:  36% (95/262)
+2022-07-15T12:32:18.0044450Z Receiving objects:  37% (97/262)
+2022-07-15T12:32:18.0045471Z Receiving objects:  38% (100/262)
+2022-07-15T12:32:18.0047181Z Receiving objects:  39% (103/262)
+2022-07-15T12:32:18.0048675Z Receiving objects:  40% (105/262)
+2022-07-15T12:32:18.0050211Z Receiving objects:  41% (108/262)
+2022-07-15T12:32:18.0051308Z Receiving objects:  42% (111/262)
+2022-07-15T12:32:18.0052997Z Receiving objects:  43% (113/262)
+2022-07-15T12:32:18.0501211Z Receiving objects:  44% (116/262)
+2022-07-15T12:32:18.0501602Z Receiving objects:  45% (118/262)
+2022-07-15T12:32:18.0504524Z Receiving objects:  46% (121/262)
+2022-07-15T12:32:18.0504915Z Receiving objects:  47% (124/262)
+2022-07-15T12:32:18.0505179Z Receiving objects:  48% (126/262)
+2022-07-15T12:32:18.0505440Z Receiving objects:  49% (129/262)
+2022-07-15T12:32:18.0505699Z Receiving objects:  50% (131/262)
+2022-07-15T12:32:18.0505944Z Receiving objects:  51% (134/262)
+2022-07-15T12:32:18.0506201Z Receiving objects:  52% (137/262)
+2022-07-15T12:32:18.0506457Z Receiving objects:  53% (139/262)
+2022-07-15T12:32:18.0506709Z Receiving objects:  54% (142/262)
+2022-07-15T12:32:18.0506996Z Receiving objects:  55% (145/262)
+2022-07-15T12:32:18.0507239Z Receiving objects:  56% (147/262)
+2022-07-15T12:32:18.0507494Z Receiving objects:  57% (150/262)
+2022-07-15T12:32:18.0507749Z Receiving objects:  58% (152/262)
+2022-07-15T12:32:18.0507989Z Receiving objects:  59% (155/262)
+2022-07-15T12:32:18.0508243Z Receiving objects:  60% (158/262)
+2022-07-15T12:32:18.0508496Z Receiving objects:  61% (160/262)
+2022-07-15T12:32:18.0508736Z Receiving objects:  62% (163/262)
+2022-07-15T12:32:18.0512482Z Receiving objects:  63% (166/262)
+2022-07-15T12:32:18.0514814Z Receiving objects:  64% (168/262)
+2022-07-15T12:32:18.0516484Z Receiving objects:  65% (171/262)
+2022-07-15T12:32:18.0516743Z Receiving objects:  66% (173/262)
+2022-07-15T12:32:18.0517003Z Receiving objects:  67% (176/262)
+2022-07-15T12:32:18.0517260Z Receiving objects:  68% (179/262)
+2022-07-15T12:32:18.0517502Z Receiving objects:  69% (181/262)
+2022-07-15T12:32:18.0523911Z Receiving objects:  70% (184/262)
+2022-07-15T12:32:18.0524228Z Receiving objects:  71% (187/262)
+2022-07-15T12:32:18.0531584Z Receiving objects:  72% (189/262)
+2022-07-15T12:32:18.0531904Z Receiving objects:  73% (192/262)
+2022-07-15T12:32:18.0532192Z Receiving objects:  74% (194/262)
+2022-07-15T12:32:18.0532472Z Receiving objects:  75% (197/262)
+2022-07-15T12:32:18.0532736Z Receiving objects:  76% (200/262)
+2022-07-15T12:32:18.0533014Z Receiving objects:  77% (202/262)
+2022-07-15T12:32:18.0539295Z Receiving objects:  78% (205/262)
+2022-07-15T12:32:18.0542063Z Receiving objects:  79% (207/262)
+2022-07-15T12:32:18.0542388Z Receiving objects:  80% (210/262)
+2022-07-15T12:32:18.0542675Z Receiving objects:  81% (213/262)
+2022-07-15T12:32:18.0542957Z Receiving objects:  82% (215/262)
+2022-07-15T12:32:18.0543446Z Receiving objects:  83% (218/262)
+2022-07-15T12:32:18.0543712Z Receiving objects:  84% (221/262)
+2022-07-15T12:32:18.0543991Z Receiving objects:  85% (223/262)
+2022-07-15T12:32:18.0544273Z Receiving objects:  86% (226/262)
+2022-07-15T12:32:18.0544541Z Receiving objects:  87% (228/262)
+2022-07-15T12:32:18.0578656Z Receiving objects:  88% (231/262)
+2022-07-15T12:32:18.0578972Z Receiving objects:  89% (234/262)
+2022-07-15T12:32:18.0579259Z Receiving objects:  90% (236/262)
+2022-07-15T12:32:18.0579543Z Receiving objects:  91% (239/262)
+2022-07-15T12:32:18.0579806Z Receiving objects:  92% (242/262)
+2022-07-15T12:32:18.0580082Z Receiving objects:  93% (244/262)
+2022-07-15T12:32:18.0580362Z Receiving objects:  94% (247/262)
+2022-07-15T12:32:18.0581016Z remote: Total 262 (delta 18), reused 132 (delta 4), pack-reused 0
+2022-07-15T12:32:18.0581376Z Receiving objects:  95% (249/262)
+2022-07-15T12:32:18.0581661Z Receiving objects:  96% (252/262)
+2022-07-15T12:32:18.0581923Z Receiving objects:  97% (255/262)
+2022-07-15T12:32:18.0582196Z Receiving objects:  98% (257/262)
+2022-07-15T12:32:18.0582472Z Receiving objects:  99% (260/262)
+2022-07-15T12:32:18.0582731Z Receiving objects: 100% (262/262)
+2022-07-15T12:32:18.0583056Z Receiving objects: 100% (262/262), 579.39 KiB | 9.05 MiB/s, done.
+2022-07-15T12:32:18.0583676Z Resolving deltas:   0% (0/18)
+2022-07-15T12:32:18.0583933Z Resolving deltas:   5% (1/18)
+2022-07-15T12:32:18.0586202Z Resolving deltas:  11% (2/18)
+2022-07-15T12:32:18.0588208Z Resolving deltas:  16% (3/18)
+2022-07-15T12:32:18.0590110Z Resolving deltas:  22% (4/18)
+2022-07-15T12:32:18.0595436Z Resolving deltas:  27% (5/18)
+2022-07-15T12:32:18.0597863Z Resolving deltas:  33% (6/18)
+2022-07-15T12:32:18.0598204Z Resolving deltas:  38% (7/18)
+2022-07-15T12:32:18.0598471Z Resolving deltas:  44% (8/18)
+2022-07-15T12:32:18.0598765Z Resolving deltas:  50% (9/18)
+2022-07-15T12:32:18.0599052Z Resolving deltas:  55% (10/18)
+2022-07-15T12:32:18.0599332Z Resolving deltas:  61% (11/18)
+2022-07-15T12:32:18.0599594Z Resolving deltas:  66% (12/18)
+2022-07-15T12:32:18.0599866Z Resolving deltas:  72% (13/18)
+2022-07-15T12:32:18.0600139Z Resolving deltas:  77% (14/18)
+2022-07-15T12:32:18.0600397Z Resolving deltas:  83% (15/18)
+2022-07-15T12:32:18.0600916Z Resolving deltas:  88% (16/18)
+2022-07-15T12:32:18.0601192Z Resolving deltas:  94% (17/18)
+2022-07-15T12:32:18.0606939Z Resolving deltas: 100% (18/18)
+2022-07-15T12:32:18.0607665Z Resolving deltas: 100% (18/18), done.
+2022-07-15T12:32:18.0751826Z From https://github.com/Shopify/maintenance_tasks
+2022-07-15T12:32:18.0752722Z  * [new ref]         52cb0490bcc2fa6f1f0e31b064e7d86e291ae6b4 -> origin/paulo/multiple-active-runs-per-task
+2022-07-15T12:32:18.0793299Z ##[endgroup]
+2022-07-15T12:32:18.0794117Z ##[group]Determining the checkout info
+2022-07-15T12:32:18.0794852Z ##[endgroup]
+2022-07-15T12:32:18.0795751Z ##[group]Checking out the ref
+2022-07-15T12:32:18.0797035Z [command]/usr/bin/git checkout --progress --force -B paulo/multiple-active-runs-per-task refs/remotes/origin/paulo/multiple-active-runs-per-task
+2022-07-15T12:32:18.0939507Z Switched to a new branch 'paulo/multiple-active-runs-per-task'
+2022-07-15T12:32:18.0945249Z branch 'paulo/multiple-active-runs-per-task' set up to track 'origin/paulo/multiple-active-runs-per-task'.
+2022-07-15T12:32:18.0947083Z ##[endgroup]
+2022-07-15T12:32:18.0991827Z [command]/usr/bin/git log -1 --format='%H'
+2022-07-15T12:32:18.1049803Z '52cb0490bcc2fa6f1f0e31b064e7d86e291ae6b4'
+2022-07-15T12:32:18.1326387Z ##[group]Run ruby/setup-ruby@v1
+2022-07-15T12:32:18.1326675Z with:
+2022-07-15T12:32:18.1326910Z   ruby-version: 2.7
+2022-07-15T12:32:18.1327156Z   bundler-cache: true
+2022-07-15T12:32:18.1327390Z env:
+2022-07-15T12:32:18.1327657Z   BUNDLE_GEMFILE: gemfiles/rails_6_0.gemfile
+2022-07-15T12:32:18.1327918Z   DB: sqlite
+2022-07-15T12:32:18.1328147Z ##[endgroup]
+2022-07-15T12:32:18.3058000Z ##[group]Modifying PATH
+2022-07-15T12:32:18.3061525Z Entries added to PATH to use selected Ruby:
+2022-07-15T12:32:18.3062632Z   /opt/hostedtoolcache/Ruby/2.7.6/x64/bin
+2022-07-15T12:32:18.3063339Z ##[endgroup]
+2022-07-15T12:32:18.3072371Z ##[group]Print Ruby version
+2022-07-15T12:32:18.3158265Z [command]/opt/hostedtoolcache/Ruby/2.7.6/x64/bin/ruby --version
+2022-07-15T12:32:18.3505066Z ruby 2.7.6p219 (2022-04-12 revision c9c2245c0a) [x86_64-linux]
+2022-07-15T12:32:18.3539507Z Took   0.05 seconds
+2022-07-15T12:32:18.3541587Z ##[endgroup]
+2022-07-15T12:32:18.3543436Z ##[group]Installing Bundler
+2022-07-15T12:32:18.3553296Z [command]/opt/hostedtoolcache/Ruby/2.7.6/x64/bin/gem install bundler -v ~> 2.0
+2022-07-15T12:32:19.0136247Z Successfully installed bundler-2.3.18
+2022-07-15T12:32:19.0136861Z 1 gem installed
+2022-07-15T12:32:19.0175961Z Took   0.66 seconds
+2022-07-15T12:32:19.0177353Z ##[endgroup]
+2022-07-15T12:32:19.0178224Z ##[group]bundle install
+2022-07-15T12:32:19.0201662Z [command]/opt/hostedtoolcache/Ruby/2.7.6/x64/bin/bundle config --local path /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle
+2022-07-15T12:32:19.3527569Z [command]/opt/hostedtoolcache/Ruby/2.7.6/x64/bin/bundle lock
+2022-07-15T12:32:23.2107917Z Fetching gem metadata from https://rubygems.org/..........
+2022-07-15T12:32:24.1231600Z Resolving dependencies......
+2022-07-15T12:32:24.1673477Z Writing lockfile to /home/runner/work/maintenance_tasks/maintenance_tasks/gemfiles/rails_6_0.gemfile.lock
+2022-07-15T12:32:24.1849338Z Cache key: setup-ruby-bundler-cache-v3-ubuntu-20.04-ruby-2.7.6-gemfiles/rails_6_0.gemfile.lock-d5fa1ec5f036d63678db9acbd9624ae28abbe94d1a2c7ab34bd6ea93f6aaec9e
+2022-07-15T12:32:24.7897181Z Received 28275412 of 28275412 (100.0%), 77.7 MBs/sec
+2022-07-15T12:32:24.7899432Z Cache Size: ~27 MB (28275412 B)
+2022-07-15T12:32:24.7923074Z [command]/usr/bin/tar --use-compress-program zstd -d -xf /home/runner/work/_temp/b7c5f7f7-448c-4cab-92dd-15ed647127b5/cache.tzst -P -C /home/runner/work/maintenance_tasks/maintenance_tasks
+2022-07-15T12:32:25.1134446Z Cache restored successfully
+2022-07-15T12:32:25.1181991Z Found cache for key: setup-ruby-bundler-cache-v3-ubuntu-20.04-ruby-2.7.6-gemfiles/rails_6_0.gemfile.lock-d5fa1ec5f036d63678db9acbd9624ae28abbe94d1a2c7ab34bd6ea93f6aaec9e
+2022-07-15T12:32:25.1202303Z [command]/opt/hostedtoolcache/Ruby/2.7.6/x64/bin/bundle install --jobs 4
+2022-07-15T12:32:25.4275493Z Using rake 13.0.6
+2022-07-15T12:32:25.4284577Z Using concurrent-ruby 1.1.10
+2022-07-15T12:32:25.4285309Z Using i18n 1.12.0
+2022-07-15T12:32:25.4289327Z Using minitest 5.16.2
+2022-07-15T12:32:25.4295496Z Using thread_safe 0.3.6
+2022-07-15T12:32:25.4324331Z Using tzinfo 1.2.9
+2022-07-15T12:32:25.4325196Z Using zeitwerk 2.6.0
+2022-07-15T12:32:25.4325858Z Using activesupport 6.0.5.1
+2022-07-15T12:32:25.4326395Z Using builder 3.2.4
+2022-07-15T12:32:25.4326975Z Using erubi 1.10.0
+2022-07-15T12:32:25.4327625Z Using racc 1.6.0
+2022-07-15T12:32:25.4337640Z Using nokogiri 1.13.7 (x86_64-linux)
+2022-07-15T12:32:25.4338460Z Using rails-dom-testing 2.0.3
+2022-07-15T12:32:25.4347945Z Using crass 1.0.6
+2022-07-15T12:32:25.4348494Z Using loofah 2.18.0
+2022-07-15T12:32:25.4357965Z Using rails-html-sanitizer 1.4.3
+2022-07-15T12:32:25.4358648Z Using actionview 6.0.5.1
+2022-07-15T12:32:25.4364166Z Using rack 2.2.4
+2022-07-15T12:32:25.4364635Z Using rack-test 2.0.2
+2022-07-15T12:32:25.4367514Z Using actionpack 6.0.5.1
+2022-07-15T12:32:25.4369489Z Using nio4r 2.5.8
+2022-07-15T12:32:25.4373284Z Using websocket-extensions 0.1.5
+2022-07-15T12:32:25.4375206Z Using websocket-driver 0.7.5
+2022-07-15T12:32:25.4382291Z Using actioncable 6.0.5.1
+2022-07-15T12:32:25.4385618Z Using globalid 1.0.0
+2022-07-15T12:32:25.4390741Z Using activejob 6.0.5.1
+2022-07-15T12:32:25.4395833Z Using activemodel 6.0.5.1
+2022-07-15T12:32:25.4401635Z Using activerecord 6.0.5.1
+2022-07-15T12:32:25.4407955Z Using marcel 1.0.2
+2022-07-15T12:32:25.4413803Z Using activestorage 6.0.5.1
+2022-07-15T12:32:25.4419464Z Using mini_mime 1.1.2
+2022-07-15T12:32:25.4424906Z Using mail 2.7.1
+2022-07-15T12:32:25.4432064Z Using actionmailbox 6.0.5.1
+2022-07-15T12:32:25.4436012Z Using actionmailer 6.0.5.1
+2022-07-15T12:32:25.4441552Z Using actiontext 6.0.5.1
+2022-07-15T12:32:25.4446323Z Using public_suffix 4.0.7
+2022-07-15T12:32:25.4451359Z Using addressable 2.8.0
+2022-07-15T12:32:25.4456401Z Using ast 2.4.2
+2022-07-15T12:32:25.4458489Z Using html_tokenizer 0.0.7
+2022-07-15T12:32:25.4465020Z Using parser 3.1.2.0
+2022-07-15T12:32:25.4470508Z Using smart_properties 1.17.0
+2022-07-15T12:32:25.4476557Z Using better_html 1.0.16
+2022-07-15T12:32:25.4478725Z Using bundler 2.3.18
+2022-07-15T12:32:25.4480928Z Using byebug 11.1.3
+2022-07-15T12:32:25.4485520Z Using matrix 0.4.2
+2022-07-15T12:32:25.4490520Z Using regexp_parser 2.5.0
+2022-07-15T12:32:25.4496223Z Using xpath 3.2.0
+2022-07-15T12:32:25.4506043Z Using capybara 3.37.1
+2022-07-15T12:32:25.4511730Z Using childprocess 4.1.0
+2022-07-15T12:32:25.4516688Z Using coderay 1.1.3
+2022-07-15T12:32:25.4518572Z Using digest 3.1.0
+2022-07-15T12:32:25.4523638Z Using job-iteration 1.3.6
+2022-07-15T12:32:25.4525125Z Using json 2.6.2
+2022-07-15T12:32:25.4528945Z Using method_source 1.0.0
+2022-07-15T12:32:25.4533473Z Using thor 1.2.1
+2022-07-15T12:32:25.4539203Z Using railties 6.0.5.1
+2022-07-15T12:32:25.4541080Z Using maintenance_tasks 1.10.1 from source at `.` and installing its executables
+2022-07-15T12:32:25.4959484Z Using mocha 1.14.0
+2022-07-15T12:32:25.4960399Z Using timeout 0.3.0
+2022-07-15T12:32:25.4971498Z Using net-protocol 0.1.3
+2022-07-15T12:32:25.4971911Z Using net-smtp 0.3.1
+2022-07-15T12:32:25.4972328Z Using parallel 1.22.1
+2022-07-15T12:32:25.4972624Z Using pg 1.4.1
+2022-07-15T12:32:25.4972938Z Using pry 0.13.1
+2022-07-15T12:32:25.4973320Z Using pry-byebug 3.9.0
+2022-07-15T12:32:25.4973637Z Using puma 5.6.4
+2022-07-15T12:32:25.4973998Z Using sprockets 4.1.1
+2022-07-15T12:32:25.4974348Z Using sprockets-rails 3.4.2
+2022-07-15T12:32:25.4976855Z Using rails 6.0.5.1
+2022-07-15T12:32:25.4979349Z Using rainbow 3.1.1
+2022-07-15T12:32:25.4983691Z Using rexml 3.2.5
+2022-07-15T12:32:25.4988953Z Using rubocop-ast 1.19.1
+2022-07-15T12:32:25.4994183Z Using ruby-progressbar 1.11.0
+2022-07-15T12:32:25.4999215Z Using unicode-display_width 2.2.0
+2022-07-15T12:32:25.5005972Z Using rubocop 1.31.2
+2022-07-15T12:32:25.5010241Z Using rubocop-shopify 2.8.0
+2022-07-15T12:32:25.5015402Z Using rubyzip 2.3.2
+2022-07-15T12:32:25.5019656Z Using websocket 1.2.9
+2022-07-15T12:32:25.5029624Z Using selenium-webdriver 4.3.0
+2022-07-15T12:32:25.5030077Z Using sqlite3 1.4.4
+2022-07-15T12:32:25.5034719Z Using webdrivers 5.0.0
+2022-07-15T12:32:25.5038946Z Using webrick 1.7.0
+2022-07-15T12:32:25.5043371Z Using yard 0.9.28
+2022-07-15T12:32:25.5102054Z Bundle complete! 16 Gemfile dependencies, 83 gems now installed.
+2022-07-15T12:32:25.5102471Z Bundled gems are installed into `./vendor/bundle`
+2022-07-15T12:32:25.5136412Z Took   6.50 seconds
+2022-07-15T12:32:25.5137152Z ##[endgroup]
+2022-07-15T12:32:25.5139983Z
+2022-07-15T12:32:25.5391659Z ##[group]Run RAILS_ENV=test bundle exec rails db:setup
+2022-07-15T12:32:25.5392228Z [36;1mRAILS_ENV=test bundle exec rails db:setup[0m
+2022-07-15T12:32:25.5457937Z shell: /usr/bin/bash -e {0}
+2022-07-15T12:32:25.5458299Z env:
+2022-07-15T12:32:25.5458643Z   BUNDLE_GEMFILE: gemfiles/rails_6_0.gemfile
+2022-07-15T12:32:25.5459082Z   DB: sqlite
+2022-07-15T12:32:25.5459337Z ##[endgroup]
+2022-07-15T12:32:27.3030316Z /opt/hostedtoolcache/Ruby/2.7.6/x64/lib/ruby/2.7.0/net/protocol.rb:66: warning: already initialized constant Net::ProtocRetryError
+2022-07-15T12:32:27.3032945Z /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/net-protocol-0.1.3/lib/net/protocol.rb:68: warning: previous definition of ProtocRetryError was here
+2022-07-15T12:32:27.3034536Z /opt/hostedtoolcache/Ruby/2.7.6/x64/lib/ruby/2.7.0/net/protocol.rb:206: warning: already initialized constant Net::BufferedIO::BUFSIZE
+2022-07-15T12:32:27.3037707Z /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/net-protocol-0.1.3/lib/net/protocol.rb:208: warning: previous definition of BUFSIZE was here
+2022-07-15T12:32:27.3039232Z /opt/hostedtoolcache/Ruby/2.7.6/x64/lib/ruby/2.7.0/net/protocol.rb:503: warning: already initialized constant Net::NetPrivate::Socket
+2022-07-15T12:32:27.3042985Z /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/net-protocol-0.1.3/lib/net/protocol.rb:504: warning: previous definition of Socket was here
+2022-07-15T12:32:29.0905708Z Created database 'db/test.sqlite3'
+2022-07-15T12:32:29.4070949Z ##[group]Run bundle exec rails test
+2022-07-15T12:32:29.4071287Z [36;1mbundle exec rails test[0m
+2022-07-15T12:32:29.4131917Z shell: /usr/bin/bash -e {0}
+2022-07-15T12:32:29.4132203Z env:
+2022-07-15T12:32:29.4132483Z   BUNDLE_GEMFILE: gemfiles/rails_6_0.gemfile
+2022-07-15T12:32:29.4132771Z   DB: sqlite
+2022-07-15T12:32:29.4133100Z ##[endgroup]
+2022-07-15T12:32:31.1442432Z /opt/hostedtoolcache/Ruby/2.7.6/x64/lib/ruby/2.7.0/net/protocol.rb:66: warning: already initialized constant Net::ProtocRetryError
+2022-07-15T12:32:31.1443792Z /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/net-protocol-0.1.3/lib/net/protocol.rb:68: warning: previous definition of ProtocRetryError was here
+2022-07-15T12:32:31.1444601Z /opt/hostedtoolcache/Ruby/2.7.6/x64/lib/ruby/2.7.0/net/protocol.rb:206: warning: already initialized constant Net::BufferedIO::BUFSIZE
+2022-07-15T12:32:31.1446098Z /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/net-protocol-0.1.3/lib/net/protocol.rb:208: warning: previous definition of BUFSIZE was here
+2022-07-15T12:32:31.1446866Z /opt/hostedtoolcache/Ruby/2.7.6/x64/lib/ruby/2.7.0/net/protocol.rb:503: warning: already initialized constant Net::NetPrivate::Socket
+2022-07-15T12:32:31.1447851Z /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/net-protocol-0.1.3/lib/net/protocol.rb:504: warning: previous definition of Socket was here
+2022-07-15T12:32:32.8991561Z Run options: --seed 42231
+2022-07-15T12:32:32.8992211Z
+2022-07-15T12:32:32.8992809Z # Running:
+2022-07-15T12:32:32.8993203Z
+2022-07-15T12:32:34.4645008Z /opt/hostedtoolcache/Ruby/2.7.6/x64/lib/ruby/2.7.0/net/protocol.rb:66: warning: already initialized constant Net::ProtocRetryError
+2022-07-15T12:32:34.4646215Z /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/net-protocol-0.1.3/lib/net/protocol.rb:68: warning: previous definition of ProtocRetryError was here
+2022-07-15T12:32:34.4647042Z /opt/hostedtoolcache/Ruby/2.7.6/x64/lib/ruby/2.7.0/net/protocol.rb:206: warning: already initialized constant Net::BufferedIO::BUFSIZE
+2022-07-15T12:32:34.4647873Z /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/net-protocol-0.1.3/lib/net/protocol.rb:208: warning: previous definition of BUFSIZE was here
+2022-07-15T12:32:34.4648501Z /opt/hostedtoolcache/Ruby/2.7.6/x64/lib/ruby/2.7.0/net/protocol.rb:503: warning: already initialized constant Net::NetPrivate::Socket
+2022-07-15T12:32:34.4649312Z /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/net-protocol-0.1.3/lib/net/protocol.rb:504: warning: previous definition of Socket was here
+2022-07-15T12:32:37.5367147Z /opt/hostedtoolcache/Ruby/2.7.6/x64/lib/ruby/2.7.0/net/protocol.rb:66: warning: already initialized constant Net::ProtocRetryError
+2022-07-15T12:32:37.5369660Z /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/net-protocol-0.1.3/lib/net/protocol.rb:68: warning: previous definition of ProtocRetryError was here
+2022-07-15T12:32:37.5371627Z /opt/hostedtoolcache/Ruby/2.7.6/x64/lib/ruby/2.7.0/net/protocol.rb:206: warning: already initialized constant Net::BufferedIO::BUFSIZE
+2022-07-15T12:32:37.5376626Z /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/net-protocol-0.1.3/lib/net/protocol.rb:208: warning: previous definition of BUFSIZE was here
+2022-07-15T12:32:37.5378097Z /opt/hostedtoolcache/Ruby/2.7.6/x64/lib/ruby/2.7.0/net/protocol.rb:503: warning: already initialized constant Net::NetPrivate::Socket
+2022-07-15T12:32:37.5379904Z /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/net-protocol-0.1.3/lib/net/protocol.rb:504: warning: previous definition of Socket was here
+2022-07-15T12:32:40.9325891Z ..................................................................................................................................................................................................................................
+2022-07-15T12:32:40.9327958Z
+2022-07-15T12:32:40.9329263Z Finished in 8.033525s, 28.1321 runs/s, 75.8073 assertions/s.
+2022-07-15T12:32:40.9330696Z 226 runs, 609 assertions, 0 failures, 0 errors, 0 skips
+2022-07-15T12:32:40.9593406Z ##[group]Run bundle exec rails test:system
+2022-07-15T12:32:40.9593738Z [36;1mbundle exec rails test:system[0m
+2022-07-15T12:32:40.9653936Z shell: /usr/bin/bash -e {0}
+2022-07-15T12:32:40.9654197Z env:
+2022-07-15T12:32:40.9654455Z   BUNDLE_GEMFILE: gemfiles/rails_6_0.gemfile
+2022-07-15T12:32:40.9654727Z   DB: sqlite
+2022-07-15T12:32:40.9654937Z ##[endgroup]
+2022-07-15T12:32:42.6229840Z /opt/hostedtoolcache/Ruby/2.7.6/x64/lib/ruby/2.7.0/net/protocol.rb:66: warning: already initialized constant Net::ProtocRetryError
+2022-07-15T12:32:42.6231892Z /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/net-protocol-0.1.3/lib/net/protocol.rb:68: warning: previous definition of ProtocRetryError was here
+2022-07-15T12:32:42.6234098Z /opt/hostedtoolcache/Ruby/2.7.6/x64/lib/ruby/2.7.0/net/protocol.rb:206: warning: already initialized constant Net::BufferedIO::BUFSIZE
+2022-07-15T12:32:42.6238429Z /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/net-protocol-0.1.3/lib/net/protocol.rb:208: warning: previous definition of BUFSIZE was here
+2022-07-15T12:32:42.6239611Z /opt/hostedtoolcache/Ruby/2.7.6/x64/lib/ruby/2.7.0/net/protocol.rb:503: warning: already initialized constant Net::NetPrivate::Socket
+2022-07-15T12:32:42.6241469Z /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/net-protocol-0.1.3/lib/net/protocol.rb:504: warning: previous definition of Socket was here
+2022-07-15T12:32:45.1600503Z Run options: --seed 32593
+2022-07-15T12:32:45.1606146Z
+2022-07-15T12:32:45.1606253Z # Running:
+2022-07-15T12:32:45.1606401Z
+2022-07-15T12:32:50.1305988Z ..[Screenshot]: /home/runner/work/maintenance_tasks/maintenance_tasks/test/dummy/tmp/screenshots/failures_test_run_a_CSV_Task.png
+2022-07-15T12:32:50.1663971Z F
+2022-07-15T12:32:50.1664378Z
+2022-07-15T12:32:50.1664710Z Failure:
+2022-07-15T12:32:50.1781262Z MaintenanceTasks::RunsTest#test_run_a_CSV_Task [/home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/minitest.rb:295]:
+2022-07-15T12:32:50.1781732Z expected not to find visible button "Run" that is not disabled, found 1 match: ""
+2022-07-15T12:32:50.1781916Z
+2022-07-15T12:32:50.1782046Z rails test test/system/maintenance_tasks/runs_test.rb:19
+2022-07-15T12:32:50.1782206Z
+2022-07-15T12:32:53.3188271Z ..[Screenshot]: /home/runner/work/maintenance_tasks/maintenance_tasks/test/dummy/tmp/screenshots/failures_test_pause_a_Run.png
+2022-07-15T12:32:53.3554891Z E
+2022-07-15T12:32:53.3555112Z
+2022-07-15T12:32:53.3558747Z Error:
+2022-07-15T12:32:53.3559133Z MaintenanceTasks::RunsTest#test_pause_a_Run:
+2022-07-15T12:32:53.3559551Z Capybara::ElementNotFound: Unable to find link or button "Pause"
+2022-07-15T12:32:53.3560793Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:310:in `block in synced_resolve'
+2022-07-15T12:32:53.3561676Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/base.rb:83:in `synchronize'
+2022-07-15T12:32:53.3562530Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:299:in `synced_resolve'
+2022-07-15T12:32:53.3563357Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:60:in `find'
+2022-07-15T12:32:53.3564199Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/actions.rb:26:in `click_link_or_button'
+2022-07-15T12:32:53.3565011Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/session.rb:771:in `click_on'
+2022-07-15T12:32:53.3565782Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/dsl.rb:52:in `call'
+2022-07-15T12:32:53.3566801Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/dsl.rb:52:in `click_on'
+2022-07-15T12:32:53.3567408Z     /home/runner/work/maintenance_tasks/maintenance_tasks/test/system/maintenance_tasks/runs_test.rb:91:in `block in <class:RunsTest>'
+2022-07-15T12:32:53.3568225Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:98:in `block (3 levels) in run'
+2022-07-15T12:32:53.3569055Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:195:in `capture_exceptions'
+2022-07-15T12:32:53.3570004Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:95:in `block (2 levels) in run'
+2022-07-15T12:32:53.3570790Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:296:in `time_it'
+2022-07-15T12:32:53.3571567Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:94:in `block in run'
+2022-07-15T12:32:53.3572336Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:391:in `on_signal'
+2022-07-15T12:32:53.3573115Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:243:in `with_info_handler'
+2022-07-15T12:32:53.3573891Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:93:in `run'
+2022-07-15T12:32:53.3574662Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:1059:in `run_one_method'
+2022-07-15T12:32:53.3575443Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:365:in `run_one_method'
+2022-07-15T12:32:53.3576232Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:352:in `block (2 levels) in run'
+2022-07-15T12:32:53.3576997Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:351:in `each'
+2022-07-15T12:32:53.3577755Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:351:in `block in run'
+2022-07-15T12:32:53.3578509Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:391:in `on_signal'
+2022-07-15T12:32:53.3579288Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:378:in `with_info_handler'
+2022-07-15T12:32:53.3580030Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:350:in `run'
+2022-07-15T12:32:53.3580825Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/railties-6.0.5.1/lib/rails/test_unit/line_filtering.rb:10:in `run'
+2022-07-15T12:32:53.3581625Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `block in __run'
+2022-07-15T12:32:53.3582381Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `map'
+2022-07-15T12:32:53.3583123Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `__run'
+2022-07-15T12:32:53.3583866Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:159:in `run'
+2022-07-15T12:32:53.3584702Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:83:in `block in autorun'
+2022-07-15T12:32:53.3585027Z
+2022-07-15T12:32:53.3587181Z rails test test/system/maintenance_tasks/runs_test.rb:86
+2022-07-15T12:32:53.3587414Z
+2022-07-15T12:32:55.7784625Z [Screenshot]: /home/runner/work/maintenance_tasks/maintenance_tasks/test/dummy/tmp/screenshots/failures_test_cancel_a_stuck_Run.png
+2022-07-15T12:32:55.8184157Z E
+2022-07-15T12:32:55.8184392Z
+2022-07-15T12:32:55.8188260Z Error:
+2022-07-15T12:32:55.8189000Z MaintenanceTasks::RunsTest#test_cancel_a_stuck_Run:
+2022-07-15T12:32:55.8189653Z Capybara::ElementNotFound: Unable to find link or button "Cancel"
+2022-07-15T12:32:55.8190618Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:310:in `block in synced_resolve'
+2022-07-15T12:32:55.8191690Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/base.rb:83:in `synchronize'
+2022-07-15T12:32:55.8192518Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:299:in `synced_resolve'
+2022-07-15T12:32:55.8193283Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:60:in `find'
+2022-07-15T12:32:55.8194062Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/actions.rb:26:in `click_link_or_button'
+2022-07-15T12:32:55.8194800Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/session.rb:771:in `click_on'
+2022-07-15T12:32:55.8195521Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/dsl.rb:52:in `call'
+2022-07-15T12:32:55.8196245Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/dsl.rb:52:in `click_on'
+2022-07-15T12:32:55.8196806Z     /home/runner/work/maintenance_tasks/maintenance_tasks/test/system/maintenance_tasks/runs_test.rb:139:in `block in <class:RunsTest>'
+2022-07-15T12:32:55.8197555Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:98:in `block (3 levels) in run'
+2022-07-15T12:32:55.8198320Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:195:in `capture_exceptions'
+2022-07-15T12:32:55.8199085Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:95:in `block (2 levels) in run'
+2022-07-15T12:32:55.8199811Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:296:in `time_it'
+2022-07-15T12:32:55.8200713Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:94:in `block in run'
+2022-07-15T12:32:55.8201422Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:391:in `on_signal'
+2022-07-15T12:32:55.8202158Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:243:in `with_info_handler'
+2022-07-15T12:32:55.8202878Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:93:in `run'
+2022-07-15T12:32:55.8203589Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:1059:in `run_one_method'
+2022-07-15T12:32:55.8204313Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:365:in `run_one_method'
+2022-07-15T12:32:55.8205163Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:352:in `block (2 levels) in run'
+2022-07-15T12:32:55.8205880Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:351:in `each'
+2022-07-15T12:32:55.8206587Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:351:in `block in run'
+2022-07-15T12:32:55.8207294Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:391:in `on_signal'
+2022-07-15T12:32:55.8208000Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:378:in `with_info_handler'
+2022-07-15T12:32:55.8208772Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:350:in `run'
+2022-07-15T12:32:55.8209512Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/railties-6.0.5.1/lib/rails/test_unit/line_filtering.rb:10:in `run'
+2022-07-15T12:32:55.8210253Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `block in __run'
+2022-07-15T12:32:55.8210951Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `map'
+2022-07-15T12:32:55.8211642Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `__run'
+2022-07-15T12:32:55.8212326Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:159:in `run'
+2022-07-15T12:32:55.8213032Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:83:in `block in autorun'
+2022-07-15T12:32:55.8213328Z
+2022-07-15T12:32:55.8213478Z rails test test/system/maintenance_tasks/runs_test.rb:134
+2022-07-15T12:32:55.8213681Z
+2022-07-15T12:32:58.2236098Z [Screenshot]: /home/runner/work/maintenance_tasks/maintenance_tasks/test/dummy/tmp/screenshots/failures_test_cancel_a_Run.png
+2022-07-15T12:32:58.2622550Z E
+2022-07-15T12:32:58.2622878Z
+2022-07-15T12:32:58.2641592Z Error:
+2022-07-15T12:32:58.2641976Z MaintenanceTasks::RunsTest#test_cancel_a_Run:
+2022-07-15T12:32:58.2642375Z Capybara::ElementNotFound: Unable to find link or button "Cancel"
+2022-07-15T12:32:58.2643487Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:310:in `block in synced_resolve'
+2022-07-15T12:32:58.2644399Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/base.rb:83:in `synchronize'
+2022-07-15T12:32:58.2645300Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:299:in `synced_resolve'
+2022-07-15T12:32:58.2646162Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:60:in `find'
+2022-07-15T12:32:58.2647033Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/actions.rb:26:in `click_link_or_button'
+2022-07-15T12:32:58.2647883Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/session.rb:771:in `click_on'
+2022-07-15T12:32:58.2648693Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/dsl.rb:52:in `call'
+2022-07-15T12:32:58.2649499Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/dsl.rb:52:in `click_on'
+2022-07-15T12:32:58.2650138Z     /home/runner/work/maintenance_tasks/maintenance_tasks/test/system/maintenance_tasks/runs_test.rb:116:in `block in <class:RunsTest>'
+2022-07-15T12:32:58.2651182Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:98:in `block (3 levels) in run'
+2022-07-15T12:32:58.2652058Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:195:in `capture_exceptions'
+2022-07-15T12:32:58.2652911Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:95:in `block (2 levels) in run'
+2022-07-15T12:32:58.2653710Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:296:in `time_it'
+2022-07-15T12:32:58.2654636Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:94:in `block in run'
+2022-07-15T12:32:58.2655439Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:391:in `on_signal'
+2022-07-15T12:32:58.2656285Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:243:in `with_info_handler'
+2022-07-15T12:32:58.2657001Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:93:in `run'
+2022-07-15T12:32:58.2657717Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:1059:in `run_one_method'
+2022-07-15T12:32:58.2658427Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:365:in `run_one_method'
+2022-07-15T12:32:58.2659391Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:352:in `block (2 levels) in run'
+2022-07-15T12:32:58.2660195Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:351:in `each'
+2022-07-15T12:32:58.2661173Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:351:in `block in run'
+2022-07-15T12:32:58.2662024Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:391:in `on_signal'
+2022-07-15T12:32:58.2662893Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:378:in `with_info_handler'
+2022-07-15T12:32:58.2663744Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:350:in `run'
+2022-07-15T12:32:58.2664618Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/railties-6.0.5.1/lib/rails/test_unit/line_filtering.rb:10:in `run'
+2022-07-15T12:32:58.2665504Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `block in __run'
+2022-07-15T12:32:58.2666346Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `map'
+2022-07-15T12:32:58.2667178Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `__run'
+2022-07-15T12:32:58.2667996Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:159:in `run'
+2022-07-15T12:32:58.2673256Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:83:in `block in autorun'
+2022-07-15T12:32:58.2673533Z
+2022-07-15T12:32:58.2673796Z rails test test/system/maintenance_tasks/runs_test.rb:111
+2022-07-15T12:32:58.2673953Z
+2022-07-15T12:33:01.7218313Z .[Screenshot]: /home/runner/work/maintenance_tasks/maintenance_tasks/test/dummy/tmp/screenshots/failures_test_errors_for_double_enqueue_are_shown.png
+2022-07-15T12:33:01.7932270Z E
+2022-07-15T12:33:01.7932506Z
+2022-07-15T12:33:01.7936739Z Error:
+2022-07-15T12:33:01.7937154Z MaintenanceTasks::RunsTest#test_errors_for_double_enqueue_are_shown:
+2022-07-15T12:33:01.7937613Z Capybara::ElementNotFound: Unable to find link or button "Pause"
+2022-07-15T12:33:01.7938591Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:310:in `block in synced_resolve'
+2022-07-15T12:33:01.7939519Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/base.rb:83:in `synchronize'
+2022-07-15T12:33:01.7940344Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:299:in `synced_resolve'
+2022-07-15T12:33:01.7941389Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:60:in `find'
+2022-07-15T12:33:01.7942239Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/actions.rb:26:in `click_link_or_button'
+2022-07-15T12:33:01.7943060Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/session.rb:771:in `click_on'
+2022-07-15T12:33:01.7943918Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/dsl.rb:52:in `call'
+2022-07-15T12:33:01.7944826Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/dsl.rb:52:in `click_on'
+2022-07-15T12:33:01.7945441Z     /home/runner/work/maintenance_tasks/maintenance_tasks/test/system/maintenance_tasks/runs_test.rb:184:in `block (2 levels) in <class:RunsTest>'
+2022-07-15T12:33:01.7946496Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara.rb:372:in `using_session'
+2022-07-15T12:33:01.7947352Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/dsl.rb:22:in `using_session'
+2022-07-15T12:33:01.7947941Z     /home/runner/work/maintenance_tasks/maintenance_tasks/test/system/maintenance_tasks/runs_test.rb:181:in `block in <class:RunsTest>'
+2022-07-15T12:33:01.7948737Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:98:in `block (3 levels) in run'
+2022-07-15T12:33:01.7949554Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:195:in `capture_exceptions'
+2022-07-15T12:33:01.7950378Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:95:in `block (2 levels) in run'
+2022-07-15T12:33:01.7951155Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:296:in `time_it'
+2022-07-15T12:33:01.7951931Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:94:in `block in run'
+2022-07-15T12:33:01.7952696Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:391:in `on_signal'
+2022-07-15T12:33:01.7953536Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:243:in `with_info_handler'
+2022-07-15T12:33:01.7954310Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:93:in `run'
+2022-07-15T12:33:01.7955066Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:1059:in `run_one_method'
+2022-07-15T12:33:01.7955921Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:365:in `run_one_method'
+2022-07-15T12:33:01.7956727Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:352:in `block (2 levels) in run'
+2022-07-15T12:33:01.7957491Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:351:in `each'
+2022-07-15T12:33:01.7958250Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:351:in `block in run'
+2022-07-15T12:33:01.7959010Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:391:in `on_signal'
+2022-07-15T12:33:01.7959949Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:378:in `with_info_handler'
+2022-07-15T12:33:01.7960994Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:350:in `run'
+2022-07-15T12:33:01.7961549Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/railties-6.0.5.1/lib/rails/test_unit/line_filtering.rb:10:in `run'
+2022-07-15T12:33:01.7962110Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `block in __run'
+2022-07-15T12:33:01.7962643Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `map'
+2022-07-15T12:33:01.7963168Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `__run'
+2022-07-15T12:33:01.7963694Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:159:in `run'
+2022-07-15T12:33:01.7964235Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:83:in `block in autorun'
+2022-07-15T12:33:01.7964461Z
+2022-07-15T12:33:01.7964828Z rails test test/system/maintenance_tasks/runs_test.rb:175
+2022-07-15T12:33:01.7965125Z
+2022-07-15T12:33:04.2238209Z [Screenshot]: /home/runner/work/maintenance_tasks/maintenance_tasks/test/dummy/tmp/screenshots/failures_test_resume_a_Run.png
+2022-07-15T12:33:04.2632244Z E
+2022-07-15T12:33:04.2632727Z
+2022-07-15T12:33:04.2633153Z Error:
+2022-07-15T12:33:04.2633505Z MaintenanceTasks::RunsTest#test_resume_a_Run:
+2022-07-15T12:33:04.2633928Z Capybara::ElementNotFound: Unable to find link or button "Pause"
+2022-07-15T12:33:04.2636096Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:310:in `block in synced_resolve'
+2022-07-15T12:33:04.2636984Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/base.rb:83:in `synchronize'
+2022-07-15T12:33:04.2637863Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:299:in `synced_resolve'
+2022-07-15T12:33:04.2638684Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:60:in `find'
+2022-07-15T12:33:04.2639517Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/actions.rb:26:in `click_link_or_button'
+2022-07-15T12:33:04.2640329Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/session.rb:771:in `click_on'
+2022-07-15T12:33:04.2641394Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/dsl.rb:52:in `call'
+2022-07-15T12:33:04.2642315Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/dsl.rb:52:in `click_on'
+2022-07-15T12:33:04.2642884Z     /home/runner/work/maintenance_tasks/maintenance_tasks/test/system/maintenance_tasks/runs_test.rb:102:in `block in <class:RunsTest>'
+2022-07-15T12:33:04.2643647Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:98:in `block (3 levels) in run'
+2022-07-15T12:33:04.2644398Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:195:in `capture_exceptions'
+2022-07-15T12:33:04.2645167Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:95:in `block (2 levels) in run'
+2022-07-15T12:33:04.2646022Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:296:in `time_it'
+2022-07-15T12:33:04.2646866Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:94:in `block in run'
+2022-07-15T12:33:04.2647585Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:391:in `on_signal'
+2022-07-15T12:33:04.2648362Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:243:in `with_info_handler'
+2022-07-15T12:33:04.2648993Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:93:in `run'
+2022-07-15T12:33:04.2649623Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:1059:in `run_one_method'
+2022-07-15T12:33:04.2650257Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:365:in `run_one_method'
+2022-07-15T12:33:04.2650882Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:352:in `block (2 levels) in run'
+2022-07-15T12:33:04.2651508Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:351:in `each'
+2022-07-15T12:33:04.2652125Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:351:in `block in run'
+2022-07-15T12:33:04.2652741Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:391:in `on_signal'
+2022-07-15T12:33:04.2653361Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:378:in `with_info_handler'
+2022-07-15T12:33:04.2653984Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:350:in `run'
+2022-07-15T12:33:04.2654635Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/railties-6.0.5.1/lib/rails/test_unit/line_filtering.rb:10:in `run'
+2022-07-15T12:33:04.2655279Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `block in __run'
+2022-07-15T12:33:04.2655964Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `map'
+2022-07-15T12:33:04.2656570Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `__run'
+2022-07-15T12:33:04.2657373Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:159:in `run'
+2022-07-15T12:33:04.2658088Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:83:in `block in autorun'
+2022-07-15T12:33:04.2658622Z
+2022-07-15T12:33:04.2658861Z rails test test/system/maintenance_tasks/runs_test.rb:97
+2022-07-15T12:33:04.2659067Z
+2022-07-15T12:33:06.6478339Z [Screenshot]: /home/runner/work/maintenance_tasks/maintenance_tasks/test/dummy/tmp/screenshots/failures_test_cancel_a_pausing_Run.png
+2022-07-15T12:33:06.6881511Z E
+2022-07-15T12:33:06.6882046Z
+2022-07-15T12:33:06.6884095Z Error:
+2022-07-15T12:33:06.6884723Z MaintenanceTasks::RunsTest#test_cancel_a_pausing_Run:
+2022-07-15T12:33:06.6885276Z Capybara::ElementNotFound: Unable to find link or button "Pause"
+2022-07-15T12:33:06.6886346Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:310:in `block in synced_resolve'
+2022-07-15T12:33:06.6887251Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/base.rb:83:in `synchronize'
+2022-07-15T12:33:06.6888385Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:299:in `synced_resolve'
+2022-07-15T12:33:06.6889258Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:60:in `find'
+2022-07-15T12:33:06.6890203Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/actions.rb:26:in `click_link_or_button'
+2022-07-15T12:33:06.6890949Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/session.rb:771:in `click_on'
+2022-07-15T12:33:06.6891887Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/dsl.rb:52:in `call'
+2022-07-15T12:33:06.6892693Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/dsl.rb:52:in `click_on'
+2022-07-15T12:33:06.6893337Z     /home/runner/work/maintenance_tasks/maintenance_tasks/test/system/maintenance_tasks/runs_test.rb:127:in `block in <class:RunsTest>'
+2022-07-15T12:33:06.6894154Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:98:in `block (3 levels) in run'
+2022-07-15T12:33:06.6895004Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:195:in `capture_exceptions'
+2022-07-15T12:33:06.6895858Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:95:in `block (2 levels) in run'
+2022-07-15T12:33:06.6896658Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:296:in `time_it'
+2022-07-15T12:33:06.6897481Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:94:in `block in run'
+2022-07-15T12:33:06.6898267Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:391:in `on_signal'
+2022-07-15T12:33:06.6899137Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:243:in `with_info_handler'
+2022-07-15T12:33:06.6899859Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:93:in `run'
+2022-07-15T12:33:06.6900565Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:1059:in `run_one_method'
+2022-07-15T12:33:06.6901267Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:365:in `run_one_method'
+2022-07-15T12:33:06.6901986Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:352:in `block (2 levels) in run'
+2022-07-15T12:33:06.6902777Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:351:in `each'
+2022-07-15T12:33:06.6903487Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:351:in `block in run'
+2022-07-15T12:33:06.6904181Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:391:in `on_signal'
+2022-07-15T12:33:06.6904899Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:378:in `with_info_handler'
+2022-07-15T12:33:06.6906115Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:350:in `run'
+2022-07-15T12:33:06.6907088Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/railties-6.0.5.1/lib/rails/test_unit/line_filtering.rb:10:in `run'
+2022-07-15T12:33:06.6907981Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `block in __run'
+2022-07-15T12:33:06.6908899Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `map'
+2022-07-15T12:33:06.6909740Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `__run'
+2022-07-15T12:33:06.6910576Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:159:in `run'
+2022-07-15T12:33:06.6911436Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:83:in `block in autorun'
+2022-07-15T12:33:06.6911846Z
+2022-07-15T12:33:06.6912102Z rails test test/system/maintenance_tasks/runs_test.rb:122
+2022-07-15T12:33:06.6912397Z
+2022-07-15T12:33:09.1311413Z [Screenshot]: /home/runner/work/maintenance_tasks/maintenance_tasks/test/dummy/tmp/screenshots/failures_test_errors_for_invalid_pause_or_cancel_due_to_stale_UI_are_shown.png
+2022-07-15T12:33:09.2039575Z E
+2022-07-15T12:33:09.2039792Z
+2022-07-15T12:33:09.2044090Z Error:
+2022-07-15T12:33:09.2044764Z MaintenanceTasks::RunsTest#test_errors_for_invalid_pause_or_cancel_due_to_stale_UI_are_shown:
+2022-07-15T12:33:09.2045379Z Capybara::ElementNotFound: Unable to find link or button "Cancel"
+2022-07-15T12:33:09.2046634Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:310:in `block in synced_resolve'
+2022-07-15T12:33:09.2047461Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/base.rb:83:in `synchronize'
+2022-07-15T12:33:09.2048305Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:299:in `synced_resolve'
+2022-07-15T12:33:09.2049076Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:60:in `find'
+2022-07-15T12:33:09.2049855Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/actions.rb:26:in `click_link_or_button'
+2022-07-15T12:33:09.2050616Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/session.rb:771:in `click_on'
+2022-07-15T12:33:09.2051382Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/dsl.rb:52:in `call'
+2022-07-15T12:33:09.2052091Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/dsl.rb:52:in `click_on'
+2022-07-15T12:33:09.2052852Z     /home/runner/work/maintenance_tasks/maintenance_tasks/test/system/maintenance_tasks/runs_test.rb:221:in `block (2 levels) in <class:RunsTest>'
+2022-07-15T12:33:09.2053873Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara.rb:372:in `using_session'
+2022-07-15T12:33:09.2054679Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/dsl.rb:22:in `using_session'
+2022-07-15T12:33:09.2055285Z     /home/runner/work/maintenance_tasks/maintenance_tasks/test/system/maintenance_tasks/runs_test.rb:219:in `block in <class:RunsTest>'
+2022-07-15T12:33:09.2056093Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:98:in `block (3 levels) in run'
+2022-07-15T12:33:09.2056916Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:195:in `capture_exceptions'
+2022-07-15T12:33:09.2057868Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:95:in `block (2 levels) in run'
+2022-07-15T12:33:09.2058651Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:296:in `time_it'
+2022-07-15T12:33:09.2059414Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:94:in `block in run'
+2022-07-15T12:33:09.2060186Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:391:in `on_signal'
+2022-07-15T12:33:09.2060977Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:243:in `with_info_handler'
+2022-07-15T12:33:09.2061749Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:93:in `run'
+2022-07-15T12:33:09.2062527Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:1059:in `run_one_method'
+2022-07-15T12:33:09.2063401Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:365:in `run_one_method'
+2022-07-15T12:33:09.2064147Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:352:in `block (2 levels) in run'
+2022-07-15T12:33:09.2064855Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:351:in `each'
+2022-07-15T12:33:09.2065568Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:351:in `block in run'
+2022-07-15T12:33:09.2066260Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:391:in `on_signal'
+2022-07-15T12:33:09.2066988Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:378:in `with_info_handler'
+2022-07-15T12:33:09.2067696Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:350:in `run'
+2022-07-15T12:33:09.2068637Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/railties-6.0.5.1/lib/rails/test_unit/line_filtering.rb:10:in `run'
+2022-07-15T12:33:09.2069437Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `block in __run'
+2022-07-15T12:33:09.2070187Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `map'
+2022-07-15T12:33:09.2070936Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `__run'
+2022-07-15T12:33:09.2071678Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:159:in `run'
+2022-07-15T12:33:09.2072494Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:83:in `block in autorun'
+2022-07-15T12:33:09.2072799Z
+2022-07-15T12:33:09.2072980Z rails test test/system/maintenance_tasks/runs_test.rb:212
+2022-07-15T12:33:09.2073202Z
+2022-07-15T12:33:11.6876715Z [Screenshot]: /home/runner/work/maintenance_tasks/maintenance_tasks/test/dummy/tmp/screenshots/failures_test_run_a_Task.png
+2022-07-15T12:33:11.7217381Z F
+2022-07-15T12:33:11.7217908Z
+2022-07-15T12:33:11.7219180Z Failure:
+2022-07-15T12:33:11.7220202Z MaintenanceTasks::RunsTest#test_run_a_Task [/home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/minitest.rb:295]:
+2022-07-15T12:33:11.7221192Z expected not to find visible button "Run" that is not disabled, found 1 match: ""
+2022-07-15T12:33:11.7221771Z
+2022-07-15T12:33:11.7222067Z rails test test/system/maintenance_tasks/runs_test.rb:7
+2022-07-15T12:33:11.7222295Z
+2022-07-15T12:33:15.6255297Z ..........
+2022-07-15T12:33:15.6255519Z
+2022-07-15T12:33:15.6257529Z Finished in 30.465574s, 0.7878 runs/s, 3.7091 assertions/s.
+2022-07-15T12:33:15.6257915Z 24 runs, 113 assertions, 2 failures, 7 errors, 0 skips
+2022-07-15T12:33:15.9721160Z ##[error]Process completed with exit code 1.
+2022-07-15T12:33:15.9771695Z ##[group]Run actions/upload-artifact@v3
+2022-07-15T12:33:15.9771970Z with:
+2022-07-15T12:33:15.9772170Z   name: screenshots
+2022-07-15T12:33:15.9772429Z   path: test/dummy/tmp/screenshots
+2022-07-15T12:33:15.9772706Z   if-no-files-found: warn
+2022-07-15T12:33:15.9772942Z env:
+2022-07-15T12:33:15.9773188Z   BUNDLE_GEMFILE: gemfiles/rails_6_0.gemfile
+2022-07-15T12:33:15.9773448Z   DB: sqlite
+2022-07-15T12:33:15.9773661Z ##[endgroup]
+2022-07-15T12:33:16.0470551Z With the provided path, there will be 9 files uploaded
+2022-07-15T12:33:16.0475214Z Starting artifact upload
+2022-07-15T12:33:16.0476087Z For more detailed logs during the artifact upload process, enable step-debugging: https://docs.github.com/actions/monitoring-and-troubleshooting-workflows/enabling-debug-logging#enabling-step-debug-logging
+2022-07-15T12:33:16.0478627Z Artifact name is valid!
+2022-07-15T12:33:16.0959799Z Container for artifact "screenshots" successfully created. Starting upload of file(s)
+2022-07-15T12:33:16.9929248Z Total size of all the files uploaded is 765397 bytes
+2022-07-15T12:33:16.9930001Z File upload process has finished. Finalizing the artifact upload
+2022-07-15T12:33:17.0190582Z Artifact has been finalized. All files have been successfully uploaded!
+2022-07-15T12:33:17.0191383Z
+2022-07-15T12:33:17.0191787Z The raw size of all the files that were specified for upload is 898567 bytes
+2022-07-15T12:33:17.0192358Z The size of all the files that were uploaded is 765397 bytes. This takes into account any gzip compression used to reduce the upload size, time and storage
+2022-07-15T12:33:17.0192687Z
+2022-07-15T12:33:17.0193740Z Note: The size of downloaded zips can differ significantly from the reported size. For more information see: https://github.com/actions/upload-artifact#zipped-artifact-downloads
+2022-07-15T12:33:17.0194138Z
+2022-07-15T12:33:17.0194311Z Artifact screenshots has been successfully uploaded!
+2022-07-15T12:33:17.0299054Z Post job cleanup.
+2022-07-15T12:33:17.1634034Z [command]/usr/bin/git version
+2022-07-15T12:33:17.1696453Z git version 2.37.0
+2022-07-15T12:33:17.1744550Z Temporarily overriding HOME='/home/runner/work/_temp/f9c9a838-7df9-4a3b-8dbe-d8c577bdd917' before making global git config changes
+2022-07-15T12:33:17.1745765Z Adding repository directory to the temporary git global config as a safe directory
+2022-07-15T12:33:17.1750818Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/maintenance_tasks/maintenance_tasks
+2022-07-15T12:33:17.1809130Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2022-07-15T12:33:17.1854345Z [command]/usr/bin/git submodule foreach --recursive git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :
+2022-07-15T12:33:17.2134379Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2022-07-15T12:33:17.2157639Z http.https://github.com/.extraheader
+2022-07-15T12:33:17.2169972Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2022-07-15T12:33:17.2212381Z [command]/usr/bin/git submodule foreach --recursive git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :
+2022-07-15T12:33:17.2754650Z Cleaning up orphan processes

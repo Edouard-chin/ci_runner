@@ -1,0 +1,42 @@
+2022-05-26T08:28:16.4850950Z # Running tests with run options --seed 20218:
+2022-05-26T08:28:16.4851640Z
+2022-05-26T08:28:16.4852340Z .............................................................................................................................................E......................................................................................................................................
+2022-05-26T08:28:16.4853290Z
+2022-05-26T08:28:16.4860230Z rake aborted!
+2022-05-26T08:28:16.4860840Z Finished tests in 34.633943s, 7.9691 tests/s, 18.3924 assertions/s.
+2022-05-26T08:28:16.4861370Z Command failed with status (1)
+2022-05-26T08:28:16.4861810Z
+2022-05-26T08:28:16.4862450Z /Users/runner/work/zeitwerk/zeitwerk/vendor/bundle/ruby/3.2.0+1/gems/rake-13.0.6/exe/rake:27:in `<top (required)>'
+2022-05-26T08:28:16.4863130Z
+2022-05-26T08:28:16.4863630Z /Users/runner/.rubies/ruby-head/bin/bundle:25:in `load'
+2022-05-26T08:28:16.4864180Z Error:
+2022-05-26T08:28:16.4864810Z /Users/runner/.rubies/ruby-head/bin/bundle:25:in `<main>'
+2022-05-26T08:28:16.4865460Z TestReloading#test_reload_recovers_from_name_errors__w__on_unload_callbacks_:
+2022-05-26T08:28:16.4866190Z Tasks: TOP => default => test
+2022-05-26T08:28:16.4866900Z NameError: uninitialized constant X
+2022-05-26T08:28:16.4867610Z (See full trace by running task with --trace)
+2022-05-26T08:28:16.4868020Z
+2022-05-26T08:28:16.4868500Z     parent.const_get(cname, false)
+2022-05-26T08:28:16.4869170Z           ^^^^^^^^^^
+2022-05-26T08:28:16.4869860Z     /Users/runner/work/zeitwerk/zeitwerk/lib/zeitwerk/loader/helpers.rb:118:in `const_get'
+2022-05-26T08:28:16.4870560Z     /Users/runner/work/zeitwerk/zeitwerk/lib/zeitwerk/loader/helpers.rb:118:in `cget'
+2022-05-26T08:28:16.4882990Z
+2022-05-26T08:28:16.4882990Z
+2022-05-26T08:28:16.4882990Z bin/rerun_test path/to/file.rb -n test_reload_recovers_from_name_errors__w__on_unload_callbacks_
+2022-05-26T08:28:16.4882990Z
+2022-05-26T08:28:16.4883370Z 276 tests, 637 assertions, 0 failures, 1 errors, 0 skips
+2022-05-26T08:28:16.4924620Z ##[error]Process completed with exit code 1.
+2022-05-26T08:28:16.5027530Z Post job cleanup.
+2022-05-26T08:28:16.6582800Z [command]/usr/local/bin/git version
+2022-05-26T08:28:16.6702540Z git version 2.36.1
+2022-05-26T08:28:16.6770910Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/1bb112fc-2f6e-49d7-a9a8-719116ecdc46/.gitconfig'
+2022-05-26T08:28:16.7194640Z Temporarily overriding HOME='/Users/runner/work/_temp/1bb112fc-2f6e-49d7-a9a8-719116ecdc46' before making global git config changes
+2022-05-26T08:28:16.7195350Z Adding repository directory to the temporary git global config as a safe directory
+2022-05-26T08:28:16.7203230Z [command]/usr/local/bin/git config --global --add safe.directory /Users/runner/work/zeitwerk/zeitwerk
+2022-05-26T08:28:16.7340760Z [command]/usr/local/bin/git config --local --name-only --get-regexp core\.sshCommand
+2022-05-26T08:28:16.7455720Z [command]/usr/local/bin/git submodule foreach --recursive git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :
+2022-05-26T08:28:16.8732720Z [command]/usr/local/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2022-05-26T08:28:16.8828990Z http.https://github.com/.extraheader
+2022-05-26T08:28:16.8876360Z [command]/usr/local/bin/git config --local --unset-all http.https://github.com/.extraheader
+2022-05-26T08:28:16.9404720Z [command]/usr/local/bin/git submodule foreach --recursive git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :
+2022-05-26T08:28:17.1523990Z Cleaning up orphan processes

@@ -1,0 +1,54 @@
+2022-07-15T12:32:45.1600503Z Run options: --seed 32593
+2022-07-15T12:32:45.1606146Z
+2022-07-15T12:32:45.1606253Z # Running:
+2022-07-15T12:32:45.1606401Z
+2022-07-15T12:32:50.1305988Z ..[Screenshot]: /home/runner/work/maintenance_tasks/maintenance_tasks/test/dummy/tmp/screenshots/failures_test_run_a_CSV_Task.png
+2022-07-15T12:32:50.1663971Z F
+2022-07-15T12:32:50.1664378Z
+2022-07-15T12:32:50.1664710Z End of test. Results finished in 10 seconds.
+2022-07-15T12:32:50.1781262Z MaintenanceTasks::RunsTest#test_run_a_CSV_Task [/home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/minitest.rb:295]:
+2022-07-15T12:32:50.1781732Z expected not to find visible button "Run" that is not disabled, found 1 match: ""
+2022-07-15T12:32:50.1781916Z
+2022-07-15T12:32:50.1782046Z rails test test/system/maintenance_tasks/runs_test.rb:19
+2022-07-15T12:32:50.1782206Z
+2022-07-15T12:32:53.3188271Z ..[Screenshot]: /home/runner/work/maintenance_tasks/maintenance_tasks/test/dummy/tmp/screenshots/failures_test_pause_a_Run.png
+2022-07-15T12:32:53.3554891Z E
+2022-07-15T12:32:53.3555112Z
+2022-07-15T12:32:53.3558747Z End of test. Results finished in 1 seconds.
+2022-07-15T12:32:53.3559133Z MaintenanceTasks::RunsTest#test_pause_a_Run:
+2022-07-15T12:32:53.3559551Z Capybara::ElementNotFound: Unable to find link or button "Pause"
+2022-07-15T12:32:53.3560793Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:310:in `block in synced_resolve'
+2022-07-15T12:32:53.3561676Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/base.rb:83:in `synchronize'
+2022-07-15T12:32:53.3562530Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:299:in `synced_resolve'
+2022-07-15T12:32:53.3563357Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/finders.rb:60:in `find'
+2022-07-15T12:32:53.3564199Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/node/actions.rb:26:in `click_link_or_button'
+2022-07-15T12:32:53.3565011Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/session.rb:771:in `click_on'
+2022-07-15T12:32:53.3565782Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/dsl.rb:52:in `call'
+2022-07-15T12:32:53.3566801Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/dsl.rb:52:in `click_on'
+2022-07-15T12:32:53.3567408Z     /home/runner/work/maintenance_tasks/maintenance_tasks/test/system/maintenance_tasks/runs_test.rb:91:in `block in <class:RunsTest>'
+2022-07-15T12:32:53.3568225Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:98:in `block (3 levels) in run'
+2022-07-15T12:32:53.3569055Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:195:in `capture_exceptions'
+2022-07-15T12:32:53.3570004Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:95:in `block (2 levels) in run'
+2022-07-15T12:32:53.3570790Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:296:in `time_it'
+2022-07-15T12:32:53.3571567Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:94:in `block in run'
+2022-07-15T12:32:53.3572336Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:391:in `on_signal'
+2022-07-15T12:32:53.3573115Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:243:in `with_info_handler'
+2022-07-15T12:32:53.3573891Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest/test.rb:93:in `run'
+2022-07-15T12:32:53.3574662Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:1059:in `run_one_method'
+2022-07-15T12:32:53.3575443Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:365:in `run_one_method'
+2022-07-15T12:32:53.3576232Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:352:in `block (2 levels) in run'
+2022-07-15T12:32:53.3576997Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:351:in `each'
+2022-07-15T12:32:53.3577755Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:351:in `block in run'
+2022-07-15T12:32:53.3578509Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:391:in `on_signal'
+2022-07-15T12:32:53.3579288Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:378:in `with_info_handler'
+2022-07-15T12:32:53.3580030Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:350:in `run'
+2022-07-15T12:32:53.3580825Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/railties-6.0.5.1/lib/rails/test_unit/line_filtering.rb:10:in `run'
+2022-07-15T12:32:53.3581625Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `block in __run'
+2022-07-15T12:32:53.3582381Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `map'
+2022-07-15T12:32:53.3583123Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:182:in `__run'
+2022-07-15T12:32:53.3583866Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:159:in `run'
+2022-07-15T12:32:53.3584702Z     /home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/minitest-5.16.2/lib/minitest.rb:83:in `block in autorun'
+2022-07-15T12:32:53.3585027Z
+2022-07-15T12:32:53.3587181Z rails test test/system/maintenance_tasks/runs_test.rb:86
+2022-07-15T12:32:53.3587414Z
+2022-07-15T12:32:55.7784625Z [Screenshot]: /home/runner/work/maintenance_tasks/maintenance_tasks/test/dummy/tmp/screenshots/failures_test_cancel_a_stuck_Ru
