@@ -24,12 +24,12 @@ module CIRunner
       log_parser.parse
 
       if log_parser.failures.count.zero?
-        exit_with_error("Couldn't find any test failures from the CI logs.")
+        return errored("Couldn't find any test failures from the CI logs.")
       end
 
       TestRunner.new(log_parser.failures, log_parser.seed, shell).run_failing_tests
     rescue GithubClient::Error, Error => e
-      exit_with_error(e.message)
+      errored(e.message)
     end
 
     desc "github_token TOKEN", "Save a GitHub token in your config"
@@ -40,7 +40,7 @@ module CIRunner
 
       say("Hello #{user["login"]}! Your token has been saved successfully!", :green)
     rescue GithubClient::Error => e
-      exit_with_error(<<~EOM)
+      errored(<<~EOM)
         Your token doesn't seem to be valid. The response from GitHub was:
 
         #{e.message}
@@ -49,10 +49,8 @@ module CIRunner
 
     private
 
-    def exit_with_error(message)
+    def errored(message)
       say_error(message, :red)
-
-      exit(1)
     end
   end
 end

@@ -1,0 +1,424 @@
+2022-05-26T08:24:27.1747970Z Requested labels: macos-latest
+2022-05-26T08:24:27.1748039Z Job defined at: fxn/zeitwerk/.github/workflows/ci.yml@refs/heads/main
+2022-05-26T08:24:27.1748073Z Waiting for a runner to pick up this job...
+2022-05-26T08:24:28.9631250Z Job is waiting for a hosted runner to come online.
+2022-05-26T08:24:44.2362887Z Job is about to start running on the hosted runner: GitHub Actions 4 (hosted)
+2022-05-26T08:24:51.7514010Z Current runner version: '2.291.1'
+2022-05-26T08:24:51.8356580Z ##[group]Operating System
+2022-05-26T08:24:51.8357430Z macOS
+2022-05-26T08:24:51.8357820Z 11.6.5
+2022-05-26T08:24:51.8358110Z 20G527
+2022-05-26T08:24:51.8358680Z ##[endgroup]
+2022-05-26T08:24:51.8359130Z ##[group]Virtual Environment
+2022-05-26T08:24:51.8359570Z Environment: macos-11
+2022-05-26T08:24:51.8359990Z Version: 20220517.4
+2022-05-26T08:24:51.8360650Z Included Software: https://github.com/actions/virtual-environments/blob/macOS-11/20220517.4/images/macos/macos-11-Readme.md
+2022-05-26T08:24:51.8361560Z Image Release: https://github.com/actions/virtual-environments/releases/tag/macOS-11%2F20220517.4
+2022-05-26T08:24:51.8362160Z ##[endgroup]
+2022-05-26T08:24:51.8362610Z ##[group]Virtual Environment Provisioner
+2022-05-26T08:24:51.8363120Z 1.0.0.0-main-20220516-1
+2022-05-26T08:24:51.8363480Z ##[endgroup]
+2022-05-26T08:24:51.8364930Z ##[group]GITHUB_TOKEN Permissions
+2022-05-26T08:24:51.8365950Z Actions: write
+2022-05-26T08:24:51.8366860Z Checks: write
+2022-05-26T08:24:51.8367440Z Contents: write
+2022-05-26T08:24:51.8367850Z Deployments: write
+2022-05-26T08:24:51.8368220Z Discussions: write
+2022-05-26T08:24:51.8368620Z Issues: write
+2022-05-26T08:24:51.8369090Z Metadata: read
+2022-05-26T08:24:51.8369450Z Packages: write
+2022-05-26T08:24:51.8369840Z Pages: write
+2022-05-26T08:24:51.8370250Z PullRequests: write
+2022-05-26T08:24:51.8370640Z RepositoryProjects: write
+2022-05-26T08:24:51.8371190Z SecurityEvents: write
+2022-05-26T08:24:51.8371620Z Statuses: write
+2022-05-26T08:24:51.8371970Z ##[endgroup]
+2022-05-26T08:24:51.8377690Z Secret source: Actions
+2022-05-26T08:24:51.8378310Z Prepare workflow directory
+2022-05-26T08:24:52.0392030Z Prepare all required actions
+2022-05-26T08:24:52.0649070Z Getting action download info
+2022-05-26T08:24:52.4740020Z Download action repository 'actions/checkout@v2' (SHA:7884fcad6b5d53d10323aee724dc68d8b9096a2e)
+2022-05-26T08:25:17.0256950Z Download action repository 'ruby/setup-ruby@v1' (SHA:8029ebd6e5bd8f4e0d6f7623ea76a01ec5b1010d)
+2022-05-26T08:25:24.0325630Z ##[group]Run actions/checkout@v2
+2022-05-26T08:25:24.0326320Z with:
+2022-05-26T08:25:24.0326560Z   repository: fxn/zeitwerk
+2022-05-26T08:25:24.0327300Z   token: ***
+2022-05-26T08:25:24.0327610Z   ssh-strict: true
+2022-05-26T08:25:24.0327870Z   persist-credentials: true
+2022-05-26T08:25:24.0328070Z   clean: true
+2022-05-26T08:25:24.0328410Z   fetch-depth: 1
+2022-05-26T08:25:24.0328660Z   lfs: false
+2022-05-26T08:25:24.0328870Z   submodules: false
+2022-05-26T08:25:24.0329110Z   set-safe-directory: true
+2022-05-26T08:25:24.0329390Z ##[endgroup]
+2022-05-26T08:25:25.1806820Z Syncing repository: fxn/zeitwerk
+2022-05-26T08:25:25.1809390Z ##[group]Getting Git version info
+2022-05-26T08:25:25.1810020Z Working directory is '/Users/runner/work/zeitwerk/zeitwerk'
+2022-05-26T08:25:25.1810770Z [command]/usr/local/bin/git version
+2022-05-26T08:25:25.2013580Z git version 2.36.1
+2022-05-26T08:25:25.2051340Z ##[endgroup]
+2022-05-26T08:25:25.2074950Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/dd02bd1c-a931-425a-b5b3-3022a2462d27/.gitconfig'
+2022-05-26T08:25:25.2493640Z Temporarily overriding HOME='/Users/runner/work/_temp/dd02bd1c-a931-425a-b5b3-3022a2462d27' before making global git config changes
+2022-05-26T08:25:25.2495470Z Adding repository directory to the temporary git global config as a safe directory
+2022-05-26T08:25:25.2501310Z [command]/usr/local/bin/git config --global --add safe.directory /Users/runner/work/zeitwerk/zeitwerk
+2022-05-26T08:25:25.2948890Z Deleting the contents of '/Users/runner/work/zeitwerk/zeitwerk'
+2022-05-26T08:25:25.2956160Z ##[group]Initializing the repository
+2022-05-26T08:25:25.2962580Z [command]/usr/local/bin/git init /Users/runner/work/zeitwerk/zeitwerk
+2022-05-26T08:25:25.4425590Z hint: Using 'master' as the name for the initial branch. This default branch name
+2022-05-26T08:25:25.4426760Z hint: is subject to change. To configure the initial branch name to use in all
+2022-05-26T08:25:25.4431630Z hint: of your new repositories, which will suppress this warning, call:
+2022-05-26T08:25:25.4432710Z hint:
+2022-05-26T08:25:25.4433230Z hint: 	git config --global init.defaultBranch <name>
+2022-05-26T08:25:25.4433560Z hint:
+2022-05-26T08:25:25.4434200Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2022-05-26T08:25:25.4434830Z hint: 'development'. The just-created branch can be renamed via this command:
+2022-05-26T08:25:25.4435130Z hint:
+2022-05-26T08:25:25.4435490Z hint: 	git branch -m <name>
+2022-05-26T08:25:25.4875020Z Initialized empty Git repository in /Users/runner/work/zeitwerk/zeitwerk/.git/
+2022-05-26T08:25:25.4886960Z [command]/usr/local/bin/git remote add origin https://github.com/fxn/zeitwerk
+2022-05-26T08:25:25.5415570Z ##[endgroup]
+2022-05-26T08:25:25.5416870Z ##[group]Disabling automatic garbage collection
+2022-05-26T08:25:25.5423280Z [command]/usr/local/bin/git config --local gc.auto 0
+2022-05-26T08:25:25.5830400Z ##[endgroup]
+2022-05-26T08:25:25.5831760Z ##[group]Setting up auth
+2022-05-26T08:25:25.5846920Z [command]/usr/local/bin/git config --local --name-only --get-regexp core\.sshCommand
+2022-05-26T08:25:25.5966940Z [command]/usr/local/bin/git submodule foreach --recursive git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :
+2022-05-26T08:25:25.9810110Z [command]/usr/local/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2022-05-26T08:25:25.9942940Z [command]/usr/local/bin/git submodule foreach --recursive git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :
+2022-05-26T08:25:26.1434470Z [command]/usr/local/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2022-05-26T08:25:26.2795850Z ##[endgroup]
+2022-05-26T08:25:26.2797010Z ##[group]Fetching the repository
+2022-05-26T08:25:26.2812300Z [command]/usr/local/bin/git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 origin +09a72137ebe9219cce0cf6af57f5ffdb645faa1a:refs/remotes/origin/main
+2022-05-26T08:25:27.3268390Z remote: Enumerating objects: 78, done.
+2022-05-26T08:25:27.3268980Z remote: Counting objects:   1% (1/78)
+2022-05-26T08:25:27.3269610Z remote: Counting objects:   2% (2/78)
+2022-05-26T08:25:27.3270120Z remote: Counting objects:   3% (3/78)
+2022-05-26T08:25:27.3270670Z remote: Counting objects:   5% (4/78)
+2022-05-26T08:25:27.3271420Z remote: Counting objects:   6% (5/78)
+2022-05-26T08:25:27.3271720Z remote: Counting objects:   7% (6/78)
+2022-05-26T08:25:27.3272380Z remote: Counting objects:   8% (7/78)
+2022-05-26T08:25:27.3272680Z remote: Counting objects:  10% (8/78)
+2022-05-26T08:25:27.3272950Z remote: Counting objects:  11% (9/78)
+2022-05-26T08:25:27.3273410Z remote: Counting objects:  12% (10/78)
+2022-05-26T08:25:27.3273750Z remote: Counting objects:  14% (11/78)
+2022-05-26T08:25:27.3274050Z remote: Counting objects:  15% (12/78)
+2022-05-26T08:25:27.3275080Z remote: Counting objects:  16% (13/78)
+2022-05-26T08:25:27.3275450Z remote: Counting objects:  17% (14/78)
+2022-05-26T08:25:27.3278170Z remote: Counting objects:  19% (15/78)
+2022-05-26T08:25:27.3278870Z remote: Counting objects:  20% (16/78)
+2022-05-26T08:25:27.3279560Z remote: Counting objects:  21% (17/78)
+2022-05-26T08:25:27.3280360Z remote: Counting objects:  23% (18/78)
+2022-05-26T08:25:27.3281050Z remote: Counting objects:  24% (19/78)
+2022-05-26T08:25:27.3281370Z remote: Counting objects:  25% (20/78)
+2022-05-26T08:25:27.3281640Z remote: Counting objects:  26% (21/78)
+2022-05-26T08:25:27.3282090Z remote: Counting objects:  28% (22/78)
+2022-05-26T08:25:27.3282560Z remote: Counting objects:  29% (23/78)
+2022-05-26T08:25:27.3282850Z remote: Counting objects:  30% (24/78)
+2022-05-26T08:25:27.3284060Z remote: Counting objects:  32% (25/78)
+2022-05-26T08:25:27.3284560Z remote: Counting objects:  33% (26/78)
+2022-05-26T08:25:27.3284850Z remote: Counting objects:  34% (27/78)
+2022-05-26T08:25:27.3285680Z remote: Counting objects:  35% (28/78)
+2022-05-26T08:25:27.3286040Z remote: Counting objects:  37% (29/78)
+2022-05-26T08:25:27.3286320Z remote: Counting objects:  38% (30/78)
+2022-05-26T08:25:27.3286640Z remote: Counting objects:  39% (31/78)
+2022-05-26T08:25:27.3287210Z remote: Counting objects:  41% (32/78)
+2022-05-26T08:25:27.3287500Z remote: Counting objects:  42% (33/78)
+2022-05-26T08:25:27.3287830Z remote: Counting objects:  43% (34/78)
+2022-05-26T08:25:27.3288360Z remote: Counting objects:  44% (35/78)
+2022-05-26T08:25:27.3288650Z remote: Counting objects:  46% (36/78)
+2022-05-26T08:25:27.3289080Z remote: Counting objects:  47% (37/78)
+2022-05-26T08:25:27.3289910Z remote: Counting objects:  48% (38/78)
+2022-05-26T08:25:27.3290340Z remote: Counting objects:  50% (39/78)
+2022-05-26T08:25:27.3290750Z remote: Counting objects:  51% (40/78)
+2022-05-26T08:25:27.3291090Z remote: Counting objects:  52% (41/78)
+2022-05-26T08:25:27.3291520Z remote: Counting objects:  53% (42/78)
+2022-05-26T08:25:27.3292020Z remote: Counting objects:  55% (43/78)
+2022-05-26T08:25:27.3292350Z remote: Counting objects:  56% (44/78)
+2022-05-26T08:25:27.3292670Z remote: Counting objects:  57% (45/78)
+2022-05-26T08:25:27.3293050Z remote: Counting objects:  58% (46/78)
+2022-05-26T08:25:27.3293510Z remote: Counting objects:  60% (47/78)
+2022-05-26T08:25:27.3293870Z remote: Counting objects:  61% (48/78)
+2022-05-26T08:25:27.3294440Z remote: Counting objects:  62% (49/78)
+2022-05-26T08:25:27.3294800Z remote: Counting objects:  64% (50/78)
+2022-05-26T08:25:27.3295270Z remote: Counting objects:  65% (51/78)
+2022-05-26T08:25:27.3296090Z remote: Counting objects:  66% (52/78)
+2022-05-26T08:25:27.3296450Z remote: Counting objects:  67% (53/78)
+2022-05-26T08:25:27.3296780Z remote: Counting objects:  69% (54/78)
+2022-05-26T08:25:27.3297350Z remote: Counting objects:  70% (55/78)
+2022-05-26T08:25:27.3297740Z remote: Counting objects:  71% (56/78)
+2022-05-26T08:25:27.3298070Z remote: Counting objects:  73% (57/78)
+2022-05-26T08:25:27.3298400Z remote: Counting objects:  74% (58/78)
+2022-05-26T08:25:27.3298670Z remote: Counting objects:  75% (59/78)
+2022-05-26T08:25:27.3298990Z remote: Counting objects:  76% (60/78)
+2022-05-26T08:25:27.3299400Z remote: Counting objects:  78% (61/78)
+2022-05-26T08:25:27.3299740Z remote: Counting objects:  79% (62/78)
+2022-05-26T08:25:27.3300020Z remote: Counting objects:  80% (63/78)
+2022-05-26T08:25:27.3300350Z remote: Counting objects:  82% (64/78)
+2022-05-26T08:25:27.3300780Z remote: Counting objects:  83% (65/78)
+2022-05-26T08:25:27.3301130Z remote: Counting objects:  84% (66/78)
+2022-05-26T08:25:27.3301410Z remote: Counting objects:  85% (67/78)
+2022-05-26T08:25:27.3301730Z remote: Counting objects:  87% (68/78)
+2022-05-26T08:25:27.3302060Z remote: Counting objects:  88% (69/78)
+2022-05-26T08:25:27.3302430Z remote: Counting objects:  89% (70/78)
+2022-05-26T08:25:27.3302760Z remote: Counting objects:  91% (71/78)
+2022-05-26T08:25:27.3303090Z remote: Counting objects:  92% (72/78)
+2022-05-26T08:25:27.3303360Z remote: Counting objects:  93% (73/78)
+2022-05-26T08:25:27.3303690Z remote: Counting objects:  94% (74/78)
+2022-05-26T08:25:27.3304100Z remote: Counting objects:  96% (75/78)
+2022-05-26T08:25:27.3304380Z remote: Counting objects:  97% (76/78)
+2022-05-26T08:25:27.3304710Z remote: Counting objects:  98% (77/78)
+2022-05-26T08:25:27.3305040Z remote: Counting objects: 100% (78/78)
+2022-05-26T08:25:27.3305860Z remote: Counting objects: 100% (78/78), done.
+2022-05-26T08:25:27.3306190Z remote: Compressing objects:   1% (1/74)
+2022-05-26T08:25:27.3306540Z remote: Compressing objects:   2% (2/74)
+2022-05-26T08:25:27.3306910Z remote: Compressing objects:   4% (3/74)
+2022-05-26T08:25:27.3307200Z remote: Compressing objects:   5% (4/74)
+2022-05-26T08:25:27.3307630Z remote: Compressing objects:   6% (5/74)
+2022-05-26T08:25:27.3307990Z remote: Compressing objects:   8% (6/74)
+2022-05-26T08:25:27.3308620Z remote: Compressing objects:   9% (7/74)
+2022-05-26T08:25:27.3309000Z remote: Compressing objects:  10% (8/74)
+2022-05-26T08:25:27.3309340Z remote: Compressing objects:  12% (9/74)
+2022-05-26T08:25:27.3309790Z remote: Compressing objects:  13% (10/74)
+2022-05-26T08:25:27.3310090Z remote: Compressing objects:  14% (11/74)
+2022-05-26T08:25:27.3310430Z remote: Compressing objects:  16% (12/74)
+2022-05-26T08:25:27.3310790Z remote: Compressing objects:  17% (13/74)
+2022-05-26T08:25:27.3311080Z remote: Compressing objects:  18% (14/74)
+2022-05-26T08:25:27.3311520Z remote: Compressing objects:  20% (15/74)
+2022-05-26T08:25:27.3791800Z remote: Compressing objects:  21% (16/74)
+2022-05-26T08:25:27.3792310Z remote: Compressing objects:  22% (17/74)
+2022-05-26T08:25:27.3792630Z remote: Compressing objects:  24% (18/74)
+2022-05-26T08:25:27.3793250Z remote: Compressing objects:  25% (19/74)
+2022-05-26T08:25:27.3793610Z remote: Compressing objects:  27% (20/74)
+2022-05-26T08:25:27.3794200Z remote: Compressing objects:  28% (21/74)
+2022-05-26T08:25:27.3794620Z remote: Compressing objects:  29% (22/74)
+2022-05-26T08:25:27.3795060Z remote: Compressing objects:  31% (23/74)
+2022-05-26T08:25:27.3795870Z remote: Compressing objects:  32% (24/74)
+2022-05-26T08:25:27.3796180Z remote: Compressing objects:  33% (25/74)
+2022-05-26T08:25:27.3797290Z remote: Compressing objects:  35% (26/74)
+2022-05-26T08:25:27.3797710Z remote: Compressing objects:  36% (27/74)
+2022-05-26T08:25:27.3798120Z remote: Compressing objects:  37% (28/74)
+2022-05-26T08:25:27.3925340Z remote: Compressing objects:  39% (29/74)
+2022-05-26T08:25:27.3925830Z remote: Compressing objects:  40% (30/74)
+2022-05-26T08:25:27.3926180Z remote: Compressing objects:  41% (31/74)
+2022-05-26T08:25:27.3926430Z remote: Compressing objects:  43% (32/74)
+2022-05-26T08:25:27.3926830Z remote: Compressing objects:  44% (33/74)
+2022-05-26T08:25:27.3927150Z remote: Compressing objects:  45% (34/74)
+2022-05-26T08:25:27.3927440Z remote: Compressing objects:  47% (35/74)
+2022-05-26T08:25:27.3927730Z remote: Compressing objects:  48% (36/74)
+2022-05-26T08:25:27.3928050Z remote: Compressing objects:  50% (37/74)
+2022-05-26T08:25:27.3928320Z remote: Compressing objects:  51% (38/74)
+2022-05-26T08:25:27.3928910Z remote: Compressing objects:  52% (39/74)
+2022-05-26T08:25:27.3929510Z remote: Compressing objects:  54% (40/74)
+2022-05-26T08:25:27.3930120Z remote: Compressing objects:  55% (41/74)
+2022-05-26T08:25:27.3930420Z remote: Compressing objects:  56% (42/74)
+2022-05-26T08:25:27.3930740Z remote: Compressing objects:  58% (43/74)
+2022-05-26T08:25:27.3931260Z remote: Compressing objects:  59% (44/74)
+2022-05-26T08:25:27.3931540Z remote: Compressing objects:  60% (45/74)
+2022-05-26T08:25:27.3931850Z remote: Compressing objects:  62% (46/74)
+2022-05-26T08:25:27.3932280Z remote: Compressing objects:  63% (47/74)
+2022-05-26T08:25:27.3932560Z remote: Compressing objects:  64% (48/74)
+2022-05-26T08:25:27.3932800Z remote: Compressing objects:  66% (49/74)
+2022-05-26T08:25:27.3933050Z remote: Compressing objects:  67% (50/74)
+2022-05-26T08:25:27.3933700Z remote: Compressing objects:  68% (51/74)
+2022-05-26T08:25:27.3935100Z remote: Compressing objects:  70% (52/74)
+2022-05-26T08:25:27.3935380Z remote: Compressing objects:  71% (53/74)
+2022-05-26T08:25:27.3935620Z remote: Compressing objects:  72% (54/74)
+2022-05-26T08:25:27.3936740Z remote: Compressing objects:  74% (55/74)
+2022-05-26T08:25:27.3937120Z remote: Compressing objects:  75% (56/74)
+2022-05-26T08:25:27.3937430Z remote: Compressing objects:  77% (57/74)
+2022-05-26T08:25:27.3937680Z remote: Compressing objects:  78% (58/74)
+2022-05-26T08:25:27.3937930Z remote: Compressing objects:  79% (59/74)
+2022-05-26T08:25:27.3938230Z remote: Compressing objects:  81% (60/74)
+2022-05-26T08:25:27.3938470Z remote: Compressing objects:  82% (61/74)
+2022-05-26T08:25:27.3938710Z remote: Compressing objects:  83% (62/74)
+2022-05-26T08:25:27.3939010Z remote: Compressing objects:  85% (63/74)
+2022-05-26T08:25:27.3939290Z remote: Compressing objects:  86% (64/74)
+2022-05-26T08:25:27.3939570Z remote: Compressing objects:  87% (65/74)
+2022-05-26T08:25:27.3939940Z remote: Compressing objects:  89% (66/74)
+2022-05-26T08:25:27.3940240Z remote: Compressing objects:  90% (67/74)
+2022-05-26T08:25:27.3940480Z remote: Compressing objects:  91% (68/74)
+2022-05-26T08:25:27.3940760Z remote: Compressing objects:  93% (69/74)
+2022-05-26T08:25:27.3941040Z remote: Compressing objects:  94% (70/74)
+2022-05-26T08:25:27.3941310Z remote: Compressing objects:  95% (71/74)
+2022-05-26T08:25:27.3941600Z remote: Compressing objects:  97% (72/74)
+2022-05-26T08:25:27.3941900Z remote: Compressing objects:  98% (73/74)
+2022-05-26T08:25:27.3942170Z remote: Compressing objects: 100% (74/74)
+2022-05-26T08:25:27.3942510Z remote: Compressing objects: 100% (74/74), done.
+2022-05-26T08:25:29.6055690Z remote: Total 78 (delta 1), reused 18 (delta 0), pack-reused 0
+2022-05-26T08:25:34.1710400Z From https://github.com/fxn/zeitwerk
+2022-05-26T08:25:34.1711760Z  * [new ref]         09a72137ebe9219cce0cf6af57f5ffdb645faa1a -> origin/main
+2022-05-26T08:25:34.2634140Z ##[endgroup]
+2022-05-26T08:25:34.2635480Z ##[group]Determining the checkout info
+2022-05-26T08:25:34.2637080Z ##[endgroup]
+2022-05-26T08:25:34.2638460Z ##[group]Checking out the ref
+2022-05-26T08:25:34.2645800Z [command]/usr/local/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2022-05-26T08:25:35.5042240Z Updating files:  26% (17/65)
+2022-05-26T08:25:35.5869060Z Updating files:  27% (18/65)
+2022-05-26T08:25:35.6272360Z Updating files:  29% (19/65)
+2022-05-26T08:25:35.7085310Z Updating files:  30% (20/65)
+2022-05-26T08:25:35.7895870Z Updating files:  32% (21/65)
+2022-05-26T08:25:35.8305460Z Updating files:  33% (22/65)
+2022-05-26T08:25:35.9113840Z Updating files:  35% (23/65)
+2022-05-26T08:25:35.9931410Z Updating files:  36% (24/65)
+2022-05-26T08:25:36.0339490Z Updating files:  38% (25/65)
+2022-05-26T08:25:36.1163330Z Updating files:  40% (26/65)
+2022-05-26T08:25:36.1986320Z Updating files:  41% (27/65)
+2022-05-26T08:25:36.2390990Z Updating files:  43% (28/65)
+2022-05-26T08:25:36.3215730Z Updating files:  44% (29/65)
+2022-05-26T08:25:36.4032440Z Updating files:  46% (30/65)
+2022-05-26T08:25:36.4441040Z Updating files:  47% (31/65)
+2022-05-26T08:25:36.5258770Z Updating files:  49% (32/65)
+2022-05-26T08:25:36.6073000Z Updating files:  50% (33/65)
+2022-05-26T08:25:36.6479270Z Updating files:  52% (34/65)
+2022-05-26T08:25:36.7291890Z Updating files:  53% (35/65)
+2022-05-26T08:25:36.8112060Z Updating files:  55% (36/65)
+2022-05-26T08:25:36.8520540Z Updating files:  56% (37/65)
+2022-05-26T08:25:36.9338110Z Updating files:  58% (38/65)
+2022-05-26T08:25:37.0154020Z Updating files:  60% (39/65)
+2022-05-26T08:25:37.0569920Z Updating files:  61% (40/65)
+2022-05-26T08:25:37.1401420Z Updating files:  63% (41/65)
+2022-05-26T08:25:37.2220010Z Updating files:  64% (42/65)
+2022-05-26T08:25:37.2622630Z Updating files:  66% (43/65)
+2022-05-26T08:25:37.2625000Z Updating files:  67% (44/65)
+2022-05-26T08:25:37.2628620Z Updating files:  69% (45/65)
+2022-05-26T08:25:37.2632350Z Updating files:  70% (46/65)
+2022-05-26T08:25:37.2637610Z Updating files:  72% (47/65)
+2022-05-26T08:25:37.2639400Z Updating files:  73% (48/65)
+2022-05-26T08:25:37.2646810Z Updating files:  75% (49/65)
+2022-05-26T08:25:37.2649280Z Updating files:  76% (50/65)
+2022-05-26T08:25:37.2681060Z Updating files:  78% (51/65)
+2022-05-26T08:25:37.2682720Z Updating files:  80% (52/65)
+2022-05-26T08:25:37.2683380Z Updating files:  81% (53/65)
+2022-05-26T08:25:37.2683940Z Updating files:  83% (54/65)
+2022-05-26T08:25:37.2684490Z Updating files:  84% (55/65)
+2022-05-26T08:25:37.2716100Z Updating files:  86% (56/65)
+2022-05-26T08:25:37.2718630Z Updating files:  87% (57/65)
+2022-05-26T08:25:37.2718900Z Updating files:  89% (58/65)
+2022-05-26T08:25:37.2719170Z Updating files:  90% (59/65)
+2022-05-26T08:25:37.3527760Z Updating files:  92% (60/65)
+2022-05-26T08:25:37.4348710Z Updating files:  93% (61/65)
+2022-05-26T08:25:37.4757710Z Updating files:  95% (62/65)
+2022-05-26T08:25:37.5582670Z Updating files:  96% (63/65)
+2022-05-26T08:25:37.6396240Z Updating files:  98% (64/65)
+2022-05-26T08:25:37.6397010Z Updating files: 100% (65/65)
+2022-05-26T08:25:37.6397620Z Updating files: 100% (65/65), done.
+2022-05-26T08:25:38.1002110Z Switched to a new branch 'main'
+2022-05-26T08:25:38.1015060Z branch 'main' set up to track 'origin/main'.
+2022-05-26T08:25:38.1018790Z ##[endgroup]
+2022-05-26T08:25:38.1192100Z [command]/usr/local/bin/git log -1 --format='%H'
+2022-05-26T08:25:38.1326120Z '09a72137ebe9219cce0cf6af57f5ffdb645faa1a'
+2022-05-26T08:25:38.3621310Z ##[group]Run ruby/setup-ruby@v1
+2022-05-26T08:25:38.3621580Z with:
+2022-05-26T08:25:38.3621740Z   ruby-version: head
+2022-05-26T08:25:38.3621940Z   bundler-cache: true
+2022-05-26T08:25:38.3622130Z ##[endgroup]
+2022-05-26T08:25:40.0203050Z ##[group]Modifying PATH
+2022-05-26T08:25:40.0212570Z Entries removed from PATH to avoid conflicts with default Ruby:
+2022-05-26T08:25:40.0224640Z   /usr/local/lib/ruby/gems/2.7.0/bin
+2022-05-26T08:25:40.0225010Z   /usr/local/opt/ruby@2.7/bin
+2022-05-26T08:25:40.1027030Z Entries added to PATH to use selected Ruby:
+2022-05-26T08:25:40.1043890Z   /Users/runner/.rubies/ruby-head/bin
+2022-05-26T08:25:40.1044900Z ##[endgroup]
+2022-05-26T08:25:40.1471260Z ##[group]Downloading Ruby
+2022-05-26T08:25:40.1472650Z https://github.com/ruby/ruby-dev-builder/releases/latest/download/ruby-head-macos-latest.tar.gz
+2022-05-26T08:25:41.6405600Z Took   1.49 seconds
+2022-05-26T08:25:41.6409670Z ##[endgroup]
+2022-05-26T08:25:41.6411410Z ##[group]Extracting  Ruby
+2022-05-26T08:25:41.7300110Z [command]/usr/bin/tar -xz -C /Users/runner/.rubies -f /Users/runner/work/_temp/33c19df9-8f30-4813-ae8f-d22c1fb0fcde
+2022-05-26T08:27:13.6949050Z Took  92.06 seconds
+2022-05-26T08:27:13.6950410Z ##[endgroup]
+2022-05-26T08:27:13.6951350Z ##[group]Print Ruby version
+2022-05-26T08:27:13.6986620Z [command]/Users/runner/.rubies/ruby-head/bin/ruby --version
+2022-05-26T08:27:14.0850450Z ruby 3.2.0dev (2022-05-25T12:17:30Z master d875445e8a) [x86_64-darwin19]
+2022-05-26T08:27:14.0868980Z Took   0.39 seconds
+2022-05-26T08:27:14.0872560Z ##[endgroup]
+2022-05-26T08:27:14.0873350Z ##[group]Installing Bundler
+2022-05-26T08:27:14.0881350Z Using Bundler 2 shipped with ruby-head (head versions do not always support the latest Bundler release)
+2022-05-26T08:27:14.0882420Z Took   0.00 seconds
+2022-05-26T08:27:14.0883110Z ##[endgroup]
+2022-05-26T08:27:14.0884140Z ##[group]bundle install
+2022-05-26T08:27:14.1725070Z [command]/Users/runner/.rubies/ruby-head/bin/bundle config --local path /Users/runner/work/zeitwerk/zeitwerk/vendor/bundle
+2022-05-26T08:27:14.9479950Z [command]/Users/runner/.rubies/ruby-head/bin/bundle lock
+2022-05-26T08:27:21.8309880Z Fetching gem metadata from https://rubygems.org/...
+2022-05-26T08:27:21.9593090Z Resolving dependencies...
+2022-05-26T08:27:22.0136140Z Writing lockfile to /Users/runner/work/zeitwerk/zeitwerk/Gemfile.lock
+2022-05-26T08:27:22.1393400Z Cache key: setup-ruby-bundler-cache-v3-macos-11-ruby-head-ABI-3.2.0+1-Gemfile.lock-9dd4a2dd129f4a1106610555c69c1b56a0483373996137f935357d5d5ade23b9
+2022-05-26T08:27:23.1551930Z Received 904651 of 904651 (100.0%), 1.9 MBs/sec
+2022-05-26T08:27:23.2022940Z Cache Size: ~1 MB (904651 B)
+2022-05-26T08:27:23.2060240Z [command]/usr/local/bin/gtar --use-compress-program zstd -d -xf /Users/runner/work/_temp/00e96569-89cc-4a36-a626-92c45a788110/cache.tzst -P -C /Users/runner/work/zeitwerk/zeitwerk --delay-directory-restore
+2022-05-26T08:27:40.0271180Z Cache restored successfully
+2022-05-26T08:27:40.0373600Z Found cache for key: setup-ruby-bundler-cache-v3-macos-11-ruby-head-ABI-3.2.0+1-Gemfile.lock-9dd4a2dd129f4a1106610555c69c1b56a0483373996137f935357d5d5ade23b9
+2022-05-26T08:27:40.0478930Z [command]/Users/runner/.rubies/ruby-head/bin/bundle install --jobs 4
+2022-05-26T08:27:40.5324440Z Using rake 13.0.6
+2022-05-26T08:27:40.5330600Z Using ansi 1.5.0
+2022-05-26T08:27:40.5334230Z Using builder 3.2.4
+2022-05-26T08:27:40.5334990Z Using bundler 2.4.0.dev
+2022-05-26T08:27:40.5341720Z Using minitest 5.15.0
+2022-05-26T08:27:40.5347290Z Using minitest-focus 1.3.1
+2022-05-26T08:27:40.5355570Z Using ruby-progressbar 1.11.0
+2022-05-26T08:27:40.5362030Z Using minitest-reporters 1.5.0
+2022-05-26T08:27:40.5362960Z Using zeitwerk 2.6.0 from source at `.`
+2022-05-26T08:27:40.5789940Z Bundle complete! 5 Gemfile dependencies, 9 gems now installed.
+2022-05-26T08:27:40.5791890Z Bundled gems are installed into `./vendor/bundle`
+2022-05-26T08:27:40.5853820Z Took  26.50 seconds
+2022-05-26T08:27:40.5854480Z ##[endgroup]
+2022-05-26T08:27:40.5855530Z
+2022-05-26T08:27:40.7407370Z ##[group]Run bundle exec rake
+2022-05-26T08:27:40.7407850Z [36;1mbundle exec rake[0m
+2022-05-26T08:27:40.7742100Z shell: /bin/bash -e {0}
+2022-05-26T08:27:40.7742510Z env:
+2022-05-26T08:27:40.7743600Z   PATH: /usr/local/opt/pipx_bin:/Users/runner/.cargo/bin:/usr/local/opt/curl/bin:/usr/local/bin:/usr/local/sbin:/Users/runner/bin:/Users/runner/.yarn/bin:/Users/runner/Library/Android/sdk/tools:/Users/runner/Library/Android/sdk/platform-tools:/Users/runner/Library/Android/sdk/ndk-bundle:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/usr/bin:/bin:/usr/sbin:/sbin:/Users/runner/.dotnet/tools:/Users/runner/.ghcup/bin:/Users/runner/hostedtoolcache/stack/2.7.5/x64
+2022-05-26T08:27:40.7744450Z ##[endgroup]
+2022-05-26T08:28:16.4816700Z
+2022-05-26T08:28:16.4850950Z # Running tests with run options --seed 20218:
+2022-05-26T08:28:16.4851640Z
+2022-05-26T08:28:16.4852340Z .............................................................................................................................................E......................................................................................................................................
+2022-05-26T08:28:16.4853290Z
+2022-05-26T08:28:16.4860230Z rake aborted!
+2022-05-26T08:28:16.4860840Z Finished tests in 34.633943s, 7.9691 tests/s, 18.3924 assertions/s.
+2022-05-26T08:28:16.4861370Z Command failed with status (1)
+2022-05-26T08:28:16.4861810Z
+2022-05-26T08:28:16.4862450Z /Users/runner/work/zeitwerk/zeitwerk/vendor/bundle/ruby/3.2.0+1/gems/rake-13.0.6/exe/rake:27:in `<top (required)>'
+2022-05-26T08:28:16.4863130Z
+2022-05-26T08:28:16.4863630Z /Users/runner/.rubies/ruby-head/bin/bundle:25:in `load'
+2022-05-26T08:28:16.4864180Z Error:
+2022-05-26T08:28:16.4864810Z /Users/runner/.rubies/ruby-head/bin/bundle:25:in `<main>'
+2022-05-26T08:28:16.4865460Z TestReloading#test_reload_recovers_from_name_errors__w__on_unload_callbacks_:
+2022-05-26T08:28:16.4866190Z Tasks: TOP => default => test
+2022-05-26T08:28:16.4866900Z NameError: uninitialized constant X
+2022-05-26T08:28:16.4867610Z (See full trace by running task with --trace)
+2022-05-26T08:28:16.4868020Z
+2022-05-26T08:28:16.4868500Z     parent.const_get(cname, false)
+2022-05-26T08:28:16.4869170Z           ^^^^^^^^^^
+2022-05-26T08:28:16.4869860Z     /Users/runner/work/zeitwerk/zeitwerk/lib/zeitwerk/loader/helpers.rb:118:in `const_get'
+2022-05-26T08:28:16.4870560Z     /Users/runner/work/zeitwerk/zeitwerk/lib/zeitwerk/loader/helpers.rb:118:in `cget'
+2022-05-26T08:28:16.4872180Z     /Users/runner/work/zeitwerk/zeitwerk/lib/zeitwerk/loader.rb:162:in `block (2 levels) in unload'
+2022-05-26T08:28:16.4873000Z     /Users/runner/work/zeitwerk/zeitwerk/lib/zeitwerk/loader.rb:154:in `each'
+2022-05-26T08:28:16.4873700Z     /Users/runner/work/zeitwerk/zeitwerk/lib/zeitwerk/loader.rb:154:in `block in unload'
+2022-05-26T08:28:16.4874400Z     /Users/runner/work/zeitwerk/zeitwerk/lib/zeitwerk/loader.rb:133:in `synchronize'
+2022-05-26T08:28:16.4875150Z     /Users/runner/work/zeitwerk/zeitwerk/lib/zeitwerk/loader.rb:133:in `unload'
+2022-05-26T08:28:16.4875940Z     /Users/runner/work/zeitwerk/zeitwerk/lib/zeitwerk/loader.rb:211:in `reload'
+2022-05-26T08:28:16.4876740Z     /Users/runner/work/zeitwerk/zeitwerk/test/lib/zeitwerk/test_reloading.rb:223:in `block (2 levels) in <class:TestReloading>'
+2022-05-26T08:28:16.4877490Z     /Users/runner/work/zeitwerk/zeitwerk/test/support/loader_test.rb:87:in `block in with_setup'
+2022-05-26T08:28:16.4878850Z     /Users/runner/work/zeitwerk/zeitwerk/test/support/loader_test.rb:65:in `block in with_files'
+2022-05-26T08:28:16.4879720Z     /Users/runner/work/zeitwerk/zeitwerk/test/support/loader_test.rb:58:in `chdir'
+2022-05-26T08:28:16.4880400Z     /Users/runner/work/zeitwerk/zeitwerk/test/support/loader_test.rb:58:in `with_files'
+2022-05-26T08:28:16.4881110Z     /Users/runner/work/zeitwerk/zeitwerk/test/support/loader_test.rb:81:in `with_setup'
+2022-05-26T08:28:16.4882390Z     /Users/runner/work/zeitwerk/zeitwerk/test/lib/zeitwerk/test_reloading.rb:219:in `block in <class:TestReloading>'
+2022-05-26T08:28:16.4882990Z
+2022-05-26T08:28:16.4883370Z 276 tests, 637 assertions, 0 failures, 1 errors, 0 skips
+2022-05-26T08:28:16.4924620Z ##[error]Process completed with exit code 1.
+2022-05-26T08:28:16.5027530Z Post job cleanup.
+2022-05-26T08:28:16.6582800Z [command]/usr/local/bin/git version
+2022-05-26T08:28:16.6702540Z git version 2.36.1
+2022-05-26T08:28:16.6770910Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/1bb112fc-2f6e-49d7-a9a8-719116ecdc46/.gitconfig'
+2022-05-26T08:28:16.7194640Z Temporarily overriding HOME='/Users/runner/work/_temp/1bb112fc-2f6e-49d7-a9a8-719116ecdc46' before making global git config changes
+2022-05-26T08:28:16.7195350Z Adding repository directory to the temporary git global config as a safe directory
+2022-05-26T08:28:16.7203230Z [command]/usr/local/bin/git config --global --add safe.directory /Users/runner/work/zeitwerk/zeitwerk
+2022-05-26T08:28:16.7340760Z [command]/usr/local/bin/git config --local --name-only --get-regexp core\.sshCommand
+2022-05-26T08:28:16.7455720Z [command]/usr/local/bin/git submodule foreach --recursive git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :
+2022-05-26T08:28:16.8732720Z [command]/usr/local/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2022-05-26T08:28:16.8828990Z http.https://github.com/.extraheader
+2022-05-26T08:28:16.8876360Z [command]/usr/local/bin/git config --local --unset-all http.https://github.com/.extraheader
+2022-05-26T08:28:16.9404720Z [command]/usr/local/bin/git submodule foreach --recursive git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :
+2022-05-26T08:28:17.1523990Z Cleaning up orphan processes

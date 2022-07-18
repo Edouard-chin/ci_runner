@@ -15,7 +15,9 @@ module CIRunner
 
       @log_content.each_line do |line|
         case line
-        when /Run options:.*?--seed\s+(\d+)/
+        when /Run options:.*?--seed\s+(\d+)/ # <== Default minitest log
+          @seed = Regexp.last_match(1).to_i
+        when /Running tests with run options.*--seed\s+(\d+)/ # <== Minitest-reporter log
           @seed = Regexp.last_match(1).to_i
         when /(Failure|Error):\s*\Z/
           process_buffer(buffer) unless buffer.empty?
@@ -79,7 +81,7 @@ module CIRunner
     end
 
     def minitest_failure(buffer)
-      regex = /(?:\s*)(?<class>[a-zA-Z0-9_:]+)\#(?<test_name>test_.+?)\s*(:|\[(?<file_path>.*)\])/
+      regex = /(?:\s*)(?<class>[a-zA-Z0-9_:]+)\#(?<test_name>test_.+?)\s*(:|\[(?<file_path>.*):\d+\])/
 
       regex.match(buffer)
     end

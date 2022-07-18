@@ -37,7 +37,11 @@ module CIRunner
     def cache_log(logfile)
       FileUtils.mkdir_p(computed_file_path.dirname)
 
-      FileUtils.cp(logfile, computed_file_path)
+      if logfile.is_a?(Tempfile)
+        FileUtils.cp(logfile, computed_file_path)
+      else
+        File.write(computed_file_path, logfile.read)
+      end
     end
 
     def computed_file_path
