@@ -5,7 +5,6 @@ require_relative "ci_runner/version"
 module CIRunner
   Error = Class.new(StandardError)
 
-  autoload :Configuration,  "ci_runner/configuration"
   autoload :CLI,            "ci_runner/cli"
   autoload :GithubClient,   "ci_runner/github_client"
   autoload :GitHelper,      "ci_runner/git_helper"
@@ -15,4 +14,5 @@ module CIRunner
   autoload :Suite,          "ci_runner/suite"
   autoload :TestRunner,     "ci_runner/test_runner"
   autoload :TestFailure,    "ci_runner/test_failure"
+  autoload :UserConfiguration,  "ci_runner/user_configuration"
 end

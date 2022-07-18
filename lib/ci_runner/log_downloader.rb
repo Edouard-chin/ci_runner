@@ -20,7 +20,7 @@ module CIRunner
         return cached_log
       end
 
-      github_client = GithubClient.new(Configuration.instance.github_token)
+      github_client = GithubClient.new(UserConfiguration.instance.github_token)
       check_runs = github_client.check_runs(@repository, @commit)
       check_run = TestRunFinder.find(@run_name, check_runs)
 

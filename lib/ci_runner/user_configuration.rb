@@ -5,7 +5,7 @@ require "yaml"
 require "singleton"
 
 module CIRunner
-  class Configuration
+  class UserConfiguration
     include Singleton
 
     USER_CONFIG_PATH = ".ci_runner/config.yml"

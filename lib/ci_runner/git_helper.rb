@@ -13,8 +13,7 @@ module CIRunner
         stdout.rstrip
       else
         raise(Error, <<~EOM)
-          Couldn't determine the commit. The commit is required to download the
-          right CI logs.
+          Couldn't determine the commit. The commit is required to download the right CI logs.
 
           Please pass the `--commit` flag (ci_runner --commit <commit>)
         EOM

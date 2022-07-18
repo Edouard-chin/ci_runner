@@ -36,7 +36,7 @@ module CIRunner
     def github_token(token)
       user = GithubClient.new(token).me
 
-      Configuration.instance.save_github_token(token)
+      UserConfiguration.instance.save_github_token(token)
 
       say("Hello #{user["login"]}! Your token has been saved successfully!", :green)
     rescue GithubClient::Error => e
