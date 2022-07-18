@@ -2,22 +2,32 @@
 
 module CIRunner
   class LogParser
+    attr_reader :failures, :seed
+
     def initialize(file)
-      @file = file
+      @log_content = file.read
+      @failures = []
+      @seed = nil
     end
 
     def parse
-      failures = []
-      content = @file.read
-
-      content.scan(minitest_default_regex) do |result|
-        failures << TestFailure.new(*result)
-      end
-
-      failures
+      parse_seed
+      parse_failures
     end
 
     private
+
+    def parse_seed
+      @log_content.match(/Run options:.*?--seed\s+(\d+)/) do |match_data|
+        @seed = match_data[1].to_i
+      end
+    end
+
+    def parse_failures
+      @log_content.scan(minitest_default_regex) do |result|
+        @failures << TestFailure.new(*result)
+      end
+    end
 
     def minitest_default_regex
       %r{

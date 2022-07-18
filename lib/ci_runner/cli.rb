@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "thor"
-require "open3"
 require "byebug"
 
 module CIRunner
@@ -14,52 +13,46 @@ module CIRunner
 
     desc "run", "run failing tests from a CI"
     option :commit, type: :string
+    option :repository, type: :string
     option :run_name, type: :string, required: true
     def rerun
-      # commit = options[:commit] || head_commit
+      commit = options[:commit] || GitHelper.head_commit
+      repository = options[:repository] || GitHelper.repository_from_remote
 
-      # client = GithubClient.new("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")
-      # check_runs = client.check_runs(commit)
-      # check_run = TestRunFinder.find(options[:name], check_runs)
+      log_file = LogDownloader.new(commit, repository, options[:run_name], shell).fetch
+      log_parser = LogParser.new(log_file)
+      log_parser.parse
 
-      # say("Downloading CI logs, this can take a few seconds...", :green)
-
-      # logfile = client.download_log(check_run["id"])
-
-      # say("CI logs downloaded. Now parsing for test failures...", :green)
-
-      failures = LogParser.new(File.open("./open-uri20220718-94179-22vrpp")).parse
-
-      if failures.count.zero?
-        say_error("Couldn't find any test failures from the CI logs.", :red)
-
-        exit(1)
+      if log_parser.failures.count.zero?
+        exit_with_error("Couldn't find any test failures from the CI logs.")
       end
 
-      TestRunner.new(failures).run_failing_tests
-    rescue GithubClient::Error, StandardError => e
-      say_error(e.message, :red)
+      TestRunner.new(log_parser.failures, log_parser.seed).run_failing_tests
+    rescue GithubClient::Error, Error => e
+      exit_with_error(e.message)
+    end
 
-      exit(1)
+    desc "github_token TOKEN", "Save a GitHub token in your config"
+    def github_token(token)
+      user = GithubClient.new(token).me
+
+      Configuration.instance.save_github_token(token)
+
+      say("Hello #{user["login"]}! Your token has been saved successfully!", :green)
+    rescue GithubClient::Error => e
+      exit_with_error(<<~EOM)
+        Your token doesn't seem to be valid. The response from GitHub was:
+
+        #{e.message}
+      EOM
     end
 
     private
 
-    def head_commit
-      stdout, _, status = Open3.capture3("git rev-parse HEAD")
+    def exit_with_error(message)
+      say_error(message, :red)
 
-      if status.success?
-        stdout.rstrip
-      else
-        say_error(<<~EOM, :red)
-          Couldn't determine the commit. The commit is required to download the
-          right CI logs.
-
-          Please pass the `--commit` flag (ci_runner --commit <commit>)
-        EOM
-
-        exit(1)
-      end
+      exit(1)
     end
   end
 end

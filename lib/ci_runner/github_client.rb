@@ -24,8 +24,12 @@ module CIRunner
       @client = client
     end
 
-    def check_runs(commit)
-      get("/repos/Edouard-chin/github_diff_parser/commits/#{commit}/check-runs")
+    def me
+      get("/user")
+    end
+
+    def check_runs(repository, commit)
+      get("/repos/#{repository}/commits/#{commit}/check-runs")
     rescue Error
       raise(Error, <<~EOM)
         Couldn't retrieve the CI checks for the commit: #{commit}.
@@ -34,8 +38,8 @@ module CIRunner
       EOM
     end
 
-    def download_log(check_run_id)
-      download_url = get("/repos/Edouard-chin/github_diff_parser/actions/jobs/#{check_run_id}/logs")
+    def download_log(repository, check_run_id)
+      download_url = get("/repos/#{repository}/actions/jobs/#{check_run_id}/logs")
 
       URI.open(download_url)
     end
@@ -58,10 +62,8 @@ module CIRunner
         response.content_type == "application/json" ? JSON.parse(response.body) : response.body
       when 302
         response["Location"]
-      when 422
-        raise(Error)
       else
-        raise(response.body)
+        raise(Error, response.body)
       end
     end
   end

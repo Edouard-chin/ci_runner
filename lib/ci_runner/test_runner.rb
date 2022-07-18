@@ -9,13 +9,13 @@ module CIRunner
       attr_accessor :failures
     end
 
-    def initialize(failures)
+    def initialize(failures, seed)
       self.class.failures = failures
       @load_errors = []
 
       setup_load_path
       setup_bundler
-      clear_argv
+      setup_argv(seed)
     end
 
     def setup_load_path
@@ -24,11 +24,14 @@ module CIRunner
 
     def setup_bundler
       ENV["BUNDLE_GEMFILE"] = File.expand_path("Gemfile", Dir.pwd)
+
       Bundler.setup(:default, :test)
     end
 
-    def clear_argv
+    def setup_argv(seed)
       ARGV.clear
+
+      ARGV << "--seed" << seed.to_s if seed
     end
 
     def run_failing_tests
@@ -42,10 +45,9 @@ module CIRunner
     private
 
     def require_file(path)
-      # puts $LOAD_PATH
       require_relative path.to_s
-    # rescue LoadError => e
-    #   @load_errors << e
+    rescue LoadError => e
+      @load_errors << e
     end
   end
 end
