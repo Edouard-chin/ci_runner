@@ -4,7 +4,7 @@ require_relative "lib/ci_runner/version"
 
 Gem::Specification.new do |spec|
   spec.name = "ci_runner"
-  spec.version = CiRunner::VERSION
+  spec.version = CIRunner::VERSION
   spec.authors = ["Edouard Chin"]
   spec.email = ["chin.edouard@gmail.com"]
 
@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
     end
   end
   spec.bindir = "exe"
-  spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
+  spec.executables = ["ci_runner"]
   spec.require_paths = ["lib"]
 
   spec.add_dependency "thor"

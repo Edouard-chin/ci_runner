@@ -7,7 +7,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    minitest (5.16.2)
+    byebug (11.1.3)
     rake (13.0.6)
     thor (1.2.1)
 
@@ -15,8 +15,8 @@ PLATFORMS
   x86_64-darwin-20
 
 DEPENDENCIES
+  byebug
   ci_runner!
-  minitest (~> 5.0)
   rake (~> 13.0)
 
 BUNDLED WITH

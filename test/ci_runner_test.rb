@@ -2,9 +2,9 @@
 
 require "test_helper"
 
-class CiRunnerTest < Minitest::Test
+class CIRunnerTest < Minitest::Test
   def test_that_it_has_a_version_number
-    refute_nil ::CiRunner::VERSION
+    refute_nil ::CIRunner::VERSION
   end
 
   def test_it_does_something_useful
