@@ -27,7 +27,7 @@ module CIRunner
         exit_with_error("Couldn't find any test failures from the CI logs.")
       end
 
-      TestRunner.new(log_parser.failures, log_parser.seed).run_failing_tests
+      TestRunner.new(log_parser.failures, log_parser.seed, shell).run_failing_tests
     rescue GithubClient::Error, Error => e
       exit_with_error(e.message)
     end

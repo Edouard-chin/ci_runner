@@ -9,9 +9,10 @@ module CIRunner
       attr_accessor :failures
     end
 
-    def initialize(failures, seed)
+    def initialize(failures, seed, shell)
       self.class.failures = failures
       @load_errors = []
+      @shell = shell
 
       setup_load_path
       setup_bundler
@@ -35,6 +36,8 @@ module CIRunner
     end
 
     def run_failing_tests
+      @shell.say("Found #{self.class.failures.count} failing tests from the CI log. Running them now", :green)
+
       self.class.failures.each do |failure|
         require_file(failure.path)
       end
@@ -46,8 +49,8 @@ module CIRunner
 
     def require_file(path)
       require_relative path.to_s
-    rescue LoadError => e
-      @load_errors << e
+    # rescue LoadError => e
+      # @load_errors << e
     end
   end
 end

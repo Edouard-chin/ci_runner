@@ -16,10 +16,10 @@ module CIRunner
 
     def absolute_path(path)
       if path.relative?
-        File.expand_path(path, Dir.pwd)
+        return File.expand_path(path, Dir.pwd)
       end
 
-      regex = /.*\/(test\/.*?)\Z/
+      regex = /.*\/?(test\/.*?)\Z/
       unless path.to_s.match?(regex)
         raise "Can't create a relative path."
       end

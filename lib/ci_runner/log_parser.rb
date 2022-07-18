@@ -11,43 +11,77 @@ module CIRunner
     end
 
     def parse
-      parse_seed
-      parse_failures
+      buffer = +""
+
+      @log_content.each_line do |line|
+        case line
+        when /Run options:.*?--seed\s+(\d+)/
+          @seed = Regexp.last_match(1).to_i
+        when /(Failure|Error):\s*\Z/
+          process_buffer(buffer) unless buffer.empty?
+          buffer.clear
+          buffer << line
+        else
+          buffer << line unless buffer.empty?
+        end
+      end
+
+      process_buffer(buffer) unless buffer.empty?
     end
 
     private
 
-    def parse_seed
-      @log_content.match(/Run options:.*?--seed\s+(\d+)/) do |match_data|
-        @seed = match_data[1].to_i
-      end
+    def process_buffer(buffer)
+      match_data = minitest_failure(buffer.lines[1])
+      return unless match_data
+
+      file_path = valid_path?(match_data[:file_path]) ? match_data[:file_path] : find_test_location(buffer, match_data)
+
+      @failures << TestFailure.new(match_data[:class], match_data[:test_name], file_path)
     end
 
-    def parse_failures
-      @log_content.scan(minitest_default_regex) do |result|
-        @failures << TestFailure.new(*result)
-      end
+    def valid_path?(path)
+      return false if path.nil?
+
+      points_to_a_gem = %r{ruby/.*?/gems}
+
+      !path.match?(points_to_a_gem)
     end
 
-    def minitest_default_regex
-      %r{
-        Failure:\s+          # Match "Failure \n" literally.
-      (?:                  # Start of Non capturing group.
-        \S*\s+               # Match any possible timestamp before the class definition.
-      )                    # End of Non capturing group.
-      (?<class>            # Start of named capturing group "class".
-        [a-zA-Z0-9_:]+       # Match the name of the suite (i.e. BlablaControllerTest).
-      )                    # End of named capturing group "class".
-      \#                    # Match the "#" sign, literally.
-      (?<test_name>        # Start of named capturing group "test_name".
-        test_.*?             # Match the name of the test (i.e. test_works_correctly).
-      )                    # End of named capturing group "test_name".
-      \s+                  # Match empty space(s).
-      \[
-        (?<file_path>.*?)
-        :\d+
-      \]
-      }x
+    def find_test_location(buffer, match_data)
+      match = try_rails(buffer)
+      return match if match
+
+      try_stacktrace(buffer, match_data) || raise("Can't find test location")
+    end
+
+    def underscore(camel_cased_word)
+      return camel_cased_word.to_s unless /[A-Z-]|::/.match?(camel_cased_word)
+      word = camel_cased_word.to_s.gsub("::", "/")
+
+      word.gsub!(/([A-Z]+)(?=[A-Z][a-z])|([a-z\d])(?=[A-Z])/) { ($1 || $2) << "_" }
+      word.tr!("-", "_")
+      word.downcase!
+      word
+    end
+
+    def try_stacktrace(buffer, match_data)
+      file_name = underscore(match_data[:class])
+      regex = /(\/.*#{file_name}.*?):\d+/
+
+      buffer.match(regex) { |match| match[1] }
+    end
+
+    def try_rails(buffer)
+      regex = /rails\s+test\s+(.*?):\d+/
+
+      buffer.match(regex) { |match| match[1] }
+    end
+
+    def minitest_failure(second_line_after_label)
+      regex = /(?:\s*)(?<class>[a-zA-Z0-9_:]+)\#(?<test_name>test_.+?)\s*(:|\[(?<file_path>.*)\])/
+
+      regex.match(second_line_after_label)
     end
   end
 end
