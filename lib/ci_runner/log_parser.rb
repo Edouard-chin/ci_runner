@@ -32,7 +32,7 @@ module CIRunner
     private
 
     def process_buffer(buffer)
-      match_data = minitest_failure(buffer.lines[1])
+      match_data = minitest_failure(buffer)
       return unless match_data
 
       file_path = valid_path?(match_data[:file_path]) ? match_data[:file_path] : find_test_location(buffer, match_data)
@@ -78,10 +78,10 @@ module CIRunner
       buffer.match(regex) { |match| match[1] }
     end
 
-    def minitest_failure(second_line_after_label)
+    def minitest_failure(buffer)
       regex = /(?:\s*)(?<class>[a-zA-Z0-9_:]+)\#(?<test_name>test_.+?)\s*(:|\[(?<file_path>.*)\])/
 
-      regex.match(second_line_after_label)
+      regex.match(buffer)
     end
   end
 end
