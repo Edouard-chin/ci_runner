@@ -15,6 +15,7 @@ module CIRunner
       @shell = shell
 
       setup_load_path
+      unload_thor
       setup_bundler
       setup_argv(seed)
     end
@@ -23,10 +24,16 @@ module CIRunner
       $LOAD_PATH.unshift(File.expand_path("test", Dir.pwd))
     end
 
+    def unload_thor
+      Gem.loaded_specs.delete("thor")
+    end
+
     def setup_bundler
       ENV["BUNDLE_GEMFILE"] = File.expand_path("Gemfile", Dir.pwd)
 
-      Bundler.setup(:default, :test)
+      Bundler.setup
+    rescue Bundler::BundlerError => e
+      raise(Error, "Couldn't load your project dependencies. The Bundler error was:\n\n#{e.message}")
     end
 
     def setup_argv(seed)
