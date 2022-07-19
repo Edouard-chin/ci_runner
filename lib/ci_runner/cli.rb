@@ -14,7 +14,7 @@ module CIRunner
     desc "run", "run failing tests from a CI"
     option :commit, type: :string
     option :repository, type: :string
-    option :run_name, type: :string, required: true
+    option :run_name, type: :string, default: ""
     def rerun
       commit = options[:commit] || GitHelper.head_commit
       repository = options[:repository] || GitHelper.repository_from_remote

@@ -22,7 +22,7 @@ module CIRunner
 
       github_client = GithubClient.new(UserConfiguration.instance.github_token)
       check_runs = github_client.check_runs(@repository, @commit)
-      check_run = TestRunFinder.find(@run_name, check_runs)
+      check_run = TestRunFinder.find(check_runs, @run_name)
 
       @shell.say("Downloading CI logs, this can take a few seconds...", :green)
 

@@ -2,9 +2,44 @@
 
 module CIRunner
   module TestRunFinder
+    class PossibleRunErrors < Error
+      attr_reader :run_names
+
+      def initialize(run_names, chosen_run, msg = nil)
+        @run_names = run_names
+        @chosen_run = chosen_run
+
+        if run_names.nil?
+          super(msg)
+        else
+          super(message)
+        end
+      end
+
+      def message
+        if @chosen_run.empty?
+          <<~EOM
+
+            Multiple checks failed on your CI.
+            Please pass the `--run-name` flag (`ci_runner --run-name <name>`) with one of these possible values:
+
+            #{@run_names.join("\n")}
+          EOM
+        else
+          <<~EOM
+            Couldn't find a failed CI Check run with the name '#{@chosen_run}'.
+
+            Failed CI check names:
+
+            #{@run_names.join("\n")}
+          EOM
+        end
+      end
+    end
+
     extend self
 
-    def self.find(name = nil, checks)
+    def self.find(checks, name)
       if checks["total_count"].zero?
         raise(Error, "There is no CI check on this commit.")
       end
@@ -34,13 +69,9 @@ module CIRunner
     end
 
     def not_found(name, failed_check_runs)
-      raise(Error, <<~EOM)
-        Couldn't find a failed CI Check run with the name '#{name}'.
+      run_names = failed_check_runs.map { |check_run| check_run["name"] }
 
-        Failed CI check names with their status:
-
-        #{check_names(failed_check_runs).join("\n")}
-      EOM
+      raise(PossibleRunErrors.new(run_names, name))
     end
 
     def check_names(check_runs)
@@ -61,7 +92,7 @@ module CIRunner
         check_runs.map do |check_run|
           conclusion = check_run['conclusion']
 
-          "#{emoji_mapping[conclusion]} #{check_run['name']} => #{conclusion}"
+          "#{emoji_mapping[conclusion]} #{check_run['name']}"
         end
       end
     end

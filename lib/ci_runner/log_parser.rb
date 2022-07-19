@@ -93,7 +93,7 @@ module CIRunner
     end
 
     def minitest_failure(buffer)
-      regex = /(?:\s*)(?<class>[a-zA-Z0-9_:]+)\#(?<test_name>test_.+?)(:$|\s+\[(?<file_path>.*):\d+\])/
+      regex = /(?:\s*)(?<class>[a-zA-Z0-9_:]+)\#(?<test_name>test_.+?)(:\s*$|\s+\[(?<file_path>.*):\d+\])/
 
       regex.match(buffer)
     end

@@ -158,7 +158,7 @@ module CIRunner
         No CI check failed on this commit. There will be no failing tests to run.
         Checks on this commit:
 
-        \u{1f7e2} test (3.1.0) => success
+        \u{1f7e2} test (3.1.0)
       EOM
 
       assert_equal(expected, err.message)
@@ -187,9 +187,9 @@ module CIRunner
       expected = <<~EOM
         Couldn't find a failed CI Check run with the name 'test (3.1.0)'.
 
-        Failed CI check names with their status:
+        Failed CI check names:
 
-        \u{1f534} CLA => failure
+        CLA
       EOM
 
       assert_equal(expected, err.message)
