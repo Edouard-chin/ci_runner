@@ -43,7 +43,7 @@ module CIRunner
     end
 
     def run_failing_tests
-      @shell.say("Found #{self.class.failures.count} failing tests from the CI log. Running them now", :green)
+      @shell.say("Found #{self.class.failures.count} failing tests from the CI log. Running them now...", :green)
 
       self.class.failures.each do |failure|
         require_file(failure.path)

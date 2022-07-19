@@ -85,5 +85,28 @@ module CIRunner
         assert_equal(expected_failure.path.to_s, failure.path)
       end
     end
+
+    # In this test, the test suite name "I18nBackendPluralizationFallbackTest", doesn't
+    # map to a file called `i18n_backend_pluralization...`.
+    def test_parse_log_with_inconsistent_class_and_file_name
+      log = read_fixture("i18n.log")
+      parser = LogParser.new(log)
+
+      parser.parse
+
+      assert_equal(1, parser.failures.count)
+      assert_equal(54606, parser.seed)
+
+      expected = TestFailure.new(
+        "I18nBackendPluralizationFallbackTest",
+        "test_fallbacks:_nils_are_ignored_and_fallback_is_applied,_with_custom_rule",
+        Pathname(Dir.pwd).join("test/backend/pluralization_fallback_test.rb")
+      )
+      failure = parser.failures[0]
+
+      assert_equal(expected.klass, failure.klass)
+      assert_equal(expected.test_name, failure.test_name)
+      assert_equal(expected.path.to_s, failure.path)
+    end
   end
 end

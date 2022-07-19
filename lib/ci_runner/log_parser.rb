@@ -54,7 +54,13 @@ module CIRunner
       match = try_rails(buffer)
       return match if match
 
-      try_stacktrace(buffer, match_data) || raise("Can't find test location")
+      match = try_infer_file_from_class(buffer, match_data)
+      return match if match
+
+      match = try_stacktrace(buffer, match_data)
+      return match if match
+
+      raise("Can't find test location")
     end
 
     def underscore(camel_cased_word)
@@ -68,6 +74,12 @@ module CIRunner
     end
 
     def try_stacktrace(buffer, match_data)
+      regex = /\s*(\/.*?):\d+:in.*#{match_data[:class]}/
+
+      buffer.match(regex) { |match| match[1] }
+    end
+
+    def try_infer_file_from_class(buffer, match_data)
       file_name = underscore(match_data[:class])
       regex = /(\/.*#{file_name}.*?):\d+/
 
@@ -81,7 +93,7 @@ module CIRunner
     end
 
     def minitest_failure(buffer)
-      regex = /(?:\s*)(?<class>[a-zA-Z0-9_:]+)\#(?<test_name>test_.+?)\s*(:|\[(?<file_path>.*):\d+\])/
+      regex = /(?:\s*)(?<class>[a-zA-Z0-9_:]+)\#(?<test_name>test_.+?)(:$|\s+\[(?<file_path>.*):\d+\])/
 
       regex.match(buffer)
     end
