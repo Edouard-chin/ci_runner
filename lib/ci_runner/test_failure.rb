@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 require "pathname"
+require "drb/drb"
 
 module CIRunner
   class TestFailure
+    include DRbUndumped
+
     attr_reader :klass, :test_name, :path
 
     def initialize(klass, test_name, path)

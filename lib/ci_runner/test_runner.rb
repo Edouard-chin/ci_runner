@@ -1,63 +1,54 @@
 # frozen_string_literal: true
 
-require "bundler"
-require "minitest/plugin"
+require "drb/drb"
+require "tempfile"
 
 module CIRunner
   class TestRunner
-    class << self
-      attr_accessor :failures
-    end
+    attr_reader :failures
 
     def initialize(failures, seed, shell)
-      self.class.failures = failures
+      @failures = failures
       @load_errors = []
       @shell = shell
-
-      setup_load_path
-      unload_thor
-      setup_bundler
-      setup_argv(seed)
-    end
-
-    def setup_load_path
-      $LOAD_PATH.unshift(File.expand_path("test", Dir.pwd))
-    end
-
-    def unload_thor
-      Gem.loaded_specs.delete("thor")
-    end
-
-    def setup_bundler
-      ENV["BUNDLE_GEMFILE"] = File.expand_path("Gemfile", Dir.pwd)
-
-      Bundler.setup
-    rescue Bundler::BundlerError => e
-      raise(Error, "Couldn't load your project dependencies. The Bundler error was:\n\n#{e.message}")
-    end
-
-    def setup_argv(seed)
-      ARGV.clear
-
-      ARGV << "--seed" << seed.to_s if seed
+      @seed = seed
     end
 
     def run_failing_tests
-      @shell.say("Found #{self.class.failures.count} failing tests from the CI log. Running them now...", :green)
+      @shell.say("Found #{failures.count} failing tests from the CI log. Running them now...", :green)
 
-      self.class.failures.each do |failure|
-        require_file(failure.path)
-      end
+      DRb.start_service("druby://localhost:8787", self)
+      test_files = failures.map(&:path)
 
-      Minitest.extensions << 'ci_runner'
-    end
+      code = <<~EOM
+        require "rake/testtask"
 
-    private
+        Rake::TestTask.new(:__ci_runner_test) do |t|
+          t.libs << "test"
+          t.libs << "lib"
+          t.test_files = #{test_files}
+        end
 
-    def require_file(path)
-      require_relative path.to_s
-    # rescue LoadError => e
-      # @load_errors << e
+        Rake::Task[:__ci_runner_test].invoke
+      EOM
+
+      dir = Dir.mktmpdir
+      rakefile_path = File.expand_path("Rakefile", dir)
+
+      File.write(rakefile_path, code)
+
+      env = {
+        "SEED" => @seed.to_s,
+        "TESTOPTS" => "--ci-runner",
+        "RUBY" => "/Users/edouard/.rubies/ruby-3.1.2/bin/ruby",
+      }
+
+      system(
+        env,
+        "bundle exec ruby #{rakefile_path}"
+      )
+
+      DRb.stop_service
     end
   end
 end
