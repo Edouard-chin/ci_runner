@@ -6,30 +6,23 @@ require "fileutils"
 
 module CIRunner
   class LogDownloader
-    def initialize(commit, repository, run_name, shell)
+    def initialize(commit, repository, check_run)
       @commit = commit
       @repository = repository
-      @run_name = run_name
-      @shell = shell
+      @check_run = check_run
     end
 
     def fetch
-      if cached_log
-        @shell.say("Logs for commit #{@commit} and CI run #{@run_name} retrieved from cache.", :green)
-
-        return cached_log
-      end
+      return cached_log if cached_log
 
       github_client = GithubClient.new(UserConfiguration.instance.github_token)
-      check_runs = github_client.check_runs(@repository, @commit)
-      check_run = TestRunFinder.find(check_runs, @run_name)
 
-      @shell.say("Downloading CI logs, this can take a few seconds...", :green)
+      ::CLI::UI.spinner("Downloading CI logs from GitHub") do |spinner|
+        logfile = github_client.download_log(@repository, @check_run["id"])
+        cache_log(logfile)
 
-      logfile = github_client.download_log(@repository, check_run["id"])
-      cache_log(logfile)
-
-      cached_log
+        cached_log
+      end
     end
 
     private
@@ -45,7 +38,7 @@ module CIRunner
     end
 
     def computed_file_path
-      normalized_run_name = @run_name.tr("/", "_")
+      normalized_run_name = @check_run["name"].tr("/", "_")
 
       log_folder.join("log-#{@commit[0..12]}-#{normalized_run_name}.log")
     end

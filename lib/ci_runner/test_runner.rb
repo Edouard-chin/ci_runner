@@ -7,16 +7,13 @@ module CIRunner
   class TestRunner
     attr_reader :failures
 
-    def initialize(failures, seed, shell)
+    def initialize(failures, seed)
       @failures = failures
       @load_errors = []
-      @shell = shell
       @seed = seed
     end
 
     def run_failing_tests
-      @shell.say("Found #{failures.count} failing tests from the CI log. Running them now...", :green)
-
       DRb.start_service("druby://localhost:8787", self)
       test_files = failures.map(&:path)
 

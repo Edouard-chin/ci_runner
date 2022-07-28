@@ -39,6 +39,12 @@ module CIRunner
 
     extend self
 
+    def self.fetch_ci_checks(repository, commit)
+      github_client = GithubClient.new(UserConfiguration.instance.github_token)
+
+      github_client.check_runs(repository, commit)
+    end
+
     def self.find(checks, name)
       if checks["total_count"].zero?
         raise(Error, "There is no CI check on this commit.")
@@ -57,7 +63,16 @@ module CIRunner
         EOM
       end
 
-      failed_checks.find { |run| run["name"] == name } || not_found(name, failed_checks)
+      if name
+        failed_checks.find { |run| run["name"] == name } || not_found(name, failed_checks)
+      else
+        answer = ::CLI::UI.ask(
+          "Multiple CI checks failed for this commit. Please choose the one you wish to re-run.",
+          options: failed_checks.map { |check_run| check_run["name"] },
+        )
+
+        find(checks, answer)
+      end
     end
 
     private
