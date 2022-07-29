@@ -19,10 +19,11 @@ module CIRunner
 
       ::CLI::UI.spinner("Downloading CI logs from GitHub") do |spinner|
         logfile = github_client.download_log(@repository, @check_run["id"])
-        cache_log(logfile)
 
-        cached_log
+        cache_log(logfile)
       end
+
+      cached_log
     end
 
     private

@@ -43,33 +43,44 @@ module CIRunner
     option :run_name, type: :string
     def rerun
       ::CLI::UI::StdoutRouter.enable
-      ::CLI::UI.frame("Preparing CI Runner")
 
-      commit = options[:commit] || GitHelper.head_commit
-      repository = options[:repository] || GitHelper.repository_from_remote
-      ci_checks = []
+      log_parser = nil
 
-      ::CLI::UI.spinner("Fetching failed CI checks from GitHub for commit {{info:#{commit[..12]}}}") do |spinner|
-        ci_checks = TestRunFinder.fetch_ci_checks(repository, commit)
+      ::CLI::UI.frame("Preparing CI Runner") do
+        commit = options[:commit] || GitHelper.head_commit
+        repository = options[:repository] || GitHelper.repository_from_remote
+        ci_checks = []
+
+        ::CLI::UI.spinner("Fetching failed CI checks from GitHub for commit {{info:#{commit[..12]}}}") do |spinner|
+          ci_checks = TestRunFinder.fetch_ci_checks(repository, commit)
+        end
+
+        run_name = options[:run_name] || ask_for_name(ci_checks)
+        check_run = find_run(ci_checks, run_name)
+
+        log_file = LogDownloader.new(commit, repository, check_run).fetch
+        log_parser = LogParser.new(log_file).tap(&:parse)
+
+        if log_parser.failures.count == 0
+          # Error
+        end
+      rescue GithubClient::Error, Error => e
+        ::CLI::UI.puts("\n{{red:#{e.message}}}", frame_color: :red)
+
+        return false
       end
-
-      run_name = options[:run_name] || ask_for_name(ci_checks)
-      check_run = find_run(ci_checks, run_name)
-
-      log_file = LogDownloader.new(commit, repository, check_run).fetch
-      log_parser = LogParser.new(log_file).tap(&:parse)
-
-      if log_parser.failures.count == 0
-        # Error
-      end
-
-      ::CLI::UI::Frame.close("Found {{warning:#{log_parser.failures.count}}} failing tests from the CI logs. Running them now.")
 
       ::CLI::UI::Frame.open("Re-running failing tests") do
+        ::CLI::UI.puts(<<~EOM)
+            {{success:Your test run is about to start}}
+
+            - Test framework detected:    {{info:Minitest}}
+            - Detected Ruby version:      {{info:3.1.2}}
+            - Number of failings tests:   {{info:#{log_parser.failures.count}}}
+          EOM
+
         TestRunner.new(log_parser.failures, log_parser.seed).run_failing_tests
       end
-    rescue GithubClient::Error, Error => e
-      errored(e.message)
     end
 
     desc "github_token TOKEN", "Save a GitHub token in your config"
