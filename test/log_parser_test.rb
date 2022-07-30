@@ -13,6 +13,8 @@ module CIRunner
 
       assert_equal(3, parser.failures.count)
       assert_equal(65000, parser.seed)
+      assert_equal("2.7.2", parser.ruby_version)
+      assert_nil(parser.gemfile)
 
       path = Pathname(Dir.pwd).join("test/github_diff_parser_test.rb")
       expected = [
@@ -38,6 +40,8 @@ module CIRunner
 
       assert_equal(1, parser.failures.count)
       assert_equal(20218, parser.seed)
+      assert_equal("3.2.0", parser.ruby_version)
+      assert_nil(parser.gemfile)
 
       expected = TestFailure.new(
         "TestReloading",
@@ -56,10 +60,11 @@ module CIRunner
       parser = LogParser.new(log)
 
       parser.parse
-      byebug
 
       assert_equal(9, parser.failures.count)
       assert_equal(32593, parser.seed)
+      assert_equal("2.7.6", parser.ruby_version)
+      assert_equal("gemfiles/rails_6_0.gemfile", parser.gemfile)
 
       path = Pathname(Dir.pwd).join("test/system/maintenance_tasks/runs_test.rb")
       expected = [
@@ -97,6 +102,8 @@ module CIRunner
 
       assert_equal(1, parser.failures.count)
       assert_equal(54606, parser.seed)
+      assert_equal("3.0.4", parser.ruby_version)
+      assert_equal("Gemfile", parser.gemfile)
 
       expected = TestFailure.new(
         "I18nBackendPluralizationFallbackTest",
