@@ -2,7 +2,7 @@
 
 module CIRunner
   class LogParser
-    attr_reader :failures, :seed, :ruby_version, :gemfile
+    attr_accessor :failures, :seed, :ruby_version, :gemfile
 
     def initialize(file)
       @log_content = file.read

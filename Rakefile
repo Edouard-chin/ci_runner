@@ -2,11 +2,12 @@
 
 require "bundler/gem_tasks"
 require "rake/testtask"
+require "byebug"
 
 Rake::TestTask.new(:test) do |t|
   t.libs << "test"
   t.libs << "lib"
-  t.test_files = FileList["test/**/*_test.rb"]
+  t.test_files = FileList["test/**/*_test.rb"].exclude(%r{^test/fixtures/})
 
   # Problem of circular dependency in the CLI UI gem.
   t.warning = false

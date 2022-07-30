@@ -79,8 +79,6 @@ module CIRunner
             EOM
 
             system(env, "bundle install")
-
-            ::CLI::UI.puts("{{success:Resuming test run}}")
           end
         end
       end
