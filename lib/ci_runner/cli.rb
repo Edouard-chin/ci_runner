@@ -2,7 +2,6 @@
 
 require "thor"
 require "byebug"
-require "cli/ui"
 
 module CIRunner
   class CLI < Thor
@@ -10,31 +9,6 @@ module CIRunner
 
     def self.exit_on_failure?
       true
-    end
-
-    def ask_for_name(ci_checks)
-      check_runs = ci_checks["check_runs"]
-      failed_runs = check_runs.select { |check_run| check_run["conclusion"] == "failure" }
-
-      if failed_runs.count == 0
-        # errors
-      elsif failed_runs.count == 1
-        # print why
-        failed_runs.first["name"]
-      else
-        ::CLI::UI.ask(
-          "Multiple CI checks failed for this commit. Please choose the one you wish to re-run.",
-          options: failed_runs.map { |check_run| check_run["name"] },
-        )
-      end
-    end
-
-    def find_run(ci_checks, run_name)
-      check_run = ci_checks["check_runs"].find { |check_run| check_run["name"] == run_name }
-      raise "No Check Run" if check_run.nil?
-      raise "Check Run succeed" if check_run["conclusion"] == "success"
-
-      check_run
     end
 
     desc "run", "run failing tests from a CI"
@@ -70,16 +44,16 @@ module CIRunner
         return false
       end
 
-      ::CLI::UI::Frame.open("Re-running failing tests") do
+      ::CLI::UI::Frame.open("Your test run is about to start") do
         ::CLI::UI.puts(<<~EOM)
-            {{success:Your test run is about to start}}
 
             - Test framework detected:    {{info:Minitest}}
-            - Detected Ruby version:      {{info:3.1.2}}
+            - Detected Ruby version:      {{info:#{log_parser.ruby_version}}}
+            - Detected Gemfile:           {{info:#{log_parser.gemfile}}}
             - Number of failings tests:   {{info:#{log_parser.failures.count}}}
           EOM
 
-        TestRunner.new(log_parser.failures, log_parser.seed).run_failing_tests
+        TestRunner.new(log_parser).run_failing_tests
       end
     end
 
@@ -98,22 +72,35 @@ module CIRunner
       EOM
     end
 
-    desc "play", "play"
-    def play
-      bla = nil
-
-      ::CLI::UI.frame("Preparing CI Runner", success_text: "Hello!") do
-        # ::CLI::UI.spinner("Fetching CI checks from GitHub") do |spinner|
-          ::CLI::UI.ask("Multiple CI checks failed for this commit. Please choose the one you wish ", options: %w(rails go ruby python rails go ruby python rails go ruby python))
-          # spinner.update_title("CI logs downloaded and cached.")
-        # end
-      end
-    end
-
     private
 
     def errored(message)
       say_error(message, :red)
+    end
+
+    def ask_for_name(ci_checks)
+      check_runs = ci_checks["check_runs"]
+      failed_runs = check_runs.select { |check_run| check_run["conclusion"] == "failure" }
+
+      if failed_runs.count == 0
+        # errors
+      elsif failed_runs.count == 1
+        # print why
+        failed_runs.first["name"]
+      else
+        ::CLI::UI.ask(
+          "Multiple CI checks failed for this commit. Please choose the one you wish to re-run.",
+          options: failed_runs.map { |check_run| check_run["name"] },
+        )
+      end
+    end
+
+    def find_run(ci_checks, run_name)
+      check_run = ci_checks["check_runs"].find { |check_run| check_run["name"] == run_name }
+      raise "No Check Run" if check_run.nil?
+      raise "Check Run succeed" if check_run["conclusion"] == "success"
+
+      check_run
     end
   end
 end

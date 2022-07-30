@@ -2,12 +2,14 @@
 
 module CIRunner
   class LogParser
-    attr_reader :failures, :seed
+    attr_reader :failures, :seed, :ruby_version, :gemfile
 
     def initialize(file)
       @log_content = file.read
       @failures = []
       @seed = nil
+      @ruby_version = nil
+      @gemfile = nil
     end
 
     def parse
@@ -19,6 +21,10 @@ module CIRunner
           @seed = Regexp.last_match(1).to_i
         when /Running tests with run options.*--seed\s+(\d+)/ # <== Minitest-reporter log
           @seed = Regexp.last_match(1).to_i
+        when /ruby(?:[[:blank:]]*|\/)(\d\.\d\.\d)p?/
+          @ruby_version = Regexp.last_match(1)
+        when /BUNDLE_GEMFILE:[[:blank:]]*(.*)/
+          @gemfile = Regexp.last_match(1).rstrip
         when /(Failure|Error):\s*\Z/
           process_buffer(buffer) unless buffer.empty?
           buffer.clear
@@ -34,6 +40,7 @@ module CIRunner
     private
 
     def process_buffer(buffer)
+      byebug
       match_data = minitest_failure(buffer)
       return unless match_data
 

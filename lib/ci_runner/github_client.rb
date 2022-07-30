@@ -4,7 +4,6 @@ require "net/http"
 require "openssl"
 require "json"
 require "open-uri"
-require "byebug"
 
 module CIRunner
   class GithubClient
@@ -30,12 +29,14 @@ module CIRunner
 
     def check_runs(repository, commit)
       get("/repos/#{repository}/commits/#{commit}/check-runs")
-    rescue Error
-      raise(Error, <<~EOM)
-        Couldn't retrieve the CI checks for the commit: #{commit}.
+    # rescue Error
+    #   ::CLI::UI.puts(<<~EOM)
+    #     Couldn't retrieve the CI checks for the commit: #{commit}.
 
-        Are you sure it was pushed to GitHub ?
-      EOM
+    #     Are you sure it was pushed to GitHub ?
+    #   EOM
+
+    #   ::CLI::UI::Spinner::TASK_FAILED
     end
 
     def download_log(repository, check_run_id)

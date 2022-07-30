@@ -56,6 +56,7 @@ module CIRunner
       parser = LogParser.new(log)
 
       parser.parse
+      byebug
 
       assert_equal(9, parser.failures.count)
       assert_equal(32593, parser.seed)

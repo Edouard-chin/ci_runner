@@ -3,7 +3,6 @@
 require "test_helper"
 require "fileutils"
 require "open3"
-require "byebug"
 
 module CIRunner
   class GitHelperTest < Minitest::Test

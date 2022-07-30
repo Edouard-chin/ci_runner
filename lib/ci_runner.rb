@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "ci_runner/version"
+require "cli/ui"
 
 module CIRunner
   Error = Class.new(StandardError)
