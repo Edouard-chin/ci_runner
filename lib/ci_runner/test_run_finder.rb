@@ -4,18 +4,31 @@ module CIRunner
   module TestRunFinder
     extend self
 
-    def self.fetch_ci_checks(repository, commit)
+    def fetch_ci_checks(repository, commit, &block)
       github_client = GithubClient.new(UserConfiguration.instance.github_token)
+      ci_checks = {}
+      title = "Fetching failed CI checks from GitHub for commit {{info:#{commit[..12]}}}"
+      error = nil
 
-      github_client.check_runs(repository, commit)
+      ::CLI::UI.spinner(title, auto_debrief: false) do |spinner|
+        ci_checks = github_client.check_runs(repository, commit)
+      rescue GithubClient::Error => e
+        error = e
+
+        ::CLI::UI::TASK_FAILED
+      end
+
+      block.call(error) if error
+
+      ci_checks
     end
 
-    private
+    def find(ci_checks, run_name)
+      check_run = ci_checks["check_runs"].find { |check_run| check_run["name"] == run_name }
+      raise "No Check Run" if check_run.nil?
+      raise "Check Run succeed" if check_run["conclusion"] == "success"
 
-    def select_failed_checks(check_runs)
-      failed_conclusions = ["failure"]
-
-      check_runs.select { |check_run| failed_conclusions.include?(check_run["conclusion"]) }
+      check_run
     end
   end
 end

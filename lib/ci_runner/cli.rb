@@ -23,14 +23,20 @@ module CIRunner
       ::CLI::UI.frame("Preparing CI Runner") do
         commit = options[:commit] || GitHelper.head_commit
         repository = options[:repository] || GitHelper.repository_from_remote
-        ci_checks = {}
 
-        ::CLI::UI.spinner("Fetching failed CI checks from GitHub for commit {{info:#{commit[..12]}}}") do |spinner|
-          ci_checks = TestRunFinder.fetch_ci_checks(repository, commit)
+        ci_checks = TestRunFinder.fetch_ci_checks(repository, commit) do |error|
+          puts(<<~EOM)
+
+            Couldn't fetch the CI checks. The response from GitHub was:
+
+            #{error.message}
+          EOM
+
+          exit(false)
         end
 
         run_name = options[:run_name] || ask_for_name(ci_checks)
-        check_run = find_run(ci_checks, run_name)
+        check_run = TestRunFinder.find(ci_checks, run_name)
 
         log_file = LogDownloader.new(commit, repository, check_run).fetch
         log_parser = LogParser.new(log_file).tap(&:parse)
@@ -93,14 +99,6 @@ module CIRunner
           options: failed_runs.map { |check_run| check_run["name"] },
         )
       end
-    end
-
-    def find_run(ci_checks, run_name)
-      check_run = ci_checks["check_runs"].find { |check_run| check_run["name"] == run_name }
-      raise "No Check Run" if check_run.nil?
-      raise "Check Run succeed" if check_run["conclusion"] == "success"
-
-      check_run
     end
   end
 end

@@ -64,7 +64,7 @@ module CIRunner
       when 302
         response["Location"]
       else
-        raise(Error, "GitHub response status: #{response.code}. Body:\n\n#{response.body}")
+        raise(Error, "GitHub response: Status: #{response.code}. Body:\n\n#{response.body}")
       end
     end
   end

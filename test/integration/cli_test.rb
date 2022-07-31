@@ -41,7 +41,7 @@ module CIRunner
       expected = <<~EOM
         Your token doesn't seem to be valid. The response from GitHub was:
 
-        GitHub response status: 401. Body:
+        GitHub response: Status: 401. Body:
 
         Requires authentication
       EOM

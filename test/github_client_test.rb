@@ -61,7 +61,7 @@ module CIRunner
       end
 
       assert_equal(<<~EOM.rstrip, error.message)
-        GitHub response status: 422. Body:
+        GitHub response: Status: 422. Body:
 
         {"message":"Unprocessable"}
       EOM
