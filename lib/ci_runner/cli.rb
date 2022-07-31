@@ -88,13 +88,18 @@ module CIRunner
 
     def ask_for_name(ci_checks)
       check_runs = ci_checks["check_runs"]
-      failed_runs = check_runs.select { |check_run| check_run["conclusion"] == "failure" }
+      failed_runs = check_runs.reject { |check_run| check_run["conclusion"] == "success" }
 
       if failed_runs.count == 0
-        # errors
+        raise(Error, "No CI checks failed on this commit.")
       elsif failed_runs.count == 1
-        # print why
-        failed_runs.first["name"]
+        check_run = failed_runs.first["name"]
+
+        ::CLI::UI.puts(<<~EOM)
+          {{warning:Automatically selected the CI check #{check_run} because it's the only one failing.}}
+        EOM
+
+        check_run
       else
         ::CLI::UI.ask(
           "Multiple CI checks failed for this commit. Please choose the one you wish to re-run.",

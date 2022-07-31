@@ -13,6 +13,7 @@ module Minitest
     def before_setup
       @home_dir = Dir.mktmpdir
       ENV["HOME"] = @home_dir
+      ENV["TMPDIR"] = @home_dir
 
       super
     end
