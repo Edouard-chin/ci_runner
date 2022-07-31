@@ -146,7 +146,7 @@ module CIRunner
         \e[0;33mCouldn't find Ruby version 2.7.6 on your system.\e[0m
         \e[0;33m\e[0m\e[0;33mSearched in #{Dir.home}/.rubies/ruby-2.7.6/bin/ruby\e[0m
         \e[0;33m\e[0m\e[0;33m\e[0m
-        \e[0;33m\e[0m\e[0;33m\e[0m\e[0;33mThe test run will start but will be running using Ruby version \e[0;33;4m#{RUBY_VERSION}\e[0;33m.\e[0m
+        \e[0;33m\e[0m\e[0;33m\e[0m\e[0;33mThe test run will start but will be running using your current Ruby version \e[0;33;4m#{RUBY_VERSION}\e[0;33m.\e[0m
         \e[0;33m\e[0m\e[0;33m\e[0m\e[0;33m\e[0;33;4m\e[0;33m\e[0m
       EOM
 

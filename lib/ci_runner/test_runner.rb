@@ -40,7 +40,7 @@ module CIRunner
             {{warning:Couldn't find Ruby version #{@log_parser.ruby_version} on your system.}}
             {{warning:Searched in #{ruby_path}}}
 
-            {{warning:The test run will start but will be running using Ruby version {{underline:#{RUBY_VERSION}}}.}}
+            {{warning:The test run will start but will be running using your current Ruby version {{underline:#{RUBY_VERSION}}}.}}
           EOM
 
           ruby_path = nil
