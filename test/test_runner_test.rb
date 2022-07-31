@@ -53,6 +53,31 @@ module CIRunner
       EOM
     end
 
+    def test_run_two_suites
+      log_parser = LogParser.new(StringIO.new("a"))
+      log_parser.failures = [
+        TestFailure.new("FooTest", "test_one", "test/fixtures/tests/foo_test.rb"),
+        TestFailure.new("SomeFolder::BarTest", "test_two", "test/fixtures/tests/some_folder/bar_test.rb"),
+      ]
+      log_parser.seed = 10331
+
+      stdout, _ = capture_subprocess_io do
+        TestRunner.new(log_parser).run_failing_tests
+      end
+
+      assert_equal(<<~EOM, clean_statistics(stdout))
+        Run options: --ci-runner --seed 10331
+
+        # Running:
+
+        ..
+
+        Finished in 0s.
+
+        2 runs, 5 assertions, 0 failures, 0 errors, 0 skips
+      EOM
+    end
+
     def test_run_no_longer_existing_runnable
       log_parser = LogParser.new(StringIO.new("a"))
       log_parser.failures = [
@@ -123,6 +148,69 @@ module CIRunner
         \e[0;33m\e[0m\e[0;33m\e[0m
         \e[0;33m\e[0m\e[0;33m\e[0m\e[0;33mThe test run will start but will be running using Ruby version \e[0;33;4m#{RUBY_VERSION}\e[0;33m.\e[0m
         \e[0;33m\e[0m\e[0;33m\e[0m\e[0;33m\e[0;33;4m\e[0;33m\e[0m
+      EOM
+
+      assert_equal(<<~EOM, clean_statistics(subprocess_stdout))
+        Run options: --ci-runner --seed 1044
+
+        # Running:
+
+        .
+
+        Finished in 0s.
+
+        1 runs, 1 assertions, 0 failures, 0 errors, 0 skips
+      EOM
+    end
+
+    def test_uses_right_gemfile_when_it_exists
+      log_parser = LogParser.new(StringIO.new("a"))
+      log_parser.failures = [TestFailure.new("WarningTest", "test_right_gemfile_picked", "test/fixtures/tests/warning_test.rb")]
+      log_parser.seed = 1044
+      log_parser.gemfile = File.expand_path("fixtures/Gemfile_dummy", __dir__)
+
+      capture_subprocess_io do
+        Bundler.unbundled_system({ "BUNDLE_GEMFILE" => log_parser.gemfile }, "bundle install")
+      end
+
+      stdout, _ = capture_subprocess_io do
+        Bundler.with_unbundled_env do
+          TestRunner.new(log_parser).run_failing_tests
+        end
+      end
+
+      assert_equal(<<~EOM, clean_statistics(stdout))
+        Run options: --ci-runner --seed 1044
+
+        # Running:
+
+        .
+
+        Finished in 0s.
+
+        1 runs, 1 assertions, 0 failures, 0 errors, 0 skips
+      EOM
+    end
+
+    def test_uses_default_gemfile_when_gemfile_cant_be_found_locally
+      log_parser = LogParser.new(StringIO.new("a"))
+      log_parser.failures = [TestFailure.new("WarningTest", "test_default_gemfile_picked", "test/fixtures/tests/warning_test.rb")]
+      log_parser.seed = 1044
+      log_parser.gemfile = File.expand_path("fixtures/Gemfile_unexisting", __dir__)
+
+      stdout = ""
+
+      subprocess_stdout, _ = capture_subprocess_io do
+        stdout, _ = capture_io do
+          TestRunner.new(log_parser).run_failing_tests
+        end
+      end
+
+      assert_equal(<<~EOM, stdout)
+        \e[0;33mYour CI run ran with the Gemfile /Users/edouard/code/projects/ci_runner/test/fixtures/Gemfile_unexisting\e[0m
+        \e[0;33m\e[0m\e[0;33mI couldn't find this gemfile in your folder.\e[0m
+        \e[0;33m\e[0m\e[0;33m\e[0m\n\e[0;33m\e[0m\e[0;33m\e[0m\e[0;33mThe test run will start but will be using the default Gemfile of your project\e[0m
+        \e[0;33m\e[0m\e[0;33m\e[0m\e[0;33m\e[0m
       EOM
 
       assert_equal(<<~EOM, clean_statistics(subprocess_stdout))

@@ -11,19 +11,17 @@ module CIRunner
     def initialize(log_parser)
       @log_parser = log_parser
       @failures = log_parser.failures
-      @load_errors = []
     end
 
     def run_failing_tests
       test_files = failures.map(&:path)
 
       code = <<~EOM
-        require "rake/testtask"
-
         Rake::TestTask.new(:__ci_runner_test) do |t|
           t.libs << "test"
           t.libs << "lib"
           t.test_files = #{test_files}
+          t.ruby_opts << "-rrake"
         end
 
         Rake::Task[:__ci_runner_test].invoke
@@ -67,28 +65,9 @@ module CIRunner
       env["RUBY"] = ruby_path.to_s if ruby_path
       env["BUNDLE_GEMFILE"] = gemfile_path if gemfile_path
 
-      if gemfile_path
-        _, status = Open3.capture2(env, "bundle check")
-
-        unless status.success?
-          ::CLI::UI.frame("Bundler Dependencies") do
-            ::CLI::UI.puts(<<~EOM)
-              {{warning:The dependencies listed in the Gemfile #{gemfile_path} are not installed in your system.}}
-
-              I'll be installing them now.
-            EOM
-
-            system(env, "bundle install")
-          end
-        end
-      end
-
       DRb.start_service("druby://localhost:8787", self)
 
-      system(
-        env,
-        "bundle exec ruby #{rakefile_path}"
-      )
+      system(env, "bundle exec ruby -r'rake/testtask' #{rakefile_path}")
 
       DRb.stop_service
     end

@@ -13,6 +13,7 @@ PATH
   specs:
     ci_runner (0.1.0)
       cli-ui
+      rake
       thor
 
 GEM
@@ -38,7 +39,6 @@ DEPENDENCIES
   byebug
   ci_runner!
   minitest (~> 5.0)
-  rake (~> 13.0)
   webmock!
 
 BUNDLED WITH
