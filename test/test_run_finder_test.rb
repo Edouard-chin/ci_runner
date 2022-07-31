@@ -101,5 +101,37 @@ module CIRunner
         There are no CI checks on this commit.
       EOM
     end
+
+    def test_detect_runner_minitest_1
+      log = read_fixture("raw_minitest_error.log")
+
+      runner = TestRunFinder.detect_runner(log.read)
+
+      assert_instance_of(Runners::MinitestRunner, runner)
+    end
+
+    def test_detect_runner_minitest_2
+      log = read_fixture("raw_minitest_failures.log")
+
+      runner = TestRunFinder.detect_runner(log.read)
+
+      assert_instance_of(Runners::MinitestRunner, runner)
+    end
+
+    def test_detect_runner_minitest_3
+      log = read_fixture("rails.log")
+
+      runner = TestRunFinder.detect_runner(log.read)
+
+      assert_instance_of(Runners::MinitestRunner, runner)
+    end
+
+    def test_detect_runner_minitest_4
+      log = read_fixture("i18n.log")
+
+      runner = TestRunFinder.detect_runner(log.read)
+
+      assert_instance_of(Runners::MinitestRunner, runner)
+    end
   end
 end

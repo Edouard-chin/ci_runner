@@ -18,7 +18,7 @@ module CIRunner
     def rerun
       ::CLI::UI::StdoutRouter.enable
 
-      log_parser = nil
+      runner = nil
 
       ::CLI::UI.frame("Preparing CI Runner") do
         commit = options[:commit] || GitHelper.head_commit
@@ -28,10 +28,11 @@ module CIRunner
         run_name = options[:run_name] || ask_for_name(ci_checks)
         check_run = TestRunFinder.find(ci_checks, run_name)
 
-        log_file = LogDownloader.new(commit, repository, check_run).fetch
-        log_parser = LogParser.new(log_file).tap(&:parse)
+        ci_log = LogDownloader.new(commit, repository, check_run).fetch.read
+        runner = TestRunFinder.detect_runner(ci_log)
+        runner.parse!
 
-        if log_parser.failures.count == 0
+        if runner.failures.count == 0
           # Error
         end
       rescue GithubClient::Error, Error => e
@@ -41,15 +42,8 @@ module CIRunner
       end
 
       ::CLI::UI::Frame.open("Your test run is about to start") do
-        ::CLI::UI.puts(<<~EOM)
-
-            - Test framework detected:    {{info:Minitest}}
-            - Detected Ruby version:      {{info:#{log_parser.ruby_version}}}
-            - Detected Gemfile:           {{info:#{log_parser.gemfile}}}
-            - Number of failings tests:   {{info:#{log_parser.failures.count}}}
-          EOM
-
-        TestRunner.new(log_parser).run_failing_tests
+        runner.report
+        runner.start!
       end
     end
 

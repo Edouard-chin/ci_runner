@@ -10,10 +10,13 @@ module CIRunner
   autoload :GithubClient,   "ci_runner/github_client"
   autoload :GitHelper,      "ci_runner/git_helper"
   autoload :TestRunFinder,  "ci_runner/test_run_finder"
-  autoload :LogParser,      "ci_runner/log_parser"
   autoload :LogDownloader,  "ci_runner/log_downloader"
   autoload :Suite,          "ci_runner/suite"
-  autoload :TestRunner,     "ci_runner/test_runner"
   autoload :TestFailure,    "ci_runner/test_failure"
   autoload :UserConfiguration,  "ci_runner/user_configuration"
+
+  module Runners
+    autoload :MinitestRunner, "ci_runner/runners/minitest_runner"
+    autoload :RSpec,          "ci_runner/runners/rspec"
+  end
 end

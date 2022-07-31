@@ -30,6 +30,14 @@ module CIRunner
       check_run
     end
 
+    def detect_runner(ci_log)
+      raise_if_not_found = lambda { raise(Error, "Couldn't detect the test runner") }
+
+      runner = [Runners::MinitestRunner].find(raise_if_not_found) { |runner| runner.match?(ci_log) }
+
+      runner.new(ci_log)
+    end
+
     private
 
     def check_succeed(run_name)

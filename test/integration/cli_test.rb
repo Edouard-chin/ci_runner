@@ -42,7 +42,7 @@ module CIRunner
       stub_request(:get, "https://api.github.com/repos/foo/bar/actions/jobs/1/logs")
         .to_return(status: 302, headers: { "Location" => "https://example.com/download" })
       stub_request(:get, "https://example.com/download")
-        .to_return(status: 200, body: "some_logs")
+        .to_return(status: 200, body: "minitest")
 
       stdout, _ = capture_io do
         CLI.start(%w(--commit abc --repository foo/bar))
@@ -95,7 +95,7 @@ module CIRunner
         .to_return(status: 302, headers: { "Location" => "https://example.com/download" })
 
       stub_request(:get, "https://example.com/download")
-        .to_return(status: 200, body: "some_logs")
+        .to_return(status: 200, body: "minitest")
 
       stdout, _ = capture_io do
         CLI.start(["--commit", "abc", "--repository", "foo/bar", "--run-name", "Ruby Test 3.1"])
