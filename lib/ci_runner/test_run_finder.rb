@@ -7,10 +7,9 @@ module CIRunner
     def fetch_ci_checks(repository, commit, &block)
       github_client = GithubClient.new(UserConfiguration.instance.github_token)
       ci_checks = {}
-      title = "Fetching failed CI checks from GitHub for commit {{info:#{commit[..12]}}}"
       error = nil
 
-      ::CLI::UI.spinner(title, auto_debrief: false) do |spinner|
+      ::CLI::UI.spinner("Fetching failed CI checks from GitHub for commit {{info:#{commit[..12]}}}", auto_debrief: false) do
         ci_checks = github_client.check_runs(repository, commit)
       rescue GithubClient::Error => e
         error = e
@@ -25,10 +24,41 @@ module CIRunner
 
     def find(ci_checks, run_name)
       check_run = ci_checks["check_runs"].find { |check_run| check_run["name"] == run_name }
-      raise "No Check Run" if check_run.nil?
-      raise "Check Run succeed" if check_run["conclusion"] == "success"
+      raise(Error.new(no_check_message(ci_checks, run_name))) if check_run.nil?
+      raise(Error.new(check_succeed(run_name))) if check_run["conclusion"] == "success"
 
       check_run
+    end
+
+    private
+
+    def check_succeed(run_name)
+      "The CI check '#{run_name}' was successfull. There should be no failing tests to rerun."
+    end
+
+    def no_check_message(ci_checks, run_name)
+      possible_checks = ci_checks["check_runs"].map do |check_run|
+        if check_run["conclusion"] == "success"
+          "#{::CLI::UI::Glyph.lookup('v')} #{check_run["name"]}"
+        else
+          "#{::CLI::UI::Glyph.lookup('x')} #{check_run["name"]}"
+        end
+      end
+
+      if possible_checks.any?
+        <<~EOM
+          Couldn't find a CI check called '#{run_name}'.
+          CI checks on this commit are:
+
+          #{possible_checks.join("\n")}
+        EOM
+      else
+        <<~EOM
+          Couldn't find a CI check called '#{run_name}'.
+
+          There are no CI checks on this commit.
+        EOM
+      end
     end
   end
 end

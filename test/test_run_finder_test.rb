@@ -35,5 +35,71 @@ module CIRunner
       assert_match("Couldn't retrieve CI checks", stdout)
       assert_requested(:get, "https://api.github.com/repos/canatacorp/catana/commits/abcdef/check-runs")
     end
+
+    def test_find_when_the_run_failed
+      ci_checks = {
+        "check_runs" => [
+          { "name" => "Test Ruby 2.7", "conclusion" => "failure" },
+          { "name" => "Test Ruby 3.0", "conclusion" => "failure" },
+        ],
+      }
+
+      check_run = TestRunFinder.find(ci_checks, "Test Ruby 3.0")
+
+      assert_equal({ "name" => "Test Ruby 3.0", "conclusion" => "failure" }, check_run)
+    end
+
+    def test_find_when_the_run_succeed
+      ci_checks = {
+        "check_runs" => [
+          { "name" => "Test Ruby 2.7", "conclusion" => "failure" },
+          { "name" => "Test Ruby 3.0", "conclusion" => "success" },
+        ],
+      }
+
+      error = assert_raises(Error) do
+        TestRunFinder.find(ci_checks, "Test Ruby 3.0")
+      end
+
+      assert_equal(
+        "The CI check 'Test Ruby 3.0' was successfull. There should be no failing tests to rerun.",
+        error.message,
+      )
+    end
+
+    def test_find_when_the_run_doesnt_exist
+      ci_checks = {
+        "check_runs" => [
+          { "name" => "Test Ruby 2.7", "conclusion" => "failure" },
+          { "name" => "Test Ruby 3.0", "conclusion" => "success" },
+        ],
+      }
+
+      error = assert_raises(Error) do
+        TestRunFinder.find(ci_checks, "Test Ruby 1.8")
+      end
+
+      assert_equal(<<~EOM, error.message)
+        Couldn't find a CI check called 'Test Ruby 1.8'.
+        CI checks on this commit are:
+
+        \e[31m✗\e[0m Test Ruby 2.7
+        \e[32m✓\e[0m Test Ruby 3.0
+      EOM
+    end
+
+    def test_find_when_there_are_no_checks
+      ci_checks = { "check_runs" => [] }
+
+      error = assert_raises(Error) do
+        TestRunFinder.find(ci_checks, "Test Ruby 1.8")
+      end
+
+      assert_equal(<<~EOM, error.message)
+        Couldn't find a CI check called 'Test Ruby 1.8'.
+
+        There are no CI checks on this commit.
+      EOM
+    end
   end
 end

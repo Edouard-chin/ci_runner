@@ -23,17 +23,7 @@ module CIRunner
       ::CLI::UI.frame("Preparing CI Runner") do
         commit = options[:commit] || GitHelper.head_commit
         repository = options[:repository] || GitHelper.repository_from_remote
-
-        ci_checks = TestRunFinder.fetch_ci_checks(repository, commit) do |error|
-          puts(<<~EOM)
-
-            Couldn't fetch the CI checks. The response from GitHub was:
-
-            #{error.message}
-          EOM
-
-          exit(false)
-        end
+        ci_checks = fetch_ci_checks(repository, commit)
 
         run_name = options[:run_name] || ask_for_name(ci_checks)
         check_run = TestRunFinder.find(ci_checks, run_name)
@@ -47,7 +37,7 @@ module CIRunner
       rescue GithubClient::Error, Error => e
         ::CLI::UI.puts("\n{{red:#{e.message}}}", frame_color: :red)
 
-        return false
+        exit(false)
       end
 
       ::CLI::UI::Frame.open("Your test run is about to start") do
@@ -82,6 +72,18 @@ module CIRunner
 
     def errored(message)
       say_error(message, :red)
+    end
+
+    def fetch_ci_checks(repository, commit)
+      TestRunFinder.fetch_ci_checks(repository, commit) do |error|
+        puts(<<~EOM)
+          Couldn't fetch the CI checks. The response from GitHub was:
+
+          #{error.message}
+        EOM
+
+        exit(false)
+      end
     end
 
     def ask_for_name(ci_checks)
