@@ -16,7 +16,7 @@ module CIRunner
       end
 
       assert_equal(<<~EOM, clean_statistics(stdout))
-        Run options: --ci-runner --seed 60212
+        Run options: --seed 60212
 
         # Running:
 
@@ -41,7 +41,7 @@ module CIRunner
       end
 
       assert_equal(<<~EOM, clean_statistics(stdout))
-        Run options: --ci-runner --seed 10331
+        Run options: --seed 10331
 
         # Running:
 
@@ -66,7 +66,7 @@ module CIRunner
       end
 
       assert_equal(<<~EOM, clean_statistics(stdout))
-        Run options: --ci-runner --seed 10331
+        Run options: --seed 10331
 
         # Running:
 
@@ -90,7 +90,7 @@ module CIRunner
       end
 
       assert_equal(<<~EOM, clean_statistics(stdout))
-        Run options: --ci-runner --seed 1044
+        Run options: --seed 1044
 
         # Running:
 
@@ -151,7 +151,7 @@ module CIRunner
       EOM
 
       assert_equal(<<~EOM, clean_statistics(subprocess_stdout))
-        Run options: --ci-runner --seed 1044
+        Run options: --seed 1044
 
         # Running:
 
@@ -180,7 +180,7 @@ module CIRunner
       end
 
       assert_equal(<<~EOM, clean_statistics(stdout))
-        Run options: --ci-runner --seed 1044
+        Run options: --seed 1044
 
         # Running:
 
@@ -214,7 +214,7 @@ module CIRunner
       EOM
 
       assert_equal(<<~EOM, clean_statistics(subprocess_stdout))
-        Run options: --ci-runner --seed 1044
+        Run options: --seed 1044
 
         # Running:
 

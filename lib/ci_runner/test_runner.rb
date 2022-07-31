@@ -60,12 +60,11 @@ module CIRunner
         gemfile_path = nil
       end
 
-      env = { "TESTOPTS" => "--ci-runner" }
+      server = DRb.start_service("drbunix:", self)
+      env = { "TESTOPTS" => "--ci-runner=#{server.uri}" }
       env["SEED"] = @log_parser.seed.to_s if @log_parser.seed
       env["RUBY"] = ruby_path.to_s if ruby_path
       env["BUNDLE_GEMFILE"] = gemfile_path if gemfile_path
-
-      DRb.start_service("druby://localhost:8787", self)
 
       system(env, "bundle exec ruby -r'rake/testtask' #{rakefile_path}")
 
