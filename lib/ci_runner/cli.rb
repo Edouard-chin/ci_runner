@@ -23,7 +23,7 @@ module CIRunner
       ::CLI::UI.frame("Preparing CI Runner") do
         commit = options[:commit] || GitHelper.head_commit
         repository = options[:repository] || GitHelper.repository_from_remote
-        ci_checks = []
+        ci_checks = {}
 
         ::CLI::UI.spinner("Fetching failed CI checks from GitHub for commit {{info:#{commit[..12]}}}") do |spinner|
           ci_checks = TestRunFinder.fetch_ci_checks(repository, commit)
