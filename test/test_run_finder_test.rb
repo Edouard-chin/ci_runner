@@ -134,6 +134,14 @@ module CIRunner
       assert_instance_of(Runners::MinitestRunner, runner)
     end
 
+    def test_detect_runner_rspec
+      log = read_fixture("rspec.log")
+
+      runner = TestRunFinder.detect_runner(log.read)
+
+      assert_instance_of(Runners::RSpec, runner)
+    end
+
     def test_detect_runner_fails_to_detect
       error = assert_raises(Error) do
         TestRunFinder.detect_runner("some_log")

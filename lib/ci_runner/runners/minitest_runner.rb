@@ -21,12 +21,6 @@ module CIRunner
         )
       end
 
-      def initialize(*)
-        @buffer = +""
-
-        super
-      end
-
       def name
         "Minitest"
       end
@@ -55,6 +49,8 @@ module CIRunner
       end
 
       def start!
+        super
+
         test_files = failures.map(&:path)
         minitest_plugin_path = File.expand_path("../..", __dir__)
 
@@ -75,37 +71,11 @@ module CIRunner
 
         File.write(rakefile_path, code)
 
-        if ruby_version && ruby_version != RUBY_VERSION
-          ruby_path = Pathname(Dir.home).join(".rubies/ruby-#{ruby_version}/bin/ruby")
-
-          unless ruby_path.exist?
-            ::CLI::UI.puts(<<~EOM)
-            {{warning:Couldn't find Ruby version #{ruby_version} on your system.}}
-            {{warning:Searched in #{ruby_path}}}
-
-            {{warning:The test run will start but will be running using your current Ruby version {{underline:#{RUBY_VERSION}}}.}}
-          EOM
-
-            ruby_path = nil
-          end
-        end
-
-        if gemfile && !File.exist?(gemfile)
-          ::CLI::UI.puts(<<~EOM)
-          {{warning:Your CI run ran with the Gemfile #{gemfile}}}
-          {{warning:I couldn't find this gemfile in your folder.}}
-
-          {{warning:The test run will start but will be using the default Gemfile of your project}}
-        EOM
-
-          self.gemfile = nil
-        end
-
         server = DRb.start_service("drbunix:", self)
         env = { "TESTOPTS" => "--ci-runner=#{server.uri}" }
         env["SEED"] = seed if seed
-        env["RUBY"] = ruby_path.to_s if ruby_path
-        env["BUNDLE_GEMFILE"] = gemfile if gemfile
+        env["RUBY"] = ruby_path.to_s if ruby_path && ruby_path.exist?
+        env["BUNDLE_GEMFILE"] = gemfile_path.to_s if gemfile_path && gemfile_path.exist?
 
         system(env, "bundle exec ruby -r'rake/testtask' #{rakefile_path}")
 
@@ -113,10 +83,6 @@ module CIRunner
       end
 
       private
-
-      def buffering?
-        !@buffer.empty?
-      end
 
       def process_buffer
         match_data = minitest_failure

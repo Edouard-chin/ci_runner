@@ -11,18 +11,12 @@ module CIRunner
     end
 
     def test_rerun_when_no_checks_failed
-      klass = Class.new(Minitest::Test) do
-        def test_inner
-          stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
-            .to_return_json(status: 200, body: { total_count: 0, check_runs: [] })
-
-          CLI.start(%w(--commit abc --repository foo/bar))
-        rescue SystemExit
-        end
-      end
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
+        .to_return_json(status: 200, body: { total_count: 0, check_runs: [] })
 
       stdout, _ = capture_io do
-        klass.new("test_inner").run
+        CLI.start(%w(--commit abc --repository foo/bar))
+      rescue SystemExit
       end
 
       assert_match("No CI checks failed on this commit.", stdout)
