@@ -133,5 +133,13 @@ module CIRunner
 
       assert_instance_of(Runners::MinitestRunner, runner)
     end
+
+    def test_detect_runner_fails_to_detect
+      error = assert_raises(Error) do
+        TestRunFinder.detect_runner("some_log")
+      end
+
+      assert_equal("Couldn't detect the test runner", error.message)
+    end
   end
 end
