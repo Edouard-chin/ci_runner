@@ -25,11 +25,25 @@ GEM
     cli-ui (1.5.1)
     crack (0.4.5)
       rexml
+    diff-lcs (1.5.0)
     hashdiff (1.0.1)
     minitest (5.16.2)
     public_suffix (4.0.7)
     rake (13.0.6)
     rexml (3.2.5)
+    rspec (3.11.0)
+      rspec-core (~> 3.11.0)
+      rspec-expectations (~> 3.11.0)
+      rspec-mocks (~> 3.11.0)
+    rspec-core (3.11.0)
+      rspec-support (~> 3.11.0)
+    rspec-expectations (3.11.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.11.0)
+    rspec-mocks (3.11.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.11.0)
+    rspec-support (3.11.0)
     thor (1.2.1)
 
 PLATFORMS
@@ -39,6 +53,7 @@ DEPENDENCIES
   byebug
   ci_runner!
   minitest (~> 5.0)
+  rspec
   webmock!
 
 BUNDLED WITH

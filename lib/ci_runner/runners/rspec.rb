@@ -47,6 +47,7 @@ module CIRunner
           RSpec::Core::RakeTask.new('__ci_runner_test') do |task|
             task.pattern = #{failures.map(&:path)}
             task.rspec_opts = "#{flags}"
+            task.verbose = false
           end
 
           Rake::Task[:__ci_runner_test].invoke

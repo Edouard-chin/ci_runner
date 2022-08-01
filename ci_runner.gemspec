@@ -37,6 +37,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rake"
 
   spec.add_development_dependency("webmock")
+  spec.add_development_dependency("rspec")
 
   # For more information and examples about making a new gem, checkout our
   # guide at: https://bundler.io/guides/creating_gem.html
