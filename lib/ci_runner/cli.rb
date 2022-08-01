@@ -1,20 +1,37 @@
 # frozen_string_literal: true
 
 require "thor"
-require "byebug"
 
 module CIRunner
   class CLI < Thor
     default_command :rerun
 
+    # @return [Boolean]
     def self.exit_on_failure?
       true
     end
 
-    desc "run", "Run failing tests from a CI."
-    option :commit, type: :string
-    option :repository, type: :string
-    option :run_name, type: :string
+    desc "rerun", "Run failing tests from a CI."
+    long_desc <<~EOM
+      Main command of CI Runner. This command is meant to rerun tests that failed on a CI,
+      on your locale machine, without having you copy/paste output from the CI logs onto your terminal.
+
+      The +rerun+ command will do everything from grabbing the CI checks that failed on a GitHub commit,
+      ask which one you'd like to rerun, download and parse the CI log output and run on your
+      machine exactly the same tests from the failing CI.
+
+      CI Runner is meant to replicate what failed on CI exactly the same way. Therefore, the SEED,
+      the Ruby version as well as the Gemfile from the CI run will be used when running the test suite.
+
+      All option on the +rerun+ command are optional. CI Runner will try to infer them from your repository,
+      and if it can't it will let you know.
+
+      Please note that CI Runner will **not** ensure that the Git HEAD of your local repository matches
+      the commit that failed upstream.
+    EOM
+    option :commit, type: :string, desc: "The Git commit that was pushed to GitHub and has a failing CI. The HEAD commit of your local repository will be used by default."
+    option :repository, type: :string, desc: "The repository on which the CI failed. The repository will be infered from your git remote by default.", banner: "catanacorp/catana"
+    option :run_name, type: :string, desc: "The CI check you which to rerun in case multiple checks failed for a commit. CI Runner will prompt you by default."
     def rerun
       ::CLI::UI::StdoutRouter.enable
 
@@ -77,6 +94,17 @@ module CIRunner
 
     private
 
+    # Retrieve all the GitHub CI checks for a given commit. Will be used to interactively prompt
+    # the user which one to rerun.
+    #
+    # @param repository [String] The full repository name including the owner (rails/rails).
+    # @param commit [String] A Git commit that has been pushed to GitHub and for which CI failed.
+    #
+    # @return [Hash] See the GitHub documentation.
+    #
+    # @raise [SystemExit] Early exit the process if the CI checks can't be retrieved.
+    #
+    # @see https://docs.github.com/en/rest/checks/runs#list-check-runs-for-a-git-reference
     def fetch_ci_checks(repository, commit)
       TestRunFinder.fetch_ci_checks(repository, commit) do |error|
         puts(<<~EOM)
@@ -89,6 +117,18 @@ module CIRunner
       end
     end
 
+    # Download and cache the log for the GitHub check. Downloading the log allows CI Runner to parse it and detect
+    # which test failed in order to run uniquely those on the user machine.
+    #
+    # @param repository [String] The full repository name including the owner (rails/rails).
+    # @param commit [String]     A Git commit that has been pushed to GitHub and for which CI failed.
+    # @param check_run [Hash]    The GitHub Check that failed. See #fetch_ci_checks.
+    #
+    # @return [String] The content of the CI log.
+    #
+    # @raise [SystemExit] Early exit the process if the CI checks can't be retrieved.
+    #
+    # @see https://docs.github.com/en/rest/actions/workflow-jobs#download-job-logs-for-a-workflow-run
     def fetch_ci_log(repository, commit, check_run)
       log = LogDownloader.new(commit, repository, check_run).fetch do |error|
         puts(<<~EOM)
@@ -103,6 +143,16 @@ module CIRunner
       log.read
     end
 
+    # Interatively ask the user which CI check to rerun in the case a commit has multiple failing checks.
+    # This method only runs if the user has not passed the '--run-name' flag to ci_runner.
+    # Will automatically select a check in the case where there is only one failing check.
+    #
+    # @param ci_checks [Hash] (See #fetch_ci_checks)
+    #
+    # @return [Hash] A single Check Run, the one that the user selected.
+    #
+    # @raise [CIRunner::Error] In case all the CI checks on this commit were successfull. In such case
+    #   there is no need to proceed as there should be no failing tests to rerun.
     def ask_for_name(ci_checks)
       check_runs = ci_checks["check_runs"]
       failed_runs = check_runs.reject { |check_run| check_run["conclusion"] == "success" }
