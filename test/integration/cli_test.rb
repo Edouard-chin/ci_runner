@@ -5,15 +5,15 @@ require "test_helper"
 module CIRunner
   class CLITest < Minitest::Test
     def setup
-      UserConfiguration.instance.load!
-      UserConfiguration.instance.save_github_token("abc")
+      Configuration::User.instance.load!
+      Configuration::User.instance.save_github_token("abc")
 
       super
     end
 
     def test_rerun_when_user_has_not_set_a_token_first
-      UserConfiguration.instance.config_file.delete
-      UserConfiguration.instance.load!
+      Configuration::User.instance.config_file.delete
+      Configuration::User.instance.load!
 
       stdout, _ = capture_io do
         CLI.start(%w(--commit abc --repository foo/bar))
@@ -157,7 +157,7 @@ module CIRunner
           token: blabla
       EOM
 
-      assert_equal(expected_config, UserConfiguration.instance.config_file.read)
+      assert_equal(expected_config, Configuration::User.instance.config_file.read)
     end
 
     def test_github_token_when_token_is_invalid
@@ -177,7 +177,7 @@ module CIRunner
           token: abc
       EOM
 
-      assert_equal(expected_config, UserConfiguration.instance.config_file.read)
+      assert_equal(expected_config, Configuration::User.instance.config_file.read)
     end
   end
 end

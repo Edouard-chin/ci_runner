@@ -5,7 +5,7 @@ module CIRunner
     extend self
 
     def fetch_ci_checks(repository, commit, &block)
-      github_client = GithubClient.new(UserConfiguration.instance.github_token)
+      github_client = GithubClient.new(Configuration::User.instance.github_token)
       ci_checks = {}
       error = nil
 

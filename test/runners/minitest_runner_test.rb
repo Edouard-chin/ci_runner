@@ -10,7 +10,7 @@ module CIRunner
       def setup
         super
 
-        ProjectConfiguration.instance.load!
+        Configuration::Project.instance.load!
       end
 
       def test_parse_raw_minitest_log_failures
@@ -130,7 +130,7 @@ module CIRunner
         runner = MinitestRunner.new(log)
 
         Dir.chdir(Dir.home) do
-          config_file = ProjectConfiguration.instance.config_file
+          config_file = Configuration::Project.instance.config_file
           Dir.mkdir(config_file.dirname)
 
           config_file.write(<<~EOM)
@@ -140,7 +140,7 @@ module CIRunner
             seed_regex: 'Running with the seed value (\\d+)'
           EOM
 
-          ProjectConfiguration.instance.load!
+          Configuration::Project.instance.load!
         end
 
         runner.parse!
@@ -155,7 +155,7 @@ module CIRunner
         runner = MinitestRunner.new(log)
 
         Dir.chdir(Dir.home) do
-          config_file = ProjectConfiguration.instance.config_file
+          config_file = Configuration::Project.instance.config_file
           Dir.mkdir(config_file.dirname)
 
           config_file.write(<<~EOM)
@@ -163,7 +163,7 @@ module CIRunner
             buffer_starts_regex: 'End of test. Results finished in \\d+ seconds.'
           EOM
 
-          ProjectConfiguration.instance.load!
+          Configuration::Project.instance.load!
         end
 
         runner.parse!
@@ -187,7 +187,7 @@ module CIRunner
         runner = MinitestRunner.new(log)
 
         Dir.chdir(Dir.home) do
-          config_file = ProjectConfiguration.instance.config_file
+          config_file = Configuration::Project.instance.config_file
           Dir.mkdir(config_file.dirname)
 
           config_file.write(<<~EOM)
@@ -195,7 +195,7 @@ module CIRunner
             failures_regex: !ruby/regexp '/(?:\s*)(?<class>[a-zA-Z0-9_:]+)\#(?<test_name>test_.+?)(?::\s*$).*bin\/rerun_test[[:blank:]](?<file_path>.*)[[:blank:]]-n/m'
           EOM
 
-          ProjectConfiguration.instance.load!
+          Configuration::Project.instance.load!
         end
 
         runner.parse!
@@ -213,7 +213,7 @@ module CIRunner
         runner = MinitestRunner.new(log)
 
         Dir.chdir(Dir.home) do
-          config_file = ProjectConfiguration.instance.config_file
+          config_file = Configuration::Project.instance.config_file
           Dir.mkdir(config_file.dirname)
 
           config_file.write(<<~EOM)
@@ -221,7 +221,7 @@ module CIRunner
             failures_regex: '(bla|blo)_test.rb'
           EOM
 
-          ProjectConfiguration.instance.load!
+          Configuration::Project.instance.load!
         end
 
         error = assert_raises(Error) do

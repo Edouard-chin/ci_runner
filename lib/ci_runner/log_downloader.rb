@@ -15,7 +15,7 @@ module CIRunner
     def fetch(&block)
       return cached_log if cached_log
 
-      github_client = GithubClient.new(UserConfiguration.instance.github_token)
+      github_client = GithubClient.new(Configuration::User.instance.github_token)
       error = nil
 
       ::CLI::UI.spinner("Downloading CI logs from GitHub", auto_debrief: false) do |spinner|

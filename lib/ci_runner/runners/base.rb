@@ -29,7 +29,7 @@ module CIRunner
           when gemfile_detection_regex
             @gemfile = first_matching_group(Regexp.last_match)
           when buffer_detection_regex
-            if ProjectConfiguration.instance.process_on_new_match? && buffering?
+            if Configuration::Project.instance.process_on_new_match? && buffering?
               process_buffer
               @buffer.clear
             end
@@ -79,7 +79,7 @@ module CIRunner
       private
 
       def process_buffer
-        custom_project_regex = ProjectConfiguration.instance.test_failure_detection_regex
+        custom_project_regex = Configuration::Project.instance.test_failure_detection_regex
 
         if custom_project_regex
           custom_project_regex.match(@buffer) do |match_data|
@@ -94,7 +94,7 @@ module CIRunner
         return @ruby_detection_regex if defined?(@ruby_detection_regex)
 
         regexes = [
-          ProjectConfiguration.instance.ruby_detection_regex,
+          Configuration::Project.instance.ruby_detection_regex,
           /[^_-][rR]uby(?:[[:blank:]]*|\/)(\d\.\d\.\d+)p?(?!\/gems)/,
         ].compact
 
@@ -105,7 +105,7 @@ module CIRunner
         return @gemfile_detection_regex if defined?(@gemfile_detection_regex)
 
         regexes = [
-          ProjectConfiguration.instance.gemfile_detection_regex,
+          Configuration::Project.instance.gemfile_detection_regex,
           /BUNDLE_GEMFILE:[[:blank:]]*(.*)/,
         ].compact
 
@@ -116,7 +116,7 @@ module CIRunner
         return @seed_regex if defined?(@seed_regex)
 
         regexes = [
-          ProjectConfiguration.instance.seed_detection_regex,
+          Configuration::Project.instance.seed_detection_regex,
           self.class::SEED_REGEX,
         ].compact
 
@@ -127,7 +127,7 @@ module CIRunner
         return @buffer_detection_regex if defined?(@buffer_detection_regex)
 
         regexes = [
-          ProjectConfiguration.instance.buffer_starts_regex,
+          Configuration::Project.instance.buffer_starts_regex,
           self.class::BUFFER_STARTS,
         ].compact
 

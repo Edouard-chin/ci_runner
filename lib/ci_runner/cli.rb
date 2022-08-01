@@ -21,7 +21,7 @@ module CIRunner
       runner = nil
 
       ::CLI::UI.frame("Preparing CI Runner") do
-        UserConfiguration.instance.validate_token!
+        Configuration::User.instance.validate_token!
 
         commit = options[:commit] || GitHelper.head_commit
         repository = options[:repository] || GitHelper.repository_from_remote
@@ -61,12 +61,12 @@ module CIRunner
 
       ::CLI::UI.frame("Saving GitHub Token") do
         user = GithubClient.new(token).me
-        UserConfiguration.instance.save_github_token(token)
+        Configuration::User.instance.save_github_token(token)
 
         ::CLI::UI.puts(<<~EOM)
           Hello {{warning:#{user["login"]}}}! {{success:Your token is valid!}}
 
-          {{info:The token has been saved in this file: #{UserConfiguration.instance.config_file}}}
+          {{info:The token has been saved in this file: #{Configuration::User.instance.config_file}}}
         EOM
       rescue GithubClient::Error => e
         ::CLI::UI.puts("{{red:\nYour token doesn't seem to be valid. The response from GitHub was: #{e.message}}}")
