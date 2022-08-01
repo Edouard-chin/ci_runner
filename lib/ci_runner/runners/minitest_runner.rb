@@ -12,6 +12,7 @@ module CIRunner
         /Running tests with run options.*--seed\s+(\d+)/, # MinitestReporters BaseReporter
         /Started with run options.*--seed\s+(\d+)/, # MinitestReporters ProgressReporter
       )
+      BUFFER_STARTS = /(Failure|Error):\s*\Z/
 
       def self.match?(ci_log)
         default_reporter = /(Finished in) \d+\.\d{6}s, \d+\.\d{4} runs\/s, \d+\.\d{4} assertions\/s\./
@@ -21,29 +22,6 @@ module CIRunner
 
       def name
         "Minitest"
-      end
-
-      def parse!
-        @ci_log.each_line do |line|
-          case line
-          when seed_regex
-            @seed = Regexp.last_match.captures.compact.first
-          when ruby_detection_regex
-            @ruby_version = Regexp.last_match(1)
-
-            @buffer << line if buffering?
-          when gemfile_detection_regex
-            @gemfile = Regexp.last_match(1).rstrip
-          when /(Failure|Error):\s*\Z/
-            process_buffer if buffering?
-            @buffer.clear
-            @buffer << line
-          else
-            @buffer << line if buffering?
-          end
-        end
-
-        process_buffer if buffering?
       end
 
       def start!

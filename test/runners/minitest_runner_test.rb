@@ -150,6 +150,38 @@ module CIRunner
         assert_equal("65123", runner.seed)
       end
 
+      def test_when_projet_uses_different_buffer_starts_regex
+        log = read_fixture("custom_buffer_starts.log")
+        runner = MinitestRunner.new(log)
+
+        Dir.chdir(Dir.home) do
+          config_file = ProjectConfiguration.instance.config_file
+          Dir.mkdir(config_file.dirname)
+
+          config_file.write(<<~EOM)
+            ---
+            buffer_starts_regex: 'End of test. Results finished in \\d+ seconds.'
+          EOM
+
+          ProjectConfiguration.instance.load!
+        end
+
+        runner.parse!
+
+        expected = [
+          TestFailure.new("MaintenanceTasks::RunsTest", "test_run_a_CSV_Task", "test/system/maintenance_tasks/runs_test.rb"),
+          TestFailure.new("MaintenanceTasks::RunsTest", "test_pause_a_Run", "test/system/maintenance_tasks/runs_test.rb"),
+        ]
+
+        assert_equal(2, runner.failures.count)
+
+        expected.each_with_index do |failure, index|
+          assert_equal(failure.test_name, runner.failures[index].test_name)
+          assert_equal(failure.klass, runner.failures[index].klass)
+          assert_equal(failure.path, runner.failures[index].path)
+        end
+      end
+
       def test_parse_namespaced_class_location_infer_from_stacktrace
         log = read_fixture("minitest_namespace.log")
         parser = MinitestRunner.new(log)

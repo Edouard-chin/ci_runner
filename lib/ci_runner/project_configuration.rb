@@ -15,7 +15,7 @@ module CIRunner
     end
 
     def load!
-      @yaml_config = config_file.exist? ? YAML.safe_load_file(config_file, permitted_classes: [Regexp]) : {}
+      @yaml_config = config_file.exist? ? YAML.load_file(config_file) : {}
     end
 
     def ruby_detection_regex
@@ -26,8 +26,18 @@ module CIRunner
       to_regexp(@yaml_config.dig("gemfile_regex"))
     end
 
-    def seed_regex
+    def seed_detection_regex
       to_regexp(@yaml_config.dig("seed_regex"))
+    end
+
+    def buffer_starts_regex
+      to_regexp(@yaml_config.dig("buffer_starts_regex"))
+    end
+
+    def process_on_new_match?
+      value = @yaml_config.dig("seed_regex")
+
+      value.nil? ? true : value
     end
 
     def config_file

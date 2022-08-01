@@ -18,7 +18,29 @@ module CIRunner
       end
 
       def parse!
-        raise NotImplementedError, "Subclass responsability"
+        @ci_log.each_line do |line|
+          case line
+          when seed_regex
+            @seed = first_matching_group(Regexp.last_match)
+          when ruby_detection_regex
+            @ruby_version = first_matching_group(Regexp.last_match)
+
+            @buffer << line if buffering?
+          when gemfile_detection_regex
+            @gemfile = first_matching_group(Regexp.last_match)
+          when buffer_detection_regex
+            if ProjectConfiguration.instance.process_on_new_match? && buffering?
+              process_buffer
+              @buffer.clear
+            end
+
+            @buffer << line
+          else
+            @buffer << line if buffering?
+          end
+        end
+
+        process_buffer if buffering?
       end
 
       def start!
@@ -56,31 +78,52 @@ module CIRunner
 
       private
 
+      def process_buffer
+        raise NotImplementedError, "Subclass responsability"
+      end
+
       def ruby_detection_regex
+        return @ruby_detection_regex if defined?(@ruby_detection_regex)
+
         regexes = [
           ProjectConfiguration.instance.ruby_detection_regex,
           /[^_-][rR]uby(?:[[:blank:]]*|\/)(\d\.\d\.\d+)p?(?!\/gems)/,
         ].compact
 
-        Regexp.union(*regexes)
+        @ruby_detection_regex = Regexp.union(*regexes)
       end
 
       def gemfile_detection_regex
+        return @gemfile_detection_regex if defined?(@gemfile_detection_regex)
+
         regexes = [
           ProjectConfiguration.instance.gemfile_detection_regex,
-          /BUNDLE_GEMFILE:[[:blank:]]*(.*)/
+          /BUNDLE_GEMFILE:[[:blank:]]*(.*)/,
         ].compact
 
-        Regexp.union(*regexes)
+        @gemfile_detection_regex = Regexp.union(*regexes)
       end
 
       def seed_regex
+        return @seed_regex if defined?(@seed_regex)
+
         regexes = [
-          ProjectConfiguration.instance.seed_regex,
-          self.class::SEED_REGEX
+          ProjectConfiguration.instance.seed_detection_regex,
+          self.class::SEED_REGEX,
         ].compact
 
-        Regexp.union(*regexes)
+        @seed_regex = Regexp.union(*regexes)
+      end
+
+      def buffer_detection_regex
+        return @buffer_detection_regex if defined?(@buffer_detection_regex)
+
+        regexes = [
+          ProjectConfiguration.instance.buffer_starts_regex,
+          self.class::BUFFER_STARTS,
+        ].compact
+
+        @buffer_detection_regex = Regexp.union(*regexes)
       end
 
       def gemfile_path
@@ -97,6 +140,10 @@ module CIRunner
 
       def buffering?
         !@buffer.empty?
+      end
+
+      def first_matching_group(match_data)
+        match_data.captures.find { |v| v }
       end
     end
   end

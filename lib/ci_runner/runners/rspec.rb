@@ -6,6 +6,7 @@ module CIRunner
   module Runners
     class RSpec < Base
       SEED_REGEX = /Randomized with seed[[:blank:]]*(\d+)/
+      BUFFER_STARTS = /(Finished in|Failed examples)/
 
       def self.match?(log)
         command = /bundle exec rspec/
@@ -16,25 +17,6 @@ module CIRunner
 
       def name
         "RSpec"
-      end
-
-      def parse!
-        @ci_log.each_line do |line|
-          case line
-          when seed_regex
-            @seed = Regexp.last_match(1)
-          when ruby_detection_regex
-            @ruby_version = Regexp.last_match(1)
-          when gemfile_detection_regex
-            @gemfile = Regexp.last_match(1).rstrip
-          when /(Finished in|Failed examples)/
-            @buffer << line
-          else
-            @buffer << line if buffering?
-          end
-        end
-
-        process_buffer if buffering?
       end
 
       def start!
