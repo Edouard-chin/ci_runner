@@ -34,6 +34,16 @@ module CIRunner
       Pathname(File.expand_path(USER_CONFIG_PATH, Dir.home))
     end
 
+    def validate_token!
+      return if github_token
+
+      raise(Error, <<~EOM)
+        A GitHub token needs to be saved into your configuration before being able to use CI Runner.
+
+        Have a look at the {{command:ci_runner help github_token}} command.
+      EOM
+    end
+
     private
 
     def save!(config = {})

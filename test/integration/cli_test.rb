@@ -6,8 +6,22 @@ module CIRunner
   class CLITest < Minitest::Test
     def setup
       UserConfiguration.instance.load!
+      UserConfiguration.instance.save_github_token("abc")
 
       super
+    end
+
+    def test_rerun_when_user_has_not_set_a_token_first
+      UserConfiguration.instance.config_file.delete
+      UserConfiguration.instance.load!
+
+      stdout, _ = capture_io do
+        CLI.start(%w(--commit abc --repository foo/bar))
+      rescue SystemExit
+      end
+
+      assert_match("GitHub token needs to be saved into your configuration before being able to use CI Runner", stdout)
+      assert_match(/mHave a look at the .*ci_runner help github_token.* command./, stdout)
     end
 
     def test_rerun_when_no_checks_failed
@@ -133,8 +147,9 @@ module CIRunner
         CLI.start(%w(github_token blabla))
       end
 
-      assert_match("\e[0mHello \e[0;33mBob\e[0m! \e[0;32mYour token has been saved successfully!\e[0m", stdout)
-      assert_match("Saved!", stdout)
+      assert_match(/Hello.*Bob.*!/, stdout)
+      assert_match("Your token is valid!", stdout)
+      assert_match("The token has been saved in this file:", stdout)
 
       expected_config = <<~EOM
         ---
@@ -151,13 +166,15 @@ module CIRunner
 
       stdout, _ = capture_io do
         CLI.start(%w(github_token blabla))
+      rescue SystemExit
       end
 
       assert_match("Your token doesn't seem to be valid.", stdout)
-      assert_match("Saving GitHub Token failed", stdout)
 
       expected_config = <<~EOM
-        --- {}
+        ---
+        github:
+          token: abc
       EOM
 
       assert_equal(expected_config, UserConfiguration.instance.config_file.read)

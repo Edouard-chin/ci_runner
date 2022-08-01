@@ -11,7 +11,7 @@ module CIRunner
       true
     end
 
-    desc "run", "run failing tests from a CI"
+    desc "run", "Run failing tests from a CI."
     option :commit, type: :string
     option :repository, type: :string
     option :run_name, type: :string
@@ -21,6 +21,8 @@ module CIRunner
       runner = nil
 
       ::CLI::UI.frame("Preparing CI Runner") do
+        UserConfiguration.instance.validate_token!
+
         commit = options[:commit] || GitHelper.head_commit
         repository = options[:repository] || GitHelper.repository_from_remote
         ci_checks = fetch_ci_checks(repository, commit)
@@ -47,18 +49,30 @@ module CIRunner
       end
     end
 
-    desc "github_token TOKEN", "Save a GitHub token in your config"
+    desc "github_token TOKEN", "Save a GitHub token in your config."
+    long_desc <<~EOM
+     Save a personal access GitHub token in the ~/.ci_runner/config.yml file.
+     The GitHub token is required to fetch CI checks and download logs from repositories.
+
+     You can get a token from GitHub by following this link: https://github.com/settings/tokens/new?description=CI+Runner&scopes=repo:status,public_repo
+    EOM
     def github_token(token)
-      ::CLI::UI.frame("Saving GitHub Token")
+      ::CLI::UI::StdoutRouter.enable
 
-      user = GithubClient.new(token).me
-      UserConfiguration.instance.save_github_token(token)
+      ::CLI::UI.frame("Saving GitHub Token") do
+        user = GithubClient.new(token).me
+        UserConfiguration.instance.save_github_token(token)
 
-      ::CLI::UI.puts("Hello {{warning:#{user["login"]}}}! {{success:Your token has been saved successfully!}}")
-      ::CLI::UI::Frame.close("Saved!")
-    rescue GithubClient::Error => e
-      puts("Your token doesn't seem to be valid. The response from GitHub was: #{e.message}")
-      ::CLI::UI::Frame.close("Saving GitHub Token failed", color: :red)
+        ::CLI::UI.puts(<<~EOM)
+          Hello {{warning:#{user["login"]}}}! {{success:Your token is valid!}}
+
+          {{info:The token has been saved in this file: #{UserConfiguration.instance.config_file}}}
+        EOM
+      rescue GithubClient::Error => e
+        ::CLI::UI.puts("{{red:\nYour token doesn't seem to be valid. The response from GitHub was: #{e.message}}}")
+
+        exit(false)
+      end
     end
 
     private
