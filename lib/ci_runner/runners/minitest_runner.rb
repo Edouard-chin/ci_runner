@@ -51,27 +51,25 @@ module CIRunner
       def start!
         super
 
-        test_files = failures.map(&:path)
         minitest_plugin_path = File.expand_path("../..", __dir__)
 
         code = <<~EOM
-        Rake::TestTask.new(:__ci_runner_test) do |t|
-          t.libs << "test"
-          t.libs << "lib"
-          t.libs << "#{minitest_plugin_path}"
-          t.test_files = #{test_files}
-          t.ruby_opts << "-rrake"
-        end
+          Rake::TestTask.new(:__ci_runner_test) do |t|
+            t.libs << "test"
+            t.libs << "lib"
+            t.libs << "#{minitest_plugin_path}"
+            t.test_files = #{failures.map(&:path)}
+            t.ruby_opts << "-rrake"
+          end
 
-        Rake::Task[:__ci_runner_test].invoke
+          Rake::Task[:__ci_runner_test].invoke
         EOM
 
-        dir = Dir.mktmpdir
-        rakefile_path = File.expand_path("Rakefile", dir)
-
+        rakefile_path = File.expand_path("Rakefile", Dir.mktmpdir)
         File.write(rakefile_path, code)
 
-        server = DRb.start_service("drbunix:", self)
+        server = DRb.start_service("drbunix:", failures)
+
         env = { "TESTOPTS" => "--ci-runner=#{server.uri}" }
         env["SEED"] = seed if seed
         env["RUBY"] = ruby_path.to_s if ruby_path && ruby_path.exist?

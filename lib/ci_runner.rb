@@ -11,7 +11,6 @@ module CIRunner
   autoload :GitHelper,      "ci_runner/git_helper"
   autoload :TestRunFinder,  "ci_runner/test_run_finder"
   autoload :LogDownloader,  "ci_runner/log_downloader"
-  autoload :Suite,          "ci_runner/suite"
   autoload :TestFailure,    "ci_runner/test_failure"
   autoload :UserConfiguration,  "ci_runner/user_configuration"
 

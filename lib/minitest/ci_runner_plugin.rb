@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "drb/drb"
-require_relative "../ci_runner/suite"
 
 module Minitest
   extend self
@@ -18,8 +17,16 @@ module Minitest
     options[:args].gsub!(/\s*--ci-runner=#{options[:ci_runner]}\s*/, "")
 
     DRb.start_service
-    bla = DRbObject.new_with_uri(options[:ci_runner])
+    failures = DRbObject.new_with_uri(options[:ci_runner])
 
-    options[:filter] = CIRunner::Suite.new(bla.failures)
+    filter = Struct.new(:failures) do
+      def ===(runnable)
+        failures.any? do |failure|
+          "#{failure.klass}##{failure.test_name}" == runnable
+        end
+      end
+    end
+
+    options[:filter] = filter.new(failures)
   end
 end
