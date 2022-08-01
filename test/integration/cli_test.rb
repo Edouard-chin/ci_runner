@@ -133,8 +133,8 @@ module CIRunner
         CLI.start(%w(github_token blabla))
       end
 
-      expected_output = "Hello Bob! Your token has been saved successfully!\n"
-      assert_equal(expected_output, stdout)
+      assert_match("\e[0mHello \e[0;33mBob\e[0m! \e[0;32mYour token has been saved successfully!\e[0m", stdout)
+      assert_match("Saved!", stdout)
 
       expected_config = <<~EOM
         ---
@@ -149,19 +149,12 @@ module CIRunner
       stub_request(:get, "https://api.github.com/user")
         .to_return_json(status: 401, body: "Requires authentication")
 
-      _, stderr = capture_io do
+      stdout, _ = capture_io do
         CLI.start(%w(github_token blabla))
       end
 
-      expected = <<~EOM
-        Your token doesn't seem to be valid. The response from GitHub was:
-
-        GitHub response: Status: 401. Body:
-
-        Requires authentication
-      EOM
-
-      assert_equal(expected, stderr)
+      assert_match("Your token doesn't seem to be valid.", stdout)
+      assert_match("Saving GitHub Token failed", stdout)
 
       expected_config = <<~EOM
         --- {}

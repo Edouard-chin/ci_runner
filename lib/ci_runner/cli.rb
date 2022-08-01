@@ -49,24 +49,19 @@ module CIRunner
 
     desc "github_token TOKEN", "Save a GitHub token in your config"
     def github_token(token)
-      user = GithubClient.new(token).me
+      ::CLI::UI.frame("Saving GitHub Token")
 
+      user = GithubClient.new(token).me
       UserConfiguration.instance.save_github_token(token)
 
-      say("Hello #{user["login"]}! Your token has been saved successfully!", :green)
+      ::CLI::UI.puts("Hello {{warning:#{user["login"]}}}! {{success:Your token has been saved successfully!}}")
+      ::CLI::UI::Frame.close("Saved!")
     rescue GithubClient::Error => e
-      errored(<<~EOM)
-        Your token doesn't seem to be valid. The response from GitHub was:
-
-        #{e.message}
-      EOM
+      puts("Your token doesn't seem to be valid. The response from GitHub was: #{e.message}")
+      ::CLI::UI::Frame.close("Saving GitHub Token failed", color: :red)
     end
 
     private
-
-    def errored(message)
-      say_error(message, :red)
-    end
 
     def fetch_ci_checks(repository, commit)
       TestRunFinder.fetch_ci_checks(repository, commit) do |error|
