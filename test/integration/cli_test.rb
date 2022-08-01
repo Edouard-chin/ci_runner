@@ -22,6 +22,30 @@ module CIRunner
       assert_match("No CI checks failed on this commit.", stdout)
     end
 
+    def test_rerun_when_log_downloading_fails
+      ci_check_response = {
+        total_count: 2,
+        check_runs: [
+          { "name": "Ruby Test 3.0", id: 1, "conclusion" => "failure" },
+          { "name": "Ruby Test 3.1", id: 2, "conclusion" => "success" },
+        ],
+      }
+
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
+        .to_return_json(status: 200, body: ci_check_response)
+      stub_request(:get, "https://api.github.com/repos/foo/bar/actions/jobs/1/logs")
+        .to_return(status: 404, body: "Not found")
+
+      stdout, _ = capture_io do
+        CLI.start(%w(--commit abc --repository foo/bar))
+      rescue SystemExit
+      end
+
+      assert_match("Downloading CI logs from GitHub", stdout)
+      assert_match("Couldn't fetch the CI log. The response from GitHub was:", stdout)
+      assert_match("GitHub response: Status: 404. Body:", stdout)
+    end
+
     def test_rerun_when_a_single_checks_failed
       ci_check_response = {
         total_count: 2,

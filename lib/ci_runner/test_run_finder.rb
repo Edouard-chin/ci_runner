@@ -14,7 +14,7 @@ module CIRunner
       rescue GithubClient::Error => e
         error = e
 
-        ::CLI::UI::TASK_FAILED
+        ::CLI::UI::Spinner::TASK_FAILED
       end
 
       block.call(error) if error

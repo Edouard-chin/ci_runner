@@ -28,7 +28,7 @@ module CIRunner
         run_name = options[:run_name] || ask_for_name(ci_checks)
         check_run = TestRunFinder.find(ci_checks, run_name)
 
-        ci_log = LogDownloader.new(commit, repository, check_run).fetch.read
+        ci_log = fetch_ci_log(repository, commit, check_run)
         runner = TestRunFinder.detect_runner(ci_log)
         runner.parse!
 
@@ -78,6 +78,20 @@ module CIRunner
 
         exit(false)
       end
+    end
+
+    def fetch_ci_log(repository, commit, check_run)
+      log = LogDownloader.new(commit, repository, check_run).fetch do |error|
+        puts(<<~EOM)
+          Couldn't fetch the CI log. The response from GitHub was:
+
+          #{error.message}
+        EOM
+
+        exit(false)
+      end
+
+      log.read
     end
 
     def ask_for_name(ci_checks)

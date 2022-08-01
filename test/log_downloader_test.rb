@@ -92,5 +92,19 @@ module CIRunner
     ensure
       logfile.delete if logfile
     end
+
+    def test_fetch_fails_to_retrieve_log
+      stub_request(:get, "https://api.github.com/repos/Edouard/catana/actions/jobs/1234/logs")
+        .to_return(status: 404, body: "Not found")
+
+      out, _ = capture_io do
+        ::CLI::UI::StdoutRouter.with_enabled do
+          @log_downloader.fetch { |error| puts "Oh no! #{error.message}" }
+        end
+      end
+
+      assert_match("Downloading CI logs from GitHub", out)
+      assert_match("Oh no! GitHub response: Status: 404. Body:", out)
+    end
   end
 end
