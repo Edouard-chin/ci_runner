@@ -116,7 +116,7 @@ module CIRunner
       #
       #   Failed examples:
       #
-      #   rspec ./spec/octokit/client/repositories_spec.rb:75 # Octokit::Client::Repositories.edit_repository is_template
+      #   rspec ./spec/octokit/client/repository_spec.rb:75 # Octokit::Client::Repositories.edit_repository is_template
       #
       #   =====================
       #

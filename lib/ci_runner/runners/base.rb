@@ -94,8 +94,11 @@ module CIRunner
       #
       # @return [void]
       def report
-        using_ruby = ruby_version ? ruby_version : "No specific Ruby version detected. Will be using your current version #{RUBY_VERSION}"
-        using_gemfile = gemfile ? gemfile : "No specific Gemfile detected. Will be using the default Gemfile of your project."
+        default_ruby = "No specific Ruby version detected. Will be using your current version #{RUBY_VERSION}"
+        using_ruby = ruby_version ? ruby_version : default_ruby
+
+        default_gemfile = "No specific Gemfile detected. Will be using the default Gemfile of your project."
+        using_gemfile = gemfile ? gemfile : default_gemfile
 
         ::CLI::UI.puts(<<~EOM)
 
@@ -134,7 +137,7 @@ module CIRunner
 
         regexes = [
           Configuration::Project.instance.ruby_detection_regex,
-          /[^_-][rR]uby(?:[[:blank:]]*|\/)(\d\.\d\.\d+)p?(?!\/gems)/,
+          %r{[^_-][rR]uby(?:[[:blank:]]*|/)(\d\.\d\.\d+)p?(?!/gems)},
         ].compact
 
         @ruby_detection_regex = Regexp.union(*regexes)

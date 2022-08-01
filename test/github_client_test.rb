@@ -13,8 +13,8 @@ module CIRunner
     end
 
     def test_me_retrieve_the_user
-      stub_request(:get, "https://api.github.com/user").
-        with(headers: { "Authorization" => "Basic #{@encoded_access_token}"})
+      stub_request(:get, "https://api.github.com/user")
+        .with(headers: { "Authorization" => "Basic #{@encoded_access_token}" })
 
       @client.me
 
@@ -23,7 +23,7 @@ module CIRunner
 
     def test_check_runs_retrieve_ci_checks
       stub_request(:get, "https://api.github.com/repos/catanacorp/ci_runner/commits/some_commit/check-runs")
-        .with(headers: { "Authorization" => "Basic #{@encoded_access_token}"})
+        .with(headers: { "Authorization" => "Basic #{@encoded_access_token}" })
 
       @client.check_runs("catanacorp/ci_runner", "some_commit")
 
@@ -32,7 +32,7 @@ module CIRunner
 
     def test_download_log_download_log_from_a_check
       stub_request(:get, "https://api.github.com/repos/catanacorp/ci_runner/actions/jobs/123/logs")
-        .with(headers: { "Authorization" => "Basic #{@encoded_access_token}"})
+        .with(headers: { "Authorization" => "Basic #{@encoded_access_token}" })
         .to_return(status: 302, headers: { "Location" => "https://example.com/download" })
       stub_request(:get, "https://example.com/download")
 
@@ -43,8 +43,8 @@ module CIRunner
     end
 
     def test_response_is_json_decoded
-      stub_request(:get, "https://api.github.com/user").
-        to_return_json(status: 200, body: { name: "edouard" })
+      stub_request(:get, "https://api.github.com/user")
+        .to_return_json(status: 200, body: { name: "edouard" })
 
       user = @client.me
 
@@ -53,8 +53,8 @@ module CIRunner
     end
 
     def test_raises_when_response_is_not_in_the_200_204_range
-      stub_request(:get, "https://api.github.com/user").
-        to_return(status: 422, body: '{"message":"Unprocessable"}')
+      stub_request(:get, "https://api.github.com/user")
+        .to_return(status: 422, body: '{"message":"Unprocessable"}')
 
       error = assert_raises(GithubClient::Error) do
         @client.me

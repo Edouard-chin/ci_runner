@@ -29,9 +29,9 @@ module CIRunner
       Please note that CI Runner will **not** ensure that the Git HEAD of your local repository matches
       the commit that failed upstream.
     EOM
-    option :commit, type: :string, desc: "The Git commit that was pushed to GitHub and has a failing CI. The HEAD commit of your local repository will be used by default."
-    option :repository, type: :string, desc: "The repository on which the CI failed. The repository will be infered from your git remote by default.", banner: "catanacorp/catana"
-    option :run_name, type: :string, desc: "The CI check you which to rerun in case multiple checks failed for a commit. CI Runner will prompt you by default."
+    option :commit, type: :string, desc: "The Git commit that was pushed to GitHub and has a failing CI. The HEAD commit of your local repository will be used by default." # rubocop:disable Layout/LineLength
+    option :repository, type: :string, desc: "The repository on which the CI failed. The repository will be infered from your git remote by default.", banner: "catanacorp/catana" # rubocop:disable Layout/LineLength
+    option :run_name, type: :string, desc: "The CI check you which to rerun in case multiple checks failed for a commit. CI Runner will prompt you by default." # rubocop:disable Layout/LineLength
     def rerun
       ::CLI::UI::StdoutRouter.enable
 
@@ -68,10 +68,10 @@ module CIRunner
 
     desc "github_token TOKEN", "Save a GitHub token in your config."
     long_desc <<~EOM
-     Save a personal access GitHub token in the ~/.ci_runner/config.yml file.
-     The GitHub token is required to fetch CI checks and download logs from repositories.
+      Save a personal access GitHub token in the ~/.ci_runner/config.yml file.
+      The GitHub token is required to fetch CI checks and download logs from repositories.
 
-     You can get a token from GitHub by following this link: https://github.com/settings/tokens/new?description=CI+Runner&scopes=repo
+      You can get a token from GitHub by following this link: https://github.com/settings/tokens/new?description=CI+Runner&scopes=repo # rubocop:disable Layout/LineLength
     EOM
     def github_token(token)
       ::CLI::UI::StdoutRouter.enable

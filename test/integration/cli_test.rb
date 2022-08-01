@@ -16,8 +16,9 @@ module CIRunner
       Configuration::User.instance.load!
 
       stdout, _ = capture_io do
-        CLI.start(%w(--commit abc --repository foo/bar))
+        CLI.start(["--commit", "abc", "--repository", "foo/bar"])
       rescue SystemExit
+        nil
       end
 
       assert_match("GitHub token needs to be saved into your configuration before being able to use CI Runner", stdout)
@@ -29,8 +30,9 @@ module CIRunner
         .to_return_json(status: 200, body: { total_count: 0, check_runs: [] })
 
       stdout, _ = capture_io do
-        CLI.start(%w(--commit abc --repository foo/bar))
+        CLI.start(["--commit", "abc", "--repository", "foo/bar"])
       rescue SystemExit
+        nil
       end
 
       assert_match("No CI checks failed on this commit.", stdout)
@@ -51,8 +53,9 @@ module CIRunner
         .to_return(status: 404, body: "Not found")
 
       stdout, _ = capture_io do
-        CLI.start(%w(--commit abc --repository foo/bar))
+        CLI.start(["--commit", "abc", "--repository", "foo/bar"])
       rescue SystemExit
+        nil
       end
 
       assert_match("Downloading CI logs from GitHub", stdout)
@@ -77,7 +80,7 @@ module CIRunner
         .to_return(status: 200, body: "minitest")
 
       stdout, _ = capture_io do
-        CLI.start(%w(--commit abc --repository foo/bar))
+        CLI.start(["--commit", "abc", "--repository", "foo/bar"])
       end
 
       assert_match("Automatically selected the CI check Ruby Test 3.0 because it's the only one failing.", stdout)
@@ -99,9 +102,9 @@ module CIRunner
         pid = fork do
           r, w = IO.pipe
           $stdin.reopen(r)
-          w.print "Ruby Test 3.0"
+          w.print("Ruby Test 3.0")
 
-          CLI.start(%w(--commit abc --repository foo/bar))
+          CLI.start(["--commit", "abc", "--repository", "foo/bar"])
         end
 
         Process.waitpid(pid)
@@ -144,7 +147,7 @@ module CIRunner
         .to_return_json(status: 200, body: { login: "Bob" })
 
       stdout, _ = capture_io do
-        CLI.start(%w(github_token blabla))
+        CLI.start(["github_token", "blabla"])
       end
 
       assert_match(/Hello.*Bob.*!/, stdout)
@@ -165,8 +168,9 @@ module CIRunner
         .to_return_json(status: 401, body: "Requires authentication")
 
       stdout, _ = capture_io do
-        CLI.start(%w(github_token blabla))
+        CLI.start(["github_token", "blabla"])
       rescue SystemExit
+        nil
       end
 
       assert_match("Your token doesn't seem to be valid.", stdout)

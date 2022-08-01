@@ -36,7 +36,7 @@ module CIRunner
       assert_requested(:get, "https://api.github.com/repos/Edouard/catana/actions/jobs/1234/logs")
       assert_requested(:get, "https://example.com/log")
     ensure
-      logfile.delete if logfile
+      logfile&.delete
     end
 
     def test_fetch_download_a_bigger_log_open_uri_returns_a_tempfile
@@ -61,7 +61,7 @@ module CIRunner
       assert_requested(:get, "https://api.github.com/repos/Edouard/catana/actions/jobs/1234/logs")
       assert_requested(:get, "https://example.com/log")
     ensure
-      logfile.delete if logfile
+      logfile&.delete
     end
 
     def test_fetch_get_the_cached_log
@@ -90,7 +90,7 @@ module CIRunner
       assert_requested(:get, "https://api.github.com/repos/Edouard/catana/actions/jobs/1234/logs", times: 1)
       assert_requested(:get, "https://example.com/log", times: 1)
     ensure
-      logfile.delete if logfile
+      logfile&.delete
     end
 
     def test_fetch_fails_to_retrieve_log

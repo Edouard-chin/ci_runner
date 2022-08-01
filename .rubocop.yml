@@ -1,0 +1,9 @@
+inherit_gem:
+  rubocop-shopify: rubocop.yml
+
+AllCops:
+  NewCops: disable
+  SuggestExtensions: false
+
+Style/Documentation:
+  Enabled: false

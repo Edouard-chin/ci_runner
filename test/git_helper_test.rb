@@ -15,8 +15,8 @@ module CIRunner
       Dir.chdir(@dir)
       File.write("some_file", "abc")
 
-      _, status = Open3.capture2("git init")
-      _, status = Open3.capture2("git add -A")
+      _, _ = Open3.capture2("git init")
+      _, _ = Open3.capture2("git add -A")
       _, status = Open3.capture2("git commit -m 'WIP'")
 
       raise("Couldn't setup the git repository to run the tests.") unless status.success?

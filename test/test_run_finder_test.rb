@@ -12,7 +12,7 @@ module CIRunner
         ::CLI::UI::StdoutRouter.with_enabled do
           checks = TestRunFinder.fetch_ci_checks("canatacorp/catana", "abcdef")
 
-          assert_equal({ "total_count" => 1, "check_runs" => [{ "id" => 1, "name" => "foo" }]}, checks)
+          assert_equal({ "total_count" => 1, "check_runs" => [{ "id" => 1, "name" => "foo" }] }, checks)
         end
       end
 
@@ -26,7 +26,7 @@ module CIRunner
 
       stdout, _ = capture_io do
         ::CLI::UI::StdoutRouter.with_enabled do
-          TestRunFinder.fetch_ci_checks("canatacorp/catana", "abcdef") do |error|
+          TestRunFinder.fetch_ci_checks("canatacorp/catana", "abcdef") do
             puts "Couldn't retrieve CI checks"
           end
         end

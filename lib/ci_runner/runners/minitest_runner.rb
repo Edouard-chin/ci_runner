@@ -37,7 +37,7 @@ module CIRunner
       #
       # @return [Boolean] Whether this runner detects (and therefore can handle) Minitest from the log output.
       def self.match?(ci_log)
-        default_reporter = /(Finished in) \d+\.\d{6}s, \d+\.\d{4} runs\/s, \d+\.\d{4} assertions\/s\./
+        default_reporter = %r{(Finished in) \d+\.\d{6}s, \d+\.\d{4} runs/s, \d+\.\d{4} assertions/s\.}
 
         Regexp.union(default_reporter, SEED_REGEX, "minitest").match?(ci_log)
       end
@@ -84,8 +84,8 @@ module CIRunner
 
         env = { "TESTOPTS" => "--ci-runner=#{server.uri}" }
         env["SEED"] = seed if seed
-        env["RUBY"] = ruby_path.to_s if ruby_path && ruby_path.exist?
-        env["BUNDLE_GEMFILE"] = gemfile_path.to_s if gemfile_path && gemfile_path.exist?
+        env["RUBY"] = ruby_path.to_s if ruby_path&.exist?
+        env["BUNDLE_GEMFILE"] = gemfile_path.to_s if gemfile_path&.exist?
 
         system(env, "bundle exec ruby -r'rake/testtask' #{rakefile_path}")
 
@@ -119,7 +119,7 @@ module CIRunner
       #
       # For failure, Minitest will print the location of the test file, but it can be wrong.
       #
-      # MaintenanceTasks::RunsTest#test_run_a_CSV_Task [/home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/minitest.rb:295]
+      # MaintenanceTasks::RunsTest#test_run_a_CSV_Task [/home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/minitest.rb:295] # rubocop:disable Layout/LineLength
       #
       # In this case the location of the file points to a file inside a gem, which is for sure not where the test lives.
       # When this happen, we discard the location provided by Minitest and try to match another possible location.
@@ -160,9 +160,11 @@ module CIRunner
       # @return [String]
       def underscore(camel_cased_word)
         return camel_cased_word.to_s unless /[A-Z-]|::/.match?(camel_cased_word)
-        word = camel_cased_word.to_s.gsub("::", "/")
 
-        word.gsub!(/([A-Z]+)(?=[A-Z][a-z])|([a-z\d])(?=[A-Z])/) { ($1 || $2) << "_" }
+        word = camel_cased_word.to_s.gsub("::", "/")
+        word.gsub!(/([A-Z]+)(?=[A-Z][a-z])|([a-z\d])(?=[A-Z])/) do
+          (Regexp.last_match(1) || Regexp.last_match(2)) << "_"
+        end
         word.tr!("-", "_")
         word.downcase!
         word
@@ -177,9 +179,9 @@ module CIRunner
       # @example
       #   Given a failure: TestReloading#test_reload_recovers_from_name_errors__w__on_unload_callbacks_:
       #   We try to look for a line from the stacktrace like this one:
-      #   /Users/runner/work/zeitwerk/zeitwerk/test/lib/zeitwerk/test_reloading.rb:219:in `block in <class:TestReloading>'
+      #   /Users/runner/wok/zeitwerk/zeitwerk/test/lib/zeitwerk/test_reloading.rb:12:in `block in <class:TestReloading>'
       def try_stacktrace(match_data)
-        regex = /\s*(\/.*?):\d+:in.*#{match_data[:class]}/
+        regex = %r{\s*(/.*?):\d+:in.*#{match_data[:class]}}
 
         @buffer.match(regex) { |match| match[1] }
       end
@@ -197,7 +199,7 @@ module CIRunner
       #   /Users/runner/work/foo/foo/test/lib/foo/big_problem_test.rb:218
       def try_infer_file_from_class(match_data)
         file_name = underscore(match_data[:class].split("::").last)
-        regex = /(\/.*#{file_name}.*?):\d+/
+        regex = %r{(/.*#{file_name}.*?):\d+}
 
         @buffer.match(regex) { |match| match[1] }
       end

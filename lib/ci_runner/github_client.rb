@@ -65,7 +65,7 @@ module CIRunner
     def download_log(repository, check_run_id)
       download_url = get("/repos/#{repository}/actions/jobs/#{check_run_id}/logs")
 
-      URI.open(download_url)
+      URI.open(download_url) # rubocop:disable Security/Open
     end
 
     private

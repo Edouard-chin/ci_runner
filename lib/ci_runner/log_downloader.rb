@@ -35,7 +35,7 @@ module CIRunner
       github_client = GithubClient.new(Configuration::User.instance.github_token)
       error = nil
 
-      ::CLI::UI.spinner("Downloading CI logs from GitHub", auto_debrief: false) do |spinner|
+      ::CLI::UI.spinner("Downloading CI logs from GitHub", auto_debrief: false) do
         logfile = github_client.download_log(@repository, @check_run["id"])
 
         cache_log(logfile)

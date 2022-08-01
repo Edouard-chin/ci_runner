@@ -47,8 +47,8 @@ module CIRunner
         File.write(rakefile_path, code)
 
         env = {}
-        env["RUBY"] = ruby_path.to_s if ruby_path && ruby_path.exist?
-        env["BUNDLE_GEMFILE"] = gemfile_path.to_s if gemfile_path && gemfile_path.exist?
+        env["RUBY"] = ruby_path.to_s if ruby_path&.exist?
+        env["BUNDLE_GEMFILE"] = gemfile_path.to_s if gemfile_path&.exist?
 
         system(env, "bundle exec ruby #{rakefile_path}")
       end
@@ -56,7 +56,7 @@ module CIRunner
       private
 
       def process_buffer
-        failure_regex = %r{rspec[[:blank:]]*(?<file_path>.*?):\d+[[:blank:]]*#[[:blank:]]*(?<test_name>.*)}
+        failure_regex = /rspec[[:blank:]]*(?<file_path>.*?):\d+[[:blank:]]*#[[:blank:]]*(?<test_name>.*)/
 
         @buffer.each_line do |line|
           line.match(failure_regex) do |match_data|

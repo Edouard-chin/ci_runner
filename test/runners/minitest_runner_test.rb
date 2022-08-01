@@ -169,8 +169,16 @@ module CIRunner
         runner.parse!
 
         expected = [
-          TestFailure.new("MaintenanceTasks::RunsTest", "test_run_a_CSV_Task", "test/system/maintenance_tasks/runs_test.rb"),
-          TestFailure.new("MaintenanceTasks::RunsTest", "test_pause_a_Run", "test/system/maintenance_tasks/runs_test.rb"),
+          TestFailure.new(
+            "MaintenanceTasks::RunsTest",
+            "test_run_a_CSV_Task",
+            "test/system/maintenance_tasks/runs_test.rb",
+          ),
+          TestFailure.new(
+            "MaintenanceTasks::RunsTest",
+            "test_pause_a_Run",
+            "test/system/maintenance_tasks/runs_test.rb"
+          ),
         ]
 
         assert_equal(2, runner.failures.count)
@@ -200,7 +208,11 @@ module CIRunner
 
         runner.parse!
 
-        expected = TestFailure.new("TestReloading", "test_reload_recovers_from_name_errors__w__on_unload_callbacks_", "path/to/file.rb")
+        expected = TestFailure.new(
+          "TestReloading",
+          "test_reload_recovers_from_name_errors__w__on_unload_callbacks_",
+          "path/to/file.rb",
+        )
 
         assert_equal(1, runner.failures.count)
         assert_equal(expected.test_name, runner.failures[0].test_name)
@@ -415,7 +427,9 @@ module CIRunner
 
       def test_uses_right_gemfile_when_it_exists
         runner = MinitestRunner.new(nil)
-        runner.failures = [TestFailure.new("WarningTest", "test_right_gemfile_picked", "test/fixtures/tests/warning_test.rb")]
+        runner.failures = [
+          TestFailure.new("WarningTest", "test_right_gemfile_picked", "test/fixtures/tests/warning_test.rb"),
+        ]
         runner.seed = "1044"
         runner.gemfile = File.expand_path("../fixtures/Gemfile_dummy", __dir__)
 
@@ -444,7 +458,9 @@ module CIRunner
 
       def test_uses_default_gemfile_when_gemfile_cant_be_found_locally
         runner = MinitestRunner.new(StringIO.new("a"))
-        runner.failures = [TestFailure.new("WarningTest", "test_default_gemfile_picked", "test/fixtures/tests/warning_test.rb")]
+        runner.failures = [
+          TestFailure.new("WarningTest", "test_default_gemfile_picked", "test/fixtures/tests/warning_test.rb"),
+        ]
         runner.seed = "1044"
         runner.gemfile = File.expand_path("../fixtures/Gemfile_unexisting", __dir__)
 
@@ -479,7 +495,7 @@ module CIRunner
       private
 
       def clean_statistics(string)
-        regex = /(Finished in) \d+\.\d{6}s, \d+\.\d{4} runs\/s, \d+\.\d{4} assertions\/s\./
+        regex = %r{(Finished in) \d+\.\d{6}s, \d+\.\d{4} runs/s, \d+\.\d{4} assertions/s\.}
 
         string.gsub(regex, '\1 0s.')
       end

@@ -6,7 +6,7 @@ module Minitest
   extend self
 
   def plugin_ci_runner_options(opts, options)
-    opts.on "--ci-runner=URI", "The UNIX socket CI Runner needs to connect to" do |value|
+    opts.on("--ci-runner=URI", "The UNIX socket CI Runner needs to connect to") do |value|
       options[:ci_runner] = value
     end
   end

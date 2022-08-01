@@ -89,7 +89,7 @@ module CIRunner
 
     # return [Regexp] The regex to detect the full repository name.
     def remote_regex
-      /\s+(?:git@|https:\/\/)github.com(?::|\/)([a-zA-Z0-9\-_\.]+)\/([a-zA-Z0-9\-_\.]+?)(?:\.git)?\s+\((?:fetch|push)\)/
+      %r{\s+(?:git@|https://)github.com(?::|/)([a-zA-Z0-9\-_\.]+)/([a-zA-Z0-9\-_\.]+?)(?:\.git)?\s+\((?:fetch|push)\)}
     end
   end
 end

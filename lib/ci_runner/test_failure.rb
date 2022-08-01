@@ -54,7 +54,7 @@ module CIRunner
         return File.expand_path(path, Dir.pwd)
       end
 
-      regex = /.*\/?(test\/.*?)\Z/
+      regex = %r{.*/?(test/.*?)\Z}
       unless path.to_s.match?(regex)
         raise "Can't create a relative path."
       end
