@@ -125,7 +125,7 @@ module CIRunner
         assert_equal(expected.path.to_s, failure.path)
       end
 
-      def test_when_projet_uses_custom_gemfile_and_ruby_regexes
+      def test_when_projet_uses_custom_regexes
         log = read_fixture("custom_regexes.log")
         runner = MinitestRunner.new(log)
 
@@ -137,6 +137,7 @@ module CIRunner
             ---
             ruby_regex: 'My Ruby version: (\\d\\.\\d\\.\\d)'
             gemfile_regex: 'Gemfile used: (.*)'
+            seed_regex: 'Running with the seed value (\\d+)'
           EOM
 
           ProjectConfiguration.instance.load!
@@ -146,6 +147,7 @@ module CIRunner
 
         assert_equal("Gemfile_AR_5_1", runner.gemfile)
         assert_equal("3.2.0", runner.ruby_version)
+        assert_equal("65123", runner.seed)
       end
 
       def test_parse_namespaced_class_location_infer_from_stacktrace

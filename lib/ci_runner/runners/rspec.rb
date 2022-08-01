@@ -5,6 +5,8 @@ require_relative "base"
 module CIRunner
   module Runners
     class RSpec < Base
+      SEED_REGEX = /Randomized with seed[[:blank:]]*(\d+)/
+
       def self.match?(log)
         command = /bundle exec rspec/
         summary = /Failed examples:/
@@ -19,7 +21,7 @@ module CIRunner
       def parse!
         @ci_log.each_line do |line|
           case line
-          when /Randomized with seed[[:blank:]]*(\d+)/
+          when seed_regex
             @seed = Regexp.last_match(1)
           when ruby_detection_regex
             @ruby_version = Regexp.last_match(1)

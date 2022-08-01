@@ -74,6 +74,15 @@ module CIRunner
         Regexp.union(*regexes)
       end
 
+      def seed_regex
+        regexes = [
+          ProjectConfiguration.instance.seed_regex,
+          self.class::SEED_REGEX
+        ].compact
+
+        Regexp.union(*regexes)
+      end
+
       def gemfile_path
         return unless gemfile
 

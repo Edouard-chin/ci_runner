@@ -26,6 +26,10 @@ module CIRunner
       to_regexp(@yaml_config.dig("gemfile_regex"))
     end
 
+    def seed_regex
+      to_regexp(@yaml_config.dig("seed_regex"))
+    end
+
     def config_file
       Pathname(File.expand_path(CONFIG_PATH, Dir.pwd))
     end

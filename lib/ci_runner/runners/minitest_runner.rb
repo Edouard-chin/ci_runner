@@ -7,18 +7,16 @@ require "tempfile"
 module CIRunner
   module Runners
     class MinitestRunner < Base
+      SEED_REGEX = Regexp.union(
+        /Run options:.*?--seed\s+(\d+)/, # Default Minitest Statistics Repoter
+        /Running tests with run options.*--seed\s+(\d+)/, # MinitestReporters BaseReporter
+        /Started with run options.*--seed\s+(\d+)/, # MinitestReporters ProgressReporter
+      )
+
       def self.match?(ci_log)
         default_reporter = /(Finished in) \d+\.\d{6}s, \d+\.\d{4} runs\/s, \d+\.\d{4} assertions\/s\./
 
-        Regexp.union(default_reporter, seed_flag, "minitest").match?(ci_log)
-      end
-
-      def self.seed_flag
-        Regexp.union(
-          /Run options:.*?--seed\s+(\d+)/, # Default Minitest Statistics Repoter
-          /Running tests with run options.*--seed\s+(\d+)/, # MinitestReporters BaseReporter
-          /Started with run options.*--seed\s+(\d+)/, # MinitestReporters ProgressReporter
-        )
+        Regexp.union(default_reporter, SEED_REGEX, "minitest").match?(ci_log)
       end
 
       def name
@@ -28,7 +26,7 @@ module CIRunner
       def parse!
         @ci_log.each_line do |line|
           case line
-          when self.class.seed_flag
+          when seed_regex
             @seed = Regexp.last_match.captures.compact.first
           when ruby_detection_regex
             @ruby_version = Regexp.last_match(1)
