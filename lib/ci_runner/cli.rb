@@ -54,7 +54,7 @@ module CIRunner
      Save a personal access GitHub token in the ~/.ci_runner/config.yml file.
      The GitHub token is required to fetch CI checks and download logs from repositories.
 
-     You can get a token from GitHub by following this link: https://github.com/settings/tokens/new?description=CI+Runner&scopes=repo:status,public_repo
+     You can get a token from GitHub by following this link: https://github.com/settings/tokens/new?description=CI+Runner&scopes=repo
     EOM
     def github_token(token)
       ::CLI::UI::StdoutRouter.enable
