@@ -129,7 +129,7 @@ module CIRunner
       end
 
       def try_infer_file_from_class(match_data)
-        file_name = underscore(match_data[:class])
+        file_name = underscore(match_data[:class].split("::").last)
         regex = /(\/.*#{file_name}.*?):\d+/
 
         @buffer.match(regex) { |match| match[1] }

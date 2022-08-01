@@ -1,0 +1,29 @@
+2022-08-01T06:16:12.5909757Z Finished in 11.361186s, 4.6650 runs/s, 12.2346 assertions/s.
+2022-08-01T06:16:12.5910022Z
+2022-08-01T06:16:12.5950463Z   6) Error:
+2022-08-01T06:16:12.5950720Z CIRunner::GitHelperTest#test_repository_from_remote_git_origin:
+2022-08-01T06:16:12.5951192Z RuntimeError: Couldn't setup the git repository to run the tests.
+2022-08-01T06:16:12.5951520Z     /home/runner/work/ci_runner/ci_runner/test/git_helper_test.rb:22:in `setup'
+2022-08-01T06:16:12.5967434Z
+2022-08-01T06:16:12.5967570Z 53 runs, 139 assertions, 8 failures, 7 errors, 0 skips
+2022-08-01T06:16:12.5984653Z rake aborted!
+2022-08-01T06:16:12.5984865Z Command failed with status (1)
+2022-08-01T06:16:12.5985374Z /home/runner/work/ci_runner/ci_runner/vendor/bundle/ruby/2.7.0/gems/rake-13.0.6/exe/rake:27:in `<top (required)>'
+2022-08-01T06:16:12.5985734Z /opt/hostedtoolcache/Ruby/2.7.6/x64/bin/bundle:23:in `load'
+2022-08-01T06:16:12.5986044Z /opt/hostedtoolcache/Ruby/2.7.6/x64/bin/bundle:23:in `<main>'
+2022-08-01T06:16:12.5986626Z Tasks: TOP => default => test
+2022-08-01T06:16:12.5986942Z (See full trace by running task with --trace)
+2022-08-01T06:16:12.6030857Z ##[error]Process completed with exit code 1.
+2022-08-01T06:16:12.6083696Z Post job cleanup.
+2022-08-01T06:16:12.7309279Z [command]/usr/bin/git version
+2022-08-01T06:16:12.7345204Z git version 2.37.1
+2022-08-01T06:16:12.7391969Z Temporarily overriding HOME='/home/runner/work/_temp/af95839a-39b7-440e-aea4-407ea6647254' before making global git config changes
+2022-08-01T06:16:12.7393321Z Adding repository directory to the temporary git global config as a safe directory
+2022-08-01T06:16:12.7397780Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ci_runner/ci_runner
+2022-08-01T06:16:12.7437230Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2022-08-01T06:16:12.7472595Z [command]/usr/bin/git submodule foreach --recursive git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :
+2022-08-01T06:16:12.7729606Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2022-08-01T06:16:12.7733746Z http.https://github.com/.extraheader
+2022-08-01T06:16:12.7744291Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2022-08-01T06:16:12.7781117Z [command]/usr/bin/git submodule foreach --recursive git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :
+2022-08-01T06:16:12.8232921Z Cleaning up orphan processes

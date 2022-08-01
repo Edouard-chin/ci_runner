@@ -119,6 +119,26 @@ module CIRunner
         assert_equal(expected.path.to_s, failure.path)
       end
 
+      def test_parse_namespaced_class_location_infer_from_stacktrace
+        log = read_fixture("minitest_namespace.log")
+        parser = MinitestRunner.new(log)
+
+        parser.parse!
+
+        assert_equal(1, parser.failures.count)
+
+        expected = TestFailure.new(
+          "CIRunner::GitHelperTest",
+          "test_repository_from_remote_git_origin",
+          "test/git_helper_test.rb",
+        )
+        failure = parser.failures[0]
+
+        assert_equal(expected.klass, failure.klass)
+        assert_equal(expected.test_name, failure.test_name)
+        assert_equal(expected.path.to_s, failure.path)
+      end
+
       def test_run_one_runnable
         runner = MinitestRunner.new(nil)
         runner.failures = [TestFailure.new("FooTest", "test_one", "test/fixtures/tests/foo_test.rb")]
