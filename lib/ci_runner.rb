@@ -12,7 +12,8 @@ module CIRunner
   autoload :TestRunFinder,  "ci_runner/test_run_finder"
   autoload :LogDownloader,  "ci_runner/log_downloader"
   autoload :TestFailure,    "ci_runner/test_failure"
-  autoload :UserConfiguration,  "ci_runner/user_configuration"
+  autoload :UserConfiguration,     "ci_runner/user_configuration"
+  autoload :ProjectConfiguration,  "ci_runner/project_configuration"
 
   module Runners
     autoload :MinitestRunner, "ci_runner/runners/minitest_runner"

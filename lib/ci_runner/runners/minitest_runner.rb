@@ -30,11 +30,11 @@ module CIRunner
           case line
           when self.class.seed_flag
             @seed = Regexp.last_match.captures.compact.first
-          when /[^_-][rR]uby(?:[[:blank:]]*|\/)(\d\.\d\.\d+)p?(?!\/gems)/
+          when ruby_detection_regex
             @ruby_version = Regexp.last_match(1)
 
             @buffer << line if buffering?
-          when /BUNDLE_GEMFILE:[[:blank:]]*(.*)/
+          when gemfile_detection_regex
             @gemfile = Regexp.last_match(1).rstrip
           when /(Failure|Error):\s*\Z/
             process_buffer if buffering?

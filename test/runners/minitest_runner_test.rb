@@ -7,6 +7,12 @@ require "fileutils"
 module CIRunner
   module Runners
     class MinitestRunnerTest < Minitest::Test
+      def setup
+        super
+
+        ProjectConfiguration.instance.load!
+      end
+
       def test_parse_raw_minitest_log_failures
         log = read_fixture("raw_minitest_failures.log")
         parser = MinitestRunner.new(log)
@@ -117,6 +123,29 @@ module CIRunner
         assert_equal(expected.klass, failure.klass)
         assert_equal(expected.test_name, failure.test_name)
         assert_equal(expected.path.to_s, failure.path)
+      end
+
+      def test_when_projet_uses_custom_gemfile_and_ruby_regexes
+        log = read_fixture("custom_regexes.log")
+        runner = MinitestRunner.new(log)
+
+        Dir.chdir(Dir.home) do
+          config_file = ProjectConfiguration.instance.config_file
+          Dir.mkdir(config_file.dirname)
+
+          config_file.write(<<~EOM)
+            ---
+            ruby_regex: 'My Ruby version: (\\d\\.\\d\\.\\d)'
+            gemfile_regex: 'Gemfile used: (.*)'
+          EOM
+
+          ProjectConfiguration.instance.load!
+        end
+
+        runner.parse!
+
+        assert_equal("Gemfile_AR_5_1", runner.gemfile)
+        assert_equal("3.2.0", runner.ruby_version)
       end
 
       def test_parse_namespaced_class_location_infer_from_stacktrace

@@ -56,6 +56,24 @@ module CIRunner
 
       private
 
+      def ruby_detection_regex
+        regexes = [
+          ProjectConfiguration.instance.ruby_detection_regex,
+          /[^_-][rR]uby(?:[[:blank:]]*|\/)(\d\.\d\.\d+)p?(?!\/gems)/,
+        ].compact
+
+        Regexp.union(*regexes)
+      end
+
+      def gemfile_detection_regex
+        regexes = [
+          ProjectConfiguration.instance.gemfile_detection_regex,
+          /BUNDLE_GEMFILE:[[:blank:]]*(.*)/
+        ].compact
+
+        Regexp.union(*regexes)
+      end
+
       def gemfile_path
         return unless gemfile
 
