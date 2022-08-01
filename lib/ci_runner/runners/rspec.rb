@@ -8,6 +8,9 @@ module CIRunner
       SEED_REGEX = /Randomized with seed[[:blank:]]*(\d+)/
       BUFFER_STARTS = /(Finished in|Failed examples)/
 
+      # @param ci_log [String] The CI log output
+      #
+      # @return [Boolean] Whether this runner detects (and therefore can handle) Minitest from the log output.
       def self.match?(log)
         command = /bundle exec rspec/
         summary = /Failed examples:/
@@ -15,6 +18,7 @@ module CIRunner
         Regexp.union(command, summary, /rspec/i).match?(log)
       end
 
+      # @return [String] See Runners::Base#report
       def name
         "RSpec"
       end
