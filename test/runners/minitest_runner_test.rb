@@ -182,6 +182,60 @@ module CIRunner
         end
       end
 
+      def test_when_projet_uses_custom_failure_regex
+        log = read_fixture("custom_failures.log")
+        runner = MinitestRunner.new(log)
+
+        Dir.chdir(Dir.home) do
+          config_file = ProjectConfiguration.instance.config_file
+          Dir.mkdir(config_file.dirname)
+
+          config_file.write(<<~EOM)
+            ---
+            failures_regex: !ruby/regexp '/(?:\s*)(?<class>[a-zA-Z0-9_:]+)\#(?<test_name>test_.+?)(?::\s*$).*bin\/rerun_test[[:blank:]](?<file_path>.*)[[:blank:]]-n/m'
+          EOM
+
+          ProjectConfiguration.instance.load!
+        end
+
+        runner.parse!
+
+        expected = TestFailure.new("TestReloading", "test_reload_recovers_from_name_errors__w__on_unload_callbacks_", "path/to/file.rb")
+
+        assert_equal(1, runner.failures.count)
+        assert_equal(expected.test_name, runner.failures[0].test_name)
+        assert_equal(expected.klass, runner.failures[0].klass)
+        assert_equal(expected.path, runner.failures[0].path)
+      end
+
+      def test_when_projet_uses_custom_invalid_failure_regex
+        log = read_fixture("custom_failures.log")
+        runner = MinitestRunner.new(log)
+
+        Dir.chdir(Dir.home) do
+          config_file = ProjectConfiguration.instance.config_file
+          Dir.mkdir(config_file.dirname)
+
+          config_file.write(<<~EOM)
+            ---
+            failures_regex: '(bla|blo)_test.rb'
+          EOM
+
+          ProjectConfiguration.instance.load!
+        end
+
+        error = assert_raises(Error) do
+          runner.parse!
+        end
+
+        assert_equal(<<~EOM, error.message)
+          The {{warning:failures_regex}} configuration of your project doesn't include expected named captures.
+          CI Runner expects the following Regexp named captures: ["file_path", "test_name", "class"].
+
+          Your Regex should look something like {{info:/(?<file_path>...)(?<test_name>...)(?<class>...)/}}
+        EOM
+      end
+
       def test_parse_namespaced_class_location_infer_from_stacktrace
         log = read_fixture("minitest_namespace.log")
         parser = MinitestRunner.new(log)

@@ -59,12 +59,14 @@ module CIRunner
       private
 
       def process_buffer
-        match_data = minitest_failure
-        return unless match_data
+        super do
+          match_data = minitest_failure
+          next unless match_data
 
-        file_path = valid_path?(match_data[:file_path]) ? match_data[:file_path] : find_test_location(match_data)
+          file_path = valid_path?(match_data[:file_path]) ? match_data[:file_path] : find_test_location(match_data)
 
-        @failures << TestFailure.new(match_data[:class], match_data[:test_name], file_path)
+          @failures << TestFailure.new(match_data[:class], match_data[:test_name], file_path)
+        end
       end
 
       def valid_path?(path)

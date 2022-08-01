@@ -15,7 +15,7 @@ module CIRunner
     end
 
     def load!
-      @yaml_config = config_file.exist? ? YAML.load_file(config_file) : {}
+      @yaml_config = config_file.exist? ? YAML.safe_load_file(config_file, permitted_classes: [Regexp]) : {}
     end
 
     def ruby_detection_regex
@@ -32,6 +32,25 @@ module CIRunner
 
     def buffer_starts_regex
       to_regexp(@yaml_config.dig("buffer_starts_regex"))
+    end
+
+    def test_failure_detection_regex
+      regexp = to_regexp(@yaml_config.dig("failures_regex"))
+      return unless regexp
+
+      expected_captures = ["file_path", "test_name", "class"]
+      difference = expected_captures - regexp.names
+
+      if difference.any?
+        raise(Error, <<~EOM)
+          The {{warning:failures_regex}} configuration of your project doesn't include expected named captures.
+          CI Runner expects the following Regexp named captures: #{expected_captures.inspect}.
+
+          Your Regex should look something like {{info:/(?<file_path>...)(?<test_name>...)(?<class>...)/}}
+        EOM
+      end
+
+      regexp
     end
 
     def process_on_new_match?

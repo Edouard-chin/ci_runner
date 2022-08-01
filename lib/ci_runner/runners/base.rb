@@ -79,7 +79,15 @@ module CIRunner
       private
 
       def process_buffer
-        raise NotImplementedError, "Subclass responsability"
+        custom_project_regex = ProjectConfiguration.instance.test_failure_detection_regex
+
+        if custom_project_regex
+          custom_project_regex.match(@buffer) do |match_data|
+            @failures << TestFailure.new(match_data[:class], match_data[:test_name], match_data[:file_path])
+          end
+        else
+          yield
+        end
       end
 
       def ruby_detection_regex
