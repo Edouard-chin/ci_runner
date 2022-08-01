@@ -56,11 +56,13 @@ module CIRunner
 
       def start!
         test_files = failures.map(&:path)
+        minitest_plugin_path = File.expand_path("../..", __dir__)
 
         code = <<~EOM
         Rake::TestTask.new(:__ci_runner_test) do |t|
           t.libs << "test"
           t.libs << "lib"
+          t.libs << "#{minitest_plugin_path}"
           t.test_files = #{test_files}
           t.ruby_opts << "-rrake"
         end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "drb/drb"
-require "ci_runner/suite"
+require_relative "../ci_runner/suite"
 
 module Minitest
   extend self
