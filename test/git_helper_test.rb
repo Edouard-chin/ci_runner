@@ -83,6 +83,27 @@ module CIRunner
       assert_equal("some_name/ci_runner", repository)
     end
 
+    def test_repository_from_remote_origin_has_precedence
+      _, status = Open3.capture2("git remote add some_remote https://github.com/Edouard-chin/ci_runner.git")
+      raise("Couldn't add a remote to the test git repository") unless status.success?
+
+      _, status = Open3.capture2("git remote add remote https://github.com/some_name/ci_runner.git")
+      raise("Couldn't add a remote to the test git repository") unless status.success?
+
+      repository = GitHelper.repository_from_remote
+
+      assert_equal("some_name/ci_runner", repository)
+    end
+
+    def test_repository_from_remote_with_different_name
+      _, status = Open3.capture2("git remote add some_remote https://github.com/Edouard-chin/ci_runner.git")
+      raise("Couldn't add a remote to the test git repository") unless status.success?
+
+      repository = GitHelper.repository_from_remote
+
+      assert_equal("Edouard-chin/ci_runner", repository)
+    end
+
     def test_repository_from_remote_raise_when_repository_cant_be_determined
       _, status = Open3.capture2("git remote add origin https://scv.com/Edouard-chin/ci_runner.git")
       raise("Couldn't add a remote to the test git repository") unless status.success?

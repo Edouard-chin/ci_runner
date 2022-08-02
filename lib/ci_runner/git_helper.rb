@@ -55,7 +55,11 @@ module CIRunner
     # Try to get the right repository depending on the remotes. It's quite common to have two remotes when your
     # work on a forked project. The remote from the source project is regularly called: "remote".
     #
-    # CI Runner will prefer the repository name for the remote "remote" over others.
+    # CI Runner will prioritize remotes with the following order:
+    #
+    # - remote
+    # - origin
+    # - anything else
     #
     # @param stdout [String] The output from the `git remote -v` command.
     #
@@ -73,6 +77,10 @@ module CIRunner
     #    rails/rails will be returned.
     def process_remotes(stdout)
       stdout.match(/remote#{remote_regex}/) do |match_data|
+        return "#{match_data[1]}/#{match_data[2]}"
+      end
+
+      stdout.match(/origin#{remote_regex}/) do |match_data|
         return "#{match_data[1]}/#{match_data[2]}"
       end
 
