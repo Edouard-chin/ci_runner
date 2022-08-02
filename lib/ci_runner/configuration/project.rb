@@ -43,7 +43,7 @@ module CIRunner
       #
       # @return [void]
       def load!
-        @yaml_config = config_file.exist? ? YAML.safe_load_file(config_file, permitted_classes: [Regexp]) : {}
+        @yaml_config = config_file.exist? ? YAML.safe_load(config_file.read, permitted_classes: [Regexp]) : {}
       end
 
       # This regex is used to detect the Ruby version that was used on a CI. It's quite common to have a CI
