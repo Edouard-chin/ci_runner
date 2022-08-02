@@ -50,7 +50,7 @@ module CIRunner
         env["RUBY"] = ruby_path.to_s if ruby_path&.exist?
         env["BUNDLE_GEMFILE"] = gemfile_path.to_s if gemfile_path&.exist?
 
-        system(env, "bundle exec ruby #{rakefile_path}")
+        execute_within_frame(env, "bundle exec ruby #{rakefile_path}")
       end
 
       private

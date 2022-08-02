@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "pathname"
+require "open3"
 
 module CIRunner
   module Runners
@@ -217,6 +218,23 @@ module CIRunner
       # @return [String]
       def first_matching_group(match_data)
         match_data.captures.find { |v| v }
+      end
+
+      # Runs a command and stream its output. We can't use `system` directly, as otherwise the
+      # streamed ouput won't fit properly inside the ::CLI::UI frame.
+      #
+      # @param env [Hash] A hash of environment variables to pass to the subprocess
+      # @param command [String] The command itself
+      #
+      # @return [void]
+      def execute_within_frame(env, command)
+        Open3.popen3(env, command) do |_, stdout, stderr, _|
+          while (char = stdout.getc)
+            print(char)
+          end
+
+          print(stderr.read)
+        end
       end
     end
   end

@@ -273,7 +273,7 @@ module CIRunner
         runner.failures = [TestFailure.new("FooTest", "test_one", "test/fixtures/tests/foo_test.rb")]
         runner.seed = "60212"
 
-        stdout, _ = capture_subprocess_io do
+        stdout, _ = capture_io do
           runner.start!
         end
 
@@ -298,7 +298,7 @@ module CIRunner
         ]
         runner.seed = "10331"
 
-        stdout, _ = capture_subprocess_io do
+        stdout, _ = capture_io do
           runner.start!
         end
 
@@ -323,7 +323,7 @@ module CIRunner
         ]
         runner.seed = "10331"
 
-        stdout, _ = capture_subprocess_io do
+        stdout, _ = capture_io do
           runner.start!
         end
 
@@ -347,7 +347,7 @@ module CIRunner
         ]
         runner.seed = "1044"
 
-        stdout, _ = capture_subprocess_io do
+        stdout, _ = capture_io do
           runner.start!
         end
 
@@ -383,7 +383,7 @@ module CIRunner
         File.write(executable_path, stub_ruby)
         FileUtils.chmod("+x", executable_path)
 
-        stdout, _ = capture_subprocess_io do
+        stdout, _ = capture_io do
           runner.start!
         end
 
@@ -396,23 +396,16 @@ module CIRunner
         runner.seed = "1044"
         runner.ruby_version = "2.7.6"
 
-        stdout = ""
-
-        subprocess_stdout, _ = capture_subprocess_io do
-          stdout, _ = capture_io do
-            runner.start!
-          end
+        stdout, _ = capture_io do
+          runner.start!
         end
 
-        assert_equal(<<~EOM, stdout)
+        assert_equal(<<~EOM, clean_statistics(stdout))
           \e[0;33mCouldn't find Ruby version 2.7.6 on your system.\e[0m
           \e[0;33m\e[0m\e[0;33mSearched in #{Dir.home}/.rubies/ruby-2.7.6/bin/ruby\e[0m
           \e[0;33m\e[0m\e[0;33m\e[0m
-          \e[0;33m\e[0m\e[0;33m\e[0m\e[0;33mThe test run will start but will be running using your current Ruby version \e[0;33;4m#{RUBY_VERSION}\e[0;33m.\e[0m
+          \e[0;33m\e[0m\e[0;33m\e[0m\e[0;33mThe test run will start but will be running using your current Ruby version \e[0;33;4m3.1.2\e[0;33m.\e[0m
           \e[0;33m\e[0m\e[0;33m\e[0m\e[0;33m\e[0;33;4m\e[0;33m\e[0m
-        EOM
-
-        assert_equal(<<~EOM, clean_statistics(subprocess_stdout))
           Run options: --seed 1044
 
           # Running:
@@ -437,7 +430,7 @@ module CIRunner
           Bundler.unbundled_system({ "BUNDLE_GEMFILE" => runner.gemfile }, "bundle install")
         end
 
-        stdout, _ = capture_subprocess_io do
+        stdout, _ = capture_io do
           Bundler.with_unbundled_env do
             runner.start!
           end
@@ -464,22 +457,15 @@ module CIRunner
         runner.seed = "1044"
         runner.gemfile = File.expand_path("../fixtures/Gemfile_unexisting", __dir__)
 
-        stdout = ""
-
-        subprocess_stdout, _ = capture_subprocess_io do
-          stdout, _ = capture_io do
-            runner.start!
-          end
+        stdout, _ = capture_io do
+          runner.start!
         end
 
-        assert_equal(<<~EOM, stdout)
+        assert_equal(<<~EOM, clean_statistics(stdout))
           \e[0;33mYour CI run ran with the Gemfile /Users/edouard/code/projects/ci_runner/test/fixtures/Gemfile_unexisting\e[0m
           \e[0;33m\e[0m\e[0;33mI couldn't find this gemfile in your folder.\e[0m
           \e[0;33m\e[0m\e[0;33m\e[0m\n\e[0;33m\e[0m\e[0;33m\e[0m\e[0;33mThe test run will start but will be using the default Gemfile of your project\e[0m
           \e[0;33m\e[0m\e[0;33m\e[0m\e[0;33m\e[0m
-        EOM
-
-        assert_equal(<<~EOM, clean_statistics(subprocess_stdout))
           Run options: --seed 1044
 
           # Running:

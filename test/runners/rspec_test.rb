@@ -25,7 +25,7 @@ module CIRunner
           TestFailure.new(nil, "harry potter abracadabra transforms", "test/fixtures/specs/foo_spec.rb"),
         ]
 
-        stdout, _ = capture_subprocess_io do
+        stdout, _ = capture_io do
           runner.start!
         end
 
@@ -51,7 +51,7 @@ module CIRunner
           TestFailure.new(nil, "harry potter abracadabra flies", "test/fixtures/specs/foo_spec.rb"),
         ]
 
-        stdout, _ = capture_subprocess_io do
+        stdout, _ = capture_io do
           runner.start!
         end
 
@@ -77,7 +77,7 @@ module CIRunner
           TestFailure.new(nil, "hermione abracadabra flies", "test/fixtures/specs/bla_spec.rb"),
         ]
 
-        stdout, _ = capture_subprocess_io do
+        stdout, _ = capture_io do
           runner.start!
         end
 
