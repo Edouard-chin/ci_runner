@@ -3,6 +3,7 @@
 require_relative "base"
 require "drb/drb"
 require "tempfile"
+require "rake"
 
 module CIRunner
   module Runners
@@ -64,14 +65,15 @@ module CIRunner
         super
 
         minitest_plugin_path = File.expand_path("../..", __dir__)
+        rake_load_path = Gem.loaded_specs["rake"].full_require_paths.first
 
         code = <<~EOM
           Rake::TestTask.new(:__ci_runner_test) do |t|
             t.libs << "test"
             t.libs << "lib"
+            t.libs << "#{rake_load_path}"
             t.libs << "#{minitest_plugin_path}"
             t.test_files = #{failures.map(&:path)}
-            t.ruby_opts << "-rrake"
           end
 
           Rake::Task[:__ci_runner_test].invoke
