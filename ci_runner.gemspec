@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "rake"
 require_relative "lib/ci_runner/version"
 
 Gem::Specification.new do |spec|
@@ -8,11 +9,15 @@ Gem::Specification.new do |spec|
   spec.authors = ["Edouard Chin"]
   spec.email = ["chin.edouard@gmail.com"]
 
-  spec.summary = "Re-run failing tests from CI on your local machine without copy/pasting anything."
+  spec.summary = "Re-run failing tests from CI on your local machine without copy/pasting."
   spec.description = <<~EOM
     Tired of copying the test suites names from a failed CI?
 
-    This gem will automate this tedious workflow. CI-runner will run all the failing tests from CI on your machine.
+    This gem will automate this tedious workflow. CI Runner will download the log from your CI
+    provider, parse it, detect failures and rerun exactly the same failing tests on your machine.
+
+    CI Runner can also detect the Ruby version used on your CI as well as which Gemfile and reuse
+    those when starting the run locally.
   EOM
   spec.homepage = "https://github.com/Edouard-chin/ci_runner"
   spec.license = "MIT"
@@ -20,23 +25,22 @@ Gem::Specification.new do |spec|
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/Edouard-chin/ci_runner"
+  spec.metadata["allowed_push_host"] = "https://rubygems.org"
+  spec.metadata["rubygems_mfa_required"] = "true"
 
-  # Specify which files should be added to the gem when it is released.
-  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
-  spec.files = Dir.chdir(File.expand_path(__dir__)) do
-    %x(git ls-files -z).split("\x0").reject do |f|
-      (f == __FILE__) || f.match(%r{\A(?:(?:test|spec|features)/|\.(?:git|travis|circleci)|appveyor)})
-    end
+  spec.files = Rake::FileList["lib/**/*", "exe/**/*", "ci_runner.gemspec"].exclude do |file|
+    !File.file?(file)
   end
+
   spec.bindir = "exe"
   spec.executables = ["ci_runner"]
   spec.require_paths = ["lib"]
 
-  spec.add_dependency("cli-ui")
-  spec.add_dependency("rake")
-  spec.add_dependency("thor")
+  spec.add_dependency("cli-ui", "~> 1.5")
+  spec.add_dependency("rake", "~> 13.0")
+  spec.add_dependency("thor", "~> 1.2")
 
-  spec.add_development_dependency("rspec")
-  spec.add_development_dependency("rubocop-shopify", ">= 2.8")
-  spec.add_development_dependency("webmock")
+  spec.add_development_dependency("rspec", "~> 3.11")
+  spec.add_development_dependency("rubocop-shopify", "~> 2.8")
+  spec.add_development_dependency("webmock", "~> 3.14")
 end

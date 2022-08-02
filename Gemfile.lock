@@ -12,9 +12,9 @@ PATH
   remote: .
   specs:
     ci_runner (0.1.0)
-      cli-ui
-      rake
-      thor
+      cli-ui (~> 1.5)
+      rake (~> 13.0)
+      thor (~> 1.2)
 
 GEM
   remote: https://rubygems.org/
@@ -77,8 +77,8 @@ DEPENDENCIES
   byebug
   ci_runner!
   minitest (~> 5.0)
-  rspec
-  rubocop-shopify (>= 2.8)
+  rspec (~> 3.11)
+  rubocop-shopify (~> 2.8)
   webmock!
 
 BUNDLED WITH
