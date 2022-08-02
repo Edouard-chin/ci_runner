@@ -3,6 +3,8 @@
 CI Runner is a Ruby library to **help rerun test failures from your CI on your local machine** without having to copy paste log output onto your terminal.
 CI Runner can rerun failures for the _Minitest and RSpec_ test frameworks.
 
+[!demo](demo.gif)
+
 ## :gear: Installation
 
 ```sh
