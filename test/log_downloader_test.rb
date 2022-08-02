@@ -28,7 +28,7 @@ module CIRunner
         end
       end
 
-      assert_equal("\e[36m⠋\e[0m \e[0mDownloading CI logs from GitHub\e[K\n\e[1A\r\e[32m✓\e[0m\e[0m\r\e[1B", out)
+      assert_match("Downloading CI logs from GitHub", out)
       assert_instance_of(Pathname, logfile)
       assert(logfile.exist?)
       assert_match("Edouard/catana/log-commit_sha-Ruby 3.1.2 Run.log", logfile.to_s)
@@ -53,7 +53,7 @@ module CIRunner
         end
       end
 
-      assert_equal("\e[36m⠋\e[0m \e[0mDownloading CI logs from GitHub\e[K\n\e[1A\r\e[32m✓\e[0m\e[0m\r\e[1B", out)
+      assert_match("Downloading CI logs from GitHub", out)
       assert_instance_of(Pathname, logfile)
       assert(logfile.exist?)
       assert_match("Edouard/catana/log-commit_sha-Ruby 3.1.2 Run.log", logfile.to_s)
@@ -78,7 +78,7 @@ module CIRunner
         end
       end
 
-      assert_equal("\e[36m⠋\e[0m \e[0mDownloading CI logs from GitHub\e[K\n\e[1A\r\e[32m✓\e[0m\e[0m\r\e[1B", out)
+      assert_match("Downloading CI logs from GitHub", out)
       assert_instance_of(Pathname, logfile)
       assert(logfile.exist?)
       assert_match("Edouard/catana/log-commit_sha-Ruby 3.1.2 Run.log", logfile.to_s)

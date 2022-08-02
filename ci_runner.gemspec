@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "rake"
 require_relative "lib/ci_runner/version"
 
 Gem::Specification.new do |spec|
@@ -28,9 +27,7 @@ Gem::Specification.new do |spec|
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
   spec.metadata["rubygems_mfa_required"] = "true"
 
-  spec.files = Rake::FileList["lib/**/*", "exe/**/*", "ci_runner.gemspec"].exclude do |file|
-    !File.file?(file)
-  end
+  spec.files = Dir["{lib,exe}/**/*", "ci_runner.gemspec"].select { |f| File.file?(f) }
 
   spec.bindir = "exe"
   spec.executables = ["ci_runner"]

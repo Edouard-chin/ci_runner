@@ -15,11 +15,11 @@ module CIRunner
       Dir.chdir(@dir)
       File.write("some_file", "abc")
 
-      _, _ = Open3.capture2("git init")
-      _, _ = Open3.capture2("git add -A")
-      _, status = Open3.capture2("git commit -m 'WIP'")
-
-      raise("Couldn't setup the git repository to run the tests.") unless status.success?
+      run_git_command("git config --global user.email 'you@example.com'")
+      run_git_command("git config --global user.name 'Your Name'")
+      run_git_command("git init")
+      run_git_command("git add -A")
+      run_git_command("git commit -m 'WIP'")
     end
 
     def teardown
@@ -97,6 +97,14 @@ module CIRunner
         Please pass the `--repository` flag (ci_runner --repository <owner/repository_name>)
       EOM
       assert_equal(expected, error.message)
+    end
+
+    private
+
+    def run_git_command(command)
+      _, _, status = Open3.capture3(command)
+
+      raise("Git command #{command} failed") unless status.success?
     end
   end
 end

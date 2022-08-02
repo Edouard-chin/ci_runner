@@ -6,7 +6,6 @@ require "ci_runner"
 require "minitest/autorun"
 require "webmock/minitest"
 require "fileutils"
-require "byebug"
 
 module Minitest
   class Test
@@ -34,3 +33,14 @@ module Minitest
     end
   end
 end
+
+# Patch CLI UI winsize. Otherwise the output depends on the terminal size which breaks
+# some tests.
+module PatchedTerminal
+  def winsize
+    [24, 120]
+  end
+end
+
+::CLI::UI::Terminal.singleton_class.prepend(PatchedTerminal)
+::CLI::UI.enable_color = true
