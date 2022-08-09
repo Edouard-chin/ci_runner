@@ -52,7 +52,7 @@ module CIRunner
         runner.parse!
 
         if runner.failures.count == 0
-          # Error
+          # TODO(on: '2022-08-20', to: 'Edouard-chin') No tests to rerun. Raise an error and exit.
         end
       rescue GithubClient::Error, Error => e
         ::CLI::UI.puts("\n{{red:#{e.message}}}", frame_color: :red)
