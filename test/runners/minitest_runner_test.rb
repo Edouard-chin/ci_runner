@@ -7,10 +7,10 @@ require "fileutils"
 module CIRunner
   module Runners
     class MinitestRunnerTest < Minitest::Test
-      def setup
-        super
-
+      def teardown
         Configuration::Project.instance.load!
+
+        super
       end
 
       def test_parse_raw_minitest_log_failures
