@@ -28,7 +28,7 @@ module CIRunner
     # @param block [Proc, Lambda] A proc that gets called if fetching the logs from GitHub fails. Allows the CLI to
     #   prematurely exit while cleaning up the CLI::UI frame.
     #
-    # @return [File] A file ready to be read.
+    # @return [Pathname] The path to the log file.
     def fetch(&block)
       return cached_log if cached_log
 

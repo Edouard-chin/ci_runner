@@ -48,12 +48,10 @@ module CIRunner
         check_run = TestRunFinder.find(ci_checks, run_name)
 
         ci_log = fetch_ci_log(repository, commit, check_run)
-        runner = TestRunFinder.detect_runner(ci_log)
+        runner = TestRunFinder.detect_runner(ci_log.read)
         runner.parse!
 
-        if runner.failures.count == 0
-          # TODO(on: '2022-08-20', to: 'Edouard-chin') No tests to rerun. Raise an error and exit.
-        end
+        no_failure_error(ci_log) if runner.failures.count.zero?
       rescue GithubClient::Error, Error => e
         ::CLI::UI.puts("\n{{red:#{e.message}}}", frame_color: :red)
 
@@ -140,7 +138,7 @@ module CIRunner
         exit(false)
       end
 
-      log.read
+      log
     end
 
     # Interatively ask the user which CI check to rerun in the case a commit has multiple failing checks.
@@ -173,6 +171,26 @@ module CIRunner
           options: failed_runs.map { |check_run| check_run["name"] },
         )
       end
+    end
+
+    # Raise an error in the case where CI Runner can't detect test failures from the logs.
+    # Can happen for a couple of reasons, outlined in the error message below.
+    #
+    # @param ci_log [Pathname]
+    #
+    # @raise [Error]
+    def no_failure_error(ci_log)
+      raise(Error, <<~EOM)
+        Couldn't detect any test failures from the log output. This can be either because:
+
+        {{warning:- The selected CI is not running Minitest or RSpec tests.}}
+        {{warning:- CIRunner default set of regexes failed to match the failures.}}
+
+          If your application is using custom reporters, you'll need to configure CI Runner.
+          {{info:Have a look at the wiki to know how: https://github.com/Edouard-chin/ci_runner/wiki}}
+
+        The CI log output has been downloaded to {{underline:#{ci_log}}} if you need to inspect it.
+      EOM
     end
   end
 end
