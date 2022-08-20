@@ -77,7 +77,7 @@ module CIRunner
       stub_request(:get, "https://api.github.com/repos/foo/bar/actions/jobs/1/logs")
         .to_return(status: 302, headers: { "Location" => "https://example.com/download" })
       stub_request(:get, "https://example.com/download")
-        .to_return(status: 200, body: "minitest")
+        .to_return(status: 200, body: minitest_failure)
 
       stdout, _ = capture_io do
         CLI.start(["--commit", "abc", "--repository", "foo/bar"])
@@ -130,7 +130,7 @@ module CIRunner
         .to_return(status: 302, headers: { "Location" => "https://example.com/download" })
 
       stub_request(:get, "https://example.com/download")
-        .to_return(status: 200, body: "minitest")
+        .to_return(status: 200, body: minitest_failure)
 
       stdout, _ = capture_io do
         CLI.start(["--commit", "abc", "--repository", "foo/bar", "--run-name", "Ruby Test 3.1"])
@@ -140,6 +140,30 @@ module CIRunner
       assert_requested(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
       assert_requested(:get, "https://api.github.com/repos/foo/bar/actions/jobs/2/logs")
       assert_requested(:get, "https://example.com/download")
+    end
+
+    def test_when_log_has_no_failures
+      ci_check_response = {
+        total_count: 1,
+        check_runs: [
+          { "name": "Ruby Test 3.0", id: 1, "conclusion" => "failure" },
+        ],
+      }
+
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
+        .to_return_json(status: 200, body: ci_check_response)
+      stub_request(:get, "https://api.github.com/repos/foo/bar/actions/jobs/1/logs")
+        .to_return(status: 302, headers: { "Location" => "https://example.com/download" })
+      stub_request(:get, "https://example.com/download")
+        .to_return(status: 200, body: "minitest")
+
+      stdout, _ = capture_io do
+        CLI.start(["--commit", "abc", "--repository", "foo/bar"])
+      rescue SystemExit
+        nil
+      end
+
+      assert_match("Couldn't detect any test failures from the log output.", stdout)
     end
 
     def test_github_token_when_token_is_valid
@@ -182,6 +206,17 @@ module CIRunner
       EOM
 
       assert_equal(expected_config, Configuration::User.instance.config_file.read)
+    end
+
+    private
+
+    def minitest_failure
+      <<~EOM
+        Run options: --seed 2567
+
+        Failure:
+        FooTest#test_one [test/fixtures/tests/foo_test.rb:6]
+      EOM
     end
   end
 end
