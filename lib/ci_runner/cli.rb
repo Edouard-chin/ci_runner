@@ -47,12 +47,12 @@ module CIRunner
         run_name = options[:run_name] || ask_for_name(ci_checks)
         check_run = TestRunFinder.find(ci_checks, run_name)
 
-        ci_log = fetch_ci_log(repository, commit, check_run)
+        ci_log = fetch_ci_log(check_run)
         runner = TestRunFinder.detect_runner(ci_log.read)
         runner.parse!
 
         no_failure_error(ci_log, runner) if runner.failures.count.zero?
-      rescue GithubClient::Error, Error => e
+      rescue Client::Error, Error => e
         ::CLI::UI.puts("\n{{red:#{e.message}}}", frame_color: :red)
 
         exit(false)
@@ -75,7 +75,7 @@ module CIRunner
       ::CLI::UI::StdoutRouter.enable
 
       ::CLI::UI.frame("Saving GitHub Token") do
-        user = GithubClient.new(token).me
+        user = Client::Github.new(token).me
         Configuration::User.instance.save_github_token(token)
 
         ::CLI::UI.puts(<<~EOM)
@@ -83,7 +83,7 @@ module CIRunner
 
           {{info:The token has been saved in this file: #{Configuration::User.instance.config_file}}}
         EOM
-      rescue GithubClient::Error => e
+      rescue Client::Error => e
         ::CLI::UI.puts("{{red:\nYour token doesn't seem to be valid. The response from GitHub was: #{e.message}}}")
 
         exit(false)
@@ -98,7 +98,7 @@ module CIRunner
     # @param repository [String] The full repository name including the owner (rails/rails).
     # @param commit [String] A Git commit that has been pushed to GitHub and for which CI failed.
     #
-    # @return [Hash] See the GitHub documentation.
+    # @return [Array<Check::Base>] Array filled with Check::Base subclasses.
     #
     # @raise [SystemExit] Early exit the process if the CI checks can't be retrieved.
     #
@@ -118,19 +118,17 @@ module CIRunner
     # Download and cache the log for the GitHub check. Downloading the log allows CI Runner to parse it and detect
     # which test failed in order to run uniquely those on the user machine.
     #
-    # @param repository [String] The full repository name including the owner (rails/rails).
-    # @param commit [String]     A Git commit that has been pushed to GitHub and for which CI failed.
-    # @param check_run [Hash]    The GitHub Check that failed. See #fetch_ci_checks.
+    # @param check_run [Check::Base] The GitHub Check that failed. See #fetch_ci_checks.
     #
     # @return [String] The content of the CI log.
     #
     # @raise [SystemExit] Early exit the process if the CI checks can't be retrieved.
     #
     # @see https://docs.github.com/en/rest/actions/workflow-jobs#download-job-logs-for-a-workflow-run
-    def fetch_ci_log(repository, commit, check_run)
-      log = LogDownloader.new(commit, repository, check_run).fetch do |error|
-        puts(<<~EOM)
-          Couldn't fetch the CI log. The response from GitHub was:
+    def fetch_ci_log(check_run)
+      log = LogDownloader.new(check_run).fetch do |error|
+        ::CLI::UI.puts(<<~EOM)
+          Couldn't fetch the CI log. The error was:
 
           #{error.message}
         EOM
@@ -145,20 +143,19 @@ module CIRunner
     # This method only runs if the user has not passed the '--run-name' flag to ci_runner.
     # Will automatically select a check in the case where there is only one failing check.
     #
-    # @param ci_checks [Hash] (See #fetch_ci_checks)
+    # @param ci_checks [Array<Check::Base>] (See #fetch_ci_checks)
     #
-    # @return [Hash] A single Check Run, the one that the user selected.
+    # @return [Check::Base] A single Check, the one that the user selected.
     #
     # @raise [CIRunner::Error] In case all the CI checks on this commit were successfull. In such case
     #   there is no need to proceed as there should be no failing tests to rerun.
     def ask_for_name(ci_checks)
-      check_runs = ci_checks["check_runs"]
-      failed_runs = check_runs.reject { |check_run| check_run["conclusion"] == "success" }
+      failed_runs = ci_checks.select(&:failed?)
 
       if failed_runs.count == 0
         raise(Error, "No CI checks failed on this commit.")
       elsif failed_runs.count == 1
-        check_run = failed_runs.first["name"]
+        check_run = failed_runs.first.name
 
         ::CLI::UI.puts(<<~EOM)
           {{warning:Automatically selected the CI check #{check_run} because it's the only one failing.}}
@@ -168,7 +165,7 @@ module CIRunner
       else
         ::CLI::UI.ask(
           "Multiple CI checks failed for this commit. Please choose the one you wish to re-run.",
-          options: failed_runs.map { |check_run| check_run["name"] },
+          options: failed_runs.map(&:name),
         )
       end
     end

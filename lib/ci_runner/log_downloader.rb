@@ -8,22 +8,24 @@ module CIRunner
   # A PORO to help download and cache a GitHub CI log.
   #
   # @example Using the service
-  #   log_dl = LogDownloader.new("commit_sha", "catanacorp/catana", { "id" => 1, "name" => "Ruby Test 3.1.2" })
+  #   log_dl = LogDownloader.new(
+  #     CICheck::GitHub.new(
+  #       "catanacorp/catana",
+  #       "commit_sha",
+  #       "Tests Ruby 2.7",
+  #       "failed",
+  #       12345,
+  #     )
+  #   )
   #   log_file = log_dl.fetch
   #   puts log_file # => File
-  #
-  # @see https://docs.github.com/en/rest/actions/workflow-jobs#download-job-logs-for-a-workflow-run
   class LogDownloader
-    # @param commit [String] A Git commit. Used to compute the file name we are going to cache.
-    # @param repository [String] The repository full name, including the owner (i.e. rails/rails).
-    # @param check_run [Hash] A GitHub CI check for which we want to download the log.
-    def initialize(commit, repository, check_run)
-      @commit = commit
-      @repository = repository
+    # @param check_run [Check::Base] A Base::Check subclass for which we want to download the log.
+    def initialize(check_run)
       @check_run = check_run
     end
 
-    # Download the CI logs from GitHub or retrieve it from disk in case we previously downloaded it.
+    # Ask the +@check_run+ to download the log from its CI or retrieve it from disk in case we previously downloaded it.
     #
     # @param block [Proc, Lambda] A proc that gets called if fetching the logs from GitHub fails. Allows the CLI to
     #   prematurely exit while cleaning up the CLI::UI frame.
@@ -32,20 +34,18 @@ module CIRunner
     def fetch(&block)
       return cached_log if cached_log
 
-      github_client = GithubClient.new(Configuration::User.instance.github_token)
       error = nil
 
-      ::CLI::UI.spinner("Downloading CI logs from GitHub", auto_debrief: false) do
-        logfile = github_client.download_log(@repository, @check_run["id"])
-
-        cache_log(logfile)
-      rescue GithubClient::Error => e
+      ::CLI::UI.spinner("Downloading CI logs from #{@check_run.provider}", auto_debrief: false) do
+        cache_log(@check_run.download_log)
+      rescue Client::Error, Error => e
         error = e
 
         ::CLI::UI::Spinner::TASK_FAILED
       end
 
       block.call(error) if error
+
       cached_log
     end
 
@@ -74,14 +74,14 @@ module CIRunner
     # @example Given a repository "rails/rails". A CI check called "Ruby 3.0". A commit "abcdef".
     #   puts computed_filed_path # ==> /var/tmpdir/T/.../rails/rails/log-abcdef-Ruby 3.0
     def computed_file_path
-      normalized_run_name = @check_run["name"].tr("/", "_")
+      normalized_run_name = @check_run.name.tr("/", "_")
 
-      log_folder.join("log-#{@commit[0..12]}-#{normalized_run_name}.log")
+      log_folder.join("log-#{@check_run.commit[0..12]}-#{normalized_run_name}.log")
     end
 
     # @return [Pathname]
     def log_folder
-      Pathname(Dir.tmpdir).join(@repository)
+      Pathname(Dir.tmpdir).join(@check_run.repository)
     end
 
     # @return [Pathname, false] Depending if the log has been downloaded before.
