@@ -15,7 +15,7 @@ module CIRunner
         command = /bundle exec rspec/
         summary = /Failed examples:/
 
-        Regexp.union(command, summary, /rspec/i).match?(log)
+        Regexp.union(command, summary).match?(log)
       end
 
       # @return [String] See Runners::Base#report
