@@ -51,7 +51,7 @@ module CIRunner
         runner = TestRunFinder.detect_runner(ci_log.read)
         runner.parse!
 
-        no_failure_error(ci_log) if runner.failures.count.zero?
+        no_failure_error(ci_log, runner) if runner.failures.count.zero?
       rescue GithubClient::Error, Error => e
         ::CLI::UI.puts("\n{{red:#{e.message}}}", frame_color: :red)
 
@@ -177,13 +177,14 @@ module CIRunner
     # Can happen for a couple of reasons, outlined in the error message below.
     #
     # @param ci_log [Pathname]
+    # @param runner [Runners::Minitest, Runners::RSpec]
     #
     # @raise [Error]
-    def no_failure_error(ci_log)
+    def no_failure_error(ci_log, runner)
       raise(Error, <<~EOM)
-        Couldn't detect any test failures from the log output. This can be either because:
+        Couldn't detect any {{warning:#{runner.name}}} test failures from the log output. This can be either because:
 
-        {{warning:- The selected CI is not running Minitest or RSpec tests.}}
+        {{warning:- The selected CI is not running #{runner.name} tests.}}
         {{warning:- CIRunner default set of regexes failed to match the failures.}}
 
           If your application is using custom reporters, you'll need to configure CI Runner.

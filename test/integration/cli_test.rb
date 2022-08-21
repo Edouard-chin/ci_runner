@@ -163,7 +163,7 @@ module CIRunner
         nil
       end
 
-      assert_match("Couldn't detect any test failures from the log output.", stdout)
+      assert_match("Couldn't detect any \e[0;31;33mMinitest\e[0;31m test failures", stdout)
     end
 
     def test_github_token_when_token_is_valid
