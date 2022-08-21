@@ -1,0 +1,25 @@
+Failures:
+
+  1) customer edit page displays selectable strings as dropdowns
+     [31mFailure/Error: [0mselect [31m[1;31m"[0m[31mvip[1;31m"[0m[31m[0m, [35mfrom[0m: [31m[1;31m"[0m[31mKind[1;31m"[0m[31m[0m[0m
+     [31m[0m
+     [31mCapybara::ElementNotFound:[0m
+     [31m  Unable to find select box "Kind" that is not disabled and Unable to find input box with datalist completion "Kind" that is not disabled[0m
+     [36m# ./spec/features/edit_page_spec.rb:43:in `block (2 levels) in <top (required)>'[0m
+     [36m# ------------------[0m
+     [36m# --- Caused by: ---[0m
+     [36m# Capybara::ElementNotFound:[0m
+     [36m#   Unable to find select box "Kind" that is not disabled[0m
+     [36m#   ./spec/features/edit_page_spec.rb:43:in `block (2 levels) in <top (required)>'[0m
+
+Finished in 18.6 seconds (files took 3.35 seconds to load)
+[31m541 examples, 1 failure[0m
+
+Failed examples:
+
+[31mrspec ./spec/features/edit_page_spec.rb:39[0m [36m# customer edit page displays selectable strings as dropdowns[0m
+
+Randomized with seed 2668
+
+
+Exited with code exit status 1

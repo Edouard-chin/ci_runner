@@ -43,13 +43,15 @@ module CIRunner
       # @return [void]
       def parse!
         @ci_log.each_line do |line|
-          case line
+          line_no_ansi_color = line.gsub(/\e\[\d+m/, "")
+
+          case line_no_ansi_color
           when seed_regex
             @seed = first_matching_group(Regexp.last_match)
           when ruby_detection_regex
             @ruby_version = first_matching_group(Regexp.last_match)
 
-            @buffer << line if buffering?
+            @buffer << line_no_ansi_color if buffering?
           when gemfile_detection_regex
             @gemfile = first_matching_group(Regexp.last_match)
           when buffer_detection_regex
@@ -58,9 +60,9 @@ module CIRunner
               @buffer.clear
             end
 
-            @buffer << line
+            @buffer << line_no_ansi_color
           else
-            @buffer << line if buffering?
+            @buffer << line_no_ansi_color if buffering?
           end
         end
 
