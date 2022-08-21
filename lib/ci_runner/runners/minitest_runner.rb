@@ -40,7 +40,7 @@ module CIRunner
       def self.match?(ci_log)
         default_reporter = %r{(Finished in) \d+\.\d{6}s, \d+\.\d{4} runs/s, \d+\.\d{4} assertions/s\.}
 
-        Regexp.union(default_reporter, SEED_REGEX, "minitest").match?(ci_log)
+        Regexp.union(default_reporter, SEED_REGEX).match?(ci_log)
       end
 
       # @return [String] See Runners::Base#report
