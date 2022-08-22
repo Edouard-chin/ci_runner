@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/Edouard-chin/ci_runner"
+  spec.metadata["changelog_uri"] = "https://github.com/Edouard-chin/ci_runner/blob/main/CHANGELOG.md"
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
   spec.metadata["rubygems_mfa_required"] = "true"
 
