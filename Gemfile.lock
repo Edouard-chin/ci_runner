@@ -1,13 +1,3 @@
-GIT
-  remote: https://github.com/bblimke/webmock.git
-  revision: 33d8810c2828fc17010e15cc3f21ad2c726a966f
-  branch: master
-  specs:
-    webmock (3.14.0)
-      addressable (>= 2.8.0)
-      crack (>= 0.3.2)
-      hashdiff (>= 0.4.0, < 2.0.0)
-
 PATH
   remote: .
   specs:
@@ -19,8 +9,8 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.8.0)
-      public_suffix (>= 2.0.2, < 5.0)
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
     byebug (11.1.3)
     cli-ui (1.5.1)
@@ -33,7 +23,7 @@ GEM
     parallel (1.22.1)
     parser (3.1.2.0)
       ast (~> 2.4.1)
-    public_suffix (4.0.7)
+    public_suffix (5.0.0)
     rainbow (3.1.1)
     rake (13.0.6)
     regexp_parser (2.5.0)
@@ -68,6 +58,10 @@ GEM
     ruby-progressbar (1.11.0)
     thor (1.2.1)
     unicode-display_width (2.2.0)
+    webmock (3.18.1)
+      addressable (>= 2.8.0)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
 
 PLATFORMS
   x86_64-darwin-20
@@ -79,7 +73,7 @@ DEPENDENCIES
   minitest (~> 5.0)
   rspec (~> 3.11)
   rubocop-shopify (~> 2.8)
-  webmock!
+  webmock (~> 3.14)
 
 BUNDLED WITH
    2.3.17

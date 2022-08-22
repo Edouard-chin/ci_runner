@@ -7,6 +7,4 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gemspec
 
 gem "byebug"
-
 gem "minitest", "~> 5.0"
-gem "webmock", github: "bblimke/webmock", branch: "master"
