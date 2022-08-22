@@ -29,6 +29,9 @@ module CIRunner
       stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
         .to_return_json(status: 200, body: { total_count: 0, check_runs: [] })
 
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/statuses")
+        .to_return_json(status: 200, body: "[]")
+
       stdout, _ = capture_io do
         CLI.start(["--commit", "abc", "--repository", "foo/bar"])
       rescue SystemExit
@@ -42,13 +45,17 @@ module CIRunner
       ci_check_response = {
         total_count: 2,
         check_runs: [
-          { "name": "Ruby Test 3.0", id: 1, "conclusion" => "failure" },
-          { "name": "Ruby Test 3.1", id: 2, "conclusion" => "success" },
+          { "name": "Ruby Test 3.0", id: 1, "conclusion" => "failure", app: { slug: "github-actions" } },
+          { "name": "Ruby Test 3.1", id: 2, "conclusion" => "success", app: { slug: "github-actions" } },
         ],
       }
 
       stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
         .to_return_json(status: 200, body: ci_check_response)
+
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/statuses")
+        .to_return_json(status: 200, body: "[]")
+
       stub_request(:get, "https://api.github.com/repos/foo/bar/actions/jobs/1/logs")
         .to_return(status: 404, body: "Not found")
 
@@ -59,23 +66,28 @@ module CIRunner
       end
 
       assert_match("Downloading CI logs from GitHub", stdout)
-      assert_match("Couldn't fetch the CI log. The response from GitHub was:", stdout)
-      assert_match("GitHub response: Status: 404. Body:", stdout)
+      assert_match("Couldn't fetch the CI log. The error was:", stdout)
+      assert_match("Error while making a request to Github. Code: 404", stdout)
     end
 
     def test_rerun_when_a_single_checks_failed
       ci_check_response = {
         total_count: 2,
         check_runs: [
-          { "name": "Ruby Test 3.0", id: 1, "conclusion" => "failure" },
-          { "name": "Ruby Test 3.1", id: 2, "conclusion" => "success" },
+          { "name": "Ruby Test 3.0", id: 1, "conclusion" => "failure", app: { slug: "github-actions" } },
+          { "name": "Ruby Test 3.1", id: 2, "conclusion" => "success", app: { slug: "github-actions" } },
         ],
       }
 
       stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
         .to_return_json(status: 200, body: ci_check_response)
+
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/statuses")
+        .to_return_json(status: 200, body: "[]")
+
       stub_request(:get, "https://api.github.com/repos/foo/bar/actions/jobs/1/logs")
         .to_return(status: 302, headers: { "Location" => "https://example.com/download" })
+
       stub_request(:get, "https://example.com/download")
         .to_return(status: 200, body: minitest_failure)
 
@@ -90,13 +102,16 @@ module CIRunner
       ci_check_response = {
         total_count: 2,
         check_runs: [
-          { "name": "Ruby Test 3.0", id: 1, "conclusion" => "failure" },
-          { "name": "Ruby Test 3.1", id: 2, "conclusion" => "failure" },
+          { "name": "Ruby Test 3.0", id: 1, "conclusion" => "failure", app: { slug: "github-actions" } },
+          { "name": "Ruby Test 3.1", id: 2, "conclusion" => "failure", app: { slug: "github-actions" } },
         ],
       }
 
       stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
         .to_return_json(status: 200, body: ci_check_response)
+
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/statuses")
+        .to_return_json(status: 200, body: "[]")
 
       stdout, _ = capture_subprocess_io do
         pid = fork do
@@ -118,13 +133,16 @@ module CIRunner
       ci_check_response = {
         total_count: 2,
         check_runs: [
-          { "name": "Ruby Test 3.0", id: 1, "conclusion" => "failure" },
-          { "name": "Ruby Test 3.1", id: 2, "conclusion" => "failure" },
+          { "name": "Ruby Test 3.0", id: 1, "conclusion" => "failure", app: { slug: "github-actions" } },
+          { "name": "Ruby Test 3.1", id: 2, "conclusion" => "failure", app: { slug: "github-actions" } },
         ],
       }
 
       stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
         .to_return_json(status: 200, body: ci_check_response)
+
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/statuses")
+        .to_return_json(status: 200, body: "[]")
 
       stub_request(:get, "https://api.github.com/repos/foo/bar/actions/jobs/2/logs")
         .to_return(status: 302, headers: { "Location" => "https://example.com/download" })
@@ -138,22 +156,68 @@ module CIRunner
 
       assert_match("Your test run is about to start", stdout)
       assert_requested(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
+      assert_requested(:get, "https://api.github.com/repos/foo/bar/commits/abc/statuses")
       assert_requested(:get, "https://api.github.com/repos/foo/bar/actions/jobs/2/logs")
       assert_requested(:get, "https://example.com/download")
+    end
+
+    def test_rerun_fetch_log_from_circleci
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
+        .to_return_json(status: 200, body: { check_runs: [] })
+
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/statuses")
+        .to_return_json(
+          status: 200,
+          body: JSON.dump(
+            [
+              { context: "ci/circleci: ruby-27", target_url: "https://circleci.com/gh/foo/bar/956", state: "failure" },
+            ],
+          ),
+        )
+
+      stub_request(:get, "https://circleci.com/api/v1.1/project/github/foo/bar/956")
+        .to_return_json(status: 200, body: read_fixture("circleci/job2.json"))
+
+      stub_request(:get, "https://circle-production-action-output.s3.amazonaws.com/1")
+        .to_return_json(status: 200, body: read_fixture("circleci/job_setup_output.json"))
+
+      stub_request(:get, "https://circle-production-action-output.s3.amazonaws.com/2")
+        .to_return_json(status: 200, body: read_fixture("circleci/job_container_output.json"))
+
+      stub_request(:get, "https://circle-production-action-output.s3.amazonaws.com/3")
+        .to_return_json(status: 200, body: read_fixture("circleci/job_test_output.json"))
+
+      stdout, _ = capture_io do
+        CLI.start(["--commit", "abc", "--repository", "foo/bar", "--run-name", "ci/circleci: ruby-27"])
+      end
+
+      assert_match("- Number of failings tests:   \e[0;94m1", stdout)
+      assert_match("- Test framework detected:    \e[0;94mRSpec", stdout)
+      assert_match("Randomized with seed 2668", stdout)
+
+      assert_requested(:get, "https://circleci.com/api/v1.1/project/github/foo/bar/956")
+      assert_requested(:get, "https://circle-production-action-output.s3.amazonaws.com/1")
+      assert_requested(:get, "https://circle-production-action-output.s3.amazonaws.com/2")
+      assert_requested(:get, "https://circle-production-action-output.s3.amazonaws.com/3")
     end
 
     def test_when_log_has_no_failures
       ci_check_response = {
         total_count: 1,
         check_runs: [
-          { "name": "Ruby Test 3.0", id: 1, "conclusion" => "failure" },
+          { "name": "Ruby Test 3.0", id: 1, "conclusion" => "failure", app: { slug: "github-actions" } },
         ],
       }
 
       stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
         .to_return_json(status: 200, body: ci_check_response)
+
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/statuses")
+        .to_return_json(status: 200, body: "[]")
+
       stub_request(:get, "https://api.github.com/repos/foo/bar/actions/jobs/1/logs")
         .to_return(status: 302, headers: { "Location" => "https://example.com/download" })
+
       stub_request(:get, "https://example.com/download")
         .to_return(status: 200, body: "Running tests with run options --seed 20218:")
 
@@ -193,6 +257,50 @@ module CIRunner
 
       stdout, _ = capture_io do
         CLI.start(["github_token", "blabla"])
+      rescue SystemExit
+        nil
+      end
+
+      assert_match("Your token doesn't seem to be valid.", stdout)
+
+      expected_config = <<~EOM
+        ---
+        github:
+          token: abc
+      EOM
+
+      assert_equal(expected_config, Configuration::User.instance.config_file.read)
+    end
+
+    def test_circle_ci_token_when_token_is_valid
+      stub_request(:get, "https://circleci.com/api/v1.1/me")
+        .to_return_json(status: 200, body: { login: "Bob" })
+
+      stdout, _ = capture_io do
+        CLI.start(["circle_ci_token", "blabla"])
+      end
+
+      assert_match(/Hello.*Bob.*!/, stdout)
+      assert_match("Your token is valid!", stdout)
+      assert_match("The token has been saved in this file:", stdout)
+
+      expected_config = <<~EOM
+        ---
+        github:
+          token: abc
+        circle_ci:
+          token: blabla
+      EOM
+
+      assert_equal(expected_config, Configuration::User.instance.config_file.read)
+    end
+
+    def test_circle_ci_token_when_token_is_invalid
+      stub_request(:get, "https://circleci.com/api/v1.1/me")
+        .to_return_json(status: 401, body: "Requires authentication")
+
+      stdout, _ = capture_io do
+        CLI.start(["circle_ci_token", "blabla"])
       rescue SystemExit
         nil
       end

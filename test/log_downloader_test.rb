@@ -8,9 +8,7 @@ module CIRunner
       super
 
       @log_downloader = LogDownloader.new(
-        "commit_sha",
-        "Edouard/catana",
-        { "id" => 1234, "name" => "Ruby 3.1.2 Run" },
+        Check::Github.new("Edouard/catana", "commit_sha", "Ruby 3.1.2 Run", "failure", 1234)
       )
     end
 
@@ -104,7 +102,7 @@ module CIRunner
       end
 
       assert_match("Downloading CI logs from GitHub", out)
-      assert_match("Oh no! GitHub response: Status: 404. Body:", out)
+      assert_match("Oh no! Error while making a request to Github. Code: 404\n\nThe response was: Not found", out)
     end
   end
 end
