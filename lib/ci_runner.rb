@@ -19,7 +19,7 @@ module CIRunner
   end
 
   module Client
-    autoload :Error,       "ci_runner/client/base"
+    autoload :Error,       "ci_runner/client/error"
     autoload :Github,      "ci_runner/client/github"
     autoload :CircleCI,    "ci_runner/client/circle_ci"
   end

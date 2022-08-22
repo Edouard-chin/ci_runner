@@ -67,7 +67,7 @@ module CIRunner
 
       assert_match("Downloading CI logs from GitHub", stdout)
       assert_match("Couldn't fetch the CI log. The error was:", stdout)
-      assert_match("GitHub response: Status: 404. Body:", stdout)
+      assert_match("Error while making a request to Github. Code: 404", stdout)
     end
 
     def test_rerun_when_a_single_checks_failed
@@ -257,6 +257,50 @@ module CIRunner
 
       stdout, _ = capture_io do
         CLI.start(["github_token", "blabla"])
+      rescue SystemExit
+        nil
+      end
+
+      assert_match("Your token doesn't seem to be valid.", stdout)
+
+      expected_config = <<~EOM
+        ---
+        github:
+          token: abc
+      EOM
+
+      assert_equal(expected_config, Configuration::User.instance.config_file.read)
+    end
+
+    def test_circle_ci_token_when_token_is_valid
+      stub_request(:get, "https://circleci.com/api/v1.1/me")
+        .to_return_json(status: 200, body: { login: "Bob" })
+
+      stdout, _ = capture_io do
+        CLI.start(["circle_ci_token", "blabla"])
+      end
+
+      assert_match(/Hello.*Bob.*!/, stdout)
+      assert_match("Your token is valid!", stdout)
+      assert_match("The token has been saved in this file:", stdout)
+
+      expected_config = <<~EOM
+        ---
+        github:
+          token: abc
+        circle_ci:
+          token: blabla
+      EOM
+
+      assert_equal(expected_config, Configuration::User.instance.config_file.read)
+    end
+
+    def test_circle_ci_token_when_token_is_invalid
+      stub_request(:get, "https://circleci.com/api/v1.1/me")
+        .to_return_json(status: 401, body: "Requires authentication")
+
+      stdout, _ = capture_io do
+        CLI.start(["circle_ci_token", "blabla"])
       rescue SystemExit
         nil
       end

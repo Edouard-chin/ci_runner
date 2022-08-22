@@ -102,7 +102,7 @@ module CIRunner
       end
 
       assert_match("Downloading CI logs from GitHub", out)
-      assert_match("Oh no! GitHub response: Status: 404. Body:", out)
+      assert_match("Oh no! Error while making a request to Github. Code: 404\n\nThe response was: Not found", out)
     end
   end
 end

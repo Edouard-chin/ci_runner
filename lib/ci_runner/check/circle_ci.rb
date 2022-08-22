@@ -83,7 +83,7 @@ module CIRunner
       #
       # @return [Tempfile]
       def download_log
-        client = Client::CircleCI.new
+        client = Client::CircleCI.new(Configuration::User.instance.circle_ci_token)
         job = client.job(repository, build_number)
         steps = []
 

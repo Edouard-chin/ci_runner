@@ -39,6 +39,13 @@ module CIRunner
         @yaml_config.dig("github", "token")
       end
 
+      # Retrieve the stored CircleCI access token of the user.
+      #
+      # @return [String, nil] Depending if the user ran the `ci_runner circle_ci_token TOKEN` command.
+      def circle_ci_token
+        @yaml_config.dig("circle_ci", "token")
+      end
+
       # Write the GitHub token to the user configuration file
       #
       # @param token [String] A valid GitHub access token.
@@ -46,6 +53,17 @@ module CIRunner
       # @return [void]
       def save_github_token(token)
         @yaml_config["github"] = { "token" => token }
+
+        save!(@yaml_config)
+      end
+
+      # Write the Circle CI token to the user configuration file
+      #
+      # @param token [String] A valid Circle CI access token.
+      #
+      # @return [void]
+      def save_circle_ci_token(token)
+        @yaml_config["circle_ci"] = { "token" => token }
 
         save!(@yaml_config)
       end

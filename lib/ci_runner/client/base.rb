@@ -6,8 +6,6 @@ require "openssl"
 
 module CIRunner
   module Client
-    Error = Class.new(StandardError)
-
     class Base
       # @return [Net::HTTP] An instance of Net:HTTP configured to make requests to the GitHub API endpoint.
       def self.default_client
@@ -28,6 +26,15 @@ module CIRunner
 
       private
 
+      # Add authentication before making the request.
+      #
+      # @param request [Net::HTTPRequest] A subclass of Net::HTTPRequest.
+      #
+      # @return [void]
+      def authentication(request)
+        raise(NotImplementedError, "Subclass responsability")
+      end
+
       # Perform an authenticated GET request.
       #
       # @param path [String] The resource to access.
@@ -46,7 +53,7 @@ module CIRunner
       def request(verb_class, path)
         req = verb_class.new(path)
         req["Accept"] = "application/json"
-        req.basic_auth("user", @access_token) if @access_token
+        authentication(req)
 
         response = @client.request(req)
 
@@ -56,7 +63,7 @@ module CIRunner
         when 302
           response["Location"]
         else
-          raise(Error, "GitHub response: Status: #{response.code}. Body:\n\n#{response.body}")
+          raise(Error.new(response.code, response.body, self.class.name.split("::").last))
         end
       end
     end

@@ -69,7 +69,7 @@ module CIRunner
       Save a personal access GitHub token in the ~/.ci_runner/config.yml file.
       The GitHub token is required to fetch CI checks and download logs from repositories.
 
-      You can get a token from GitHub by following this link: https://github.com/settings/tokens/new?description=CI+Runner&scopes=repo # rubocop:disable Layout/LineLength
+      You can get a token from GitHub by following this link: https://github.com/settings/tokens/new?description=CI+Runner&scopes=repo
     EOM
     def github_token(token)
       ::CLI::UI::StdoutRouter.enable
@@ -85,6 +85,33 @@ module CIRunner
         EOM
       rescue Client::Error => e
         ::CLI::UI.puts("{{red:\nYour token doesn't seem to be valid. The response from GitHub was: #{e.message}}}")
+
+        exit(false)
+      end
+    end
+
+    desc "circle_ci_token TOKEN", "Save a Circle CI token in your config."
+    long_desc <<~EOM
+      Save a personal access Circle CI token in the ~/.ci_runner/config.yml file.
+      If one of your project uses Circle CI as its CI provider and the project is set to private,
+      CI Runner won't be able to fetch the logs unless you provide a token.
+
+      You can get a token from Circle CI by following this link: https://app.circleci.com/settings/user/tokens
+    EOM
+    def circle_ci_token(token)
+      ::CLI::UI::StdoutRouter.enable
+
+      ::CLI::UI.frame("Saving CircleCI Token") do
+        user = Client::CircleCI.new(token).me
+        Configuration::User.instance.save_circle_ci_token(token)
+
+        ::CLI::UI.puts(<<~EOM)
+          Hello {{warning:#{user["login"]}}}! {{success:Your token is valid!}}
+
+          {{info:The token has been saved in this file: #{Configuration::User.instance.config_file}}}
+        EOM
+      rescue Client::Error => e
+        ::CLI::UI.puts("{{red:\nYour token doesn't seem to be valid. The response from Circle CI was: #{e.message}}}")
 
         exit(false)
       end

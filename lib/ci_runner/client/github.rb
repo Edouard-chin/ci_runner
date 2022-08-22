@@ -61,6 +61,17 @@ module CIRunner
 
         URI.open(download_url)
       end
+
+      private
+
+      # Add authentication before making the request.
+      #
+      # @param request [Net::HTTPRequest] A subclass of Net::HTTPRequest.
+      #
+      # @return [void]
+      def authentication(request)
+        request.basic_auth("user", @access_token)
+      end
     end
   end
 end
