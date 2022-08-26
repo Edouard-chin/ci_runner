@@ -10,3 +10,6 @@ Style/Documentation:
 
 Security/Open:
   Enabled: false
+
+Style/ClassMethodsDefinitions:
+  Enabled: false
