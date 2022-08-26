@@ -6,11 +6,12 @@ require_relative "ci_runner/version"
 module CIRunner
   Error = Class.new(StandardError)
 
-  autoload :CLI,            "ci_runner/cli"
-  autoload :GitHelper,      "ci_runner/git_helper"
-  autoload :TestRunFinder,  "ci_runner/test_run_finder"
-  autoload :LogDownloader,  "ci_runner/log_downloader"
-  autoload :TestFailure,    "ci_runner/test_failure"
+  autoload :CLI,             "ci_runner/cli"
+  autoload :GitHelper,       "ci_runner/git_helper"
+  autoload :TestRunFinder,   "ci_runner/test_run_finder"
+  autoload :LogDownloader,   "ci_runner/log_downloader"
+  autoload :TestFailure,     "ci_runner/test_failure"
+  autoload :VersionVerifier, "ci_runner/version_verifier"
 
   module Check
     autoload :Github,      "ci_runner/check/github"

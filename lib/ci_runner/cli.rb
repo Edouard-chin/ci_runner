@@ -35,6 +35,7 @@ module CIRunner
     def rerun
       ::CLI::UI::StdoutRouter.enable
 
+      check_for_new_version
       runner = nil
 
       ::CLI::UI.frame("Preparing CI Runner") do
@@ -118,6 +119,21 @@ module CIRunner
     end
 
     private
+
+    # Inform the user of a possible new CI Runner version.
+    #
+    # @return [void]
+    def check_for_new_version
+      version_verifier = VersionVerifier.new
+      return unless version_verifier.new_ci_runner_version?
+
+      ::CLI::UI.puts(<<~EOM)
+        {{info:A newer version of CI Runner is available (#{version_verifier.upstream_version}).}}
+        {{info:You can update CI Runner by running}} {{command:gem update ci_runner}}
+      EOM
+    rescue StandardError
+      nil
+    end
 
     # Retrieve all the GitHub CI checks for a given commit. Will be used to interactively prompt
     # the user which one to rerun.
