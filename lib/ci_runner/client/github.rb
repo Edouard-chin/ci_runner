@@ -22,6 +22,17 @@ module CIRunner
         get("/user")
       end
 
+      # Get the latest release of a repository.
+      #
+      # @param repository [String] The full repository name, including the owner (rails/rails)
+      #
+      # @return [Hash] See GitHub documentation.
+      #
+      # https://docs.github.com/en/rest/releases/releases#get-the-latest-release
+      def latest_release(repository)
+        get("/repos/#{repository}/releases/latest")
+      end
+
       # Makes an API request to get the CI checks for the +commit+.
       #
       # @param repository [String] The full repository name, including the owner (rails/rails)

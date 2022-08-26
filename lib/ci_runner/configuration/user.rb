@@ -68,6 +68,14 @@ module CIRunner
         save!(@yaml_config)
       end
 
+      # @return [Pathname] The path of the CI Runner directory configuration.
+      #
+      # @example
+      #   puts config_directory # ~/.ci_runner
+      def config_directory
+        config_file.dirname
+      end
+
       # @return [Pathname] The path of the configuration file.
       #
       # @example

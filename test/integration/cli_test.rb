@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 require "test_helper"
+require "fileutils"
 
 module CIRunner
   class CLITest < Minitest::Test
     def setup
       Configuration::User.instance.load!
       Configuration::User.instance.save_github_token("abc")
+      FileUtils.touch(VersionVerifier.new.last_checked)
 
       super
     end
@@ -21,6 +23,7 @@ module CIRunner
         nil
       end
 
+      refute_match("A newer version of CI Runner is available.", stdout)
       assert_match("GitHub token needs to be saved into your configuration before being able to use CI Runner", stdout)
       assert_match(/mHave a look at the .*ci_runner help github_token.* command./, stdout)
     end
@@ -314,6 +317,26 @@ module CIRunner
       EOM
 
       assert_equal(expected_config, Configuration::User.instance.config_file.read)
+    end
+
+    def test_ci_runner_inform_user_of_new_version
+      Configuration::User.instance.config_file.delete
+      Configuration::User.instance.load!
+
+      verifier = VersionVerifier.new
+      verifier.last_checked.delete
+
+      stub_request(:get, "https://api.github.com/repos/Edouard-chin/ci_runner/releases/latest")
+        .to_return_json(status: 200, body: { tag_name: "v5.0.0" })
+
+      stdout, _ = capture_io do
+        CLI.start(["--commit", "abc", "--repository", "foo/bar"])
+      rescue SystemExit
+        nil
+      end
+
+      assert_match("A newer version of CI Runner is available (5.0.0).", stdout)
+      assert_predicate(verifier.last_checked, :exist?)
     end
 
     private
