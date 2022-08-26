@@ -22,10 +22,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: ['2.7', '3.0', '3.1']
+        ruby-version: ['2.7', '3.0', '3.1', 'head']
 
     steps:
     - uses: actions/checkout@v3
+    - name: Remove lockfile
+      run: rm Gemfile.lock
     - name: Set up Ruby
       uses: ruby/setup-ruby@2b019609e2b0f1ea1a2bc8ca11cb82ab46ada124
       with:
