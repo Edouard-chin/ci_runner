@@ -56,7 +56,7 @@ module CIRunner
 
       regex = %r{.*/?(test/.*?)\Z}
       unless path.to_s.match?(regex)
-        # TODO(on: "2022-09-10", to: "edouard-chin") Revisit this as it's too brittle.
+        # TODO(on: '2022-09-17', to: "edouard-chin") Revisit this as it's too brittle.
         #   If a test file doesn't live the in the `test/` root folder, this will raise an error.
         #   I should instead warn the user and move on.
         raise "Can't create a relative path."
