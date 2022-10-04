@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ci_runner (0.2.0)
+    ci_runner (0.3.0)
       cli-ui (~> 1.5)
       rake (~> 13.0)
       thor (~> 1.2)
