@@ -129,6 +129,8 @@ module CIRunner
       case uri.host
       when "circleci.com"
         Check::CircleCI.new(repository, commit, *commit_status.values_at("context", "state", "target_url"))
+      when "buildkite.com"
+        Check::Buildkite.new(repository, commit, *commit_status.values_at("context", "state", "target_url"))
       else
         Check::Unsupported.new(repository, commit, *commit_status.values_at("context", "state"))
       end
