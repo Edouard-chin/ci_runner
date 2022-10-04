@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [0.3.0] - 2022-10-04
+### Added
+- Added support for Buildkite.
+- Added a new command `ci_runner buildkite_token` to store a Buildkite token in your config.
+- CI Runner will now print a message when a new version gets released.
+
 ## [0.2.0] - 2022-8-22
 ### Added
 - Added support for Circle CI.

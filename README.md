@@ -59,10 +59,11 @@ CI Runner works with:
 - :octocat: Repositories hosted on GitHub
 - :octocat: GitHub CI
 - :black_circle: Circle CI
+- :kite: Buildkite
 - :test_tube: Minitest
 - :test_tube: RSpec
 
-If your project uses a different CI (Circle, Travis), please open an Issue to let me know you are interested 😸.
+If your project uses a different CI, please open an Issue to let me know you are interested 😸.
 
 ## :books: Wiki
 
