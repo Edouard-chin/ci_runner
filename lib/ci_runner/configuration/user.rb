@@ -68,6 +68,28 @@ module CIRunner
         save!(@yaml_config)
       end
 
+      # Retrieve the stored Buildkite access token of the user that has access to the +organization+.
+      #
+      # @return [String, nil] Depending if the user ran the `ci_runner buildkite TOKEN ORGANIZATION` command.
+      def buildkite_token(organization)
+        @yaml_config.dig("buildkite", "tokens", organization.downcase)
+      end
+
+      # Write the Buildkite token to the user configuration file.
+      #
+      # @param token [String] A valid Buildkite access token.
+      # @param organization [String] The name of the organization the token has access to.
+      #
+      # @return [void]
+      def save_buildkite_token(token, organization)
+        existing_tokens = @yaml_config.dig("buildkite", "tokens") || {}
+        existing_tokens[organization.downcase] = token
+
+        @yaml_config["buildkite"] = { "tokens" => existing_tokens }
+
+        save!(@yaml_config)
+      end
+
       # @return [Pathname] The path of the CI Runner directory configuration.
       #
       # @example

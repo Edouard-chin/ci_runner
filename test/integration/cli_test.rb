@@ -204,6 +204,46 @@ module CIRunner
       assert_requested(:get, "https://circle-production-action-output.s3.amazonaws.com/3")
     end
 
+    def test_rerun_fetch_log_from_buildkite
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
+        .to_return_json(status: 200, body: { check_runs: [] })
+
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/statuses")
+        .to_return_json(
+          status: 200,
+          body: JSON.dump(
+            [
+              { context: "Ruby tests", target_url: "https://buildkite.com/foo/bar/builds/956", state: "failure" },
+            ],
+          ),
+        )
+
+      stub_request(:get, "https://buildkite.com/foo/bar/builds/956")
+        .to_return_json(status: 200, body: read_fixture("buildkite/public_build.json"))
+
+      stub_request(:get, "https://buildkite.com/organizations/katana/pipelines/test/builds/7/jobs/abc/raw_log")
+        .to_return(status: 302, headers: { "Location" => "https://example.com/log1" })
+
+      stub_request(:get, "https://buildkite.com/organizations/katana/pipelines/test/builds/7/jobs/def/raw_log")
+        .to_return(status: 302, headers: { "Location" => "https://example.com/log2" })
+
+      stub_request(:get, "https://example.com/log1").to_return(status: 200, body: read_fixture("rails.log"))
+      stub_request(:get, "https://example.com/log2").to_return(status: 200, body: "def")
+
+      stdout, _ = capture_io do
+        CLI.start(["--commit", "abc", "--repository", "foo/bar", "--run-name", "Ruby tests"])
+      end
+
+      assert_match("- Number of failings tests:   \e[0;94m9", stdout)
+      assert_match("- Test framework detected:    \e[0;94mMinitest", stdout)
+
+      assert_requested(:get, "https://buildkite.com/foo/bar/builds/956")
+      assert_requested(:get, "https://buildkite.com/organizations/katana/pipelines/test/builds/7/jobs/abc/raw_log")
+      assert_requested(:get, "https://buildkite.com/organizations/katana/pipelines/test/builds/7/jobs/def/raw_log")
+      assert_requested(:get, "https://example.com/log1")
+      assert_requested(:get, "https://example.com/log2")
+    end
+
     def test_when_log_has_no_failures
       ci_check_response = {
         total_count: 1,
@@ -309,6 +349,123 @@ module CIRunner
       end
 
       assert_match("Your token doesn't seem to be valid.", stdout)
+
+      expected_config = <<~EOM
+        ---
+        github:
+          token: abc
+      EOM
+
+      assert_equal(expected_config, Configuration::User.instance.config_file.read)
+    end
+
+    def test_buildkite_token_when_token_is_valid_and_has_all_scopes
+      stub_request(:get, "https://api.buildkite.com/v2/access-token")
+        .to_return_json(status: 200, body: { scopes: ["read_builds", "read_build_logs"] })
+
+      stdout, _ = capture_io do
+        CLI.start(["buildkite_token", "my_token", "catana"])
+      rescue SystemExit
+        nil
+      end
+
+      assert_match("Your token is valid!", stdout)
+      assert_match("The token has been saved in this file:", stdout)
+
+      expected_config = <<~EOM
+        ---
+        github:
+          token: abc
+        buildkite:
+          tokens:
+            catana: my_token
+      EOM
+
+      assert_equal(expected_config, Configuration::User.instance.config_file.read)
+    end
+
+    def test_buildkite_token_downcase_the_org_name
+      stub_request(:get, "https://api.buildkite.com/v2/access-token")
+        .to_return_json(status: 200, body: { scopes: ["read_builds", "read_build_logs"] })
+
+      stdout, _ = capture_io do
+        CLI.start(["buildkite_token", "my_token", "Catana"])
+      rescue SystemExit
+        nil
+      end
+
+      assert_match("Your token is valid!", stdout)
+      assert_match("The token has been saved in this file:", stdout)
+
+      expected_config = <<~EOM
+        ---
+        github:
+          token: abc
+        buildkite:
+          tokens:
+            catana: my_token
+      EOM
+
+      assert_equal(expected_config, Configuration::User.instance.config_file.read)
+    end
+
+    def test_buildkite_token_store_multiple_tokens
+      stub_request(:get, "https://api.buildkite.com/v2/access-token")
+        .to_return_json(status: 200, body: { scopes: ["read_builds", "read_build_logs"] })
+
+      capture_io do
+        CLI.start(["buildkite_token", "my_token", "Catana"])
+        CLI.start(["buildkite_token", "another_token", "Some-Org"])
+      rescue SystemExit
+        nil
+      end
+
+      expected_config = <<~EOM
+        ---
+        github:
+          token: abc
+        buildkite:
+          tokens:
+            catana: my_token
+            some-org: another_token
+      EOM
+
+      assert_equal(expected_config, Configuration::User.instance.config_file.read)
+    end
+
+    def test_buildkite_token_when_token_is_valid_but_is_missing_scopes
+      stub_request(:get, "https://api.buildkite.com/v2/access-token")
+        .to_return_json(status: 200, body: { scopes: ["read_builds"] })
+
+      stdout, _ = capture_io do
+        CLI.start(["buildkite_token", "my_token", "catana"])
+      rescue SystemExit
+        nil
+      end
+
+      assert_match("Your token is missing required scope(s): read_build_logs", stdout)
+
+      expected_config = <<~EOM
+        ---
+        github:
+          token: abc
+      EOM
+
+      assert_equal(expected_config, Configuration::User.instance.config_file.read)
+    end
+
+    def test_buildkite_token_when_token_is_invalid
+      stub_request(:get, "https://api.buildkite.com/v2/access-token")
+        .to_return_json(status: 401, body: { message: "Authentication required" })
+
+      stdout, _ = capture_io do
+        CLI.start(["buildkite_token", "my_token", "catana"])
+      rescue SystemExit
+        nil
+      end
+
+      assert_match("Your token doesn't seem to be valid.", stdout)
+      assert_match("Authentication required", stdout)
 
       expected_config = <<~EOM
         ---

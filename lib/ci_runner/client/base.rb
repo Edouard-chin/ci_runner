@@ -24,6 +24,14 @@ module CIRunner
         @client = client
       end
 
+      # Set a new Client object.
+      # NET::HTTP is not threadsafe so each time we need to make requests concurrently we need to use a new client.
+      #
+      # @return [void]
+      def reset!
+        @client = self.class.default_client
+      end
+
       private
 
       # Add authentication before making the request.
@@ -32,7 +40,6 @@ module CIRunner
       #
       # @return [void]
       def authentication(request)
-        raise(NotImplementedError, "Subclass responsability")
       end
 
       # Perform an authenticated GET request.

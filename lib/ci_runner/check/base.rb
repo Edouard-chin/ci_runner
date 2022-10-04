@@ -53,8 +53,10 @@ module CIRunner
       end
 
       # @return [Boolean]
+      #
+      # @see https://docs.github.com/en/rest/commits/statuses#get-the-combined-status-for-a-specific-reference
       def failed?
-        @status == "failure"
+        ["error", "failure"].include?(status)
       end
     end
   end

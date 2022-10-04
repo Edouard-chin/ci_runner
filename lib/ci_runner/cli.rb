@@ -118,6 +118,39 @@ module CIRunner
       end
     end
 
+    desc "buildkite_token TOKEN ORGANIZATION", "Save a Buildkite token in your config."
+    long_desc <<~EOM
+      Save a personal access Buildkite token in the ~/.ci_runner/config.yml file.
+      Storing a Buildkite token is required to retrieve log from private Buildkite builds.
+
+      The ORGANIZATION, should be the name of the organization the token has access to.
+
+      You can get a token from Buildkite by following this link: https://buildkite.com/user/api-access-tokens/new?description=CI%20Runner&scopes[]=read_builds&scopes[]=read_build_logs
+    EOM
+    def buildkite_token(token, organization)
+      ::CLI::UI::StdoutRouter.enable
+
+      required_scopes = ["read_builds", "read_build_logs"]
+      token_scopes = Client::AuthenticatedBuildkite.new(token).access_token["scopes"]
+      missing_scopes = required_scopes - token_scopes
+
+      if missing_scopes.empty?
+        Configuration::User.instance.save_buildkite_token(token, organization)
+
+        ::CLI::UI.puts(<<~EOM)
+          {{success:Your token is valid!}}
+
+          {{info:The token has been saved in this file: #{Configuration::User.instance.config_file}}}
+        EOM
+      else
+        ::CLI::UI.puts("{{red:\nYour token is missing required scope(s): #{missing_scopes.join(",")}")
+      end
+    rescue Client::Error => e
+      ::CLI::UI.puts("{{red:\nYour token doesn't seem to be valid. The response from Buildkite was: #{e.message}}}")
+
+      exit(false)
+    end
+
     private
 
     # Inform the user of a possible new CI Runner version.

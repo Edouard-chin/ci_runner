@@ -4,7 +4,6 @@ require_relative "base"
 require "uri"
 require "open-uri"
 require "json"
-require "tempfile"
 
 module CIRunner
   module Check
@@ -54,6 +53,8 @@ module CIRunner
 
     # Check class used when a project is configured to run its CI using CircleCI.
     class CircleCI < Base
+      include ConcurrentDownload
+
       attr_reader :url # :private:
 
       # @param args (See Base#initialize)
@@ -62,8 +63,6 @@ module CIRunner
         super(*args)
 
         @url = url
-        @queue = Queue.new
-        @tempfile = Tempfile.new
       end
 
       # Used to tell the user which CI provider we are downloading the log output from.
@@ -102,36 +101,9 @@ module CIRunner
         end
 
         process_queue
-
-        @tempfile.tap(&:flush)
-      end
-
-      # @return [Boolean]
-      #
-      # @see https://docs.github.com/en/rest/commits/statuses#get-the-combined-status-for-a-specific-reference
-      def failed?
-        ["error", "failure"].include?(status)
       end
 
       private
-
-      # Implement a queuing system in order to download log files in parallel.
-      #
-      # @return [void]
-      def process_queue
-        max_threads = 6
-        threads = []
-
-        max_threads.times do
-          threads << Thread.new do
-            while (element = dequeue)
-              process(element)
-            end
-          end
-        end
-
-        threads.each(&:join)
-      end
 
       # @param step [Step]
       #
@@ -142,15 +114,6 @@ module CIRunner
         log_output = parsed_response.map! { |res| res["message"] }.join
 
         @tempfile.write(log_output)
-      end
-
-      # Dequeue a CircleCI Step from the queue.
-      #
-      # @return [Step, nil]
-      def dequeue
-        @queue.pop(true)
-      rescue ThreadError
-        nil
       end
 
       # The URL on the commit status will look something like: https://circleci.com/gh/owner/repo/1234?query_string.

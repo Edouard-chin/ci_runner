@@ -1,0 +1,221 @@
+{
+  "id": "01839e12-e7e5-4d6a-8389-99978a109766",
+  "state": "failed",
+  "blocked_state": null,
+  "message": "Fix",
+  "number": 7,
+  "path": "/katana/test/builds/7",
+  "json_path": "/katana/test/builds/7.json",
+  "source": "ui",
+  "commit_id": "4a16e574cb54114897c7265acda9ede5c11a568f",
+  "commit_short_length": 7,
+  "commit_url": "https://github.com/Edouard-chin/test_circle/commit/4a16e574cb54114897c7265acda9ede5c11a568f",
+  "branch_name": "main",
+  "branch_path": "/katana/test/builds?branch=main",
+  "test_analytics": {
+    "run_urls": []
+  },
+  "pull_request": null,
+  "author_name": "Edouard",
+  "author_avatar": "https://www.gravatar.com/avatar/a478cd8745e3f45919cb5835b321dc6b?d=https%3A%2F%2Fbuildkiteassets.com%2Fassets%2Favatar_default-1c579d7b6a5939a41cb7c766a89781739bc678f7dba80da0461edb8519a7b68a.png",
+  "creator_verified": false,
+  "account": {
+    "name": "Katana",
+    "slug": "katana",
+    "job_minute_limit_reached": false
+  },
+  "project": {
+    "id": "01839e09-574e-4dd1-a794-cae1e722b3f9",
+    "name": "Test",
+    "url": "https://buildkite.com/katana/test",
+    "public": true,
+    "archived": false,
+    "provider": {
+      "id": "github",
+      "icon_class": "fa fa-github"
+    },
+    "slug": "test",
+    "example_repository": false,
+    "allow_rebuilds": true
+  },
+  "permissions": {
+    "cancel": {
+      "allowed": false,
+      "reason": "anonymous",
+      "message": "You must be signed in to cancel this build"
+    },
+    "rebuild": {
+      "allowed": false,
+      "reason": "anonymous",
+      "message": "You must be signed in to trigger a build in this pipeline"
+    }
+  },
+  "cancel_path": "/organizations/katana/pipelines/test/builds/7/cancel",
+  "rebuild_path": "/organizations/katana/pipelines/test/builds/7/rebuild",
+  "created_at": "2022-10-03T13:39:42.703Z",
+  "scheduled_at": "2022-10-03T13:39:42.682Z",
+  "started_at": "2022-10-03T13:39:43.422Z",
+  "canceled_at": null,
+  "finished_at": "2022-10-03T13:39:51.990Z",
+  "cancel_reason": null,
+  "jobs": [{
+    "id": "01839e12-e7ec-492d-a338-e18901718124",
+    "type": "script",
+    "state": "finished",
+    "name": "Test",
+    "build_number": 7,
+    "project_name": "Test",
+    "project_provider_id": "github",
+    "tooltip": null,
+    "passed": false,
+    "soft_failed": false,
+    "command": "bundle install\nbundle exec rake",
+    "exit_status": 1,
+    "created_at": "2022-10-03T13:39:42.691Z",
+    "scheduled_at": "2022-10-03T13:39:42.691Z",
+    "runnable_at": "2022-10-03T13:39:42.730Z",
+    "agent_assigned_at": "2022-10-03T13:39:42.860Z",
+    "agent_accepted_at": "2022-10-03T13:39:43.068Z",
+    "unblocked_at": null,
+    "started_at": "2022-10-03T13:39:43.422Z",
+    "canceled_at": null,
+    "timed_out_at": null,
+    "expired_at": null,
+    "finished_at": "2022-10-03T13:39:51.828Z",
+    "step_uuid": "01839e12-e7e2-409f-986d-5884abc30b87",
+    "step_key": null,
+    "parallel_group_index": null,
+    "parallel_group_total": null,
+    "matrix": null,
+    "group_uuid": null,
+    "group_label": null,
+    "group_identifier": null,
+    "agent_name": "Edouards-MBP-2-1",
+    "agent_uuid": "01839e0d-48bd-4f52-8f81-9783179345c2",
+    "agent_os_id": "osx_11.3.1",
+    "agent_meta_data": ["queue=default"],
+    "agent_version": "3.35.1",
+    "agent_version_known_issues": false,
+    "agent_hostname": "Edouards-MBP-2",
+    "agent_query_rules": [],
+    "retried_in_job_uuid": null,
+    "retried_at": null,
+    "retry_pending": false,
+    "permissions": {
+      "activate": {
+        "allowed": false,
+        "reason": "anonymous",
+        "message": "You must be signed in to unblock this job"
+      },
+      "retry": {
+        "allowed": false,
+        "reason": "anonymous",
+        "message": "You must be signed in to retry this job"
+      },
+      "delete_job_log": {
+        "allowed": false,
+        "reason": "anonymous",
+        "message": "You must be signed in to remove this job log"
+      }
+    },
+    "concurrency": null,
+    "concurrency_group": "",
+    "base_path": "/organizations/katana/pipelines/test/builds/7/jobs/abc",
+    "path": "/katana/test/builds/7#01839e12-e7ec-492d-a338-e18901718124",
+    "retryable": {
+      "allowed": true,
+      "message": null
+    },
+    "cancelable": {
+      "allowed": false,
+      "message": "You can only cancel jobs that have started"
+    },
+    "step": {
+      "label": "Test",
+      "conditional": null
+    },
+    "agent_path": "/organizations/katana/agents/01839e0d-48bd-4f52-8f81-9783179345c2"
+  },
+  {
+    "id": "01839e12-e7ec-492d-a338-e18901718124",
+    "type": "script",
+    "state": "finished",
+    "name": "Test",
+    "build_number": 7,
+    "project_name": "Test",
+    "project_provider_id": "github",
+    "tooltip": null,
+    "passed": false,
+    "soft_failed": false,
+    "command": "bundle install\nbundle exec rake",
+    "exit_status": 1,
+    "created_at": "2022-10-03T13:39:42.691Z",
+    "scheduled_at": "2022-10-03T13:39:42.691Z",
+    "runnable_at": "2022-10-03T13:39:42.730Z",
+    "agent_assigned_at": "2022-10-03T13:39:42.860Z",
+    "agent_accepted_at": "2022-10-03T13:39:43.068Z",
+    "unblocked_at": null,
+    "started_at": "2022-10-03T13:39:43.422Z",
+    "canceled_at": null,
+    "timed_out_at": null,
+    "expired_at": null,
+    "finished_at": "2022-10-03T13:39:51.828Z",
+    "step_uuid": "01839e12-e7e2-409f-986d-5884abc30b87",
+    "step_key": null,
+    "parallel_group_index": null,
+    "parallel_group_total": null,
+    "matrix": null,
+    "group_uuid": null,
+    "group_label": null,
+    "group_identifier": null,
+    "agent_name": "Edouards-MBP-2-1",
+    "agent_uuid": "01839e0d-48bd-4f52-8f81-9783179345c2",
+    "agent_os_id": "osx_11.3.1",
+    "agent_meta_data": ["queue=default"],
+    "agent_version": "3.35.1",
+    "agent_version_known_issues": false,
+    "agent_hostname": "Edouards-MBP-2",
+    "agent_query_rules": [],
+    "retried_in_job_uuid": null,
+    "retried_at": null,
+    "retry_pending": false,
+    "permissions": {
+      "activate": {
+        "allowed": false,
+        "reason": "anonymous",
+        "message": "You must be signed in to unblock this job"
+      },
+      "retry": {
+        "allowed": false,
+        "reason": "anonymous",
+        "message": "You must be signed in to retry this job"
+      },
+      "delete_job_log": {
+        "allowed": false,
+        "reason": "anonymous",
+        "message": "You must be signed in to remove this job log"
+      }
+    },
+    "concurrency": null,
+    "concurrency_group": "",
+    "base_path": "/organizations/katana/pipelines/test/builds/7/jobs/def",
+    "path": "/katana/test/builds/7#01839e12-e7ec-492d-a338-e18901718124",
+    "retryable": {
+      "allowed": true,
+      "message": null
+    },
+    "cancelable": {
+      "allowed": false,
+      "message": "You can only cancel jobs that have started"
+    },
+    "step": {
+      "label": "Test",
+      "conditional": null
+    },
+    "agent_path": "/organizations/katana/agents/01839e0d-48bd-4f52-8f81-9783179345c2"
+  }],
+  "jobs_count": 2,
+  "job_minutes": 0,
+  "total_job_duration": 8,
+  "annotation_issue_count": 0
+}

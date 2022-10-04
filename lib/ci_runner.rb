@@ -14,15 +14,19 @@ module CIRunner
   autoload :VersionVerifier, "ci_runner/version_verifier"
 
   module Check
-    autoload :Github,      "ci_runner/check/github"
-    autoload :CircleCI,    "ci_runner/check/circle_ci"
-    autoload :Unsupported, "ci_runner/check/unsupported"
+    autoload :Buildkite,          "ci_runner/check/buildkite"
+    autoload :Github,             "ci_runner/check/github"
+    autoload :CircleCI,           "ci_runner/check/circle_ci"
+    autoload :Unsupported,        "ci_runner/check/unsupported"
+    autoload :ConcurrentDownload, "ci_runner/check/concurrent_download"
   end
 
   module Client
-    autoload :Error,       "ci_runner/client/error"
-    autoload :Github,      "ci_runner/client/github"
-    autoload :CircleCI,    "ci_runner/client/circle_ci"
+    autoload :Error,                  "ci_runner/client/error"
+    autoload :Github,                 "ci_runner/client/github"
+    autoload :CircleCI,               "ci_runner/client/circle_ci"
+    autoload :Buildkite,              "ci_runner/client/buildkite"
+    autoload :AuthenticatedBuildkite, "ci_runner/client/authenticated_buildkite"
   end
 
   module Configuration
