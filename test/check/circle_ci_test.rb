@@ -12,7 +12,7 @@ module CIRunner
           "abcdef",
           "ci/circleci: ruby-27",
           "failure",
-          "https://circleci.com/gh/owner/repo/3230?utm_campaign=vcs-integration-link"
+          "https://circleci.com/gh/owner/repo/3230?utm_campaign=vcs-integration-link",
         )
       end
 
@@ -120,7 +120,7 @@ module CIRunner
           "abcdef",
           "ci/circleci: ruby-27",
           "error",
-          "https://circleci.com/gh/owner/repo/3230?utm_campaign=vcs-integration-link"
+          "https://circleci.com/gh/owner/repo/3230?utm_campaign=vcs-integration-link",
         )
 
         assert_predicate(check, :failed?)
@@ -132,7 +132,7 @@ module CIRunner
           "abcdef",
           "ci/circleci: ruby-27",
           "success",
-          "https://circleci.com/gh/owner/repo/3230?utm_campaign=vcs-integration-link"
+          "https://circleci.com/gh/owner/repo/3230?utm_campaign=vcs-integration-link",
         )
 
         refute_predicate(check, :failed?)

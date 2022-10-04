@@ -54,7 +54,7 @@ module CIRunner
         expected = TestFailure.new(
           "TestReloading",
           "test_reload_recovers_from_name_errors__w__on_unload_callbacks_",
-          Pathname(Dir.pwd).join("test/lib/zeitwerk/test_reloading.rb")
+          Pathname(Dir.pwd).join("test/lib/zeitwerk/test_reloading.rb"),
         )
         failure = parser.failures[0]
 
@@ -86,7 +86,7 @@ module CIRunner
           TestFailure.new(
             "MaintenanceTasks::RunsTest",
             "test_errors_for_invalid_pause_or_cancel_due_to_stale_UI_are_shown",
-            path
+            path,
           ),
           TestFailure.new("MaintenanceTasks::RunsTest", "test_run_a_Task", path),
         ]
@@ -116,7 +116,7 @@ module CIRunner
         expected = TestFailure.new(
           "I18nBackendPluralizationFallbackTest",
           "test_fallbacks:_nils_are_ignored_and_fallback_is_applied,_with_custom_rule",
-          Pathname(Dir.pwd).join("test/backend/pluralization_fallback_test.rb")
+          Pathname(Dir.pwd).join("test/backend/pluralization_fallback_test.rb"),
         )
         failure = parser.failures[0]
 
@@ -177,7 +177,7 @@ module CIRunner
           TestFailure.new(
             "MaintenanceTasks::RunsTest",
             "test_pause_a_Run",
-            "test/system/maintenance_tasks/runs_test.rb"
+            "test/system/maintenance_tasks/runs_test.rb",
           ),
         ]
 

@@ -8,7 +8,7 @@ module CIRunner
       super
 
       @log_downloader = LogDownloader.new(
-        Check::Github.new("Edouard/catana", "commit_sha", "Ruby 3.1.2 Run", "failure", 1234)
+        Check::Github.new("Edouard/catana", "commit_sha", "Ruby 3.1.2 Run", "failure", 1234),
       )
     end
 
