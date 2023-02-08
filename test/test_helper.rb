@@ -42,5 +42,5 @@ module PatchedTerminal
   end
 end
 
-::CLI::UI::Terminal.singleton_class.prepend(PatchedTerminal)
-::CLI::UI.enable_color = true
+CLI::UI::Terminal.singleton_class.prepend(PatchedTerminal)
+CLI::UI.enable_color = true

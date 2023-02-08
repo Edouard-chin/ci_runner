@@ -198,10 +198,12 @@ module CIRunner
           config_file = Configuration::Project.instance.config_file
           Dir.mkdir(config_file.dirname)
 
+          # rubocop:disable Style/RedundantStringEscape
           config_file.write(<<~EOM)
             ---
             failures_regex: !ruby/regexp '/(?:\s*)(?<class>[a-zA-Z0-9_:]+)\#(?<test_name>test_.+?)(?::\s*$).*bin\/rerun_test[[:blank:]](?<file_path>.*)[[:blank:]]-n/m'
           EOM
+          # rubocop:enable Style/RedundantStringEscape
 
           Configuration::Project.instance.load!
         end
