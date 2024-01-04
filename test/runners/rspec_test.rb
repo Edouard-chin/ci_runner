@@ -6,7 +6,7 @@ module CIRunner
   module Runners
     class RSpecTest < Minitest::Test
       def test_parse_return_failures
-        runner = RSpec.new(read_fixture("rspec.log"))
+        runner = RSpec.new(fixture_path("rspec.log"))
         runner.parse!
 
         expected_test_name = "Octokit::Client::Repositories.edit_repository is_template is passed in params gets"
@@ -19,7 +19,7 @@ module CIRunner
       end
 
       def test_parse_return_failures_when_output_is_colored
-        runner = RSpec.new(read_fixture("rspec_colored.log"))
+        runner = RSpec.new(fixture_path("rspec_colored.log"))
         runner.parse!
 
         expected_test_name = "customer edit page displays selectable strings as dropdowns"

@@ -20,7 +20,7 @@ module CIRunner
 
       def test_download_log_when_the_pipeline_is_public
         stub_request(:get, "https://buildkite.com/katana/test/builds/1")
-          .to_return_json(status: 200, body: read_fixture("buildkite/public_build.json"))
+          .to_return_json(status: 200, body: fixture_path("buildkite/public_build.json").read)
 
         stub_request(:get, "https://buildkite.com/organizations/katana/pipelines/test/builds/7/jobs/abc/raw_log")
           .to_return(status: 302, headers: { "Location" => "https://example.com/log1" })
@@ -50,7 +50,7 @@ module CIRunner
           .to_return_json(status: 403)
 
         stub_request(:get, "https://api.buildkite.com/v2/organizations/katana/pipelines/test/builds/1")
-          .to_return_json(status: 200, body: read_fixture("buildkite/private_build.json"))
+          .to_return_json(status: 200, body: fixture_path("buildkite/private_build.json").read)
 
         stub_request(:get, "https://api.buildkite.com/v2/organizations/katana/pipelines/private-build/builds/1/jobs/abc/log.txt")
           .to_return(status: 200, body: "abc")

@@ -23,7 +23,7 @@ module Minitest
       FileUtils.rm_rf(@home_dir) if @home_dir
     end
 
-    def read_fixture(file)
+    def fixture_path(file)
       fixture_folder = Pathname(File.expand_path("fixtures", __dir__))
       fixture_path = fixture_folder.join(file)
 

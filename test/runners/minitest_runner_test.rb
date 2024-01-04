@@ -14,7 +14,7 @@ module CIRunner
       end
 
       def test_parse_raw_minitest_log_failures
-        log = read_fixture("raw_minitest_failures.log")
+        log = fixture_path("raw_minitest_failures.log")
         parser = MinitestRunner.new(log)
 
         parser.parse!
@@ -41,7 +41,7 @@ module CIRunner
       end
 
       def test_parse_raw_minitest_log_errors
-        log = read_fixture("raw_minitest_error.log")
+        log = fixture_path("raw_minitest_error.log")
         parser = MinitestRunner.new(log)
 
         parser.parse!
@@ -64,7 +64,7 @@ module CIRunner
       end
 
       def test_parse_rails_log
-        log = read_fixture("rails.log")
+        log = fixture_path("rails.log")
         parser = MinitestRunner.new(log)
 
         parser.parse!
@@ -103,7 +103,7 @@ module CIRunner
       # In this test, the test suite name "I18nBackendPluralizationFallbackTest", doesn't
       # map to a file called `i18n_backend_pluralization...`.
       def test_parse_log_with_inconsistent_class_and_file_name
-        log = read_fixture("i18n.log")
+        log = fixture_path("i18n.log")
         parser = MinitestRunner.new(log)
 
         parser.parse!
@@ -126,7 +126,7 @@ module CIRunner
       end
 
       def test_when_projet_uses_custom_regexes
-        log = read_fixture("custom_regexes.log")
+        log = fixture_path("custom_regexes.log")
         runner = MinitestRunner.new(log)
 
         Dir.chdir(Dir.home) do
@@ -151,7 +151,7 @@ module CIRunner
       end
 
       def test_when_projet_uses_different_buffer_starts_regex
-        log = read_fixture("custom_buffer_starts.log")
+        log = fixture_path("custom_buffer_starts.log")
         runner = MinitestRunner.new(log)
 
         Dir.chdir(Dir.home) do
@@ -191,7 +191,7 @@ module CIRunner
       end
 
       def test_when_projet_uses_custom_failure_regex
-        log = read_fixture("custom_failures.log")
+        log = fixture_path("custom_failures.log")
         runner = MinitestRunner.new(log)
 
         Dir.chdir(Dir.home) do
@@ -223,7 +223,7 @@ module CIRunner
       end
 
       def test_when_projet_uses_custom_invalid_failure_regex
-        log = read_fixture("custom_failures.log")
+        log = fixture_path("custom_failures.log")
         runner = MinitestRunner.new(log)
 
         Dir.chdir(Dir.home) do
@@ -251,7 +251,7 @@ module CIRunner
       end
 
       def test_parse_namespaced_class_location_infer_from_stacktrace
-        log = read_fixture("minitest_namespace.log")
+        log = fixture_path("minitest_namespace.log")
         parser = MinitestRunner.new(log)
 
         parser.parse!
