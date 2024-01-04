@@ -74,6 +74,7 @@ module CIRunner
             t.libs << "#{rake_load_path}"
             t.libs << "#{minitest_plugin_path}"
             t.test_files = #{failures.map(&:path)}
+            t.ruby_opts = ["-W0"] if ENV["NO_WARNING"]
           end
 
           Rake::Task[:__ci_runner_test].invoke

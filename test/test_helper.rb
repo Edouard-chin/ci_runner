@@ -13,6 +13,7 @@ module Minitest
       @home_dir = Dir.mktmpdir
       ENV["HOME"] = @home_dir
       ENV["TMPDIR"] = @home_dir
+      ENV["NO_WARNING"] = "1"
 
       super
     end
