@@ -74,6 +74,7 @@ module CIRunner
             t.libs << "#{rake_load_path}"
             t.libs << "#{minitest_plugin_path}"
             t.test_files = #{failures.map(&:path)}
+            t.ruby_opts = ["-W0"] if ENV["NO_WARNING"]
           end
 
           Rake::Task[:__ci_runner_test].invoke
@@ -89,7 +90,7 @@ module CIRunner
         env["RUBY"] = ruby_path.to_s if ruby_path&.exist?
         env["BUNDLE_GEMFILE"] = gemfile_path.to_s if gemfile_path&.exist?
 
-        execute_within_frame(env, "bundle exec ruby -r'rake/testtask' #{rakefile_path}")
+        execute_within_frame(env, "bundle exec ruby -I'#{rake_load_path}' -r'rake/testtask' #{rakefile_path}")
 
         DRb.stop_service
       end

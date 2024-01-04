@@ -179,16 +179,16 @@ module CIRunner
         )
 
       stub_request(:get, "https://circleci.com/api/v1.1/project/github/foo/bar/956")
-        .to_return_json(status: 200, body: read_fixture("circleci/job2.json"))
+        .to_return_json(status: 200, body: fixture_path("circleci/job2.json").read)
 
       stub_request(:get, "https://circle-production-action-output.s3.amazonaws.com/1")
-        .to_return_json(status: 200, body: read_fixture("circleci/job_setup_output.json"))
+        .to_return_json(status: 200, body: fixture_path("circleci/job_setup_output.json").read)
 
       stub_request(:get, "https://circle-production-action-output.s3.amazonaws.com/2")
-        .to_return_json(status: 200, body: read_fixture("circleci/job_container_output.json"))
+        .to_return_json(status: 200, body: fixture_path("circleci/job_container_output.json").read)
 
       stub_request(:get, "https://circle-production-action-output.s3.amazonaws.com/3")
-        .to_return_json(status: 200, body: read_fixture("circleci/job_test_output.json"))
+        .to_return_json(status: 200, body: fixture_path("circleci/job_test_output.json").read)
 
       stdout, _ = capture_io do
         CLI.start(["--commit", "abc", "--repository", "foo/bar", "--run-name", "ci/circleci: ruby-27"])
@@ -219,7 +219,7 @@ module CIRunner
         )
 
       stub_request(:get, "https://buildkite.com/foo/bar/builds/956")
-        .to_return_json(status: 200, body: read_fixture("buildkite/public_build.json"))
+        .to_return_json(status: 200, body: fixture_path("buildkite/public_build.json").read)
 
       stub_request(:get, "https://buildkite.com/organizations/katana/pipelines/test/builds/7/jobs/abc/raw_log")
         .to_return(status: 302, headers: { "Location" => "https://example.com/log1" })
@@ -227,7 +227,7 @@ module CIRunner
       stub_request(:get, "https://buildkite.com/organizations/katana/pipelines/test/builds/7/jobs/def/raw_log")
         .to_return(status: 302, headers: { "Location" => "https://example.com/log2" })
 
-      stub_request(:get, "https://example.com/log1").to_return(status: 200, body: read_fixture("rails.log"))
+      stub_request(:get, "https://example.com/log1").to_return(status: 200, body: fixture_path("rails.log").read)
       stub_request(:get, "https://example.com/log2").to_return(status: 200, body: "def")
 
       stdout, _ = capture_io do

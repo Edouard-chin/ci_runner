@@ -265,7 +265,7 @@ module CIRunner
     end
 
     def test_detect_runner_minitest_1
-      log = read_fixture("raw_minitest_error.log")
+      log = fixture_path("raw_minitest_error.log")
 
       runner = TestRunFinder.detect_runner(log.read)
 
@@ -273,7 +273,7 @@ module CIRunner
     end
 
     def test_detect_runner_minitest_2
-      log = read_fixture("raw_minitest_failures.log")
+      log = fixture_path("raw_minitest_failures.log")
 
       runner = TestRunFinder.detect_runner(log.read)
 
@@ -281,7 +281,7 @@ module CIRunner
     end
 
     def test_detect_runner_minitest_3
-      log = read_fixture("rails.log")
+      log = fixture_path("rails.log")
 
       runner = TestRunFinder.detect_runner(log.read)
 
@@ -289,7 +289,7 @@ module CIRunner
     end
 
     def test_detect_runner_minitest_4
-      log = read_fixture("i18n.log")
+      log = fixture_path("i18n.log")
 
       runner = TestRunFinder.detect_runner(log.read)
 
@@ -297,7 +297,7 @@ module CIRunner
     end
 
     def test_detect_runner_rspec
-      log = read_fixture("rspec.log")
+      log = fixture_path("rspec.log")
 
       runner = TestRunFinder.detect_runner(log.read)
 

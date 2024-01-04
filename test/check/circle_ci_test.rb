@@ -27,7 +27,7 @@ module CIRunner
 
       def test_download_log_downloads_the_log_output_for_each_step
         stub_request(:get, "https://circleci.com/api/v1.1/project/github/owner/repo/3230")
-          .to_return_json(status: 200, body: read_fixture("circleci/job.json"))
+          .to_return_json(status: 200, body: fixture_path("circleci/job.json").read)
 
         stub_request(:get, "https://circle-production-action-output.s3.amazonaws.com/1")
           .to_return(status: 200, body: JSON.dump([message: "abc"]))
@@ -59,7 +59,7 @@ module CIRunner
 
       def test_download_log_skip_steps_without_output
         stub_request(:get, "https://circleci.com/api/v1.1/project/github/owner/repo/3230")
-          .to_return_json(status: 200, body: read_fixture("circleci/job_step_no_output.json"))
+          .to_return_json(status: 200, body: fixture_path("circleci/job_step_no_output.json").read)
 
         stub_request(:get, "https://circle-production-action-output.s3.amazonaws.com/1")
           .to_return(status: 200, body: JSON.dump([message: "abc"]))
@@ -88,7 +88,7 @@ module CIRunner
 
       def test_download_log_when_steps_run_in_parallel
         stub_request(:get, "https://circleci.com/api/v1.1/project/github/owner/repo/3230")
-          .to_return_json(status: 200, body: read_fixture("circleci/job_parallel.json"))
+          .to_return_json(status: 200, body: fixture_path("circleci/job_parallel.json").read)
 
         stub_request(:get, "https://circle-production-action-output.s3.amazonaws.com/1")
           .to_return(status: 200, body: JSON.dump([message: "abc"]))
