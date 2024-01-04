@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [0.4.0] - 2024-1-04
+### Fixed
+- If you were using Rubygem with version >= 3.4.0, CI Runner would not run when
+  Rake was not activated in your Gemfile.
+
 ## [0.3.0] - 2022-10-04
 ### Added
 - Added support for Buildkite.
