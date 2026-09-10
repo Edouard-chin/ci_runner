@@ -135,6 +135,10 @@ module CIRunner
         Process.waitpid(pid)
       end
 
+      # capture_subprocess_io returns ASCII-8BIT; the CLI::UI frames contain UTF-8 box-drawing
+      # characters, so tag the bytes as UTF-8 before matching to avoid "invalid byte sequence".
+      stdout = stdout.force_encoding(Encoding::UTF_8)
+
       assert_match("Multiple CI checks failed for this commit. Please choose the one you wish to re-run.", stdout)
       assert_match("You chose: \e[0;3mRuby Test 3.0\e[0m", stdout)
     end
@@ -179,9 +183,11 @@ module CIRunner
         .to_return_json(
           status: 200,
           body: JSON.dump(
-            { statuses: [
-              { context: "ci/circleci: ruby-27", target_url: "https://circleci.com/gh/foo/bar/956", state: "failure" },
-            ] },
+            {
+              statuses: [
+                { context: "ci/circleci: ruby-27", target_url: "https://circleci.com/gh/foo/bar/956", state: "failure" },
+              ],
+            },
           ),
         )
 
@@ -219,9 +225,11 @@ module CIRunner
         .to_return_json(
           status: 200,
           body: JSON.dump(
-            { statuses: [
-              { context: "Ruby tests", target_url: "https://buildkite.com/foo/bar/builds/956", state: "failure" },
-            ] },
+            {
+              statuses: [
+                { context: "Ruby tests", target_url: "https://buildkite.com/foo/bar/builds/956", state: "failure" },
+              ],
+            },
           ),
         )
 

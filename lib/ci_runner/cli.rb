@@ -29,9 +29,9 @@ module CIRunner
       Please note that CI Runner will **not** ensure that the Git HEAD of your local repository matches
       the commit that failed upstream.
     EOM
-    option :commit, type: :string, desc: "The Git commit that was pushed to GitHub and has a failing CI. The HEAD commit of your local repository will be used by default." # rubocop:disable Layout/LineLength
-    option :repository, type: :string, desc: "The repository on which the CI failed. The repository will be infered from your git remote by default.", banner: "catanacorp/catana" # rubocop:disable Layout/LineLength
-    option :run_name, type: :string, desc: "The CI check you which to rerun in case multiple checks failed for a commit. CI Runner will prompt you by default." # rubocop:disable Layout/LineLength
+    option :commit, type: :string, desc: "The Git commit that was pushed to GitHub and has a failing CI. The HEAD commit of your local repository will be used by default."
+    option :repository, type: :string, desc: "The repository on which the CI failed. The repository will be infered from your git remote by default.", banner: "catanacorp/catana"
+    option :run_name, type: :string, desc: "The CI check you which to rerun in case multiple checks failed for a commit. CI Runner will prompt you by default."
     def rerun
       ::CLI::UI::StdoutRouter.enable
 

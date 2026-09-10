@@ -66,12 +66,14 @@ module CIRunner
 
         minitest_plugin_path = File.expand_path("../..", __dir__)
         rake_load_path = Gem.loaded_specs["rake"].full_require_paths.first
+        drb_load_path = Gem.loaded_specs["drb"].full_require_paths.first
 
         code = <<~EOM
           Rake::TestTask.new(:__ci_runner_test) do |t|
             t.libs << "test"
             t.libs << "lib"
             t.libs << "#{rake_load_path}"
+            t.libs << "#{drb_load_path}"
             t.libs << "#{minitest_plugin_path}"
             t.test_files = #{failures.map(&:path)}
             t.ruby_opts = ["-W0"] if ENV["NO_WARNING"]
@@ -122,7 +124,7 @@ module CIRunner
       #
       # For failure, Minitest will print the location of the test file, but it can be wrong.
       #
-      # MaintenanceTasks::RunsTest#test_run_a_CSV_Task [/home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/minitest.rb:295] # rubocop:disable Layout/LineLength
+      # MaintenanceTasks::RunsTest#test_run_a_CSV_Task [/home/runner/work/maintenance_tasks/maintenance_tasks/vendor/bundle/ruby/2.7.0/gems/capybara-3.37.1/lib/capybara/minitest.rb:295]
       #
       # In this case the location of the file points to a file inside a gem, which is for sure not where the test lives.
       # When this happen, we discard the location provided by Minitest and try to match another possible location.
