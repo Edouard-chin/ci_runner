@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "test_helper"
+require "base64"
 
 module CIRunner
   module Client
