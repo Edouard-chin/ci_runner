@@ -183,6 +183,44 @@ module CIRunner
         value.nil? ? true : value
       end
 
+      # Whether CI Runner should detect the Ruby version used on CI and re-run the tests with the
+      # matching Ruby from ~/.rubies.
+      #
+      # Set this to +false+ for projects whose gems are bound to a specific interpreter/gem path
+      # that CI Runner shouldn't override (e.g. a Nix- or shadowenv-managed monorepo). When false,
+      # the rerun uses the Ruby and gems of the environment CI Runner is invoked from.
+      #
+      # @return [Boolean] True by default.
+      #
+      # @example Storing this configuration
+      #   `cat myproject/.github/ci_runner.yml`
+      #
+      #   ---
+      #   detect_ruby: false
+      def detect_ruby?
+        value = @yaml_config.dig("detect_ruby")
+
+        value.nil? ? true : value
+      end
+
+      # Whether CI Runner should detect the Gemfile used on CI and re-run the tests with it.
+      #
+      # Set this to +false+ for the same reasons as +detect_ruby?+: when the environment CI Runner
+      # runs in already provides the correct set of dependencies.
+      #
+      # @return [Boolean] True by default.
+      #
+      # @example Storing this configuration
+      #   `cat myproject/.github/ci_runner.yml`
+      #
+      #   ---
+      #   detect_gemfile: false
+      def detect_gemfile?
+        value = @yaml_config.dig("detect_gemfile")
+
+        value.nil? ? true : value
+      end
+
       # Main detection regex used to detect test failures.
       #
       # **Important** This regexp 3 named capture groups. The order doesn't matter.

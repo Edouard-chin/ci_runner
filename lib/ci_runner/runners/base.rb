@@ -49,11 +49,11 @@ module CIRunner
           when seed_regex
             @seed = first_matching_group(Regexp.last_match)
           when ruby_detection_regex
-            @ruby_version = first_matching_group(Regexp.last_match)
+            @ruby_version = first_matching_group(Regexp.last_match) if Configuration::Project.instance.detect_ruby?
 
             @buffer << line_no_ansi_color if buffering?
           when gemfile_detection_regex
-            @gemfile = first_matching_group(Regexp.last_match)
+            @gemfile = first_matching_group(Regexp.last_match) if Configuration::Project.instance.detect_gemfile?
           when buffer_detection_regex
             if Configuration::Project.instance.process_on_new_match? && buffering?
               process_buffer
