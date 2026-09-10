@@ -76,10 +76,12 @@ module CIRunner
         .to_return_json(
           status: 200,
           body: JSON.dump(
-            { statuses: [
-              { context: "ci/circleci: ruby-27", target_url: "https://circleci.com/gh/a/b/956", state: "success" },
-              { context: "ci/circleci: ruby-30", target_url: "https://circleci.com/gh/a/b/957", state: "success" },
-            ] },
+            {
+              statuses: [
+                { context: "ci/circleci: ruby-27", target_url: "https://circleci.com/gh/a/b/956", state: "success" },
+                { context: "ci/circleci: ruby-30", target_url: "https://circleci.com/gh/a/b/957", state: "success" },
+              ],
+            },
           ),
         )
 
@@ -114,10 +116,12 @@ module CIRunner
         .to_return_json(
           status: 200,
           body: JSON.dump(
-            { statuses: [
-              { context: "ci/circleci: ruby-27", target_url: "https://circleci.com/gh/a/b/956", state: "success" },
-              { context: "ci/circleci: ruby-30", target_url: nil, state: "success" },
-            ] },
+            {
+              statuses: [
+                { context: "ci/circleci: ruby-27", target_url: "https://circleci.com/gh/a/b/956", state: "success" },
+                { context: "ci/circleci: ruby-30", target_url: nil, state: "success" },
+              ],
+            },
           ),
         )
 
@@ -157,9 +161,11 @@ module CIRunner
         .to_return_json(
           status: 200,
           body: JSON.dump(
-            { statuses: [
-              { context: "ci/circleci: ruby-27", target_url: "https://circleci.com/gh/a/b/956", state: "success" },
-            ] },
+            {
+              statuses: [
+                { context: "ci/circleci: ruby-27", target_url: "https://circleci.com/gh/a/b/956", state: "success" },
+              ],
+            },
           ),
         )
 

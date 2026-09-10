@@ -183,9 +183,11 @@ module CIRunner
         .to_return_json(
           status: 200,
           body: JSON.dump(
-            { statuses: [
-              { context: "ci/circleci: ruby-27", target_url: "https://circleci.com/gh/foo/bar/956", state: "failure" },
-            ] },
+            {
+              statuses: [
+                { context: "ci/circleci: ruby-27", target_url: "https://circleci.com/gh/foo/bar/956", state: "failure" },
+              ],
+            },
           ),
         )
 
@@ -223,9 +225,11 @@ module CIRunner
         .to_return_json(
           status: 200,
           body: JSON.dump(
-            { statuses: [
-              { context: "Ruby tests", target_url: "https://buildkite.com/foo/bar/builds/956", state: "failure" },
-            ] },
+            {
+              statuses: [
+                { context: "Ruby tests", target_url: "https://buildkite.com/foo/bar/builds/956", state: "failure" },
+              ],
+            },
           ),
         )
 
