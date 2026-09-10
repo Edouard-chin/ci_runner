@@ -116,11 +116,18 @@ module CIRunner
       stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/statuses")
         .to_return_json(status: 200, body: "[]")
 
+      stub_request(:get, "https://api.github.com/repos/foo/bar/actions/jobs/1/logs")
+        .to_return(status: 302, headers: { "Location" => "https://example.com/download" })
+
+      stub_request(:get, "https://example.com/download")
+        .to_return(status: 200, body: minitest_failure)
+
       stdout, _ = capture_subprocess_io do
         pid = fork do
           r, w = IO.pipe
           $stdin.reopen(r)
-          w.print("Ruby Test 3.0")
+          w.print("1\n") # Choose the 1st option ("Ruby Test 3.0") from the interactive prompt.
+          w.close
 
           CLI.start(["--commit", "abc", "--repository", "foo/bar"])
         end
