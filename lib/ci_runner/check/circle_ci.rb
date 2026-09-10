@@ -113,7 +113,7 @@ module CIRunner
         parsed_response = JSON.parse(response.read)
         log_output = parsed_response.map! { |res| res["message"] }.join
 
-        @tempfile.write(log_output)
+        @write_mutex.synchronize { @tempfile.write(log_output) }
       end
 
       # The URL on the commit status will look something like: https://circleci.com/gh/owner/repo/1234?query_string.

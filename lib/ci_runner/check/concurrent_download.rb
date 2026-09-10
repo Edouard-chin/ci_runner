@@ -13,6 +13,7 @@ module CIRunner
       def initialize(...)
         @queue = Queue.new
         @tempfile = Tempfile.new
+        @write_mutex = Mutex.new
 
         super(...)
       end

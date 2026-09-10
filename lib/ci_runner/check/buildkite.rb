@@ -39,14 +39,18 @@ module CIRunner
       def download_log
         uri = URI(url)
         _, org, pipeline, _, build = uri.path.split("/")
-        @client = Client::Buildkite.new
+        @token = nil
+        client = Client::Buildkite.new
 
-        unless @client.public_build?(org, pipeline, build)
-          token = retrieve_token_from_config(org, url)
-          @client = Client::AuthenticatedBuildkite.new(token)
+        unless client.public_build?(org, pipeline, build)
+          @token = retrieve_token_from_config(org, url)
+          client = Client::AuthenticatedBuildkite.new(@token)
         end
 
-        @client.job_logs(org, pipeline, build).each do |log_url|
+        # Remember the client class so each concurrent download can build its own instance in #process.
+        @client_class = client.class
+
+        client.job_logs(org, pipeline, build).each do |log_url|
           @queue << log_url
         end
 
@@ -55,14 +59,17 @@ module CIRunner
 
       private
 
+      # Net::HTTP is not thread-safe, so each concurrent download gets its own client instance
+      # rather than sharing (and repeatedly resetting) a single one across threads.
+      #
       # @param url [String]
       #
       # @return [void]
       def process(url)
-        @client.reset!
-        response = @client.download_log(url)
+        response = @client_class.new(@token).download_log(url)
+        content = response.read
 
-        @tempfile.write(response.read)
+        @write_mutex.synchronize { @tempfile.write(content) }
       end
 
       # Retrieve a Buildkite token from the user confg.

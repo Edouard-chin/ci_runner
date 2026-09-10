@@ -25,6 +25,11 @@ module Minitest
           "#{failure.klass}##{failure.test_name}" == runnable
         end
       end
+
+      # Vanilla Minitest filters with `filter === runnable`, but the minitest-reporters gem's
+      # DelegateReporter calls `filter.match?(runnable)` instead. Alias the two so CI Runner
+      # works whether or not the project under test uses minitest-reporters.
+      alias_method :match?, :===
     end
 
     options[:filter] = filter.new(failures)
