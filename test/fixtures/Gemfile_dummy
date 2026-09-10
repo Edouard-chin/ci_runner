@@ -3,4 +3,4 @@
 source "https://rubygems.org"
 
 gem "warning"
-gem "minitest"
+gem "minitest", "~> 5.0" # Match the minitest line CI Runner's plugin supports (see gemspec).

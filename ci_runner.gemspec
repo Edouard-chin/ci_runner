@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
   spec.executables = ["ci_runner"]
   spec.require_paths = ["lib"]
 
-  spec.add_dependency("cli-ui", "~> 1.5")
+  spec.add_dependency("cli-ui", "~> 2.7")
   spec.add_dependency("rake", "~> 13.0")
   spec.add_dependency("thor", "~> 1.2")
   spec.add_dependency("drb")

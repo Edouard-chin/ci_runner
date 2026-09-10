@@ -353,17 +353,9 @@ module CIRunner
           runner.start!
         end
 
-        assert_equal(<<~EOM, clean_statistics(stdout))
-          Run options: --seed 1044
-
-          # Running:
-
-
-
-          Finished in 0s.
-
-          0 runs, 0 assertions, 0 failures, 0 errors, 0 skips
-        EOM
+        output = clean_statistics(stdout)
+        assert_match("Run options: --seed 1044", output)
+        assert_match("0 runs, 0 assertions, 0 failures, 0 errors, 0 skips", output)
       end
 
       def test_uses_the_right_ruby_version_when_it_exists

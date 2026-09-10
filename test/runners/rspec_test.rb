@@ -111,9 +111,9 @@ module CIRunner
       private
 
       def clean_statistics(string)
-        regex = /(Finished in) .*/
-
-        string.gsub(regex, '\1 0s.')
+        string
+          .gsub(/(Finished in) .*/, '\1 0s.')
+          .gsub("full_description: ", ":full_description=>")
       end
     end
   end

@@ -66,12 +66,14 @@ module CIRunner
 
         minitest_plugin_path = File.expand_path("../..", __dir__)
         rake_load_path = Gem.loaded_specs["rake"].full_require_paths.first
+        drb_load_path = Gem.loaded_specs["drb"].full_require_paths.first
 
         code = <<~EOM
           Rake::TestTask.new(:__ci_runner_test) do |t|
             t.libs << "test"
             t.libs << "lib"
             t.libs << "#{rake_load_path}"
+            t.libs << "#{drb_load_path}"
             t.libs << "#{minitest_plugin_path}"
             t.test_files = #{failures.map(&:path)}
             t.ruby_opts = ["-W0"] if ENV["NO_WARNING"]
