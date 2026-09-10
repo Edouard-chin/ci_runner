@@ -32,8 +32,8 @@ module CIRunner
       stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
         .to_return_json(status: 200, body: { total_count: 0, check_runs: [] })
 
-      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/statuses")
-        .to_return_json(status: 200, body: "[]")
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/status")
+        .to_return_json(status: 200, body: { statuses: [] })
 
       stdout, _ = capture_io do
         CLI.start(["--commit", "abc", "--repository", "foo/bar"])
@@ -56,8 +56,8 @@ module CIRunner
       stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
         .to_return_json(status: 200, body: ci_check_response)
 
-      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/statuses")
-        .to_return_json(status: 200, body: "[]")
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/status")
+        .to_return_json(status: 200, body: { statuses: [] })
 
       stub_request(:get, "https://api.github.com/repos/foo/bar/actions/jobs/1/logs")
         .to_return(status: 404, body: "Not found")
@@ -85,8 +85,8 @@ module CIRunner
       stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
         .to_return_json(status: 200, body: ci_check_response)
 
-      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/statuses")
-        .to_return_json(status: 200, body: "[]")
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/status")
+        .to_return_json(status: 200, body: { statuses: [] })
 
       stub_request(:get, "https://api.github.com/repos/foo/bar/actions/jobs/1/logs")
         .to_return(status: 302, headers: { "Location" => "https://example.com/download" })
@@ -113,8 +113,8 @@ module CIRunner
       stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
         .to_return_json(status: 200, body: ci_check_response)
 
-      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/statuses")
-        .to_return_json(status: 200, body: "[]")
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/status")
+        .to_return_json(status: 200, body: { statuses: [] })
 
       stub_request(:get, "https://api.github.com/repos/foo/bar/actions/jobs/1/logs")
         .to_return(status: 302, headers: { "Location" => "https://example.com/download" })
@@ -151,8 +151,8 @@ module CIRunner
       stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
         .to_return_json(status: 200, body: ci_check_response)
 
-      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/statuses")
-        .to_return_json(status: 200, body: "[]")
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/status")
+        .to_return_json(status: 200, body: { statuses: [] })
 
       stub_request(:get, "https://api.github.com/repos/foo/bar/actions/jobs/2/logs")
         .to_return(status: 302, headers: { "Location" => "https://example.com/download" })
@@ -166,7 +166,7 @@ module CIRunner
 
       assert_match("Your test run is about to start", stdout)
       assert_requested(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
-      assert_requested(:get, "https://api.github.com/repos/foo/bar/commits/abc/statuses")
+      assert_requested(:get, "https://api.github.com/repos/foo/bar/commits/abc/status")
       assert_requested(:get, "https://api.github.com/repos/foo/bar/actions/jobs/2/logs")
       assert_requested(:get, "https://example.com/download")
     end
@@ -175,13 +175,13 @@ module CIRunner
       stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
         .to_return_json(status: 200, body: { check_runs: [] })
 
-      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/statuses")
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/status")
         .to_return_json(
           status: 200,
           body: JSON.dump(
-            [
+            { statuses: [
               { context: "ci/circleci: ruby-27", target_url: "https://circleci.com/gh/foo/bar/956", state: "failure" },
-            ],
+            ] },
           ),
         )
 
@@ -215,13 +215,13 @@ module CIRunner
       stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
         .to_return_json(status: 200, body: { check_runs: [] })
 
-      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/statuses")
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/status")
         .to_return_json(
           status: 200,
           body: JSON.dump(
-            [
+            { statuses: [
               { context: "Ruby tests", target_url: "https://buildkite.com/foo/bar/builds/956", state: "failure" },
-            ],
+            ] },
           ),
         )
 
@@ -262,8 +262,8 @@ module CIRunner
       stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/check-runs")
         .to_return_json(status: 200, body: ci_check_response)
 
-      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/statuses")
-        .to_return_json(status: 200, body: "[]")
+      stub_request(:get, "https://api.github.com/repos/foo/bar/commits/abc/status")
+        .to_return_json(status: 200, body: { statuses: [] })
 
       stub_request(:get, "https://api.github.com/repos/foo/bar/actions/jobs/1/logs")
         .to_return(status: 302, headers: { "Location" => "https://example.com/download" })

@@ -45,16 +45,20 @@ module CIRunner
         get("/repos/#{repository}/commits/#{commit}/check-runs")
       end
 
-      # Makes an API request to get the Commit statuses for the +commit+.
+      # Makes an API request to get the combined Commit status for the +commit+.
+      #
+      # Unlike the "list commit statuses" endpoint (which is append-only and returns every status
+      # update), the combined status endpoint returns only the latest status per context, matching
+      # what GitHub displays. This avoids presenting duplicate checks to the user.
       #
       # @param repository [String] The full repository name, including the owner (rails/rails)
       # @param commit [String] The Git commit that has been pushed to GitHub.
       #
       # @return [Hash] See GitHub documentation.
       #
-      # @see https://docs.github.com/en/rest/commits/statuses#list-commit-statuses-for-a-reference
-      def commit_statuses(repository, commit)
-        get("/repos/#{repository}/commits/#{commit}/statuses")
+      # @see https://docs.github.com/en/rest/commits/statuses#get-the-combined-status-for-a-specific-reference
+      def commit_status(repository, commit)
+        get("/repos/#{repository}/commits/#{commit}/status")
       end
 
       # Makes two requests to get the CI log for a check run.

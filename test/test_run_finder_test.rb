@@ -16,8 +16,8 @@ module CIRunner
           },
         )
 
-      stub_request(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/statuses")
-        .to_return_json(status: 200, body: "[]")
+      stub_request(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/status")
+        .to_return_json(status: 200, body: { statuses: [] })
 
       stdout, _ = capture_io do
         ::CLI::UI::StdoutRouter.with_enabled do
@@ -34,7 +34,7 @@ module CIRunner
 
       assert_match(/Fetching failed CI checks from GitHub for commit/, stdout)
       assert_requested(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/check-runs")
-      assert_requested(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/statuses")
+      assert_requested(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/status")
     end
 
     def test_fetch_ci_checks_return_only_github_actions
@@ -50,8 +50,8 @@ module CIRunner
           },
         )
 
-      stub_request(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/statuses")
-        .to_return_json(status: 200, body: "[]")
+      stub_request(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/status")
+        .to_return_json(status: 200, body: { statuses: [] })
 
       stdout, _ = capture_io do
         ::CLI::UI::StdoutRouter.with_enabled do
@@ -68,18 +68,18 @@ module CIRunner
 
       assert_match(/Fetching failed CI checks from GitHub for commit/, stdout)
       assert_requested(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/check-runs")
-      assert_requested(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/statuses")
+      assert_requested(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/status")
     end
 
     def test_fetch_ci_checks_fetch_commit_statuses
-      stub_request(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/statuses")
+      stub_request(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/status")
         .to_return_json(
           status: 200,
           body: JSON.dump(
-            [
+            { statuses: [
               { context: "ci/circleci: ruby-27", target_url: "https://circleci.com/gh/a/b/956", state: "success" },
               { context: "ci/circleci: ruby-30", target_url: "https://circleci.com/gh/a/b/957", state: "success" },
-            ],
+            ] },
           ),
         )
 
@@ -106,18 +106,18 @@ module CIRunner
       end
 
       assert_requested(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/check-runs")
-      assert_requested(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/statuses")
+      assert_requested(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/status")
     end
 
     def test_fetch_ci_checks_fetch_commit_status_and_remove_the_one_without_target_url
-      stub_request(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/statuses")
+      stub_request(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/status")
         .to_return_json(
           status: 200,
           body: JSON.dump(
-            [
+            { statuses: [
               { context: "ci/circleci: ruby-27", target_url: "https://circleci.com/gh/a/b/956", state: "success" },
               { context: "ci/circleci: ruby-30", target_url: nil, state: "success" },
-            ],
+            ] },
           ),
         )
 
@@ -138,7 +138,7 @@ module CIRunner
       end
 
       assert_requested(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/check-runs")
-      assert_requested(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/statuses")
+      assert_requested(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/status")
     end
 
     def test_fetch_ci_checks_fetch_commit_statuses_and_checks
@@ -153,13 +153,13 @@ module CIRunner
           },
         )
 
-      stub_request(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/statuses")
+      stub_request(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/status")
         .to_return_json(
           status: 200,
           body: JSON.dump(
-            [
+            { statuses: [
               { context: "ci/circleci: ruby-27", target_url: "https://circleci.com/gh/a/b/956", state: "success" },
-            ],
+            ] },
           ),
         )
 
@@ -184,7 +184,7 @@ module CIRunner
       end
 
       assert_requested(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/check-runs")
-      assert_requested(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/statuses")
+      assert_requested(:get, "https://api.github.com/repos/catanacorp/catana/commits/abcdef/status")
     end
 
     def test_fetch_ci_checks_when_checks_cant_be_retrieved

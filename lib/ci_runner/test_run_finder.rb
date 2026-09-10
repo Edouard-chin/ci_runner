@@ -64,10 +64,10 @@ module CIRunner
     # @see https://docs.github.com/en/rest/checks/runs#get-a-check-run
     def other_ci(repository, commit)
       github_client = Client::Github.new(Configuration::User.instance.github_token)
-      commit_statuses = github_client.commit_statuses(repository, commit)
+      commit_status = github_client.commit_status(repository, commit)
 
-      commit_statuses.map do |commit_status|
-        check_class_from_url(commit_status, repository, commit)
+      commit_status["statuses"].map do |status|
+        check_class_from_url(status, repository, commit)
       end.compact
     end
 

@@ -31,13 +31,13 @@ module CIRunner
         assert_requested(:get, "https://api.github.com/repos/catanacorp/ci_runner/commits/some_commit/check-runs")
       end
 
-      def test_check_runs_retrieve_commit_statuses
-        stub_request(:get, "https://api.github.com/repos/catanacorp/ci_runner/commits/some_commit/statuses")
+      def test_check_runs_retrieve_commit_status
+        stub_request(:get, "https://api.github.com/repos/catanacorp/ci_runner/commits/some_commit/status")
           .with(headers: { "Authorization" => "Basic #{@encoded_access_token}" })
 
-        @client.commit_statuses("catanacorp/ci_runner", "some_commit")
+        @client.commit_status("catanacorp/ci_runner", "some_commit")
 
-        assert_requested(:get, "https://api.github.com/repos/catanacorp/ci_runner/commits/some_commit/statuses")
+        assert_requested(:get, "https://api.github.com/repos/catanacorp/ci_runner/commits/some_commit/status")
       end
 
       def test_download_log_download_log_from_a_check
