@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [0.5.0] - 2026-9-14
+### Added
+- Added a project configuration to prevent CI Runner from looking up the Ruby version.
+- Added a project configuration to prevent CI Runner from looking up the Gemfile.
+
+### Fixed
+- Fixed incompatibility for projects using minitest-reporter.
+- Fixed a bug where concurrently downloading multiple log artifacts would produce a 0 byte file.
+- CI checks to choose from will no longer be duplicated.
+
+### Changed
+- DRB is a new transitive dependency since DRB is no longer a default gem on Ruby 3.4
+
 ## [0.4.0] - 2024-1-04
 ### Fixed
 - If you were using Rubygem with version >= 3.4.0, CI Runner would not run when
